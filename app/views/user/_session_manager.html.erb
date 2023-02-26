@@ -1,0 +1,22 @@
+<% if logged_in? %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Hello, <%= current_user.name %>
+    </a>
+    <!--dropdown-menu-lg-end значит выравнивание выпадающего списка по левому краю-->
+    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+      <li><%= link_to "New Goal", new_goal_path, class: "dropdown-item" %></li>
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><%= link_to 'Edit account', edit_user_path(current_user), class: "dropdown-item" %></li>
+      <li><hr class="dropdown-divider"></li>
+      <%= link_to 'Log out', logout_path, method: :delete, class: "dropdown-item" %>
+    </ul>
+  </li>
+<% else %>
+  <li class="nav-item">
+    <%= link_to "Sign Up", signup_path, class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Login", login_path, class: "nav-link" %>
+  </li>
+<% end %>

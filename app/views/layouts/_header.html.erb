@@ -1,0 +1,15 @@
+<nav class="navbar mb-2">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to 'Goals', goals_path %>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <% if logged_in? %>
+        <li><%= link_to "Log out", logout_path, class: "btn btn-danger", method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Log in", login_path, class: "btn btn-secondary" %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

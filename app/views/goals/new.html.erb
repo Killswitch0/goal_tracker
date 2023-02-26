@@ -1,0 +1,15 @@
+<h1 class="text-center">Create new goal</h1>
+
+<div class="row">
+  <div class="col-md-4 offset-4">
+    <%= form_with(model: @goal) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "mb-1 form-control" %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "mb-1 form-control" %>
+
+      <%= f.submit "Create my goal", class: "mb-2 btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

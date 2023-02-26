@@ -1,0 +1,11 @@
+<h1 class="text-center">My Goals</h1>
+
+<div class="row">
+  <div class="offset-4 col-md-4">
+    <% current_user.goals.each do |goal| %>
+      <li class="text-center"><%= link_to goal.name, goal, class: "btn btn-tertiary" %></li>
+    <% end %>
+  </div>
+</div>
+
+
