@@ -12,11 +12,41 @@
     </h3>
     <p class="text-center"><%= @goal.description %></p>
 
+    <h3 class="text-center">
+      Deadline:
+    </h3>
+    <p class="text-center">
+      <%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present?%>
+    </p>
+
     <div class="col-md-8 offset-3">
       <%= link_to 'Back to goals', goals_path, class: "btn btn-secondary" %>
       <%= link_to "Add new habit", new_goal_habit_path(@goal), class: "btn btn-warning" %>
       <%= link_to "Destroy goal", @goal, method: :delete, class: "btn btn-danger" %>
     </div>
+  </div>
 
+  <div class="col-md-3 offset-2">
+    <h2 class="text-center">Habits</h2>
+
+    <table class="table">
+      <thead>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      </thead>
+
+      <tbody>
+      <% @goal.habits.each_with_index do |habit, index| %>
+        <tr>
+          <% unless habit.name.nil? %>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= link_to habit.name, [@goal, habit] %></td>
+            <td><%= habit.description.truncate(15) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

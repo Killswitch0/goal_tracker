@@ -5,3 +5,33 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+User.create(name: "Max", email: "t@t.com", password: "111111", password_confirmation: "111111")
+
+20.times do |i|
+  puts "#{i}"
+
+  Goal.create(name: "Goal #{i + 1}",
+              description: "Description #{i + 1}",
+              days_completed: 0,
+              user_id: User.first.id,
+              deadline: "#{Date.new(2025, 2, 25)}"
+  )
+end
+
+10.times do
+  20.times do |i|
+    Habit.create(name: "Habit #{i}",
+                 description: "Description #{i}",
+                 days_completed: 0,
+                 user_id: User.first.id,
+                 goal_id: i
+    )
+  end
+end
+
+
+
+
+
+
+

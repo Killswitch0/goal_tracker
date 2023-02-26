@@ -7,7 +7,7 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
-    @habit = @goal.habits.build
+    # @habit = @goal.habits.build
   end
 
   def new
@@ -32,6 +32,6 @@ class GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permit(:name, :description, :days_completed)
+    params.require(:goal).permit(:name, :description, :days_completed, :deadline, :complete)
   end
 end

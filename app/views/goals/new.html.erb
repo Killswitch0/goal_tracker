@@ -9,6 +9,9 @@
       <%= f.label :description %>
       <%= f.text_area :description, class: "mb-1 form-control" %>
 
+      <%= f.label :deadline %>
+      <%= f.date_select :deadline, class: "mb-1 form-control" %>
+
       <%= f.submit "Create my goal", class: "mb-2 btn btn-primary" %>
     <% end %>
   </div>
