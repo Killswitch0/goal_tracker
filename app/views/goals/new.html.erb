@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-4 offset-4">
-    <%= form_with(model: @goal) do |f| %>
+    <%= form_with(model: [@category, @goal]) do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name, class: "mb-1 form-control" %>
 
@@ -12,7 +12,7 @@
       <%= f.label :deadline %>
       <%= f.date_select :deadline, class: "mb-1 form-control" %>
 
-      <%= f.submit "Create my goal", class: "mb-2 btn btn-primary" %>
+      <%= f.submit "Create my goal", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

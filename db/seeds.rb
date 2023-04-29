@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 User.create(name: "Max", email: "t@t.com", password: "111111", password_confirmation: "111111")
+Category.create(name: "Sport")
 
 20.times do |i|
   puts "#{i}"
@@ -14,6 +15,7 @@ User.create(name: "Max", email: "t@t.com", password: "111111", password_confirma
               description: "Description #{i + 1}",
               days_completed: 0,
               user_id: User.first.id,
+              category_id: Category.first.id,
               deadline: "#{Date.new(2025, 2, 25)}"
   )
 end

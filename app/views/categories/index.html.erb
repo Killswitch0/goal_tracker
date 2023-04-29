@@ -1,0 +1,9 @@
+<h1 class="text-center">Choose Category or create <%= link_to "NEW", new_category_path, style: "text-decoration-line: none;" %></h1>
+
+<div class="row">
+  <div class="col-md-4 offset-4">
+    <% @categories.each do |category| %>
+      <li class="text-center"><%= link_to category.name, category_path(category), class: "btn btn-tertiary" %></li>
+    <% end %>
+  </div>
+</div>

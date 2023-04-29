@@ -1,0 +1,15 @@
+<h1>Tasks#new</h1>
+
+<div class="row">
+  <div class="col-md-4 offset-4">
+    <%= form_with(model: [@goal, @task]) do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "mb-1 form-control" %>
+
+      <%= f.label :complete %>
+      <%= f.check_box :complete, {}, true, class: "mb-1 form-control" %>
+
+      <%= f.submit "Add Task", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

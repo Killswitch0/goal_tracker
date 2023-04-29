@@ -1,2 +1,13 @@
 <h1>Goals#edit</h1>
-<p>Find me in app/views/goals/edit.html.erb</p>
+
+<div class="text-center">
+  <%= form_with model: @goal do |f| %>
+    <%= f.label :complete %>
+    <%= f.check_box :complete, {}, true, false %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.submit "Update" %>
+  <% end %>
+</div>

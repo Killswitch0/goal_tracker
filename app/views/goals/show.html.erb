@@ -1,7 +1,12 @@
 <h1 class="text-center">My Goal</h1>
 
-<div class="row">
+<div class="row" , style="font-size: large">
   <div class="offset-4 col-md-4">
+    <h2 class="text-center">
+      Category
+    </h2>
+    <p class="text-center"><%= @goal.category.name unless @goal.category.nil? %></p>
+
     <h3 class="text-center">
       Name:
     </h3>
@@ -16,8 +21,17 @@
       Deadline:
     </h3>
     <p class="text-center">
-      <%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present?%>
+      <%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present? %>
     </p>
+
+    <div class="text-center">
+      <%= form_with model: @goal do |f| %>
+        <%= f.label :complete %>
+        <%= f.check_box :complete, {}, true %>
+
+        <%= f.submit "#{@goal.complete? ? 'Mark goal as not completed' : 'Mark goal as completed'}", class: "mb-2 btn btn-primary btn-sm" %>
+      <% end %>
+    </div>
 
     <div class="col-md-8 offset-3">
       <%= link_to 'Back to goals', goals_path, class: "btn btn-secondary" %>
@@ -29,21 +43,60 @@
   <div class="col-md-3 offset-2">
     <h2 class="text-center">Habits</h2>
 
-    <table class="table">
+    <div style="height: 350px; overflow: scroll;">
+
+      <table class="table table-bordered">
+        <thead>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        </thead>
+
+        <tbody>
+        <% @goal.habits.each_with_index do |habit, index| %>
+          <tr>
+            <% unless habit.name.nil? %>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= link_to habit.name, [@goal, habit] %></td>
+              <td><%= habit.description.truncate(15) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="col-md-3 offset-2">
+    <h2 class="text-center">Tasks</h2>
+
+    <table class="table table-bordered text-center">
       <thead>
       <th scope="col">#</th>
       <th scope="col">Name</th>
-      <th scope="col">Description</th>
+      <th scope="col">Complete</th>
       </thead>
 
+
       <tbody>
-      <% @goal.habits.each_with_index do |habit, index| %>
+      <% @goal.tasks.each_with_index do |task, index| %>
+
         <tr>
-          <% unless habit.name.nil? %>
+          <% unless task.name.nil? %>
             <th scope="row"><%= index + 1 %></th>
-            <td><%= link_to habit.name, [@goal, habit] %></td>
-            <td><%= habit.description.truncate(15) %></td>
+            <td>
+              <% if task.complete? %>
+                <%= link_to task.name, nil, style: "text-decoration: line-through" %>
+              <% else %>
+                <%= link_to task.name, nil, style: "text-decoration: none" %>
+              <% end %>
+            </td>
           <% end %>
+
+          <td>
+            <%= link_to "#{task.complete? ? 'Unfinished task' : 'Finish task'}", complete_task_path(@goal, task), class: "btn btn-primary btn-sm" %>
+          </td>
         </tr>
       <% end %>
       </tbody>

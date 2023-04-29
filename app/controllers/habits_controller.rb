@@ -17,7 +17,7 @@ class HabitsController < ApplicationController
     @habit.user = current_user
 
     if @habit.save
-      redirect_to goal_habit_path(@goal, @habit)
+      redirect_to category_goal_path(@goal.category_id, @goal)
     else
       render :new
     end
