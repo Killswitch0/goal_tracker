@@ -1,15 +1,32 @@
-<h1>Tasks#new</h1>
+<div class="container">
+  <h1 class="text-center">New Task</h1>
 
-<div class="row">
-  <div class="col-md-4 offset-4">
-    <%= form_with(model: [@goal, @task]) do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "mb-1 form-control" %>
+  <div class="row">
+    <div class="col-md-4 offset-4">
+      <%= form_with(model: [@goal, @task]) do |f| %>
+        <%= render "shared/error_messages", resource: @task %>
 
-      <%= f.label :complete %>
-      <%= f.check_box :complete, {}, true, class: "mb-1 form-control" %>
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-3">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
 
-      <%= f.submit "Add Task", class: "btn btn-primary" %>
-    <% end %>
+            <div class="mb-3">
+              <%= f.label :complete %>
+              <%= f.check_box :complete, {}, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :deadline %>
+              <%= f.datetime_select :deadline, class: "form-control" %>
+            </div>
+
+            <%= f.submit "Add Task", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -1,0 +1,24 @@
+<%= form_with(model: [@goal, @habit]) do |f| %>
+  <%= render "shared/error_messages", resource: @habit %>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "mb-1 form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: "mb-1 form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :keep %>
+        <%= f.check_box :keep, {}, class: "form-control" %>
+      </div>
+
+      <%= f.submit "#{@habit.new_record? ? 'Create' : 'Update'}", class: "mb-2 btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

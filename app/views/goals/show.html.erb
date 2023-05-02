@@ -1,105 +1,125 @@
-<h1 class="text-center">My Goal</h1>
+<h1 class="text-center">Goal info</h1>
 
-<div class="row" , style="font-size: large">
+<div class="row" style="font-size: large">
   <div class="offset-4 col-md-4">
-    <h2 class="text-center">
-      Category
-    </h2>
-    <p class="text-center"><%= @goal.category.name unless @goal.category.nil? %></p>
 
-    <h3 class="text-center">
-      Name:
-    </h3>
-    <p class="text-center"><%= @goal.name %></p>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="">
+          Category: <%= @goal.category.name unless @goal.category.nil? %>
+        </h2>
 
-    <h3 class="text-center">
-      Descr:
-    </h3>
-    <p class="text-center"><%= @goal.description %></p>
+        <h3 class="">
+          Name: <%= @goal.name %>
+        </h3>
 
-    <h3 class="text-center">
-      Deadline:
-    </h3>
-    <p class="text-center">
-      <%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present? %>
-    </p>
+        <h3 class="">
+          Descr: <%= @goal.description %>
+        </h3>
+
+        <h3 class="">
+          Deadline: <%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present? %>
+        </h3>
+      </div>
+    </div>
 
     <div class="text-center">
       <%= form_with model: @goal do |f| %>
-        <%= f.label :complete %>
-        <%= f.check_box :complete, {}, true %>
+        <div class="mt-3">
+          <%= f.label :complete %>
+          <%= f.check_box :complete, {}, true %>
 
-        <%= f.submit "#{@goal.complete? ? 'Mark goal as not completed' : 'Mark goal as completed'}", class: "mb-2 btn btn-primary btn-sm" %>
+          <%= f.submit "#{@goal.complete? ? 'Mark goal as not completed' : 'Mark goal as completed'}", class: "mb-2 btn btn-primary btn-sm" %>
+        </div>
       <% end %>
     </div>
 
-    <div class="col-md-8 offset-3">
+    <div class="col-md-12 text-center">
       <%= link_to 'Back to goals', goals_path, class: "btn btn-secondary" %>
-      <%= link_to "Add new habit", new_goal_habit_path(@goal), class: "btn btn-warning" %>
       <%= link_to "Destroy goal", @goal, method: :delete, class: "btn btn-danger" %>
     </div>
   </div>
 
-  <div class="col-md-3 offset-2">
+  <div class="col-md-4 offset-2">
     <h2 class="text-center">Habits</h2>
 
     <div style="height: 350px; overflow: scroll;">
 
-      <table class="table table-bordered">
-        <thead>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
+      <table class="table table-bordered table-striped text-center">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Keep</th>
+          </tr>
         </thead>
 
         <tbody>
         <% @goal.habits.each_with_index do |habit, index| %>
           <tr>
-            <% unless habit.name.nil? %>
+              <% unless habit.name.nil? %>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit), style: "text-decoration: none" %></td>
+                <td><%= habit.description.truncate(15) %></td>
+                <td>
+                  <%= link_to "#{habit.keep? ? 'keep true' : 'keep false'}",
+                              complete_habit_path(habit),
+                              class: "#{habit.keep? ? 'btn btn-success btn-sm' : 'btn btn-warning btn-sm'}" %>
+                </td>
+              <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+
+      </table>
+    </div>
+
+    <%= link_to "Add Habit", new_goal_habit_path(@goal), class: "mt-2 btn btn-primary" %>
+    <%= link_to "Show Habits", goal_habits_path(@goal), class: "mt-2 btn btn-primary", style: "display: inline-block; margin-left: auto;" %>
+  </div>
+
+
+  <div class="col-md-4 offset-1">
+    <h2 class="text-center">Tasks</h2>
+
+    <div style="height: 350px; overflow: scroll;">
+      <table class="table table-bordered table-striped text-center">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Complete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @goal.tasks.each_with_index do |task, index| %>
+
+          <tr>
+            <% unless task.name.nil? %>
               <th scope="row"><%= index + 1 %></th>
-              <td><%= link_to habit.name, [@goal, habit] %></td>
-              <td><%= habit.description.truncate(15) %></td>
+              <td>
+                <% if task.complete? %>
+                  <%= link_to task.name, nil, style: "text-decoration: line-through" %>
+                <% else %>
+                  <%= link_to task.name, nil, style: "text-decoration: none" %>
+                <% end %>
+              </td>
             <% end %>
+
+            <td>
+              <%= link_to "#{task.complete? ? 'Unfinished task' : 'Finish task'}",
+                          complete_task_path(task),
+                          class: "btn btn-primary btn-sm" %>
+            </td>
           </tr>
         <% end %>
         </tbody>
       </table>
-
     </div>
-  </div>
 
-  <div class="col-md-3 offset-2">
-    <h2 class="text-center">Tasks</h2>
-
-    <table class="table table-bordered text-center">
-      <thead>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Complete</th>
-      </thead>
-
-
-      <tbody>
-      <% @goal.tasks.each_with_index do |task, index| %>
-
-        <tr>
-          <% unless task.name.nil? %>
-            <th scope="row"><%= index + 1 %></th>
-            <td>
-              <% if task.complete? %>
-                <%= link_to task.name, nil, style: "text-decoration: line-through" %>
-              <% else %>
-                <%= link_to task.name, nil, style: "text-decoration: none" %>
-              <% end %>
-            </td>
-          <% end %>
-
-          <td>
-            <%= link_to "#{task.complete? ? 'Unfinished task' : 'Finish task'}", complete_task_path(@goal, task), class: "btn btn-primary btn-sm" %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <%= link_to "Add Task", new_goal_task_path(@goal), class: "mt-2 btn btn-primary" %>
+    <%= link_to "Show Tasks", goal_tasks_path(@goal), class: "mt-2 btn btn-primary", style: "display: inline-block;" %>
   </div>
 </div>

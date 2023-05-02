@@ -10,17 +10,19 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 </head>
 
 <body>
-  <header>
-    <%= render "layouts/navbar" %>
-  </header>
+<header>
+  <%= render "layouts/navbar" %>
+</header>
 
-  <main>
+<main>
+  <div class="container">
     <%= yield %>
-  </main>
+  </div>
+</main>
 </body>
 </html>

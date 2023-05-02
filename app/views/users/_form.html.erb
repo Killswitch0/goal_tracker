@@ -1,17 +1,29 @@
 <%= form_with(model: user, local: true) do |f| %>
   <%= render "shared/error_messages" %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name, class: "mb-1 form-control" %>
+  <div class="card">
+    <div class="card-body">
+      <div class="mb-3">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
 
-  <%= f.label :email %>
-  <%= f.text_field :email, class: "mb-1 form-control" %>
+      <div class="mb-3">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password, class: "mb-1 form-control" %>
+      <div class="mb-3">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
 
-  <%= f.label :password_confirmation, "Confirmation" %>
-  <%= f.password_field :password_confirmation, class: "mb-1 form-control" %>
+      <div class="mb-3">
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation, class: "mb-1 form-control" %>
+      </div>
+    </div>
+  </div>
 
   <%= f.submit "Create my account", class: "mb-2 btn btn-primary" %>
 <% end %>

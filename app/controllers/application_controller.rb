@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     redirect_to home_path unless current_user
   end
 
+  def redirect_back
+    redirect_to root_path if current_user
+  end
+
   def logged_in_user
     unless logged_in?
       store_location

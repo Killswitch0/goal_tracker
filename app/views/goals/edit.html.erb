@@ -1,13 +1,7 @@
 <h1>Goals#edit</h1>
 
-<div class="text-center">
-  <%= form_with model: @goal do |f| %>
-    <%= f.label :complete %>
-    <%= f.check_box :complete, {}, true, false %>
-
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-
-    <%= f.submit "Update" %>
-  <% end %>
+<div class="row">
+  <div class="col-md-4 offset-4">
+    <%= render "form" %>
+  </div>
 </div>

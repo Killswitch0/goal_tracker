@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
+  before_action :redirect_user
+
   def index
-    @tasks = Task.all
+    @goal = Goal.find(params[:goal_id])
+    @tasks = current_user.tasks
   end
 
   def new
@@ -15,6 +18,7 @@ class TasksController < ApplicationController
   def create
     @goal = Goal.find(params[:goal_id])
     @task = @goal.tasks.build(task_params)
+    @task.user = current_user
 
     if @task.save
       redirect_to category_goal_path(@goal.category_id, @goal)
@@ -30,11 +34,19 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
 
     if @task.update(task_params)
-      redirect_to category_goal_path(@task.goal.category_id, @task.goal)
+      redirect_to category_goals_path(@task.goal.category_id, @task.goal)
       respond_to do |format|
         format.js
       end
     end
+  end
+
+  def destroy
+    @goal = Goal.find(params[:goal_id])
+    @task = Task.find(params[:id])
+
+    @task.destroy
+    redirect_to goal_task_path(@goal, @task)
   end
 
   def complete
@@ -52,6 +64,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :complete)
+    params.require(:task).permit(:name, :complete, :deadline)
   end
 end

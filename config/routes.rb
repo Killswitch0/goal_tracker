@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   end
 
   resources :goals do
-    resources :habits
-    resources :tasks, except: :show
+    resources :habits, except: %i[ show ]
+
+    resources :tasks, except: %i[ show ]
   end
 
+
   get "goals/:id/tasks/:id", to: "tasks#complete", as: "complete_task"
+  get "goals/:id/habits/:id", to: "habits#complete", as: "complete_habit"
 
   get "signup", to: "users#new"
   post "signup", to: "users#create"
@@ -21,10 +24,11 @@ Rails.application.routes.draw do
   get "logout", to: "sessions#destroy"
 
   get "home", to: "pages#home"
+  get "about", to: "pages#about"
   # delete "logout", to: "sessions#destroy"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "goals#index"
+  root "categories#index"
 end

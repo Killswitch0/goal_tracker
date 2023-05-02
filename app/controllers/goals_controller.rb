@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_action :redirect_user
-  before_action :set_category, only: %i[ new create ]
+  before_action :set_category, only: %i[]
 
   def index
     @goals = current_user.goals
@@ -15,16 +15,19 @@ class GoalsController < ApplicationController
   end
 
   def create
-    @goal = @category.goals.build(goal_params)
+    @goal = Goal.new(goal_params)
     @goal.user = current_user
-    @goal.category = @category
+    @category = @goal.category
 
-    if @goal.save
-      flash[:success] = "Goal was successfully created."
-      redirect_to category_goal_path(@category, @goal)
-    else
-      flash[:notice] = "Goal was not created."
-      render :new
+    respond_to do |format|
+      if @goal.save
+        flash[:success] = "Goal was successfully created."
+        redirect_to category_goal_path(@category, @goal)
+        format.html
+      else
+        flash[:notice] = "Goal was not created."
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -37,6 +40,7 @@ class GoalsController < ApplicationController
 
   def update
     @goal = Goal.find(params[:id])
+    @category = @goal.category_id
 
     respond_to do |format|
       if @goal.update(goal_params)
@@ -54,6 +58,6 @@ class GoalsController < ApplicationController
   end
 
   def goal_params
-    params.require(:goal).permit(:name, :description, :days_completed, :deadline, :complete)
+    params.require(:goal).permit(:name, :description, :category_id, :days_completed, :deadline, :complete)
   end
 end
