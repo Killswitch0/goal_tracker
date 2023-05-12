@@ -1,18 +1,15 @@
 <h1 class="text-center"><%= @category.name %> category</h1>
 <hr>
 
-<div class="row">
-  <h3 class="text-center">
-    <%= link_to "Add Goal", new_category_goal_path(@category), class: "btn btn-primary btn-lg" %>
-  </h3>
+<h3 class="text-center">
+  <%= link_to "Add Goal", new_category_goal_path(@category), class: "btn btn-primary btn-lg" %>
+</h3>
 
-  <div class="col-md-4 offset-4" style="height: 500px; overflow: scroll; border: 1px solid">
-    <% @category.goals.each do |goal| %>
-      <ul class="list-group">
-        <li class="text-center"><%= link_to goal.name, [@category, goal], class: "list-group-item btn btn-primary" %></li>
-      </ul>
-    <% end %>
-  </div>
-
+<div class="col-md-4 offset-4" style="height: 500px; overflow: scroll; border: 1px solid">
+  <% @category.goals.each do |goal| %>
+    <ul class="list-group">
+      <li class="text-center"><%= link_to goal.name, [@category, goal], class: "list-group-item btn btn-primary" %></li>
+    </ul>
+  <% end %>
 </div>
 

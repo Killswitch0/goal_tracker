@@ -1,9 +1,11 @@
 class TasksController < ApplicationController
   before_action :redirect_user
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @goal = Goal.find(params[:goal_id])
-    @tasks = current_user.tasks
+    @tasks = Task.order(sort_column + ' ' + sort_direction)
   end
 
   def new
@@ -23,7 +25,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to category_goal_path(@goal.category_id, @goal)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

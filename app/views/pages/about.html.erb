@@ -1,2 +1,17 @@
-<h1>Pages#about</h1>
-<p>Find me in app/views/pages/about.html.erb</p>
+<h1 class="text-center mt-3">How to use this app?</h1>
+<div class="col-md-4 offset-md-4">
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <ul style="list-style: decimal">
+        <li><p>Choose the category or create new</p></li>
+        <li><p>Create goal in the category</p></li>
+        <li><p>Add habits or tasks in the goal page</p></li>
+        <li><p>Manage your habits and tasks in the goal under table</p></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="">Let's try to <%= link_to "Start", categories_path, class: "btn btn-primary" %></div>
+</div>
+

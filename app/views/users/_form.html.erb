@@ -1,5 +1,5 @@
 <%= form_with(model: user, local: true) do |f| %>
-  <%= render "shared/error_messages" %>
+  <%= render "shared/error_messages", resource: user %>
 
   <div class="card">
     <div class="card-body">
@@ -22,8 +22,8 @@
         <%= f.label :password_confirmation, "Confirmation" %>
         <%= f.password_field :password_confirmation, class: "mb-1 form-control" %>
       </div>
+
+      <%= f.submit "#{user.new_record? ? 'Create account' : 'Update'}", class: "mb-2 btn btn-primary" %>
     </div>
   </div>
-
-  <%= f.submit "Create my account", class: "mb-2 btn btn-primary" %>
 <% end %>

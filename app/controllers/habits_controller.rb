@@ -2,6 +2,8 @@ class HabitsController < ApplicationController
   before_action :redirect_user
   before_action :set_goal, only: %i[ index new edit create update destroy ]
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @habits = current_user.habits
   end
@@ -26,7 +28,7 @@ class HabitsController < ApplicationController
     if @habit.save
       redirect_to category_goal_path(@goal.category_id, @goal)
     else
-      render :new
+      render :new,status: :unprocessable_entity
     end
   end
 
@@ -36,9 +38,9 @@ class HabitsController < ApplicationController
     respond_to do |format|
       if @habit.update(habit_params)
         redirect_to category_goal_path(@goal.category_id, @goal)
-        format.js
+        format.html
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

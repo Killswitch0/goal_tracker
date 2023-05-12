@@ -20,8 +20,11 @@
 </header>
 
 <main>
+  <%= render "shared/flash" unless current_user.nil?%>
   <div class="container">
-    <%= yield %>
+    <div class="row">
+      <%= yield %>
+    </div>
   </div>
 </main>
 </body>

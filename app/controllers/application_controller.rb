@@ -19,4 +19,12 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end

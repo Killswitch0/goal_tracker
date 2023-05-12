@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show ]
 
   def index
-    @categories = Category.all
+    @categories = current_user.categories
   end
 
   def show
@@ -14,12 +14,12 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params)
+    @category = current_user.categories.build(category_params)
 
     if @category.save
       redirect_to categories_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -30,6 +30,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:name)
+    params.require(:category).permit(:name, :user_id)
   end
 end

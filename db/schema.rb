@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_02_172306) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_12_092551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,20 +18,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_172306) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "goal_id"
+    t.bigint "goal_id"
+    t.bigint "user_id", null: false
     t.index ["goal_id"], name: "index_categories_on_goal_id"
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "goals", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.integer "days_completed", default: 0
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deadline"
     t.boolean "complete", default: false
-    t.integer "category_id", null: false
+    t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_goals_on_category_id"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
@@ -40,8 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_172306) do
     t.string "name"
     t.text "description"
     t.integer "days_completed", default: 0
-    t.integer "user_id", null: false
-    t.integer "goal_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "goal_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "keep", default: false
@@ -52,10 +54,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_172306) do
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.boolean "complete", default: false
-    t.integer "goal_id", null: false
+    t.bigint "goal_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "deadline"
     t.index ["goal_id"], name: "index_tasks_on_goal_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
@@ -70,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_172306) do
   end
 
   add_foreign_key "categories", "goals"
+  add_foreign_key "categories", "users"
   add_foreign_key "goals", "categories"
   add_foreign_key "goals", "users"
   add_foreign_key "habits", "goals"

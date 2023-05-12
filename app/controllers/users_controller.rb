@@ -19,10 +19,10 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the app!"
+      flash[:noticed] = "Welcome to the app!"
       redirect_to @user
     else
-      flash[:notice] = "Something go wrong..."
+      flash[:danger] = "Something go wrong..."
       render :new
     end
   end

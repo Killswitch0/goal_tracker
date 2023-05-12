@@ -1,33 +1,57 @@
-<div class="text-center" >
-  <h1>Habits</h1>
+<h1 class="text-center mt-3">Habits</h1>
 
+<div class="col-md-6">
+  <h2 class="text-center">Completed</h2>
 
-  <div class="row">
-    <div class="col-md-4 offset-md-1">
-      <h2>Completed</h2>
-      <hr>
+  <div style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
 
-      <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
-        <% @habits.completed(@goal, current_user).each do |habit| %>
-          <p>
-            <%= link_to habit.name, goal_habit_path(@goal, habit) %>
-            <%= link_to "Destroy", goal_habit_path(@goal, habit), data: { turbo_method: :delete },
-                                                                  class: "btn btn-danger btn-sm" %>
-          </p>
+      <% if @habits.present? %>
+        <% @habits.completed(@goal, current_user).each_with_index do |habit, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %></td>
+            <td><%= link_to "Destroy", goal_habit_path(@goal, habit), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+          </tr>
         <% end %>
-      </div>
-    </div>
-
-    <div class="col-md-4 offset-md-1">
-      <h2 class="">Uncompleted</h2>
-      <hr>
-
-      <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
-        <% @habits.uncompleted(@goal, current_user).each do |habit| %>
-          <p><%= link_to habit.name, goal_habit_path(@goal, habit) %></p>
-        <% end %>
-      </div>
-    </div>
+      <% end %>
+    </table>
   </div>
+</div>
 
+<div class="col-md-6">
+  <h2 class="text-center">Uncompleted</h2>
+
+  <div style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+
+      <% if @habits.present? %>
+        <% @habits.uncompleted(@goal, current_user).each_with_index do |habit, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %></td>
+            <td><%= link_to "Destroy", goal_habit_path(@goal, habit), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<div class="text-center">
+  <%= link_to "Back to Goal", goal_path(@goal), class: "btn btn-secondary" %>
 </div>

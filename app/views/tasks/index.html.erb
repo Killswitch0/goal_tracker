@@ -1,59 +1,59 @@
-<div class="text-center">
-  <h1 class="">Tasks</h1>
+<h1 class="text-center">Tasks</h1>
 
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Completed</h2>
+<div class="col-md-6">
+  <h2 class="text-center">Completed</h2>
 
-      <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
-        <table class="table table-bordered table-striped text-center">
-          <thead class="table-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Action</th>
-          </tr>
-          </thead>
+  <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sortable 'name' %></th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
 
-          <% @tasks.completed(@goal).each_with_index do |task, index| %>
-            <tr>
-              <th scope="row"><%= index + 1 %></th>
-              <td><%= link_to task.name, goal_task_path(@goal, task) %></td>
-              <td><%= link_to "Destroy", goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <h2>Uncompleted</h2>
-
-      <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
-        <table class="table table-bordered table-striped text-center">
-          <thead class="table-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Action</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <% @tasks.uncompleted(@goal).each_with_index do |task, index| %>
-            <tr>
-              <th scope="row"><%= index + 1 %></th>
-              <td><%= link_to task.name, goal_task_path(@goal, task) %></td>
-              <td><%= link_to "Destroy", goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
+      <% @tasks.completed(@goal).each_with_index do |task, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= link_to task.name.truncate(15), goal_task_path(@goal, task) %></td>
+          <td><%= link_to "Destroy", goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>
+
+<div class="col-md-6">
+  <h2 class="text-center">Uncompleted</h2>
+
+  <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sortable "name" %></th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @tasks.uncompleted(@goal).each_with_index do |task, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= link_to task.name.truncate(35), goal_task_path(@goal, task) %></td>
+          <td><%= link_to "Destroy", goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="text-center">
+  <%= link_to "Back to Goal", goal_path(@goal), class: "btn btn-secondary" %>
+</div>
+
 
 
 

@@ -1,5 +1,9 @@
 class Category < ApplicationRecord
-  has_many :goals
+  belongs_to :user
 
-  validates :name, presence: true, uniqueness: true
+  has_many :goals, dependent: :destroy
+
+  validates :name, presence: true, uniqueness: true,
+            format: { with: /[A-Z]+[a-z]*/ },
+            length: { minimum: 2, maximum: 10 }
 end

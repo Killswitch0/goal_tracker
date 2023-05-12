@@ -1,7 +1,7 @@
-<h1 class="text-center">Edit user</h1>
+<h1 class="text-center mt-3">Edit user</h1>
 
-<div class="row">
-  <div class="col-md-4 offset-4">
-    <%= render "form", user: @user %>
-  </div>
+<div class="col-md-4 offset-4">
+  <%= render "form", user: @user %>
+
+  <%= link_to "Back", user_path(@user), class: "btn btn-secondary mt-3" %>
 </div>

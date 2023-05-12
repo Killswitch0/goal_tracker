@@ -2,12 +2,16 @@ class GoalsController < ApplicationController
   before_action :redirect_user
   before_action :set_category, only: %i[]
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @goals = current_user.goals
   end
 
   def show
     @goal = Goal.find(params[:id])
+    @tasks = @goal.tasks.order(sort_column + ' ' + sort_direction)
+    @habits = @goal.habits.order(sort_column + ' ' + sort_direction)
   end
 
   def new
@@ -21,11 +25,11 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.save
-        flash[:success] = "Goal was successfully created."
+        flash[:noticed] = "Goal was successfully created."
         redirect_to category_goal_path(@category, @goal)
         format.html
       else
-        flash[:notice] = "Goal was not created."
+        flash[:danger] = "Goal was not created."
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -49,6 +53,14 @@ class GoalsController < ApplicationController
         format.js { render :edit }
       end
     end
+  end
+
+  def destroy
+    @goal = Goal.find(params[:id])
+
+    @goal.destroy
+    flash[:noticed] = "Goal was successfully destroyed."
+    redirect_to goals_path
   end
 
   private

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  layout "home"
+  layout "application", except: %i[ new ]
 
   def new
     redirect_to login_path if current_user
@@ -10,10 +10,11 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       log_in user
+      flash[:noticed] = "#{current_user.name}, welcome to the app!"
       redirect_back_or user
     else
-      flash.now[:danger] = "Invalid email/password combination"
-      render :new
+      flash[:danger] = "Invalid email/password combination"
+      redirect_to login_path
     end
   end
 
