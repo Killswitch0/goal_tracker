@@ -23,6 +23,13 @@
         <%= f.password_field :password_confirmation, class: "mb-1 form-control" %>
       </div>
 
+      <% unless @user.new_record? %>
+        <div class="mb-3">
+          <%= f.label :old_password %>
+          <%= f.password_field :old_password, class: 'form-control' %>
+        </div>
+      <% end %>
+
       <%= f.submit "#{user.new_record? ? 'Create account' : 'Update'}", class: "mb-2 btn btn-primary" %>
     </div>
   </div>

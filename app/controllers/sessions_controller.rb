@@ -1,8 +1,9 @@
 class SessionsController < ApplicationController
   layout "application", except: %i[ new ]
 
+  before_action :require_no_authentication, only: %i[ new create ]
+
   def new
-    redirect_to login_path if current_user
   end
 
   def create
@@ -24,22 +25,22 @@ class SessionsController < ApplicationController
     end
   end
 
-  #
   # def create
-  #   user = User.find_by(email: params[:session][:email].downcase)
-  #
+  #   user = User.find_by_email(params[:session][:email])
   #   if user && user.authenticate(params[:session][:password])
   #     log_in user
+  #     redirect_to root_path
   #     flash[:noticed] = "#{current_user.name}, welcome to the app!"
-  #     redirect_back_or user
   #   else
-  #     flash[:danger] = "Invalid email/password combination"
-  #     redirect_to login_path
+  #     flash[:danger] = "Invalid email or password"
+  #     render :new
   #   end
   # end
 
+
   def destroy
     log_out
+    flash[:noticed] = "See you later."
     redirect_to home_path
   end
 end

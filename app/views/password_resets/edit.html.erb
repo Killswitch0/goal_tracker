@@ -1,0 +1,15 @@
+<%= form_with model: @user, url: password_reset_path(params[:id]) do |f| %>
+  <%= render 'shared/error_messages', resource: @user %>
+
+  <div class="mb-3">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="actions"><%= f.submit 'Update Password' %></div>
+<% end %>

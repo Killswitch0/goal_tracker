@@ -9,9 +9,22 @@ module SessionsHelper
     end
   end
 
+  def user_signed_in?
+    current_user.present?
+  end
+
   def logged_in?
     !current_user.nil?
   end
+
+  def require_no_authentication
+    return if !user_signed_in?
+
+    flash[:danger] = "You are already signed in."
+    redirect_to root_url
+  end
+
+
 
   def log_out
     session.delete(:user_id)

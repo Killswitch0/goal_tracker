@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :tasks, except: %i[ show ]
   end
 
+  resources :password_resets
+
 
   get "goals/:id/tasks/:id", to: "tasks#complete", as: "complete_task"
   get "goals/:id/habits/:id", to: "habits#complete", as: "complete_habit"
