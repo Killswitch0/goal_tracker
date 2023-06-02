@@ -14,6 +14,8 @@ gem "sqlite3", "~> 1.4"
 
 gem 'sass-rails'
 
+gem 'rubocop'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -80,3 +82,5 @@ end
 
 gem "pg", "~> 1.5"
 gem "twitter-bootstrap-rails"
+
+gem "letter_opener", "~> 1.8"

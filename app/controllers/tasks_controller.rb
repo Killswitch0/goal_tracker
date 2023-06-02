@@ -30,15 +30,17 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @goal = Goal.find(params[:goal_id])
+    @task = Task.find(params[:id])
   end
 
   def update
     @task = Task.find(params[:id])
 
     if @task.update(task_params)
-      redirect_to category_goals_path(@task.goal.category_id, @task.goal)
+      redirect_to category_goal_path(@task.goal.category_id, @task.goal)
       respond_to do |format|
-        format.js
+        format.html
       end
     end
   end

@@ -5,7 +5,7 @@ class GoalsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @goals = current_user.goals
+    @goals = current_user.goals.order(complete: :asc)
   end
 
   def show
@@ -48,9 +48,9 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.update(goal_params)
-        format.js { redirect_to category_goal_path(@goal)}
+        format.html { redirect_to category_goal_path(@goal)}
       else
-        format.js { render :edit }
+        format.html { render :edit }
       end
     end
   end

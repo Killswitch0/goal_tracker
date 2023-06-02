@@ -100,9 +100,9 @@
             <th scope="row"><%= index + 1 %></th>
             <td>
               <% if task.complete? %>
-                <%= link_to task.name.truncate(15), nil, style: "text-decoration: line-through" %>
+                <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task), style: "text-decoration: line-through" %>
               <% else %>
-                <%= link_to task.name.truncate(15), nil, style: "text-decoration: none" %>
+                <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task), style: "text-decoration: none" %>
               <% end %>
             </td>
           <% end %>
