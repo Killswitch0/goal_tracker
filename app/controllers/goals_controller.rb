@@ -5,7 +5,11 @@ class GoalsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @goals = current_user.goals.order(complete: :asc)
+    if params[:search]
+      @goals = Goal.search(params[:search], current_user)
+    else
+      @goals = current_user.goals.order(complete: :asc)
+    end
   end
 
   def show

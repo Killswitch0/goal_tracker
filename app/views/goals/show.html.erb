@@ -28,7 +28,7 @@
         <%= f.label :complete %>
         <%= f.check_box :complete, {}, true %>
 
-        <%= f.submit "#{@goal.complete? ? 'Mark goal as not completed' : 'Mark goal as completed'}", class: "mb-2 btn btn-primary btn-sm" %>
+        <%= f.submit "#{@goal.complete? ? 'Uncomplete goal' : 'Complete goal'}", class: "mb-2 btn btn-primary btn-sm" %>
       </div>
     <% end %>
   </div>

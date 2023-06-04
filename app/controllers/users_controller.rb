@@ -21,9 +21,7 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
       flash[:noticed] = "Please confirm your email address to continue"
-      log_in @user
-      flash[:noticed] = "Welcome to the app!"
-      redirect_to @user
+      redirect_to login_path
     else
       flash[:danger] = "Something go wrong..."
       render :new, status: :unprocessable_entity
@@ -43,8 +41,8 @@ class UsersController < ApplicationController
 
     if user
       user.email_activate
-      flash[:noticed] = "Welcome to the Sample App! Your email has been confirmed. Please sign in to continue."
-      redirect_to user_path(user)
+      flash[:noticed] = "Welcome to the Goal Tracker! Your email has been confirmed. Please sign in to continue."
+      redirect_to login_path
     else
       flash[:danger] = "Sorry. User does not exist"
       redirect_to home_path

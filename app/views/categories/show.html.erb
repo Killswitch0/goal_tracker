@@ -1,6 +1,13 @@
 <h1 class="text-center"><%= @category.name %> category</h1>
 <hr>
 
+<%= form_with url: goals_path, method: :get, class: 'text-center mb-3' do %>
+  <%= text_field_tag :search, params[:search], placeholder: 'Search...',
+                     class: 'input-group-text',
+                     style: 'display: inline-block;' %>
+  <%= submit_tag 'Search', class: 'btn btn-primary mb-1' %>
+<% end %>
+
 <h3 class="text-center">
   <%= link_to "Add Goal", new_category_goal_path(@category), class: "btn btn-primary btn-lg" %>
 </h3>

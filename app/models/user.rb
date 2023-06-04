@@ -4,7 +4,7 @@ class User < ApplicationRecord
   # Виртуальный аттрибут. В базу данных он попадать не будет. Просто чтобы
   # на объекте существовал метод old_password, с помощью которого мы будем
   # отрисовывать новое текстовое поле в форме, а потом проверять его значение.
-  attr_accessor :old_password
+  attr_accessor :old_password, :remember_token
 
   has_many :goals, dependent: :destroy
   has_many :habits, dependent: :destroy
@@ -24,27 +24,38 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
 
   before_create :confirmation_token
-  before_create { generate_token(:auth_token) }
 
-  private
-
-  def send_password_reset
-    generate_token(:password_reset_token)
-    self.password_reset_sent_at = Time.zone.now
-    save!
-    UserMailer.password_reset(self).deliver
+  def remember_me
+    self.remember_token = SecureRandom.urlsafe_base64
+    update_column :auth_token, digest(remember_token)
   end
 
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column: self[column])
+  def forget_me
+    update_column :auth_token, nil
+    self.remember_token = nil
+  end
+
+  def remember_token_authenticated?(remember_token)
+    return false if auth_token.blank?
+    BCrypt::Password.new(self.auth_token).is_password?(remember_token)
   end
 
   def email_activate
     self.email_confirmed = true
     self.confirm_token = nil
     save!(validate: false)
+  end
+
+  private
+
+  def digest(string)
+    cost = if ActiveModel::SecurePassword
+                .min_cost
+             BCrypt::Engine::MIN_COST
+           else
+             BCrypt::Engine.cost
+           end
+    BCrypt::Password.create(string, cost: cost)
   end
 
   def confirmation_token

@@ -12,35 +12,23 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       if user.email_confirmed
         log_in user
+        remember(user) if params[:session][:remember_me] == '1'
         flash[:noticed] = "#{current_user.name}, welcome to the app!"
         redirect_back_or user
       else
-        flash.now[:danger] = 'Please activate your account by following the
-        instructions in the account confirmation email you received to proceed'
-        render :new
+        flash[:danger] = 'Please activate your account by following the
+        instructions in the account confirmation email you received to proceed.'
+        render :new, status: :unprocessable_entity
       end
     else
       flash[:danger] = "Invalid email/password combination"
-      redirect_to login_path
+      render :new, status: :unprocessable_entity
     end
   end
-
-  # def create
-  #   user = User.find_by_email(params[:session][:email])
-  #   if user && user.authenticate(params[:session][:password])
-  #     log_in user
-  #     redirect_to root_path
-  #     flash[:noticed] = "#{current_user.name}, welcome to the app!"
-  #   else
-  #     flash[:danger] = "Invalid email or password"
-  #     render :new
-  #   end
-  # end
-
 
   def destroy
     log_out
     flash[:noticed] = "See you later."
-    redirect_to home_path
+    redirect_to login_path
   end
 end

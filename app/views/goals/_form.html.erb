@@ -16,7 +16,9 @@
 
       <div class="mb-3">
         <%= f.label :category_id %>
-        <%= f.select :category_id, current_user.categories.all.collect { |c| [c.name, c.id] }, include_blank: false, selected: params[:category_id] %>
+        <%= f.select :category_id, current_user.categories.all.collect { |c| [c.name, c.id] },
+                     include_blank: false,
+                     selected: params[:category_id] %>
       </div>
 
       <div class="mb-3">
