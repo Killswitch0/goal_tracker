@@ -1,6 +1,8 @@
 module TasksHelper
   def tasks_complete(goal)
-    tasks = goal.tasks.where(complete: true).count
-    tasks == 0 ? 0 : tasks
+    completed = goal.tasks.where(complete: true).count
+    all = goal.tasks.count
+    completed == 0 ? 0 : completed
+    "#{completed}/#{all}"
   end
 end

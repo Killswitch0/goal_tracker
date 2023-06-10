@@ -18,10 +18,11 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
 env :PATH, ENV['PATH']
 
 set :output, './log/cron.log'
 
-every 1.hours do
+every 1.minutes do
   rake "habit_complete_updater:habit_updater"
 end

@@ -1,6 +1,8 @@
 module HabitsHelper
   def habits_completed(goal)
-    habits = goal.habits.where(keep: true).count
-    habits == 0 ? 0 : habits
+    completed = goal.habits.where(keep: true).count
+    all = goal.habits.count
+    habits = completed == 0 ? 0 : completed
+    "#{habits}/#{all}"
   end
 end
