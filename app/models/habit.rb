@@ -22,7 +22,6 @@ class Habit < ApplicationRecord
 
     completion_date = CompletionDate.new(date: Time.now.localtime)
     self.completion_dates << completion_date
-    completion_date.save!
   end
 
 end

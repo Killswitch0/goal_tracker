@@ -52,19 +52,6 @@ class HabitsController < ApplicationController
     redirect_to goal_habit_path(@goal, @habit)
   end
 
-  # def complete
-  #   @habit = Habit.find(params[:id])
-  #   @goal = @habit.goal
-  #
-  #   if @habit.keep?
-  #     @habit.update_attribute(:keep, false)
-  #     redirect_to category_goal_path(@goal.category_id, @goal)
-  #   else
-  #     @habit.update_attribute(:keep, true)
-  #     redirect_to category_goal_path(@goal.category_id, @goal)
-  #   end
-  # end
-
   def completed_habit
     @habit = Habit.find(params[:id])
     @goal = @habit.goal

@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
 
   get "goals/:id/tasks/:id", to: "tasks#complete", as: "complete_task"
-  # get "goals/:id/habits/:id", to: "habits#complete", as: "complete_habit"
   get "goals/:id/habits/:id", to: "habits#completed_habit", as: "complete_habit"
 
   get "signup", to: "users#new"
