@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_100401) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_10_123746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_100401) do
     t.bigint "user_id", null: false
     t.index ["goal_id"], name: "index_categories_on_goal_id"
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "completion_dates", force: :cascade do |t|
+    t.datetime "date"
+    t.bigint "habit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_completion_dates_on_habit_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -78,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_100401) do
 
   add_foreign_key "categories", "goals"
   add_foreign_key "categories", "users"
+  add_foreign_key "completion_dates", "habits"
   add_foreign_key "goals", "categories"
   add_foreign_key "goals", "users"
   add_foreign_key "habits", "goals"

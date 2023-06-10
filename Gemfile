@@ -84,3 +84,5 @@ gem "pg", "~> 1.5"
 gem "twitter-bootstrap-rails"
 
 gem "letter_opener", "~> 1.8"
+
+gem "whenever", "~> 1.0", require: false
