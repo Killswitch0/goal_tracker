@@ -2,7 +2,7 @@
   <h1>Habits#show</h1>
   <p><%= @habit.name %></p>
   <p><%= @habit.description %></p>
-  <p><%= @habit.keep? ? "Keep today" : "Not keep" %></p>
+  <p><%= @habit.completed? ? "Completed today" : "Not Completed" %></p>
 
   <%= link_to "Back to goal", category_goal_path(@category, @goal), class: "btn btn-secondary" %>
   <%= link_to "Edit", edit_goal_habit_path(@goal, @habit), class: "btn btn-primary" %>

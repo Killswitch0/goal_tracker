@@ -7,21 +7,27 @@ class Habit < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
 
-  scope :completed, ->(goal, user) { where(keep: true, goal_id: goal.id, user_id: user.id) }
-  scope :uncompleted, ->(goal, user) { where(keep: false, goal_id: goal.id, user_id: user.id) }
-
-  def habit_completed_today?(date)
-    self.completion_dates.each do |completion_date|
-      return true if completion_date.date.localtime == date
-    end
-  end
+  scope :completed, -> (goal) { joins(:completion_dates)
+                                  .where('completion_dates.created_at >= ? AND habits.goal_id = ?',
+                                         Date.today.beginning_of_day, goal.id)
+  }
+  scope :uncompleted, -> (goal) { where(completed: false, goal_id: goal.id) }
 
   def complete_habit_today
     self.update_attribute(:days_completed, self.days_completed += 1)
-    self.update_attribute(:keep, true)
+    self.update_attribute(:completed, true)
 
     completion_date = CompletionDate.new(date: Time.now.localtime)
     self.completion_dates << completion_date
   end
 
+  def completed_today?
+    completion_dates.created_today.exists?
+  end
+
+  # def habit_completed_today?(date)
+  #   self.completion_dates.each do |completion_date|
+  #     return true if completion_date.date.localtime == date
+  #   end
+  # end
 end
