@@ -1,26 +1,20 @@
-<h1 class="text-center">Goal info</h1>
+<h1 class="text-center mt-3">Goal info</h1>
 
-<div class="offset-4 col-md-4" style="font-size: large">
+<div class="offset-4 col-md-4 mb-3 border border-black p-3" style="font-size: large">
 
-  <div class="card">
-    <div class="card-body">
-      <h2 class="">
-        Category: <i><%= @goal.category.name unless @goal.category.nil? %></i>
-      </h2>
+  <dl class="row">
+      <dt class="col-sm-3">Category:</dt>
+      <dd class="col-sm-9"><%= @goal.category.name unless @goal.category.nil? %></dd>
 
-      <h3 class="">
-        Name: <i><%= @goal.name %></i>
-      </h3>
+      <dt class="col-sm-3">Name:</dt>
+      <dd class="col-sm-9"><%= @goal.name %></dd>
 
-      <h3 class="">
-        Descr: <i><%= @goal.description %></i>
-      </h3>
+      <dt class="col-sm-3">Description:</dt>
+      <dd class="col-sm-9"><%= @goal.description %></dd>
 
-      <h3 class="">
-        Deadline: <i><%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present? %></i>
-      </h3>
-    </div>
-  </div>
+      <dt class="col-sm-3">Deadline:</dt>
+      <dd class="col-sm-9"><%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present? %></dd>
+  </dl>
 
   <div class="text-center">
     <%= form_with model: @goal do |f| %>
