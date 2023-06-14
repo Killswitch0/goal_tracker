@@ -65,6 +65,7 @@ gem 'sass-rails'
 
 gem 'rubocop'
 
+# grouping dates by day/week/month
 gem "groupdate", "~> 6.2"
 
 group :development, :test do

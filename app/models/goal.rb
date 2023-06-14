@@ -7,7 +7,7 @@ class Goal < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true,
             format: { with: /[A-Z]+[a-z]*/ },
-            length: {minimum: 5, maximum: 50}
+            length: { minimum: 5, maximum: 50 }
 
   validates :description, presence: true,
             format: { with: /\A(.|\s)*[a-zA-Z]+(.|\s)*\z/ },
@@ -15,12 +15,11 @@ class Goal < ApplicationRecord
 
   validates :category_id, presence: true
 
-
   def complete?
     self.complete == true
   end
 
   def self.search(search, user)
-      where('lower(name) LIKE ? AND user_id = ?', "%#{search.downcase}%", "#{user.id}") if search
+    where('lower(name) LIKE ? AND user_id = ?', "%#{search.downcase}%", "#{user.id}") if search
   end
 end
