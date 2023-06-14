@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :calendar, only: :show, controller: :calendar
+
   resources :users, except: :new do
     member do
       get :confirm_email

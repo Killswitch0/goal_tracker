@@ -6,6 +6,9 @@ class HabitsController < ApplicationController
 
   def index
     @habits = current_user.habits
+    @completed_habits = @habits.joins(:completion_dates).where(completion_dates: {created_at: Date.today.beginning_of_day..}).distinct
+    @uncompleted_habits = @habits.left_joins(:completion_dates).where(completion_dates: {id: nil}).distinct
+    #binding.pry
   end
 
   # def show
