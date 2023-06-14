@@ -5,7 +5,7 @@
   <%= link_to "Add category", new_category_path, class: "btn btn-primary btn-lg" %>
 </p>
 
-<div class="col-md-4 offset-4" style="height: 500px; overflow: scroll; border: 1px solid">
+<div class="col-sm-12 col-md-4 offset-md-4" style="height: 500px; overflow: scroll; border: 1px solid">
   <% @categories.each do |category| %>
     <ul class="list-group">
       <li class="text-center"><%= link_to category.name, category_path(category), class: "list-group-item btn btn-primary" %></li>
