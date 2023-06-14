@@ -56,7 +56,7 @@ class HabitsController < ApplicationController
     @habit = Habit.find(params[:id])
     @goal = @habit.goal
 
-    if @habit.keep?
+    if @habit.completed_today?
       flash[:noticed] = "You have already completed this habit today!"
       redirect_to goal_path(@goal)
     else
@@ -72,6 +72,6 @@ class HabitsController < ApplicationController
   end
 
   def habit_params
-    params.require(:habit).permit(:name, :description, :days_completed, :keep)
+    params.require(:habit).permit(:name, :description, :days_completed, :completed)
   end
 end

@@ -14,7 +14,7 @@
       </thead>
 
       <% if @habits.present? %>
-        <% @habits.completed(@goal, current_user).each_with_index do |habit, index| %>
+        <% @habits.completed(@goal).each_with_index do |habit, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %></td>
@@ -40,7 +40,7 @@
       </thead>
 
       <% if @habits.present? %>
-        <% @habits.uncompleted(@goal, current_user).each_with_index do |habit, index| %>
+        <% @habits.uncompleted(@goal).each_with_index do |habit, index| %>
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %></td>
