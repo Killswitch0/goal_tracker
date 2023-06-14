@@ -15,8 +15,8 @@
       </div>
 
       <div class="mb-3">
-        <%= f.label :keep %>
-        <%= f.check_box :keep, {}, class: "form-control" %>
+        <%= f.label :completed %>
+        <%= f.check_box :completed, {}, class: "form-control" %>
       </div>
 
       <%= f.submit "#{@habit.new_record? ? 'Create' : 'Update'}", class: "mb-2 btn btn-primary" %>

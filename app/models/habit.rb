@@ -7,22 +7,30 @@ class Habit < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
 
+  before_update :destroy_completion_date_today
+
   scope :completed, -> (goal) { joins(:completion_dates)
                                   .where('completion_dates.created_at >= ? AND habits.goal_id = ?',
                                          Date.today.beginning_of_day, goal.id)
   }
   scope :uncompleted, -> (goal) { where(completed: false, goal_id: goal.id) }
 
+  def completed_today?
+    completion_dates.created_today.exists? && self.completed?
+  end
+
+  # group_by_day is the method of groupdate gem
+  def completed_monthly
+    completion_dates.group_by_month(:created_at).count
+  end
+
   def complete_habit_today
     self.update_attribute(:days_completed, self.days_completed += 1)
     self.update_attribute(:completed, true)
 
-    completion_date = CompletionDate.new(date: Time.now.localtime)
-    self.completion_dates << completion_date
-  end
-
-  def completed_today?
-    completion_dates.created_today.exists?
+    unless completion_dates.created_today.exists?
+      create_completion_date
+    end
   end
 
   # def habit_completed_today?(date)
@@ -30,4 +38,18 @@ class Habit < ApplicationRecord
   #     return true if completion_date.date.localtime == date
   #   end
   # end
+
+  private
+
+  def destroy_completion_date_today
+    if self.completion_dates.created_today.exists? && self.completed == false
+      self.completion_dates.created_today.delete_all
+      self.update_attribute(:days_completed, self.days_completed -= 1)
+    end
+  end
+
+  def create_completion_date
+    completion_date = CompletionDate.new(date: Time.now.localtime)
+    self.completion_dates << completion_date # Habit.new.completion_dates.build
+  end
 end

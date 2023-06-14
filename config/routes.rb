@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   resources :password_resets
 
-
   get "goals/:id/tasks/:id", to: "tasks#complete", as: "complete_task"
   get "goals/:id/habits/:id", to: "habits#completed_habit", as: "complete_habit"
 
