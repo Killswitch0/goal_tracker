@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="text-center">New Task</h1>
 
-  <div class="col-md-4 offset-4">
+  <div class="col-sm-12 col-md-4 offset-md-4">
     <%= form_with(model: [@goal, @task]) do |f| %>
       <%= render "shared/error_messages", resource: @task %>
 
