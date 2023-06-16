@@ -12,4 +12,8 @@ module ApplicationHelper
     when :danger then 'alert alert-danger'
     end
   end
+
+  def habit_record_exists?(habit, date)
+    habit.completion_dates.calendar_completed_today(date).exists?
+  end
 end

@@ -5,9 +5,10 @@ class HabitsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
+    @goal = Goal.find(params[:goal_id])
     @habits = current_user.habits
-    @completed_habits = @habits.joins(:completion_dates).where(completion_dates: {created_at: Date.today.beginning_of_day..}).distinct
-    @uncompleted_habits = @habits.left_joins(:completion_dates).where(completion_dates: {id: nil}).distinct
+    @completed_habits = @habits.joins(:completion_dates).where(completion_dates: {created_at: Date.today.beginning_of_day..}, goal_id: @goal.id).distinct
+    @uncompleted_habits = @habits.left_joins(:completion_dates).where(completion_dates: {id: nil}, goal_id: @goal.id).distinct
     #binding.pry
   end
 
@@ -66,6 +67,10 @@ class HabitsController < ApplicationController
       @habit.complete_habit_today
       redirect_to goal_path(@goal)
     end
+  end
+
+  def calendar
+    @habits = current_user.habits
   end
 
   private

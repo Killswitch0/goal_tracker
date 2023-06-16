@@ -9,9 +9,10 @@ class Habit < ApplicationRecord
 
   before_update :destroy_completion_date_today
 
-  scope :completed, -> { joins(:completion_dates)
-                           .where('completion_dates.created_at >= ?',
-                                  Date.today.beginning_of_day)
+  scope :completed, -> {
+    joins(:completion_dates)
+      .where('completion_dates.created_at >= ?',
+             Date.today.beginning_of_day)
   }
   scope :uncompleted, -> (goal) { where(completed: false, goal_id: goal.id) }
 
