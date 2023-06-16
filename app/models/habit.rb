@@ -34,6 +34,10 @@ class Habit < ApplicationRecord
     end
   end
 
+  def self.search(search, user)
+    where('lower(name) LIKE ? AND user_id = ?', "%#{search.downcase}%", "#{user.id}") if search
+  end
+
   # def habit_completed_today?(date)
   #   self.completion_dates.each do |completion_date|
   #     return true if completion_date.date.localtime == date
@@ -50,7 +54,7 @@ class Habit < ApplicationRecord
   end
 
   def create_completion_date
-    completion_date = CompletionDate.new(date: Time.now.localtime)
+    completion_date = CompletionDate.new(date: Time.now.to_date)
     self.completion_dates << completion_date # Habit.new.completion_dates.build
   end
 end

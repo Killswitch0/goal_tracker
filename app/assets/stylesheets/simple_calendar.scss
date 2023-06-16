@@ -1,13 +1,14 @@
 .habit-record {
-  border: 1px solid black;
+  border: 2px solid black;
   margin: 5px;
   padding: 5px;
 }
 
 .completed {
-  background-color: green;
+  background-color: rgba(24, 225, 68, 0.5);
+
 }
 
 .uncompleted {
-  background-color: red;
+  background-color: rgba(239, 22, 22, 0.5);
 }
