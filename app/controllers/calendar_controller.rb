@@ -3,7 +3,7 @@ class CalendarController < ApplicationController
     @habits = if params[:search]
                 Habit.search(params[:search], current_user)
               else
-                current_user.habits
+                current_user.habits.includes(:completion_dates)
               end
   end
 end
