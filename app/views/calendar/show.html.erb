@@ -1,10 +1,14 @@
-<h1>Calendar</h1>
+<div class="mt-3 text-center">
+  <h1>Calendar</h1>
 
-<%= month_calendar do |date| %>
-  <%= date.day %>
-  <% @habits.each do |habit| %>
-    <div class="habit_record <%= habit_record_exists?(habit, date) ? 'completed' : 'uncompleted' %>">
-      <%= habit.name %>
-    </div>
+  <%= month_calendar do |date| %>
+    <%= date.day %>
+    <% habits_for.each do |habit| %>
+      <% if habit.completion_dates.any? { |cd| cd.date == date.to_date } %>
+        <div class="completed border border-dark"><%= habit.name %></div>
+      <% else %>
+        <div class="uncompleted border border-dark"><%= habit.name %></div>
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

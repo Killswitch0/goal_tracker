@@ -13,7 +13,9 @@ module ApplicationHelper
     end
   end
 
-  def habit_record_exists?(habit, date)
-    habit.completion_dates.calendar_completed_today(date).exists?
+  def habits_for
+    @habits.left_outer_joins(:completion_dates)
+           .where(completion_dates: { id: nil }) | @habits.left_joins(:completion_dates)
+                                                          .where.not(completion_dates: { id: nil })
   end
 end
