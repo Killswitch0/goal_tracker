@@ -1,4 +1,6 @@
 class Habit < ApplicationRecord
+  include Searchable
+
   belongs_to :user
   belongs_to :goal
 
@@ -32,10 +34,6 @@ class Habit < ApplicationRecord
     unless completion_dates.created_today.exists?
       create_completion_date
     end
-  end
-
-  def self.search(search, user)
-    where('lower(name) LIKE ? AND user_id = ?', "%#{search.downcase}%", "#{user.id}") if search
   end
 
   # def habit_completed_today?(date)

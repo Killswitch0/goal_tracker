@@ -94,3 +94,5 @@ end
 
 gem "simple_calendar", "~> 2.4"
 
+
+gem "yard", "~> 0.9.34"

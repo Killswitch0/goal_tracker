@@ -1,4 +1,6 @@
 class Goal < ApplicationRecord
+  include Searchable
+
   belongs_to :user
   belongs_to :category
 
@@ -17,9 +19,5 @@ class Goal < ApplicationRecord
 
   def complete?
     self.complete == true
-  end
-
-  def self.search(search, user)
-    where('lower(name) LIKE ? AND user_id = ?', "%#{search.downcase}%", "#{user.id}") if search
   end
 end

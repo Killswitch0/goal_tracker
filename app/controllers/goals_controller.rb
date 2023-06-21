@@ -1,6 +1,7 @@
 class GoalsController < ApplicationController
   before_action :redirect_user
   before_action :set_category, only: %i[]
+  before_action :set_goal, only: %i[ show edit update destroy ]
 
   helper_method :sort_column, :sort_direction
 
@@ -13,7 +14,6 @@ class GoalsController < ApplicationController
   end
 
   def show
-    @goal = Goal.find(params[:id])
     @tasks = @goal.tasks.order(sort_column + ' ' + sort_direction)
     @habits = @goal.habits.order(sort_column + ' ' + sort_direction)
   end
@@ -42,12 +42,9 @@ class GoalsController < ApplicationController
   def edit
     # @category = Category.find(params[:category_id])
     # @goal = @category.goals.find_by(id: params[:id])
-
-    @goal = Goal.find(params[:id])
   end
 
   def update
-    @goal = Goal.find(params[:id])
     @category = @goal.category_id
 
     respond_to do |format|
@@ -60,8 +57,6 @@ class GoalsController < ApplicationController
   end
 
   def destroy
-    @goal = Goal.find(params[:id])
-
     @goal.destroy
     flash[:noticed] = "Goal was successfully destroyed."
     redirect_to goals_path
@@ -69,11 +64,15 @@ class GoalsController < ApplicationController
 
   private
 
-  def set_category
-    @category = Category.find(params[:category_id])
-  end
-
   def goal_params
     params.require(:goal).permit(:name, :description, :category_id, :days_completed, :deadline, :complete)
+  end
+
+  def set_category
+    @category ||= Category.find(params[:category_id])
+  end
+
+  def set_goal
+    @goal ||= Goal.find(params[:id])
   end
 end

@@ -41,6 +41,12 @@
 
 .idea
 
+# Ignore yardoc gem folders
+.yardoc
+doc
+docs
+
+
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
