@@ -1,4 +1,6 @@
 class Goal < ApplicationRecord
+  include Searchable
+  
   AVAILABLE_COLORS = [['Purple', 'rgb(140,8,246)'],
                       ['Blue', 'rgb(17,85,253)'], 
                       ['Red', 'rgb(255,18,12)'], 
@@ -6,7 +8,7 @@ class Goal < ApplicationRecord
                       ['Cyan', 'rgb(1,240,253)'],
                       ['Yellow', 'rgb(255,255,33)'],
                       ['Gold', 'rgb(252,206,24)'],
-                      ['Midnight blue', 'rgb(14,31,82)']]
+                      ['Midnight blue', 'rgb(14,31,82)']
 
   belongs_to :user
   belongs_to :category
@@ -27,9 +29,5 @@ class Goal < ApplicationRecord
 
   def complete?
     self.complete == true
-  end
-
-  def self.search(search, user)
-    where('lower(name) LIKE ? AND user_id = ?', "%#{search.downcase}%", "#{user.id}") if search
   end
 end

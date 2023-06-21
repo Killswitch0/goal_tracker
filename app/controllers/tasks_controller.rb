@@ -1,15 +1,15 @@
 class TasksController < ApplicationController
   before_action :redirect_user
+  before_action :set_goal, only: %i[ index new create edit destroy ]
+  before_action :set_task, only: %i[ new edit update destroy complete ]
 
   helper_method :sort_column, :sort_direction
 
   def index
-    @goal = Goal.find(params[:goal_id])
-    @tasks = Task.order(sort_column + ' ' + sort_direction)
+    @tasks = Task.order("#{sort_column} #{sort_direction}")
   end
 
   def new
-    @goal = Goal.find(params[:goal_id])
     @task = Task.new
   end
 
@@ -18,7 +18,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    @goal = Goal.find(params[:goal_id])
     @task = @goal.tasks.build(task_params)
     @task.user = current_user
 
@@ -30,44 +29,43 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @goal = Goal.find(params[:goal_id])
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
-
     if @task.update(task_params)
       redirect_to category_goal_path(@task.goal.category_id, @task.goal)
-      respond_to do |format|
-        format.html
-      end
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @goal = Goal.find(params[:goal_id])
-    @task = Task.find(params[:id])
-
     @task.destroy
     redirect_to goal_task_path(@goal, @task)
   end
 
   def complete
-    @task = Task.find(params[:id])
     @goal = @task.goal
     if @task.complete?
       @task.update_attribute(:complete, false)
-      redirect_to category_goal_path(@goal.category_id, @goal)
     else
       @task.update_attribute(:complete, true)
-      redirect_to category_goal_path(@goal.category_id, @goal)
     end
+
+    redirect_to category_goal_path(@goal.category_id, @goal)
   end
 
   private
 
   def task_params
     params.require(:task).permit(:name, :complete, :deadline)
+  end
+
+  def set_task
+    @task ||= Task.find(params[:id])
+  end
+
+  def set_goal
+    @goal ||= Goal.find(params[:goal_id])
   end
 end
