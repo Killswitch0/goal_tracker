@@ -8,7 +8,7 @@ class Goal < ApplicationRecord
                       ['Cyan', 'rgb(1,240,253)'],
                       ['Yellow', 'rgb(255,255,33)'],
                       ['Gold', 'rgb(252,206,24)'],
-                      ['Midnight blue', 'rgb(14,31,82)']
+                      ['Midnight blue', 'rgb(14,31,82)']]
 
   belongs_to :user
   belongs_to :category
@@ -26,8 +26,4 @@ class Goal < ApplicationRecord
 
   validates :category_id, presence: true
   validates :color, presence: true
-
-  def complete?
-    self.complete == true
-  end
 end

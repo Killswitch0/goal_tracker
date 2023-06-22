@@ -5,5 +5,6 @@ class CalendarController < ApplicationController
               else
                 current_user.habits.includes(:completion_dates)
               end
+    @goals = current_user.goals.includes(:habits)
   end
 end
