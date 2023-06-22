@@ -1,36 +1,42 @@
 <%= form_with(model: [@category, @goal]) do |f| %>
   <%= render "shared/error_messages", resource: @goal %>
-
   <div class="card">
     <div class="card-body">
-
+      
       <div class="mb-3">
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
       </div>
-
+      
       <div class="mb-3">
         <%= f.label :description %>
         <%= f.text_area :description, class: "form-control" %>
       </div>
-
+      
       <div class="mb-3">
         <%= f.label :category_id %>
         <%= f.select :category_id, current_user.categories.all.collect { |c| [c.name, c.id] },
                      include_blank: false,
                      selected: params[:category_id] %>
       </div>
-
+      
+      <div class="mb-3">
+        <%= f.label :color %>
+        <%= f.select :color, options_for_select(Goal::AVAILABLE_COLORS.map { |color| 
+                                               [color[0], color[1],
+                                               { style: "background-color: #{color[1]}; color: white;" }] }) %>
+      </div>
+      
       <div class="mb-3">
         <%= f.label :deadline %>
         <%= f.datetime_field :deadline, class: "form-select" %>
       </div>
-
+      
       <div class="mb-3">
         <%= f.label :complete %>
         <%= f.check_box :complete, {}, true, false %>
       </div>
-
+      
       <%= f.submit "#{@goal.new_record? ? 'Create' : 'Update'}", class: "btn btn-primary" %>
     </div>
   </div>
