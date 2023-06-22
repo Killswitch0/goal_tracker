@@ -34,7 +34,7 @@
     </div>
     
     <%= month_calendar do |date| %>
-      <%= date.day %>
+      <%= date %>
       <% habits_for.each do |habit| %>
         <% if habit.completion_dates.any? { |cd| cd.date == date.to_date } %>
           <div class="completed border border-dark" 
