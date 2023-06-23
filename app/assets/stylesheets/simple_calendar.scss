@@ -16,6 +16,18 @@
 
 
 .simple-calendar {
+  background-color: #fff5;
+  box-shadow: 0 5px 25px rgba(0,0,0, .2);
+  border-radius: 1rem;
+  margin-top: 10px;
+  overflow-x: auto;
+
+  .calendar-heading {
+    position: sticky;
+    margin: 10px;
+  }
+
+
   .day {}
 
   .wday-0 {}

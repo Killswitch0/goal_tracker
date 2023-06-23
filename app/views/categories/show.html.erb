@@ -12,13 +12,14 @@
   <%= link_to "Add Goal", new_category_goal_path(@category), class: "btn btn-primary btn-lg" %>
 </h3>
 
-<div class="col-sm-12 col-md-4 offset-md-4" style="height: 500px; overflow: scroll; border: 1px solid">
-  <% @category.goals.each do |goal| %>
-    <ul class="list-group">
-      <li class="text-center"><%= link_to goal.name,
-                                          [@category, goal],
-                                          class: "#{goal.complete? ? 'list-group-item list-group-item-success' : 'list-group-item btn btn-primary'}" %></li>
-    </ul>
-  <% end %>
+<div class="col-sm-12 col-md-4 offset-md-4 box" style="">
+  <h2>Goals</h2>
+  
+  <ul class="">
+    <% @category.goals.each_with_index do |goal, index| %>
+      <li class=""><span><%= index + 1 %></span><%= link_to goal.name,
+                       [@category, goal] %>
+      </li>
+    <% end %>
+  </ul>
 </div>
-

@@ -1,0 +1,9 @@
+<% if @goals.present? %>
+  <% @goals.each_with_index do |goal, index| %>
+    <li class="">
+      <span><%= index + 1 %></span><%= link_to goal.name, goal%>
+    </li>
+  <% end %>
+<% else %>
+  <p class="text-center">No goals have yet</p>
+<% end%>

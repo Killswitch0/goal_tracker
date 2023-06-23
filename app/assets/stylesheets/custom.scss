@@ -1,4 +1,13 @@
 @import "simple_calendar";
+@import "categories/index";
+@import "categories/show";
+@import "goals/show";
+
+body {
+  min-height: 100vh;
+  background: #03dfff;
+  background: linear-gradient(139deg, #03ddffcb 0%, #ff0381b6 90%);
+}
 
 th a {
   text-decoration: none;
@@ -7,4 +16,14 @@ th a {
   text-decoration: none;
  }
 
+
+
+      /// Bootstrap ///
+.navbar-collapse {
+  font-size: 18px;
+}
+
+.navbar-brand {
+  font-size: 31px;
+}
 

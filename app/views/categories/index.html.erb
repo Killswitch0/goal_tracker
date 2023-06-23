@@ -1,14 +1,13 @@
 <h1 class="text-center">Choose Category</h1>
 <hr>
-
 <p class="text-center">
   <%= link_to "Add category", new_category_path, class: "btn btn-primary btn-lg" %>
 </p>
-
-<div class="col-sm-12 col-md-4 offset-md-4" style="height: 500px; overflow: scroll; border: 1px solid">
-  <% @categories.each do |category| %>
-    <ul class="list-group">
-      <li class="text-center"><%= link_to category.name, category_path(category), class: "list-group-item btn btn-primary" %></li>
-    </ul>
-  <% end %>
+<div class="box">
+  <h2>Categories</h2>
+  <ul>
+    <% @categories.each_with_index do |category, index| %>
+      <li class=""><span><%= index + 1 %></span><%= link_to category.name, category_path(category) %></li>
+    <% end %>
+  </ul>
 </div>
