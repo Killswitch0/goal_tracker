@@ -1,6 +1,9 @@
 @import "simple_calendar";
-@import "categories";
-@import "goals";
+@import "categories/index";
+@import "categories/show";
+@import "goals/index";
+@import "goals/show";
+
 
 body {
   min-height: 100vh;
