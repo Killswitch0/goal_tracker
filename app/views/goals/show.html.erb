@@ -1,5 +1,5 @@
 <h1 class="text-center mt-3">Goal info</h1>
-<div class="col-sm-12 col-md-4 offset-md-4 mb-3 p-3 goal-info" style="font-size: large">
+<div class="col-sm-12 col-md-4 offset-md-4 mb-3 p-3 goal-info <%= @goal.complete? ? 'completed' : 'uncompleted' %>" style="font-size: large">
   <dl class="row">
     <dt class="col-sm-3">Category:</dt>
     <dd class="col-sm-9 px-5"><%= @goal.category.name unless @goal.category.nil? %></dd>
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<div class="col-sm-12 col-md-4 offset-md-1 mb-5 table">
+<div class="col-sm-12 col-md-4 offset-md-1 mb-5 table <%= 'completed' if @goal.habits_streak? %>">
   <div class="table-header">
     <h2 class="text-center"><%= habits_completed(@goal) %> Habits are completed</h2>
   </div>
@@ -66,7 +66,7 @@
   </div>
 </div>
 
-<div class="col-sm-12 col-md-4 offset-md-1 table">
+<div class="col-sm-12 col-md-4 offset-md-1 table <%= 'completed' if @goal.tasks_streak? %>">
   <div class="table-header">
     <h2 class="text-center"><%= tasks_complete(@goal) %> Tasks are completed</h2>
   </div>

@@ -26,4 +26,18 @@ class Goal < ApplicationRecord
 
   validates :category_id, presence: true
   validates :color, presence: true
+  validates :deadline, presence: true
+  validates :color, presence: true
+
+  def tasks_streak?
+    return if self.tasks.completed.count == 0
+
+    self.tasks.completed.count == self.tasks.count
+  end
+
+  def habits_streak?
+    return if self.habits.completed_today.count == 0
+
+    self.habits.completed_today.count == self.habits.count
+  end
 end

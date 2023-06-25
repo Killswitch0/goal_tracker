@@ -14,12 +14,16 @@
 
 <div class="col-sm-12 col-md-4 offset-md-4 box" style="">
   <h2>Goals</h2>
-  
+
   <ul class="">
-    <% @category.goals.each_with_index do |goal, index| %>
-      <li class=""><span><%= index + 1 %></span><%= link_to goal.name,
-                       [@category, goal] %>
-      </li>
+    <% if @category.goals.present? %>
+      <% @category.goals.each_with_index do |goal, index| %>
+        <li class=""><span><%= index + 1 %></span><%= link_to goal.name,
+                                                              [@category, goal] %>
+        </li>
+      <% end %>
+    <% else %>
+      <p class="text-center fs-4">No goals have yet</p>
     <% end %>
   </ul>
 </div>

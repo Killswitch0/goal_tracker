@@ -4,7 +4,7 @@ class Task < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :completed, ->(goal) { where(complete: true, goal_id: goal.id) }
-  scope :uncompleted, ->(goal) { where(complete: false, goal_id: goal.id) }
+  scope :completed, -> { where(complete: true) }
+  scope :uncompleted, -> { where(complete: false) }
 
 end

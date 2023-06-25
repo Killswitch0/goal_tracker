@@ -29,3 +29,27 @@ th a {
   font-size: 31px;
 }
 
+.nav-link {
+  position: relative;
+}
+
+.nav-link:after {
+  opacity: 0;
+  transition: all 0.2s;
+  height: 2px;
+  width: 100%;
+  background-color: #fff5;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.nav-link-dropdown:after {
+  all: unset;
+}
+
+.nav-link:hover:after {
+  content: '' ;
+  opacity: 1;
+}
+

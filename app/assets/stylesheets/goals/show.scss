@@ -1,11 +1,9 @@
-      /// Goal info ///
-
-  .goal-info {
-    box-shadow: 0 .4rem .8rem #0005;
-    background-color: #fff5;
-    border-radius: 1rem;
+/// Goal info
+.goal-info {
+  box-shadow: 0 .4rem .8rem #0005;
+  background-color: #fff5;
+  border-radius: 1rem;
 }
-
 
 div.table {
   width: 50vh;
@@ -14,6 +12,11 @@ div.table {
   box-shadow: 0 .4rem .8rem #0005;
   border-radius: .8rem;
   // overflow: auto;
+}
+
+/// goals, habits, tasks: goals/show
+div.completed {
+  background-color: rgba(39, 245, 93, 0.6);
 }
 
 table {
@@ -54,23 +57,23 @@ table, th, td {
   border-radius: .6rem;
 
   overflow: auto;
-  
+
   box-shadow: 0 .4rem .8rem #0005;
 }
 
 
-.table-body::-webkit-scrollbar{
+.table-body::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;
 }
 
-.table-body::-webkit-scrollbar-thumb{
+.table-body::-webkit-scrollbar-thumb {
   border-radius: .5rem;
   background-color: #0004;
   visibility: hidden;
 }
 
-.table-body:hover::-webkit-scrollbar-thumb{ 
+.table-body:hover::-webkit-scrollbar-thumb {
   visibility: visible;
 }
 
