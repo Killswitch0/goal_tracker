@@ -63,7 +63,6 @@ gem 'sass-rails'
 
 gem 'rubocop'
 
-
 # grouping dates by day/week/month
 gem "groupdate", "~> 6.2"
 
@@ -93,6 +92,5 @@ group :test do
 end
 
 gem "simple_calendar", "~> 2.4"
-
 
 gem "yard", "~> 0.9.34"

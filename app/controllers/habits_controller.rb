@@ -51,11 +51,10 @@ class HabitsController < ApplicationController
 
   def destroy
     @habit.destroy
-
-    redirect_to goal_habit_path(@goal, @habit)
+    redirect_to goal_habits_path(@goal, @habit)
   end
 
-  def completed_habit
+  def complete
     @habit = Habit.find(params[:id])
     @goal = @habit.goal
 

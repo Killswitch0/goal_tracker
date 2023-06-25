@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_action :redirect_user
-  before_action :set_category, only: %i[]
+  before_action :set_category, only: %i[  ]
   before_action :set_goal, only: %i[ show edit update destroy ]
 
   helper_method :sort_column, :sort_direction
@@ -49,7 +49,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.update(goal_params)
-        format.html { redirect_to category_goal_path(@goal)}
+        format.html { redirect_to category_goal_path(@goal) }
       else
         format.html { render :edit }
       end

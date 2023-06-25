@@ -19,8 +19,8 @@ Rails.application.routes.draw do
 
   resources :password_resets
 
-  get "goals/:id/tasks/:id", to: "tasks#complete", as: "complete_task"
-  get "goals/:id/habits/:id", to: "habits#completed_habit", as: "complete_habit"
+  get "goals/:id/tasks/:id/complete", to: "tasks#complete", as: "complete_task"
+  get "goals/:id/habits/:id/complete", to: "habits#complete", as: "complete_habit"
 
   get "signup", to: "users#new"
   post "signup", to: "users#create"
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
 
   get "home", to: "pages#home"
   get "about", to: "pages#about"
-
 
   root "categories#index"
 end
