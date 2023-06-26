@@ -6,7 +6,9 @@ class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @tasks = Task.order("#{sort_column} #{sort_direction}")
+    @tasks = current_user.tasks.order("#{sort_column} #{sort_direction}")
+    @completed_tasks = @tasks.where(complete: true, goal_id: @goal.id)
+    @uncompleted_tasks = @tasks.where(complete: false, goal_id: @goal.id)
   end
 
   def new

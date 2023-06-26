@@ -6,5 +6,4 @@ class Task < ApplicationRecord
 
   scope :completed, -> { where(complete: true) }
   scope :uncompleted, -> { where(complete: false) }
-
 end

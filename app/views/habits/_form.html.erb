@@ -14,11 +14,6 @@
         <%= f.text_area :description, class: "mb-1 form-control" %>
       </div>
 
-      <div class="mb-3">
-        <%= f.label :completed %>
-        <%= f.check_box :completed, {}, class: "form-control" %>
-      </div>
-
       <%= f.submit "#{@habit.new_record? ? 'Create' : 'Update'}", class: "mb-2 btn btn-primary" %>
     </div>
   </div>
