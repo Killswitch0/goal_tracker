@@ -4,10 +4,10 @@ one:
   name: MyString
   description: MyString
   days_completed: 1
-  user: one
+  user: 1
 
 two:
   name: MyString
   description: MyString
   days_completed: 1
-  user: two
+  user: 2

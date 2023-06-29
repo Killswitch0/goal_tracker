@@ -51,7 +51,7 @@
               <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit), style: "text-decoration: none" %></td>
               <td><%= habit.description.truncate(15) %></td>
               <td>
-                <%= link_to "#{habit.completed_today? ? 'completed' : 'in process'}",
+                <%= link_to "#{habit.completed_today? ? 'uncomplete' : 'complete'}",
                             complete_habit_path(habit),
                             class: "#{habit.completed_today? ? 'btn btn-success btn-sm' : 'btn btn-warning btn-sm'}" %>
               </td>
