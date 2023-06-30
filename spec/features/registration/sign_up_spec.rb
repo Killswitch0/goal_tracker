@@ -29,7 +29,8 @@ RSpec.feature "SignUps", type: :feature do
       fill_in 'Confirmation', with: "#{user.password}"
       click_on 'Create account'
 
-      expect(page).to have_content "Email has already been taken"
+      expect(page).to have_content('Email has already been taken', count: 1)
+      expect(current_path).to eq signup_path
     end
   end
 end

@@ -10,7 +10,7 @@ module SessionsHelper
   end
 
   def forget(user)
-    user.forget_me
+    user&.forget_me
     cookies.delete :user_id
     cookies.delete :remember_token
   end
