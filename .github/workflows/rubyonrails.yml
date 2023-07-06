@@ -35,6 +35,8 @@ jobs:
           bundler-cache: true
       - name: Install gems
         run: bundle install
+      - name: Precompile assets
+        run: bundle exec rails assets:precompile
       # Add or replace database setup steps here
       - name: Change permissions for bin/rails
         run: chmod +x bin/rails
