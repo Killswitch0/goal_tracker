@@ -89,6 +89,14 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  # Security tools
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'ruby_audit'
+
+  # Linting
+  gem 'rubocop-rails'
 end
 
 gem "simple_calendar", "~> 2.4"
