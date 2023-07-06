@@ -42,7 +42,7 @@ jobs:
         run: bin/rails db:create db:migrate
       # Add or replace test runners here
       - name: Run tests
-        run: bin/rake
+        run: bundle exec rake rspec
 
   lint:
     runs-on: ubuntu-latest
