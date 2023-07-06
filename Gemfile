@@ -95,6 +95,14 @@ group :test do
   gem "webdrivers"
   gem 'shoulda-matchers' # gem с макросами для короткой записи тестов на ассоциации, валидации
   gem 'launchy'
+
+  # Security tools
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'ruby_audit'
+
+  # Linting
+  gem 'rubocop-rails'
 end
 
 gem "simple_calendar", "~> 2.4"
