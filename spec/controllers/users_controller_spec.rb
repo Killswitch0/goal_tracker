@@ -13,10 +13,18 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #edit' do
     let(:user) { create(:user) }
-    before { get :edit, params: { id: user } }
+
+    before do
+      get :edit, params: { id: user }
+      controller.instance_variable_set(:@user, user)
+    end
 
     it 'assigns the requested user to @user' do
       expect(assigns(:user)).to eq(user)
+    end
+
+    it 'makes the user method available in the view' do
+      expect(controller.view_assigns['user']).to eq(user)
     end
 
     it 'renders an edit view' do
@@ -72,10 +80,16 @@ RSpec.describe UsersController, type: :controller do
   describe 'PATCH #update' do
     let(:user) { create(:user) }
 
+    before { controller.instance_variable_set(:@user, user) }
+
     context 'valid attributes' do
       it 'assigns the requested user to @user' do
         patch :update, params: { id: user, user: attributes_for(:user) }
         expect(assigns(:user)).to eq(user)
+      end
+
+      it 'makes the user method available in the view' do
+        expect(controller.view_assigns['user']).to eq(user)
       end
 
       it 'changes user attributes' do

@@ -47,7 +47,7 @@ doc
 docs
 
 # Ignore somplecov gem folder
-coverage
+coverage/
 
 
 /app/assets/builds/*
