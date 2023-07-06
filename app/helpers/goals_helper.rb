@@ -1,5 +1,6 @@
 module GoalsHelper
   include TasksHelper
+  include HabitsHelper
 
   AVAILABLE_COLORS = [['Purple', 'rgb(140,8,246)'],
                       ['Blue', 'rgb(17,85,253)'],
