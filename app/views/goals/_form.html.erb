@@ -22,7 +22,7 @@
 
       <div class="mb-3">
         <%= f.label :color %>
-        <%= f.select :color, options_for_select(Goal::AVAILABLE_COLORS
+        <%= f.select :color, options_for_select(GoalsHelper::AVAILABLE_COLORS
                                                   .map { |color| [color[0], color[1],
                                                                   { style: "background-color: #{color[1]}; color: white;" }]
                                                   }) %>
