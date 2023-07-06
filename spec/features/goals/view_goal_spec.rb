@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ViewGoals", type: :feature do
+RSpec.feature "ViewGoals" do
   given(:user) { create(:user) }
   given(:category) { create(:category, user: user) }
 

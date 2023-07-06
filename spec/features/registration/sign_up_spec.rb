@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "SignUps", type: :feature do
+RSpec.feature "SignUps" do
   given(:user) { create(:user) }
 
   feature 'User sign up', %q{

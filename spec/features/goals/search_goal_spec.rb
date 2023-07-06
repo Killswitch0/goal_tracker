@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "SearchGoals", type: :feature do
+RSpec.feature "SearchGoals" do
   given(:user) { create(:user) }
   given(:category) { create(:category, user: user) }
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "CreateCategories", type: :feature do
+RSpec.feature "CreateCategories" do
   given(:user) { create(:user) }
   given(:category) { create(:category) }
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "LogOuts", type: :feature do
+RSpec.feature "LogOuts" do
   given(:user) { create(:user) }
 
   feature 'User log out', '%q{

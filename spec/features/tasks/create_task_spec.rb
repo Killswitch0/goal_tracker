@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "CreateTasks", type: :feature do
+RSpec.feature "CreateTasks" do
   given(:user) { create(:user) }
   given(:category) { create(:category, user: user) }
   given(:goal) { create(:goal, user: user, category: category) }

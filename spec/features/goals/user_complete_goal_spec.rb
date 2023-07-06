@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "UserCompleteGoals", type: :feature do
+RSpec.feature "UserCompleteGoals" do
   given(:user) { create(:user) }
   given(:category) { create(:category, user: user) }
   given(:goal) { create(:goal, user: user, category: category) }

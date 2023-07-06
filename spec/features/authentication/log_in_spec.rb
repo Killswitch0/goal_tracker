@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "LogIns", type: :feature do
+RSpec.feature "LogIns" do
   given(:user) { create(:user) }
 
   feature 'User log in', %q{
