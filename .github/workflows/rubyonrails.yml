@@ -34,6 +34,8 @@ jobs:
         with:
           bundler-cache: true
       # Add or replace database setup steps here
+      - name: Change permissions for bin/rails
+        run: chmod +x bin/rails
       - name: Set up database schema
         run: bin/rails db:create db:migrate
       # Add or replace test runners here
