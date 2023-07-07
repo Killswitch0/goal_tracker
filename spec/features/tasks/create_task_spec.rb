@@ -26,7 +26,7 @@ RSpec.feature "CreateTasks" do
       select deadline.year.to_s, from: 'task_deadline_1i'
       select deadline.strftime('%B'), from: 'task_deadline_2i'
       select deadline.day.to_s, from: 'task_deadline_3i'
-      select deadline.hour.to_s, from: 'task_deadline_4i', match: :first
+      select deadline.hour.to_s, from: 'task_deadline_4i'
       select '07', from: 'task_deadline_5i'
 
 
