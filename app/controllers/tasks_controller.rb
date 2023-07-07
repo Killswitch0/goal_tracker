@@ -24,6 +24,7 @@ class TasksController < ApplicationController
     @task.user = current_user
 
     if @task.save
+      flash[:noticed] = "Task has been successfully created."
       redirect_to category_goal_path(@goal.category_id, @goal)
     else
       render :new, status: :unprocessable_entity
@@ -49,8 +50,10 @@ class TasksController < ApplicationController
   def complete
     @goal = @task.goal
     if @task.complete?
+      flash[:noticed] = "Task has been successfully uncompleted."
       @task.update_attribute(:complete, false)
     else
+      flash[:noticed] = "Task has been successfully completed."
       @task.update_attribute(:complete, true)
     end
 

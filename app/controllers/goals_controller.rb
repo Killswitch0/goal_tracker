@@ -49,7 +49,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.update(goal_params)
-        format.html { redirect_to category_goal_path(@goal) }
+        format.html { redirect_to category_goal_path(@category, @goal) }
       else
         format.html { render :edit }
       end
