@@ -71,6 +71,10 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rubocop'
   gem 'pry-rails'
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -89,7 +93,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem 'rspec-rails'
+  gem 'shoulda-matchers' # gem с макросами для короткой записи тестов на ассоциации, валидации
+  gem 'launchy'
 
   # Security tools
   gem 'brakeman'
@@ -103,3 +108,7 @@ end
 gem "simple_calendar", "~> 2.4"
 
 gem "yard", "~> 0.9.34"
+
+gem "faker", "~> 3.2"
+
+gem "simplecov", "~> 0.22.0"

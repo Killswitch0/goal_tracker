@@ -46,6 +46,12 @@
 doc
 docs
 
+# Ignore somplecov gem folder
+/coverage/
+
+# Ignore Rails test folder
+/test/
+
 
 /app/assets/builds/*
 !/app/assets/builds/.keep

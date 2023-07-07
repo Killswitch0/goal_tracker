@@ -1,19 +1,15 @@
 class UsersController < ApplicationController
-  #layout "home", only: %i[ new create edit ]
-
-  before_action :set_user, only: %i[ show edit update ]
   before_action :logged_in_user, only: %i[ show ]
 
-  def show
-  end
+  helper_method :user
+
+  def show; end
 
   def new
     @user = User.new
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
+  def edit; end
 
   def create
     @user = User.new(user_params)
@@ -51,8 +47,8 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
+  def user
+    @user ||= User.find(params[:id])
   end
 
   def user_params
