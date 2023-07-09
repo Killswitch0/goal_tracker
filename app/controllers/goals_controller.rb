@@ -1,6 +1,5 @@
 class GoalsController < ApplicationController
   before_action :redirect_user
-  before_action :set_category, only: %i[  ]
   before_action :set_goal, only: %i[ show edit update destroy ]
 
   helper_method :sort_column, :sort_direction
@@ -16,6 +15,8 @@ class GoalsController < ApplicationController
   def show
     @tasks = @goal.tasks.order(sort_column + ' ' + sort_direction)
     @habits = @goal.habits.order(sort_column + ' ' + sort_direction)
+
+    mark_notifications_as_read if params[:mark_as_read] == 'true'
   end
 
   def new
@@ -74,5 +75,12 @@ class GoalsController < ApplicationController
 
   def set_goal
     @goal ||= Goal.find(params[:id])
+  end
+
+  def mark_notifications_as_read
+    if current_user
+      notifications_to_mark_as_read = @goal.notifications_as_goal.where(recipient: current_user)
+      notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
+    end
   end
 end

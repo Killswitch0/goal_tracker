@@ -5,9 +5,15 @@ class Habit < ApplicationRecord
   belongs_to :goal
 
   has_many :completion_dates, dependent: :destroy
+  has_many :notifications, through: :user, dependent: :destroy
 
   validates :name, presence: true
   validates :description, presence: true
+
+  after_create_commit :notify_recipient
+  before_destroy :cleanup_notifications
+
+  has_noticed_notifications model_name: 'Notification'
 
   scope :completed_today, -> {
     joins(:completion_dates)
@@ -49,5 +55,13 @@ class Habit < ApplicationRecord
 
   def delete_completion_date
     self.completion_dates.created_today.delete_all
+  end
+
+  def notify_recipient
+    HabitNotification.with(habit: self, goal: goal).deliver_later(goal.user)
+  end
+
+  def cleanup_notifications
+    notifications_as_habit.destroy_all
   end
 end

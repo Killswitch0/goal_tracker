@@ -1,1 +1,9 @@
 @import '../elements/lists';
+
+.list-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin: 0 auto;
+  padding: 0;
+}

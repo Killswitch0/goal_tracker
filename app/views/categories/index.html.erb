@@ -3,11 +3,14 @@
 <p class="text-center">
   <%= link_to "Add category", new_category_path, class: "btn btn-primary btn-lg" %>
 </p>
-<div class="box">
-  <h2>Categories</h2>
-  <ul>
-    <% @categories.each_with_index do |category, index| %>
-      <li class=""><span><%= index + 1 %></span><%= link_to category.name, category_path(category) %></li>
-    <% end %>
-  </ul>
+
+<div class="list-wrapper">
+  <div class="box">
+    <h2>Categories</h2>
+    <ul>
+      <% @categories.each_with_index do |category, index| %>
+        <li class=""><span><%= index + 1 %></span><%= link_to category.name, category_path(category) %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
