@@ -15,7 +15,6 @@ RSpec.feature "CreateTasks" do
       log_in(user)
 
       ### create ###
-      visit category_goal_path(category, goal)
       visit new_goal_task_path(goal)
 
       fill_in 'Name', with: task.name

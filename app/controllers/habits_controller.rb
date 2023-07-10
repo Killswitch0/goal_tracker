@@ -9,9 +9,9 @@ class HabitsController < ApplicationController
     @goal = Goal.find(params[:goal_id])
     @habits = current_user.habits
     @completed_habits = @habits.joins(:completion_dates)
-                               .where(completion_dates: {created_at: Date.today.beginning_of_day..}, goal_id: @goal.id).distinct
+                               .where(completion_dates: { created_at: Date.today.beginning_of_day.. }, goal_id: @goal.id).distinct
     @uncompleted_habits = @habits.left_joins(:completion_dates)
-                                 .where(completion_dates: {id: nil}, goal_id: @goal.id).distinct
+                                 .where(completion_dates: { id: nil }, goal_id: @goal.id).distinct
     #binding.pry
   end
 
@@ -34,7 +34,7 @@ class HabitsController < ApplicationController
     if @habit.save
       redirect_to category_goal_path(@goal.category_id, @goal)
     else
-      render :new,status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

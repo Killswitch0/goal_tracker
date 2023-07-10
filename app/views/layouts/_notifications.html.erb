@@ -8,7 +8,10 @@
 
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
       <% @unread.each do |notification| %>
-        <%= render 'layouts/notification', notification: notification %>
+        <li class="dropdown-item">
+          <i class="bi bi-bookmark"></i>
+          <%= render 'layouts/notification', notification: notification %>
+        </li>
       <% end %>
       <% if @unread.count > 0 && @read.count > 0 %>
         <li>
@@ -20,7 +23,10 @@
         </li>
       <% end %>
       <% @read.each do |notification| %>
-        <%= render 'layouts/notification', notification: notification %>
+        <li class="dropdown-item">
+          <i class="bi bi-bookmark-check"></i>
+          <%= render 'layouts/notification', notification: notification %>
+        </li>
       <% end %>
     </ul>
   </li>

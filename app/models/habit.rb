@@ -5,12 +5,13 @@ class Habit < ApplicationRecord
   belongs_to :goal
 
   has_many :completion_dates, dependent: :destroy
-  has_many :notifications, through: :user, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :description, presence: true
 
-  after_create_commit :notify_recipient
+  after_create_commit :notify_create
+  after_update_commit :notify_almost_streak, if: :almost_streak?
+
   before_destroy :cleanup_notifications
 
   has_noticed_notifications model_name: 'Notification'
@@ -32,33 +33,43 @@ class Habit < ApplicationRecord
 
   def complete_habit_today
     if completion_dates.created_today.exists?
-      self.update_attribute(:days_completed, self.days_completed -= 1)
+      update_attribute(:days_completed, self.days_completed -= 1)
       delete_completion_date
     else
-      self.update_attribute(:days_completed, self.days_completed += 1)
+      update_attribute(:days_completed, self.days_completed += 1)
       create_completion_date
     end
   end
-
-  # def habit_completed_today?(date)
-  #   self.completion_dates.each do |completion_date|
-  #     return true if completion_date.date.localtime == date
-  #   end
-  # end
 
   private
 
   def create_completion_date
     completion_date = CompletionDate.new(date: Time.now.to_date)
-    self.completion_dates << completion_date # Habit.new.completion_dates.build
+    completion_dates << completion_date # Habit.new.completion_dates.build
   end
 
   def delete_completion_date
-    self.completion_dates.created_today.delete_all
+    completion_dates.created_today.delete_all
   end
 
-  def notify_recipient
+  ### methods for notice ###
+  #
+  # Checks if the habit is in "almost streak" state
+  # when true then notify_almost_streak
+  def almost_streak?
+    all_habits ||= goal.habits.count
+    completed ||= goal.habits.completed_today.count
+    (all_habits - completed).between?(2, 4) &&
+      all_habits != 0 &&
+      completion_dates.created_today.count.zero?
+  end
+
+  def notify_create
     HabitNotification.with(habit: self, goal: goal).deliver_later(goal.user)
+  end
+
+  def notify_almost_streak
+    HabitAlmostNotification.with(habit: self, goal: goal).deliver(goal.user)
   end
 
   def cleanup_notifications

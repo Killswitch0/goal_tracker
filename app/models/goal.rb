@@ -6,6 +6,7 @@ class Goal < ApplicationRecord
 
   has_many :habits, class_name: 'Habit', dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :notifications, through: :user
 
   has_noticed_notifications model_name: 'Notification'
 
