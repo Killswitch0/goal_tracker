@@ -7,7 +7,7 @@ module TasksHelper
   end
 
   def task_complete_link(task)
-    link_to "#{task.complete? ? 'Unfinished task' : 'Finish task'}",
+    link_to "#{task.complete? ? 'Unfinished tasks' : 'Finish tasks'}",
             complete_task_path(task),
             class: "btn btn-primary btn-sm"
   end

@@ -17,7 +17,7 @@ class HabitsController < ApplicationController
 
   def show
     # @category = @goal.category_id
-    # @habit = Habit.find(params[:id])
+    # @habits = Habit.find(params[:id])
   end
 
   def new
@@ -60,11 +60,11 @@ class HabitsController < ApplicationController
 
     if @habit.completed_today?
       @habit.complete_habit_today
-      flash[:noticed] = "Your habit successfully uncompleted."
+      flash[:noticed] = "Your habits successfully uncompleted."
       redirect_to goal_path(@goal)
     else
       @habit.complete_habit_today
-      flash[:noticed] = "Your habit successfully completed."
+      flash[:noticed] = "Your habits successfully completed."
       redirect_to goal_path(@goal)
     end
   end

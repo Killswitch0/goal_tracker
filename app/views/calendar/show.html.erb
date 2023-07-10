@@ -25,7 +25,7 @@
     
     <div class="col-md-4 offset-md-1"><%= form_with url: calendar_path, method: :get, class: 'text-center mb-3' do %>
         <%= text_field_tag :search, params[:search],
-                           placeholder: "Let's search your habit",
+                           placeholder: "Let's search your habits",
                            class: 'input-group-text',
                            style: 'display: inline-block;' %>
         <%= submit_tag 'Search', name: nil,

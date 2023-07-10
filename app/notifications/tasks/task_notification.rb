@@ -21,7 +21,7 @@ class TaskNotification < Noticed::Base
     @goal = Goal.find(params[:task][:goal_id])
     @task = Task.find(params[:task][:id])
     @user = User.find(params[:task][:user_id])
-    "#{@user.name} created #{@task.name.truncate(10)} task in #{@goal.name.truncate(10)}"
+    "#{@user.name} created #{@task.name.truncate(10)} tasks in #{@goal.name.truncate(10)}"
   end
 
   def url

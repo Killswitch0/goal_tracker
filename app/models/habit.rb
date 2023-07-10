@@ -54,7 +54,7 @@ class Habit < ApplicationRecord
 
   ### methods for notice ###
   #
-  # Checks if the habit is in "almost streak" state
+  # Checks if the habits is in "almost streak" state
   # when true then notify_almost_streak
   def almost_streak?
     all_habits ||= goal.habits.count

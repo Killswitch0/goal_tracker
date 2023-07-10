@@ -20,7 +20,7 @@ class HabitNotification < Noticed::Base
     @goal = Goal.find(params[:habit][:goal_id])
     @habit = Habit.find(params[:habit][:id])
     @user = User.find(@habit.user_id)
-    "#{@user.name} created #{@habit.name.truncate(10)} habit in #{@goal.name.truncate(10)}"
+    "#{@user.name} created #{@habit.name.truncate(10)} habits in #{@goal.name.truncate(10)}"
   end
 
   def url
