@@ -19,7 +19,7 @@ class HabitAlmostNotification < Noticed::Base
   #
   def message
     @goal = Goal.find(params[:habit][:goal_id])
-    "You almost make streak in #{@goal.name.truncate(10)}! Let's GO!"
+    "You almost made streak in #{@goal.name.truncate(10)} habit! Let's GO!"
   end
 
   def url
