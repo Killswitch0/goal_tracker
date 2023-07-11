@@ -60,11 +60,11 @@ class HabitsController < ApplicationController
 
     if @habit.completed_today?
       @habit.complete_habit_today
-      flash[:noticed] = "Your habits successfully uncompleted."
+      flash[:noticed] = "Your habit successfully uncompleted."
       redirect_to goal_path(@goal)
     else
       @habit.complete_habit_today
-      flash[:noticed] = "Your habits successfully completed."
+      flash[:noticed] = "Your habit successfully completed."
       redirect_to goal_path(@goal)
     end
   end
