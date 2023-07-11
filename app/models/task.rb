@@ -17,6 +17,10 @@ class Task < ApplicationRecord
 
   private
 
+  ### methods for notice ###
+  #
+  # Checks if the habits is in "almost streak" state
+  # when true then notify_almost_streak
   def almost_streak?
     all_tasks = goal.tasks.count
     return if all_tasks == 1
