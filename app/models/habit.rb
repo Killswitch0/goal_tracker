@@ -57,8 +57,10 @@ class Habit < ApplicationRecord
   # Checks if the habits is in "almost streak" state
   # when true then notify_almost_streak
   def almost_streak?
-    all_habits ||= goal.habits.count
-    completed ||= goal.habits.completed_today.count
+    all_habits = goal.habits.count
+    return if all_habits == 1
+
+    completed = goal.habits.completed_today.count
     (all_habits - completed).between?(2, 4) &&
       all_habits != 0 &&
       completion_dates.created_today.count.zero?

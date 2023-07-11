@@ -5,6 +5,7 @@ class Task < ApplicationRecord
   validates :name, presence: true
 
   after_create_commit :notify_create
+  after_create_commit :notify_almost_streak, if: :almost_streak?
   after_update_commit :notify_almost_streak, if: :almost_streak?
 
   before_destroy :clean_up_notifications
@@ -18,6 +19,8 @@ class Task < ApplicationRecord
 
   def almost_streak?
     all_tasks = goal.tasks.count
+    return if all_tasks == 1
+
     completed = goal.tasks.where(complete: true).size
     (all_tasks - completed).between?(1, 4) &&
       all_tasks != 0 &&

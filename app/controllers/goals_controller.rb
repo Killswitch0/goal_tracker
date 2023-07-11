@@ -5,16 +5,21 @@ class GoalsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    if params[:search]
-      @goals = Goal.search(params[:search], current_user)
-    else
-      @goals = current_user.goals.order(complete: :asc)
-    end
+    @goals = if params[:search]
+               Goal.search(params[:search], current_user)
+             else
+               current_user.goals.order(complete: :asc)
+             end
   end
 
   def show
-    @tasks = @goal.tasks.order(sort_column + ' ' + sort_direction)
-    @habits = @goal.habits.order(sort_column + ' ' + sort_direction)
+    @tasks = if params[:sort]
+               @goal.tasks.order(sort_column + ' ' + sort_direction)
+             else
+               @goal.tasks.order(complete: :asc)
+             end
+
+    @habits = @goal.habits.includes(:completion_dates).order('completion_dates.created_at DESC')
 
     mark_notifications_as_read if params[:mark_as_read] == 'true'
   end
@@ -82,5 +87,13 @@ class GoalsController < ApplicationController
       notifications_to_mark_as_read = @goal.notifications_as_goal.where(recipient: current_user)
       notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
     end
+  end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

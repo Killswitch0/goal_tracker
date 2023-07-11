@@ -28,13 +28,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-  end
 
   def date_today
     Time.now.localtime.to_date
