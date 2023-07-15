@@ -1,5 +1,6 @@
 class Habit < ApplicationRecord
   include Searchable
+  include Streakable
 
   belongs_to :user
   belongs_to :goal
@@ -52,26 +53,8 @@ class Habit < ApplicationRecord
     completion_dates.created_today.delete_all
   end
 
-  ### methods for notice ###
-  #
-  # Checks if the habits is in "almost streak" state
-  # when true then notify_almost_streak
-  def almost_streak?
-    all_habits = goal.habits.count
-    return if all_habits == 1
-
-    completed = goal.habits.completed_today.count
-    (all_habits - completed).between?(2, 4) &&
-      all_habits != 0 &&
-      completion_dates.created_today.count.zero?
-  end
-
   def notify_create
     HabitNotification.with(habit: self, goal: goal).deliver_later(goal.user)
-  end
-
-  def notify_almost_streak
-    HabitAlmostNotification.with(habit: self, goal: goal).deliver(goal.user)
   end
 
   def cleanup_notifications
