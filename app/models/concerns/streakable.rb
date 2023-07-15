@@ -17,9 +17,10 @@ module Streakable
 
     completed = is_habit? ? goal.habits.completed_today.count : goal.tasks.where(complete: true).size
     streak_range = is_habit? ? [2, 4] : [1, 4]
-    (all_items - completed).between?(streak_range.first, streak_range.last) &&
+    calculation = (all_items - completed)
+    calculation >= streak_range.first && calculation <= streak_range.last &&
       all_items != 0 &&
-      (is_habit? ? completion_dates.created_today.count.zero? : self.complete?)
+      (is_habit? ? completion_dates.created_today.count.zero? : complete?)
   end
 
   def notify_almost_streak
