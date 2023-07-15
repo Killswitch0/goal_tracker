@@ -4,7 +4,7 @@ class Goal < ApplicationRecord
   belongs_to :user
   belongs_to :category
 
-  has_many :habits, class_name: 'Habit', dependent: :destroy
+  has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :notifications, through: :user
 
