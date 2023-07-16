@@ -42,7 +42,24 @@ class Habit < ApplicationRecord
     end
   end
 
+  # for Streakable concern
+  def completed_count
+    goal.habits.completed_today.count
+  end
+
+  def completed_condition
+    completion_dates.created_today.count.zero?
+  end
+
   private
+
+  def almost_streak?(range = [2, 4])
+    super
+  end
+
+  def notification_params
+    { habit: self, goal: goal }
+  end
 
   def create_completion_date
     completion_date = CompletionDate.new(date: Time.now.to_date)

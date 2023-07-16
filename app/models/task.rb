@@ -18,6 +18,19 @@ class Task < ApplicationRecord
 
   private
 
+  # for Streakable concern
+  def completed_count
+    goal.tasks.where(complete: true).size
+  end
+
+  def completed_condition
+    complete?
+  end
+
+  def notification_params
+    { task: self, goal: goal }
+  end
+
   def notify_create
     TaskNotification.with(task: self, goal: goal).deliver_later(goal.user)
   end

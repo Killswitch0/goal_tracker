@@ -1,8 +1,8 @@
 module Streakable
   extend ActiveSupport::Concern
 
-  def is_habit?
-    self.is_a?(Habit)
+  def send_notification(params)
+    "#{self.class.name}AlmostNotification".constantize.with(params).deliver(goal.user)
   end
 
   private
@@ -11,23 +11,37 @@ module Streakable
   #
   # Checks if the habits is in "almost streak" state
   # when true then notify_almost_streak
-  def almost_streak?
-    all_items = is_habit? ? goal.habits.count : goal.tasks.count
-    return if all_items == 1
+  def almost_streak?(range = nil)
+    range ||= [1, 4]
 
-    completed = is_habit? ? goal.habits.completed_today.count : goal.tasks.where(complete: true).size
-    streak_range = is_habit? ? [2, 4] : [1, 4]
-    calculation = (all_items - completed)
-    calculation >= streak_range.first && calculation <= streak_range.last &&
-      all_items != 0 &&
-      (is_habit? ? completion_dates.created_today.count.zero? : complete?)
+    all_items = goal.send(self.class.name.pluralize.downcase.to_s)&.count
+    return false if all_items.nil? || all_items == 1
+
+    (all_items - completed_count).between?(range.first, range.last) &&
+      all_items.positive? &&
+      completed_condition
   end
 
   def notify_almost_streak
-    if is_habit?
-      HabitAlmostNotification.with(habit: self, goal: goal).deliver(goal.user)
-    else
-      TaskAlmostNotification.with(task: self, goal: goal).deliver(goal.user)
-    end
+    self.send_notification(notification_params)
+  end
+
+  # count completion
+  # example for habit:
+  # goal.habits.completed_today.count
+  def completion_count
+    raise NotImplementedError
+  end
+
+  # checks it's not completed
+  # example:
+  # completion_dates.created_today.count.zero?
+  def completion_condition
+    raise NotImplementedError
+  end
+
+  # { habit: self, goal: goal }
+  def notification_params
+    raise NotImplementedError
   end
 end
