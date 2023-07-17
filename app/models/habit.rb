@@ -70,10 +70,6 @@ class Habit < ApplicationRecord
     completion_dates.created_today.delete_all
   end
 
-  def notify_create
-    HabitNotification.with(habit: self, goal: goal).deliver_later(goal.user)
-  end
-
   def cleanup_notifications
     notifications_as_habit.destroy_all
   end

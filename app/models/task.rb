@@ -31,10 +31,6 @@ class Task < ApplicationRecord
     { task: self, goal: goal }
   end
 
-  def notify_create
-    TaskNotification.with(task: self, goal: goal).deliver_later(goal.user)
-  end
-
   def cleanup_notifications
     notifications_as_task.destroy_all
   end
