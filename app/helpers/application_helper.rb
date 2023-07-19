@@ -13,6 +13,8 @@ module ApplicationHelper
     end
   end
 
+  # helper for calendar
+  # check in views/calendar/show
   def habits_for
     @habits.left_outer_joins(:completion_dates)
            .where(completion_dates: { id: nil }) | @habits.left_joins(:completion_dates)

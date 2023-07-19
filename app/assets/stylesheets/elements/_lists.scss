@@ -14,7 +14,7 @@
   text-align: center;
   padding: 10px 20px;
   font-size: 30px;
-  font-weight: 700px;
+  font-weight: 700;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -22,7 +22,7 @@
 .box ul {
   position: relative;
   background: #fff;
-  padding-left: 0px;
+  padding-left: 0;
   margin-bottom: 8px;
 }
 
@@ -46,7 +46,7 @@
 
 .box ul li a {
   position: absolute;
-  width: 100%;
+  width: 90%;
   text-decoration: none;
   color: inherit;
 }
@@ -62,7 +62,7 @@
   border-radius: 50%;
   margin-right: 10px;
   font-size: 12px;
-  font-weight: 600px;
+  font-weight: 600;
   transform: translateY(-2px);
 }
 

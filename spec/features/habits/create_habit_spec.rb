@@ -20,7 +20,7 @@ RSpec.feature "CreateHabits" do
       ### create ###
       visit new_goal_habit_path(goal)
 
-      fill_in 'Name', with: habit.name
+      fill_in 'Name', with: 'Make 7 push ups'
       fill_in 'Description', with: habit.description
 
       click_on 'Create'

@@ -1,8 +1,11 @@
 <% if logged_in? %>
   <li class="nav-item dropdown">
+    <span class="dropdown-toggle-icon"></span>
     <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-caret-down-fill"></i>
       Hello, <%= current_user.name %>
     </a>
+
     <!--dropdown-menu-lg-end значит выравнивание выпадающего списка по левому краю-->
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
       <li><%= link_to "New Category", new_category_path, class: "dropdown-item" %></li>
@@ -19,3 +22,5 @@
     <%= link_to "Login", login_path, class: "nav-link" %>
   </li>
 <% end %>
+
+

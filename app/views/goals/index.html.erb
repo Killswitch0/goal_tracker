@@ -8,12 +8,17 @@
   <%= submit_tag 'Search', name: nil,
                  class: 'btn btn-primary mb-1' %>
 <% end %>
-<h2 class="text-center">
-  <%= link_to "New Goal", new_goal_path(@goal), class: "btn btn-primary btn-lg" %>
-</h2>
-<div class="col-sm-12 col-md-4 offset-md-4 box" style="">
-  <h2>Goals</h2>
-  <ul class="">
-    <%= render 'goals' %>
-  </ul>
+
+<div class="list-wrapper">
+  <div class="col-sm-12 col-md-4 offset-md-4 box" style="">
+    <h2>Goals</h2>
+    <ul class="">
+      <%= render 'goals' %>
+    </ul>
+  </div>
+
+  <div class="list-buttons mt-3">
+    <%= link_to 'Back to Categories', categories_path, class: 'btn btn-secondary' %>
+    <%= link_to 'Add Goal', new_goal_path(@goal), class: 'btn btn-primary' %>
+  </div>
 </div>

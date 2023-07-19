@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :categories, dependent: :destroy
 
+  # noticed gem association
+  has_many :notifications, as: :recipient, dependent: :destroy
+
   has_secure_password validations: false
 
   validates :name, presence: true

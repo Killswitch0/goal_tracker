@@ -6,6 +6,9 @@ class Goal < ApplicationRecord
 
   has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :notifications, through: :user
+
+  has_noticed_notifications model_name: 'Notification'
 
   validates :name, presence: true, uniqueness: true,
             format: { with: /[A-Z]+[a-z]*/ },
@@ -16,7 +19,7 @@ class Goal < ApplicationRecord
             length: { minimum: 7, maximum: 200 }
 
   validates :category_id, presence: true
-  validates :color, presence: true
+  validates :color, presence: true, uniqueness: true
   validates :deadline, presence: true
   validates :color, presence: true
 

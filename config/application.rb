@@ -30,5 +30,8 @@ module GoalTracker
 
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+
+    # path for noticed gem folders
+    config.autoload_paths += Dir[Rails.root.join('app', 'notifications', '*')]
   end
 end

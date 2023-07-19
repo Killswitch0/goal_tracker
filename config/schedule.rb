@@ -10,7 +10,7 @@
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
-#   rake "some:great:rake:task"
+#   rake "some:great:rake:tasks"
 # end
 #
 # every 4.days do

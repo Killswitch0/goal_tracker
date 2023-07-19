@@ -4,9 +4,9 @@ RSpec.feature "ViewGoals" do
   given(:user) { create(:user) }
   given(:category) { create(:category, user: user) }
 
-  let!(:goal1) { create(:goal, user: user, category: category, name: "Name 1") }
+  let!(:goal1) { create(:goal, user: user, color: 'Purple', category: category, name: "Name 1") }
   let!(:goal2) { create(:goal, user: user, category: category, name: "Name 2") }
-  let!(:goal3) { create(:goal, user: user, category: category, name: "Name 3") }
+  let!(:goal3) { create(:goal, user: user, color: 'Gold', category: category, name: "Name 3") }
 
   feature 'View goal', '%q{
     In order to visit to the Goal

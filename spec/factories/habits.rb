@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :habit do
-    name { "MyString" }
+    name { 'MyString' }
     description { "MyString" }
   end
 end
