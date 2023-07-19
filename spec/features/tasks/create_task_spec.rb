@@ -20,13 +20,11 @@ RSpec.feature "CreateTasks" do
       fill_in 'Name', with: task.name
       check 'Complete'
 
-      deadline = DateTime.now
-
-      select deadline.year.to_s, from: 'task_deadline_1i'
-      select deadline.strftime('%B'), from: 'task_deadline_2i'
-      select deadline.day.to_s, from: 'task_deadline_3i'
-      select deadline.hour.to_s, from: 'task_deadline_4i'
-      select '07', from: 'task_deadline_5i'
+      select task.deadline.year, from: 'task_deadline_1i'
+      select task.deadline.strftime('%B'), from: 'task_deadline_2i'
+      select task.deadline.day.to_s, from: 'task_deadline_3i'
+      select task.deadline.hour, from: 'task_deadline_4i'
+      select task.deadline.min, from: 'task_deadline_5i'
 
 
       click_on 'Add Task'
