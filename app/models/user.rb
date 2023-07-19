@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :categories, dependent: :destroy
+  has_many :user_groups
+  has_many :groups, through: :user_groups
 
   # noticed gem association
   has_many :notifications, as: :recipient, dependent: :destroy
