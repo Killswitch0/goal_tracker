@@ -17,6 +17,10 @@ class UserGroup < ApplicationRecord
     self.user_id != self.group.user_id
   end
 
+  def creator?
+    self.user_id == self.group.user_id
+  end
+
   private
 
   def notification_params

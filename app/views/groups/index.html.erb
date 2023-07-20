@@ -1,20 +1,63 @@
 <h1 class="text-center">Groups</h1>
 <div class="row">
+
   <div class="card col-md-3 offset-md-2">
     <h2 class="text-center">My Groups</h2>
     <div class="card-body">
-      <% @groups.each_with_index do |group, index| %>
-        <%= link_to "#{index + 1}   #{group.name}", group %>
-      <% end %>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @groups.present? %>
+          <% @groups.each_with_index do |group, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= group.name %></td>
+              <td><%= link_to 'Show', group, class: 'btn btn-primary btn-sm' %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4" class="text-center">No groups yet</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <div class="card col-md-3 offset-md-1">
+  <div class="card col-md-3 offset-md-2">
     <h2 class="text-center">Common Groups</h2>
     <div class="card-body">
-      <% @confirmed_groups.each_with_index do |group, index| %>
-        <%= link_to "#{index + 1}   #{group.name}", group %>
-      <% end %>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @confirmed_groups.present? %>
+          <% @confirmed_groups.each_with_index do |group, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= group.name %></td>
+              <td><%= link_to 'Show', group, class: 'btn btn-primary btn-sm' %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4" class="text-center">No groups yet</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

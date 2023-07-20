@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :redirect_user
-  before_action :set_goal, only: %i[ index new create edit destroy ]
-  before_action :set_task, only: %i[ edit update destroy complete ]
+  before_action :set_goal, only: %i[index new create edit destroy]
+  before_action :set_task, only: %i[edit update destroy complete]
 
   helper_method :sort_column, :sort_direction
 

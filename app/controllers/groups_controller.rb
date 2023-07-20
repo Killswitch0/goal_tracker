@@ -1,14 +1,14 @@
 class GroupsController < ApplicationController
   before_action :redirect_user
-  before_action :set_invite, only: %i[ index show new ]
-  before_action :set_group, only: %i[ create_invitation confirm_invitation decline_invitation ]
-  before_action :set_invitation, only: %i[ confirm_invitation decline_invitation leave show ]
+  before_action :set_invite, only: %i[index show new]
+  before_action :set_group, only: %i[create_invitation confirm_invitation decline_invitation destroy]
+  before_action :set_invitation, only: %i[confirm_invitation decline_invitation leave show]
 
   def index
     @groups = Group.where(user_id: current_user)
-    user_groups = Group.includes(:user_groups)
-    @creator_groups = user_groups.where(user_groups: { user_id: current_user.id })
-    @confirmed_groups = user_groups.where(user_groups: { user_id: current_user.id, confirm: true })
+    groups_in_user_groups = Group.includes(:user_groups)
+    @creator_groups = groups_in_user_groups.where(user_groups: { user_id: current_user.id })
+    @confirmed_groups = groups_in_user_groups.where(user_groups: { user_id: current_user.id, confirm: true })
   end
 
   def show
@@ -41,6 +41,12 @@ class GroupsController < ApplicationController
       flash[:danger] = "Group has not successfully created."
       render :new
     end
+  end
+
+  def destroy
+    @group.destroy
+    flash[:noticed] = "Group was successfully destroyed."
+    redirect_to groups_path
   end
 
   def create_invitation
@@ -95,18 +101,6 @@ class GroupsController < ApplicationController
 
   private
 
-  def set_group
-    @group = Group.find(params[:id])
-  end
-
-  def set_invitation
-    @invitation = UserGroup.find_by(user: current_user)
-  end
-
-  def set_invite
-    @invites = current_user.user_groups
-  end
-
   def group_params
     params.require(:group).permit(:name, :group_id, :user_id)
   end
@@ -120,9 +114,21 @@ class GroupsController < ApplicationController
   end
 
   def mark_notifications_as_read
-    if current_user
-      notifications_to_mark_as_read = @group.notifications.where(recipient: current_user)
-      notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
-    end
+    return unless current_user
+
+    notifications_to_mark_as_read = @group.notifications.where(recipient: current_user)
+    notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
+  end
+
+  def set_group
+    @group = Group.find(params[:id])
+  end
+
+  def set_invitation
+    @invitation = UserGroup.find_by(user: current_user)
+  end
+
+  def set_invite
+    @invites = current_user.user_groups.where(confirm: false)
   end
 end

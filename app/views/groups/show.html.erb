@@ -1,37 +1,61 @@
 <h1 class="text-center"><%= @group.name %> Group</h1>
 
 <div class="col-sm-12 col-md-4 offset-md-4">
-  <div class="card">
-    <div class="card-body">
-      <%= form_with url: create_invitation_group_path(@group), method: :post do |f| %>
-        <%= render "shared/error_messages", resource: @group %>
-        <%= f.label :email, 'Email of the user to invite:' %>
-        <%= f.text_field :email %>
+  <% if @invitation.creator? %>
+    <div class="card">
+      <div class="card-body">
+        <%= form_with url: create_invitation_group_path(@group), method: :post do |f| %>
+          <%= render "shared/error_messages", resource: @group %>
+          <%= f.label :email, 'Email of the user to invite:' %>
+          <%= f.text_field :email %>
 
-        <%= f.submit %>
-      <% end %>
+          <%= f.submit 'Invite' %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="card mt-5">
     <div class="card-body">
-      <% if @invites.present? %>
-        <% @invites.each do |invite| %>
-          <% if invite.confirm? %>
-            No invites have yet
-          <% else %>
-            <%= "Invite to #{invite.group.name} group" %>
-            <%= button_to 'Accept invite', confirm_invitation_group_path, method: :patch %> |
-            <%= button_to 'Decline invite', decline_invitation_group_path, method: :patch %>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Accept</th>
+          <th scope="col">Decline</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @invites.present? %>
+          <% @invites.each_with_index do |invite, index| %>
+            <% if invite.confirm? %>
+              No notifications yet
+            <% else %>
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= "Invite to #{invite.group.name} group" %></td>
+                <td><%= button_to 'Accept invite', confirm_invitation_group_path, method: :patch, class: 'btn btn-primary btn-sm' %></td>
+                <td><%= button_to 'Decline invite', decline_invitation_group_path, method: :patch, class: 'btn btn-danger btn-sm' %></td>
+              </tr>
+            <% end %>
           <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4" class="text-center">Invites have not yet</td>
+          </tr>
         <% end %>
-      <% else %>
-        No invites have yet
-      <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <%= button_to "Leave group", leave_group_path, method: :delete, class: 'btn btn-danger mt-3' if @invitation %>
+  <div class="col-md-12 d-flex justify-content-sm-around">
+    <%= link_to 'Back to groups', groups_path, class: 'btn btn-secondary mt-3' %>
+    <%= button_to "Leave group", leave_group_path, method: :delete, class: 'btn btn-danger mt-3' if @invitation && !@invitation.creator? %>
+    <%= link_to 'Destroy group', @group, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                class: 'btn btn-danger mt-3' if @invitation.creator? %>
+  </div>
 
   <div class="card mt-5">
     <h2 class="text-center">Members</h2>

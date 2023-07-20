@@ -1,7 +1,7 @@
 class HabitsController < ApplicationController
   before_action :redirect_user
-  before_action :set_goal, only: %i[ index new edit create update destroy ]
-  before_action :set_habit, only: %i[ edit update destroy ]
+  before_action :set_goal, only: %i[index new edit create update destroy]
+  before_action :set_habit, only: %i[edit update destroy]
 
   helper_method :sort_column, :sort_direction
 
