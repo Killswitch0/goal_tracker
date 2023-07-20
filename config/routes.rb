@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   resource :calendar, only: :show, controller: :calendar
 
+  resources :groups do
+    member do
+      get 'invite'
+      post 'create_invitation'
+      patch 'confirm_invitation'
+      patch 'decline_invitation'
+      delete 'leave'
+    end
+  end
+
   resources :users, except: :new do
     member do
       get :confirm_email

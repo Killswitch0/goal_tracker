@@ -1,0 +1,23 @@
+<h1 class="text-center">New Group</h1>
+
+<div class="col-sm-12 col-md-4 offset-md-4">
+  <div class="card">
+    <div class="card-body">
+      <%= form_with(model: @group) do |f| %>
+        <%= render "shared/error_messages", resource: @group %>
+        <div class="mb-3">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "mb-1 form-control" %>
+        </div>
+
+<!--        <div class="mb-3">-->
+          <%#= f.label :user_id, 'Users' %>
+          <%#= f.collection_select :user_id, User.all, :id, :name, multiple: true %>
+<!--        </div>-->
+
+        <%= f.submit "#{@group.new_record? ? 'Create' : 'Update'}", class: "mb-2 btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

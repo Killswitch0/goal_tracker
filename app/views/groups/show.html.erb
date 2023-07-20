@@ -1,0 +1,47 @@
+<h1 class="text-center"><%= @group.name %> Group</h1>
+
+<div class="col-sm-12 col-md-4 offset-md-4">
+  <div class="card">
+    <div class="card-body">
+      <%= form_with url: create_invitation_group_path(@group), method: :post do |f| %>
+        <%= render "shared/error_messages", resource: @group %>
+        <%= f.label :email, 'Email of the user to invite:' %>
+        <%= f.text_field :email %>
+
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card mt-5">
+    <div class="card-body">
+      <% if @invites.present? %>
+        <% @invites.each do |invite| %>
+          <% if invite.confirm? %>
+            No invites have yet
+          <% else %>
+            <%= "Invite to #{invite.group.name} group" %>
+            <%= button_to 'Accept invite', confirm_invitation_group_path, method: :patch %> |
+            <%= button_to 'Decline invite', decline_invitation_group_path, method: :patch %>
+          <% end %>
+        <% end %>
+      <% else %>
+        No invites have yet
+      <% end %>
+    </div>
+  </div>
+
+  <%= button_to "Leave group", leave_group_path, method: :delete, class: 'btn btn-danger mt-3' if @invitation %>
+
+  <div class="card mt-5">
+    <h2 class="text-center">Members</h2>
+    <div class="card-body">
+      <% if @members.present? %>
+        <% @members.each_with_index do |member, index| %>
+          <p><%= "#{index + 1}: #{member.email}" %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
