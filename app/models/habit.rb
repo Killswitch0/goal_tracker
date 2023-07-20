@@ -1,6 +1,7 @@
 class Habit < ApplicationRecord
   include Searchable
   include Streakable
+  include Notifyable
 
   belongs_to :user
   belongs_to :goal

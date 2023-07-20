@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   include Streakable
+  include Notifyable
 
   belongs_to :goal
   belongs_to :user

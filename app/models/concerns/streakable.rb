@@ -1,15 +1,11 @@
 module Streakable
   extend ActiveSupport::Concern
 
-  def send_notification(params)
-    "#{self.class.name}AlmostNotification".constantize.with(params).deliver(goal.user)
-  end
-
-  def send_notification_create(params)
-    "#{self.class.name}Notification".constantize.with(params).deliver_later(goal.user)
-  end
-
   private
+
+  def send_notification(params)
+    "#{self.class.name}AlmostNotification".constantize.with(params).deliver(self.user)
+  end
 
   ### method for notice ###
   #
@@ -28,10 +24,6 @@ module Streakable
 
   def notify_almost_streak
     self.send_notification(notification_params)
-  end
-
-  def notify_create
-    self.send_notification_create(notification_params)
   end
 
   # count completion

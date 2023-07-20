@@ -1,10 +1,12 @@
 class UserGroup < ApplicationRecord
+  include Notifyable
+
   belongs_to :user
   belongs_to :group
 
   validates :group_id, uniqueness: { scope: :user_id }
 
-  after_create_commit :send_notification_create, if: :check_creator
+  after_create_commit :notify_create, if: :check_creator
 
   before_destroy :clean_up_notifications
 
@@ -17,8 +19,8 @@ class UserGroup < ApplicationRecord
 
   private
 
-  def send_notification_create
-    UserGroupNotification.with(user_group: self, group: self.group).deliver_later(self.user)
+  def notification_params
+    { user_group: self, group: self.group }
   end
 
   def clean_up_notifications
