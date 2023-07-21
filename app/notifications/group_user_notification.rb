@@ -3,7 +3,7 @@
 # UserGroupNotification.with(post: @post).deliver_later(current_user)
 # UserGroupNotification.with(post: @post).deliver(current_user)
 
-class UserGroupNotification < Noticed::Base
+class GroupUserNotification < Noticed::Base
   # Add your delivery methods
   #
   deliver_by :database
@@ -18,13 +18,13 @@ class UserGroupNotification < Noticed::Base
   # Define helper methods to make rendering easier.
 
   def message
-    @group = Group.find(params[:user_group][:group_id])
-    @user_group = UserGroup.find(params[:user_group][:id])
-    @user = User.find(params[:user_group][:user_id])
+    @group = Group.find(params[:group_user][:group_id])
+    @user_group = GroupUser.find(params[:group_user][:id])
+    @user = User.find(params[:group_user][:user_id])
     "Your invite to #{@group.name}"
   end
 
   def url
-    group_path(Group.find(params[:user_group][:group_id]), mark_as_read: 'true')
+    group_path(Group.find(params[:group_user][:group_id]), mark_as_read: 'true')
   end
 end

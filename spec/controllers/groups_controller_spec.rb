@@ -17,7 +17,7 @@ RSpec.describe GroupsController, type: :controller do
 
     it "returns http success" do
       log_in user
-      group.user_groups.create(user: user, confirm: true)
+      group.group_users.create(user: user, confirm: true)
 
       get :show, params: { id: group, user_id: user }
       expect(response).to have_http_status(:success)

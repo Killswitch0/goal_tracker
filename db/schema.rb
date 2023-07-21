@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_105020) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_21_162136) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_105020) do
     t.string "color"
     t.index ["category_id"], name: "index_goals_on_category_id"
     t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "group_users", force: :cascade do |t|
+    t.boolean "confirm", default: false
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id", "group_id"], name: "index_group_users_on_user_id_and_group_id", unique: true
+    t.index ["user_id"], name: "index_group_users_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -91,17 +102,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_105020) do
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
-  create_table "user_groups", force: :cascade do |t|
-    t.boolean "confirm", default: false
-    t.bigint "user_id", null: false
-    t.bigint "group_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_user_groups_on_group_id"
-    t.index ["user_id", "group_id"], name: "index_user_groups_on_user_id_and_group_id", unique: true
-    t.index ["user_id"], name: "index_user_groups_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -120,11 +120,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_105020) do
   add_foreign_key "completion_dates", "habits"
   add_foreign_key "goals", "categories"
   add_foreign_key "goals", "users"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
   add_foreign_key "groups", "users"
   add_foreign_key "habits", "goals"
   add_foreign_key "habits", "users"
   add_foreign_key "tasks", "goals"
   add_foreign_key "tasks", "users"
-  add_foreign_key "user_groups", "groups"
-  add_foreign_key "user_groups", "users"
 end

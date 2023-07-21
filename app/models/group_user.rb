@@ -1,4 +1,4 @@
-class UserGroup < ApplicationRecord
+class GroupUser < ApplicationRecord
   include Notifyable
 
   belongs_to :user
@@ -24,10 +24,10 @@ class UserGroup < ApplicationRecord
   private
 
   def notification_params
-    { user_group: self, group: self.group }
+    { group_user: self, group: self.group }
   end
 
   def clean_up_notifications
-    notifications_as_user_group.destroy_all
+    notifications_as_group_user.destroy_all
   end
 end

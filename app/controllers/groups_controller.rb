@@ -6,9 +6,9 @@ class GroupsController < ApplicationController
 
   def index
     @groups = Group.where(user_id: current_user)
-    groups_in_user_groups = Group.includes(:user_groups)
-    @creator_groups = groups_in_user_groups.where(user_groups: { user_id: current_user.id })
-    @confirmed_groups = groups_in_user_groups.where(user_groups: { user_id: current_user.id, confirm: true })
+    groups_in_group_users = Group.includes(:group_users)
+    @creator_groups = groups_in_group_users.where(group_users: { user_id: current_user.id })
+    @confirmed_groups = groups_in_group_users.where(group_users: { user_id: current_user.id, confirm: true })
   end
 
   def show
@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
     require_invitation
 
     if @group
-      @members = User.joins(:user_groups).where(user_groups: { confirm: true, group_id: @group.id }).distinct
+      @members = User.joins(:group_users).where(group_users: { confirm: true, group_id: @group.id }).distinct
       mark_notifications_as_read if params[:mark_as_read] == 'true'
     else
       flash[:danger] = "Something go wrong"
@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
     @group.user_id = current_user.id
 
     if @group.save
-      current_user.user_groups << UserGroup.new(group: @group, confirm: true)
+      current_user.group_users << GroupUser.new(group: @group, confirm: true)
       flash[:noticed] = "Group has been successfully created."
       redirect_to group_path(@group)
     else
@@ -53,7 +53,7 @@ class GroupsController < ApplicationController
     invited_user = User.find_by(email: params[:email])
 
     if invited_user
-      @invitation = UserGroup.new(group: @group, user: invited_user)
+      @invitation = GroupUser.new(group: @group, user: invited_user)
 
       if @invitation.save
         flash[:noticed] = "Invitation sent to #{invited_user.email}"
@@ -109,7 +109,7 @@ class GroupsController < ApplicationController
     @group = Group.find_by(id: params[:id])
     return if @group.blank?
 
-    invitation = UserGroup.find_by(group_id: @group, user: current_user)
+    invitation = GroupUser.find_by(group_id: @group, user: current_user)
     redirect_to root_path unless invitation
   end
 
@@ -125,10 +125,10 @@ class GroupsController < ApplicationController
   end
 
   def set_invitation
-    @invitation = UserGroup.find_by(user: current_user)
+    @invitation = GroupUser.find_by(user: current_user)
   end
 
   def set_invite
-    @invites = current_user.user_groups.where(confirm: false)
+    @invites = current_user.group_users.where(confirm: false)
   end
 end
