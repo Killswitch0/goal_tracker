@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       patch 'decline_invitation'
       delete 'leave'
     end
-    
+
     resources :goals
   end
 

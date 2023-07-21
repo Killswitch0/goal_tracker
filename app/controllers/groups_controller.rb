@@ -109,8 +109,8 @@ class GroupsController < ApplicationController
     @group = Group.find_by(id: params[:id])
     return if @group.blank?
 
-    invintation = UserGroup.find_by(group_id: @group, user: current_user)
-    redirect_to root_path unless invintation
+    invitation = UserGroup.find_by(group_id: @group, user: current_user)
+    redirect_to root_path unless invitation
   end
 
   def mark_notifications_as_read
