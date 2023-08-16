@@ -1,7 +1,7 @@
 <% if @goals.present? %>
   <% @goals.each_with_index do |goal, index| %>
-    <li class="">
-      <span><%= index + 1 %></span><%= link_to goal.name, goal%>
+    <li class="<%= goal.complete? ? 'completed' : 'uncompleted' %>">
+      <span><%= index + 1 %></span><%= link_to goal.name.truncate(30), goal %>
     </li>
   <% end %>
 <% else %>

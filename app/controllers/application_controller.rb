@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "deadline"
   end
 
   def sort_direction

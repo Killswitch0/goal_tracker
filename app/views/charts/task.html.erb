@@ -1,0 +1,34 @@
+<div class="col-md-12">
+  <h2 class="text-center mt-3"><%= @goal.try(:name)&.truncate(30) %> TASKS CHART</h2>
+
+  <div class="chart-buttons text-center mt-3">
+    <% if @goal %>
+      <%= chart_link_to 'Day', goal_task_chart_path(@goal, period: 'day'), 'day' %>
+      <%= chart_link_to 'Week', goal_task_chart_path(@goal, period: 'week'), 'week' %>
+      <%= chart_link_to 'Month', goal_task_chart_path(@goal, period: 'month'), 'month' %>
+    <% else %>
+      <%= chart_link_to 'Day', task_chart_path(period: 'day'), 'day' %>
+      <%= chart_link_to 'Week', task_chart_path(period: 'week'), 'week' %>
+      <%= chart_link_to 'Month', task_chart_path(period: 'month'), 'month' %>
+    <% end %>
+
+    <% if @goal %>
+      <%= link_to 'Switch to habits', goal_habit_chart_path(@goal, period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
+    <% else %>
+      <%= link_to 'Show habits', habit_chart_path(period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
+    <% end %>
+  </div>
+
+
+  <% if @tasks.present? %>
+    <%= set_chart(@tasks, nil) %>
+  <% else %>
+    <div class="text-center mt-5 display-5">No tasks</div>
+  <% end %>
+
+  <% if @goal %>
+    <%= link_to 'Back to goal', goal_path(@goal), class: 'btn btn-secondary mt-2' %>
+  <% else %>
+    <%= link_to 'Back to Dashboard', dashboard_path, class: 'btn btn-secondary mt-2' %>
+  <% end %>
+</div>

@@ -25,7 +25,7 @@ class TasksController < ApplicationController
 
     if @task.save
       flash[:noticed] = "Task has been successfully created."
-      redirect_to category_goal_path(@goal.category_id, @goal)
+      redirect_to goal_path(@goal)
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to category_goal_path(@task.goal.category_id, @task.goal)
+      redirect_to goal_path(@goal)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -51,19 +51,23 @@ class TasksController < ApplicationController
     @goal = @task.goal
     if @task.complete?
       flash[:noticed] = "Task has been successfully uncompleted."
-      @task.update_attribute(:complete, false)
+      @task.update(complete: false, complete_date: nil)
     else
       flash[:noticed] = "Task has been successfully completed."
-      @task.update_attribute(:complete, true)
+      @task.update(complete: true, complete_date: Date.today)
     end
 
-    redirect_to category_goal_path(@goal.category_id, @goal)
+    redirect_to goal_path(@goal)
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:name, :complete, :deadline)
+    params.require(:task).permit(:name,
+                                 :complete,
+                                 :deadline,
+                                 :complete_date
+    )
   end
 
   def set_task
@@ -72,5 +76,9 @@ class TasksController < ApplicationController
 
   def set_goal
     @goal ||= Goal.find(params[:goal_id])
+  end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "complete"
   end
 end

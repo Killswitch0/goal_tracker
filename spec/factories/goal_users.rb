@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :group_user do
+  factory :goal_user do
     user
-    group
+    goal
   end
 end

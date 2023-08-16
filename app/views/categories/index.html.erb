@@ -1,16 +1,35 @@
-<h1 class="text-center">Choose Category</h1>
+<h1 class="text-center">Manage Categories</h1>
 <hr>
-<p class="text-center">
-  <%= link_to "Add category", new_category_path, class: "btn btn-primary btn-lg" %>
-</p>
 
-<div class="list-wrapper">
-  <div class="box">
-    <h2>Categories</h2>
-    <ul>
-      <% @categories.each_with_index do |category, index| %>
-        <li class=""><span><%= index + 1 %></span><%= link_to category.name, category_path(category) %></li>
+<div class="categories-index-wrapper">
+  <div class="actions-items">
+    <div class="actions-header">
+      <div class="items-title">Categories</div>
+      <%= link_to 'Add category', new_category_path,
+                  class: 'btn btn-primary btn-sm new-task' %>
+    </div>
+
+    <div class="divider"></div>
+
+    <ul class="action-list">
+      <% if @categories.present? %>
+        <% @categories.each do |category| %>
+          <li class="action-item">
+            <span class="fw-bold"><%= category.name %></span>
+            <div class="">
+              <%= link_to 'Edit', edit_category_path(category),
+                          class: 'btn btn-primary btn-sm' %>
+              <%= link_to 'Destroy', category,
+                          data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                          class: 'btn btn-danger btn-sm' %>
+            </div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
+</div>
+
+<div class="d-flex justify-content-center mt-3">
+  <%= link_to 'Back to Goals', goals_path, class: 'btn btn-secondary' %>
 </div>

@@ -40,14 +40,14 @@ RSpec.configure do |config|
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
   # have no way to turn it off -- the option exists only for backwards
   # compatibility in RSpec 3). It causes shared context metadata to be
-  # inherited by the metadata hash of host groups and examples, rather than
-  # triggering implicit auto-inclusion in groups with matching metadata.
+  # inherited by the metadata hash of host goal_invitations and examples, rather than
+  # triggering implicit auto-inclusion in goal_invitations with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
-  # This allows you to limit a spec run to individual examples or groups
+  # This allows you to limit a spec run to individual examples or goal_invitations
   # you care about by tagging them with `:focus` metadata. When nothing
   # is tagged with `:focus`, all examples get run. RSpec also provides
   # aliases for `it`, `describe`, and `context` that include `:focus`
@@ -74,7 +74,7 @@ RSpec.configure do |config|
     config.default_formatter = "doc"
   end
 
-  # Print the 10 slowest examples and example groups at the
+  # Print the 10 slowest examples and example goal_invitations at the
   # end of the spec run, to help surface which specs are running
   # particularly slow.
   config.profile_examples = 10

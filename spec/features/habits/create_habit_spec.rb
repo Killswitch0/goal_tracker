@@ -25,12 +25,12 @@ RSpec.feature "CreateHabits" do
 
       click_on 'Create'
 
-      expect(current_path).to eq category_goal_path(category, goal)
+      expect(page).to have_content "Habit has been successfully created."
       expect(page).to have_content(habit.name)
       expect(page).to have_content(habit.description)
 
       ### complete ###
-      visit complete_habit_path(habit)
+      visit complete_goal_habit_path(goal, habit)
       expect(page).to have_content("Your habit successfully completed.")
     end
 

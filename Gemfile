@@ -114,3 +114,5 @@ gem "faker", "~> 3.2"
 gem "simplecov", "~> 0.22.0"
 
 gem "noticed", "~> 1.6"
+
+gem "chartkick", "~> 5.0"

@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  layout 'home'
+  # layout 'home'
 
   before_action :redirect_back, only: %i[ home ]
 

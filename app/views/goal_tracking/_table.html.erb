@@ -1,0 +1,27 @@
+<table class="tracking">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Status</th>
+    <th>Created at</th>
+    <th>
+      <%= sortable 'deadline' %>
+    <th>Days left</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% items.each_with_index do |item, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= link_to item.name, item %></td>
+      <td><%= item.class.name %></td>
+      <td><%= item.complete? ? 'Completed' : 'In process' %></td>
+      <td><%= item.created_at.to_fs(:long) %></td>
+      <td><%= item.deadline.to_fs(:long) %></td>
+      <td><%= days_left(item) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

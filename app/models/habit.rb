@@ -24,15 +24,33 @@ class Habit < ApplicationRecord
              Date.today.beginning_of_day)
   }
 
+  scope :not_completed_today, -> {
+    today = Date.today
+    left_joins(:completion_dates)
+      .where('completion_dates.created_at IS NULL OR DATE(completion_dates.created_at) != ?', today)
+      .where.not(
+        'EXISTS (
+         SELECT 1
+         FROM completion_dates
+         WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
+    )
+      .distinct
+  }
+
   def completed_today?
     completion_dates.created_today.exists?
   end
 
-  # group_by_day is the method of groupdate gem
+  # group_by_month is the method of groupdate gem
   def completed_monthly
-    completion_dates.group_by_month(:created_at).count
+    completion_dates.group_by_month(:date).count
   end
 
+  def completed_by_day
+    completion_dates.group_by_period(:day, :date).count
+  end
+
+  #
   def complete_habit_today
     if completion_dates.created_today.exists?
       update_attribute(:days_completed, self.days_completed -= 1)

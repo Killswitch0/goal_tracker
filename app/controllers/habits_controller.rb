@@ -12,27 +12,23 @@ class HabitsController < ApplicationController
                                .where(completion_dates: { created_at: Date.today.beginning_of_day.. }, goal_id: @goal.id).distinct
     @uncompleted_habits = @habits.left_joins(:completion_dates)
                                  .where(completion_dates: { id: nil }, goal_id: @goal.id).distinct
-    #binding.pry
   end
 
-  def show
-    # @category = @goal.category_id
-    # @habits = Habit.find(params[:id])
-  end
+  def show; end
 
   def new
     @habit = Habit.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @habit = @goal.habits.build(habit_params)
     @habit.user = current_user
 
     if @habit.save
-      redirect_to category_goal_path(@goal.category_id, @goal)
+      flash[:noticed] = "Habit has been successfully created."
+      redirect_to goal_path(@goal)
     else
       render :new, status: :unprocessable_entity
     end
@@ -41,8 +37,7 @@ class HabitsController < ApplicationController
   def update
     respond_to do |format|
       if @habit.update(habit_params)
-        redirect_to category_goal_path(@goal.category_id, @goal)
-        format.html
+        redirect_to goal_path(@goal)
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -72,7 +67,12 @@ class HabitsController < ApplicationController
   private
 
   def habit_params
-    params.require(:habit).permit(:name, :description, :days_completed, :completed)
+    params.require(:habit).permit(:name,
+                                  :description,
+                                  :days_completed,
+                                  :completed
+    )
+
   end
 
   def set_goal
