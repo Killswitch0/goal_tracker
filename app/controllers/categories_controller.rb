@@ -8,9 +8,7 @@ class CategoriesController < ApplicationController
 
   def show; end
 
-  def edit
-
-  end
+  def edit; end
 
   def new
     @category = Category.new

@@ -1,10 +1,15 @@
 class User < ApplicationRecord
+  include Rememberable
+  include Recoverable
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   # Виртуальный аттрибут. В базу данных он попадать не будет. Просто чтобы
   # на объекте существовал метод old_password, с помощью которого мы будем
   # отрисовывать новое текстовое поле в форме, а потом проверять его значение.
-  attr_accessor :old_password, :remember_token
+  # admin_edit: true мы мерджим в password_resets_controller в user_params,
+  # чтобы при восстановлении пароля не требовалась валидация correct_old_password
+  attr_accessor :old_password, :admin_edit
 
   has_many :goals, dependent: :destroy
   has_many :habits, dependent: :destroy
@@ -24,26 +29,11 @@ class User < ApplicationRecord
   validates :password, confirmation: true, allow_blank: true, presence: true, length: { minimum: 6 }
 
   validate :password_presence
-  validate :correct_old_password, on: :update
+  validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
 
   before_save { self.email = email.downcase }
 
   before_create :confirmation_token
-
-  def remember_me
-    self.remember_token = SecureRandom.urlsafe_base64
-    update_column :auth_token, digest(remember_token)
-  end
-
-  def forget_me
-    update_column :auth_token, nil
-    self.remember_token = nil
-  end
-
-  def remember_token_authenticated?(remember_token)
-    return false if auth_token.blank?
-    BCrypt::Password.new(self.auth_token).is_password?(remember_token)
-  end
 
   def email_activate
     self.email_confirmed = true

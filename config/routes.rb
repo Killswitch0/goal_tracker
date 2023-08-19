@@ -43,7 +43,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :password_resets
 
   # Sign up
   get "signup", to: "users#new"
@@ -55,6 +54,9 @@ Rails.application.routes.draw do
 
   # Log out
   get "logout", to: "sessions#destroy"
+
+  # Password reset
+  resources :password_resets, only: %i[new create edit update]
 
   # Pages
   get "home", to: "pages#home"

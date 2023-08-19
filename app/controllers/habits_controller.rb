@@ -1,7 +1,7 @@
 class HabitsController < ApplicationController
   before_action :redirect_user
   before_action :set_goal, only: %i[index new edit create update destroy]
-  before_action :set_habit, only: %i[edit update destroy]
+  before_action :set_habit, only: %i[edit update destroy complete]
 
   helper_method :sort_column, :sort_direction
 
@@ -50,18 +50,17 @@ class HabitsController < ApplicationController
   end
 
   def complete
-    @habit = Habit.find(params[:id])
     @goal = @habit.goal
 
     if @habit.completed_today?
       @habit.complete_habit_today
       flash[:noticed] = "Your habit successfully uncompleted."
-      redirect_to goal_path(@goal)
     else
       @habit.complete_habit_today
       flash[:noticed] = "Your habit successfully completed."
-      redirect_to goal_path(@goal)
     end
+
+    redirect_to goal_path(@goal)
   end
 
   private
@@ -72,14 +71,13 @@ class HabitsController < ApplicationController
                                   :days_completed,
                                   :completed
     )
-
   end
 
   def set_goal
-    @goal ||= Goal.find(params[:goal_id])
+    @goal = Goal.find(params[:goal_id])
   end
 
   def set_habit
-    @habit ||= Habit.find(params[:id])
+    @habit = Habit.find(params[:id])
   end
 end

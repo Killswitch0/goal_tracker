@@ -1,4 +1,6 @@
 class GoalTrackingController < ApplicationController
+  before_action :redirect_user
+
   helper_method :sort_column, :sort_direction
 
   def show

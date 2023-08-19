@@ -76,28 +76,24 @@ class GoalsController < ApplicationController
 
       if @invitation.save
         flash[:noticed] = "Invitation sent to #{invited_user.email}"
-        redirect_to goal_path @goal
       elsif @invitation.present?
         flash[:danger] = "User already got invite"
-        redirect_to goal_path @goal
       else
         flash[:danger] = "Failed to send invitation"
-        redirect_to goal_path @goal
       end
     else
       flash[:danger] = "User not found"
-      redirect_to goal_path @goal
     end
+
+    redirect_to goal_path(@goal)
   end
 
   def confirm_invitation
     if @invitation
       @invitation.update_attribute(:confirm, true)
       flash[:noticed] = "You have accepted invitation and joined to #{@invitation.goal.name} group."
-      redirect_to goal_path @goal
     else
       flash[:danger] = "Invitation not found"
-      redirect_to goal_path @goal
     end
   end
 
@@ -106,11 +102,11 @@ class GoalsController < ApplicationController
       @invitation.update_attribute(:confirm, false)
       @invitation.destroy
       flash[:noticed] = "You have ignored invitation to #{@invitation.goal.name} group."
-      redirect_to goal_path @goal
     else
       flash[:danger] = "Invitation not found"
-      redirect_to goal_path @goal
     end
+
+    redirect_to goal_path(@goal)
   end
 
   def leave
@@ -156,11 +152,11 @@ class GoalsController < ApplicationController
   end
 
   def set_category
-    @category ||= Category.find(params[:category_id])
+    @category = Category.find(params[:category_id])
   end
 
   def set_goal
-    @goal ||= Goal.find(params[:id])
+    @goal = Goal.find(params[:id])
   end
 
   def mark_notifications_as_read
@@ -180,7 +176,7 @@ class GoalsController < ApplicationController
   end
 
   def set_invitation
-    @invitation ||= GoalUser.find_by(user: current_user)
+    @invitation = GoalUser.find_by(user: current_user)
   end
 
   def set_invite
