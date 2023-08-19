@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include Sorting
 
   before_action :set_notifications, if: :current_user
 
@@ -26,21 +27,6 @@ class ApplicationController < ActionController::Base
 
       redirect_to login_url
     end
-  end
-
-  def sort_column(column = nil, model = nil)
-    column ||= "name"
-
-    if model
-      model.capitalize.constantize.column_names.include?(params[:sort]) ? params[:sort] : "#{column}"
-    else
-      model = controller_name.singularize.constantize
-      model.column_names.include?(params[:sort]) ? params[:sort] : "#{column}"
-    end
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def date_today
