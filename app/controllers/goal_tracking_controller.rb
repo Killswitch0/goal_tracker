@@ -13,8 +13,8 @@ class GoalTrackingController < ApplicationController
 
   private
 
-  def sort_column
-    Goal.column_names.include?(params[:sort]) ? params[:sort] : "deadline"
+  def sort_column(column = 'deadline', model = 'goal')
+    super
   end
 
   def sort_direction

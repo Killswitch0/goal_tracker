@@ -8,4 +8,14 @@ class TaskTrackingController < ApplicationController
       @tasks = current_user.tasks.order("#{sort_column} #{sort_direction}")
     end
   end
+
+  private
+
+  def sort_column(column = 'deadline', model = 'task')
+    super
+  end
+
+  def sort_column
+    Goal.column_names.include?(params[:sort]) ? params[:sort] : "deadline"
+  end
 end

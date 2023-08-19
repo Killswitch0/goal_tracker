@@ -28,8 +28,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "deadline"
+  def sort_column(column = nil, model = nil)
+    column ||= "name"
+
+    if model
+      model.capitalize.constantize.column_names.include?(params[:sort]) ? params[:sort] : "#{column}"
+    else
+      model = controller_name.singularize.constantize
+      model.column_names.include?(params[:sort]) ? params[:sort] : "#{column}"
+    end
   end
 
   def sort_direction

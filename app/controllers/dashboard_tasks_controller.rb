@@ -17,7 +17,7 @@ class DashboardTasksController < ApplicationController
   end
 
   def complete
-    @task ||= Task.find(params[:id])
+    @task = Task.find(params[:id])
 
     @goal = @task.goal
     if @task.complete?
