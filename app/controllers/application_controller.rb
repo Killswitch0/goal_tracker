@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Sets notification for current user
   def set_notifications
     notifications = Notification.where(recipient: current_user).newest_first.limit(9)
     @unread = notifications.unread

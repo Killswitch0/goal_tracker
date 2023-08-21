@@ -1,3 +1,21 @@
+# == Schema information
+#
+# Table name: habits
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  description    :text
+#  days_completed :integer          default(0)
+#  user_id        :bigint           not null
+#  goal_id        :bigint           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+# Indexes
+#
+#  index_habits_on_goal_id  (goal_id)
+#  index_habits_on_user_id  (user_id)
+
 class Habit < ApplicationRecord
   include Searchable
   include Streakable

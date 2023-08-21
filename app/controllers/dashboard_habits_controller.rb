@@ -1,8 +1,13 @@
 class DashboardHabitsController < ApplicationController
+
+  # GET /dashboard_habits/new
+  #----------------------------------------------------------------------------
   def new
     @habit = Habit.new
   end
 
+  # POST /dashboard_habits
+  #----------------------------------------------------------------------------
   def create
     @habit = current_user.habits.build(task_params)
 
@@ -15,6 +20,8 @@ class DashboardHabitsController < ApplicationController
     end
   end
 
+  # GET /dashboard_habits/1/complete
+  #----------------------------------------------------------------------------
   def complete
     @habit = Habit.find(params[:id])
     @goal = @habit.goal
@@ -33,9 +40,10 @@ class DashboardHabitsController < ApplicationController
   private
 
   def task_params
-    params.require(:habit).permit(:name,
-                                  :goal_id,
-                                  :description
-    )
+    params.require(:habit).permit(
+        :name,
+        :goal_id,
+        :description
+      )
   end
 end

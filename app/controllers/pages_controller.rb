@@ -3,9 +3,11 @@ class PagesController < ApplicationController
 
   before_action :redirect_back, only: %i[ home ]
 
-  def home
-  end
+  # GET /home
+  #----------------------------------------------------------------------------
+  def home; end
 
-  def about
-  end
+  # GET /about
+  #----------------------------------------------------------------------------
+  def about; end
 end

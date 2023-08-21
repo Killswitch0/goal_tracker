@@ -1,6 +1,8 @@
 class DashboardController < ApplicationController
   before_action :redirect_user
 
+  # GET /dashboard
+  #----------------------------------------------------------------------------
   def show
     @all_goals = Goal.includes(:user)
                      .where(user: current_user)

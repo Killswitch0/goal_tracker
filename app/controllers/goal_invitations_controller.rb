@@ -94,7 +94,11 @@ class GoalInvintationController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permit(:name, :goal_id, :user_id)
+    params.require(:goal).permit(
+      :name,
+      :goal_id,
+      :user_id
+    )
   end
 
 end

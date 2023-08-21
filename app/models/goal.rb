@@ -1,3 +1,25 @@
+# == Schema information
+#
+# Table name: goals
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  description    :string(255)
+#  days_completed :integer          default(0)
+#  user_id        :bigint           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  deadline       :datetime
+#  complete       :boolean          default(FALSE)
+#  category_id    :bigint           not null
+#  color          :string(255)
+#
+# Indexes
+#
+#  index_goals_on_category_id  (category_id)
+#  index_goals_on_user_id      (user_id)
+#
+
 class Goal < ApplicationRecord
   include Searchable
 

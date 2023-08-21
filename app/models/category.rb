@@ -1,3 +1,20 @@
+# == Schema information
+#
+# Table name: categories
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  goal_id    :bigint
+#  user_id    :bigint           not null
+#
+# Indexes
+#
+#  index_categories_on_goal_id  (goal_id)
+#  index_categories_on_user_id  (user_id)
+#
+
 class Category < ApplicationRecord
   belongs_to :user
 

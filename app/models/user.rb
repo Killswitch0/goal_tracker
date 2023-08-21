@@ -1,14 +1,31 @@
+# == Schema information
+#
+# Table name: users
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  email                :string(255)
+#  password_digest      :string(255)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  email_confirmed      :boolean          default(FALSE)
+#  confirm_token        :string(255)
+#  auth_token           :string(255)
+#  password_reset_token :string(255)
+#  password_reset_sent_at :datetime
+#
+
 class User < ApplicationRecord
   include Rememberable
   include Recoverable
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  # Виртуальный аттрибут. В базу данных он попадать не будет. Просто чтобы
-  # на объекте существовал метод old_password, с помощью которого мы будем
-  # отрисовывать новое текстовое поле в форме, а потом проверять его значение.
-  # admin_edit: true мы мерджим в password_resets_controller в user_params,
-  # чтобы при восстановлении пароля не требовалась валидация correct_old_password
+  # Virtual attribute. It will not enter the database. Just to
+  # the old_password method existed on the object, with the help of which we will
+  # draw a new text field on the form and then check its value.
+  # admin_edit: true we merge in password_resets_controller in user_params,
+  # so that when recovering a password, validation is not required correct_old_password
   attr_accessor :old_password, :admin_edit
 
   has_many :goals, dependent: :destroy
@@ -73,9 +90,9 @@ class User < ApplicationRecord
   end
 
   def correct_old_password
-    # password_digest_was - этот метод RoR создает автомат,
-    # постфикс _was говорит о том, что нужно вытащить старый digest,
-    # который хранится в БД, а не в памяти
+    # password_digest_was - this RoR method creates automatically,
+    # the _was postfix says to pull out the old digest,
+    # which is stored in the database, not in memory
     return if BCrypt::Password.new(password_digest_was).is_password?(old_password)
 
     errors.add :old_password, 'is incorrect'

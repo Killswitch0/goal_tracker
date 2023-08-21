@@ -5,20 +5,28 @@ class TasksController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
+  # GET /goals/1/tasks
+  #----------------------------------------------------------------------------
   def index
     @tasks = current_user.tasks.order("#{sort_column} #{sort_direction}")
     @completed_tasks = @tasks.where(complete: true, goal_id: @goal.id)
     @uncompleted_tasks = @tasks.where(complete: false, goal_id: @goal.id)
   end
 
+  # GET /goals/1/tasks/new
+  #----------------------------------------------------------------------------
   def new
     @task = Task.new
   end
 
+  # GET /goals/1/tasks/1
+  #----------------------------------------------------------------------------
   def show
     # @tasks = Task.find(params[:id])
   end
 
+  # POST /goals/1/tasks
+  #----------------------------------------------------------------------------
   def create
     @task = @goal.tasks.build(task_params)
     @task.user = current_user
@@ -31,9 +39,12 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-  end
+  # GET /goals/1/tasks/1
+  #----------------------------------------------------------------------------
+  def edit; end
 
+  # PUT /goals/1/tasks/1
+  #----------------------------------------------------------------------------
   def update
     if @task.update(task_params)
       redirect_to goal_path(@goal)
@@ -42,11 +53,15 @@ class TasksController < ApplicationController
     end
   end
 
+  # DELETE /goals/1/tasks/1
+  #----------------------------------------------------------------------------
   def destroy
     @task.destroy
     redirect_to goal_task_path(@goal, @task)
   end
 
+  # PUT /goals/1/tasks/1/complete
+  #----------------------------------------------------------------------------
   def complete
     @goal = @task.goal
     if @task.complete?
@@ -63,10 +78,11 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name,
-                                 :complete,
-                                 :deadline,
-                                 :complete_date
+    params.require(:task).permit(
+      :name,
+      :complete,
+      :deadline,
+      :complete_date
     )
   end
 

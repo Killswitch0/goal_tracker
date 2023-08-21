@@ -5,6 +5,8 @@ class HabitsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
+  # GET /goals/1/habits
+  #----------------------------------------------------------------------------
   def index
     @goal = Goal.find(params[:goal_id])
     @habits = current_user.habits
@@ -14,14 +16,22 @@ class HabitsController < ApplicationController
                                  .where(completion_dates: { id: nil }, goal_id: @goal.id).distinct
   end
 
-  def show; end
-
+  # GET /goals/1/habits/new
+  #----------------------------------------------------------------------------
   def new
     @habit = Habit.new
   end
 
+  # GET /goals/1/habits/1
+  #----------------------------------------------------------------------------
+  def show; end
+
+  # GET goals/1/habits/1/edit
+  #----------------------------------------------------------------------------
   def edit; end
 
+  # POST /goals/1/habits
+  #----------------------------------------------------------------------------
   def create
     @habit = @goal.habits.build(habit_params)
     @habit.user = current_user
@@ -34,6 +44,8 @@ class HabitsController < ApplicationController
     end
   end
 
+  # PUT /goals/1/habits/1
+  #----------------------------------------------------------------------------
   def update
     respond_to do |format|
       if @habit.update(habit_params)
@@ -44,11 +56,15 @@ class HabitsController < ApplicationController
     end
   end
 
+  # DELETE /goals/1/habits/1
+  #----------------------------------------------------------------------------
   def destroy
     @habit.destroy
     redirect_to goal_habits_path(@goal, @habit)
   end
 
+  # GET /goals/1/habits/1/complete
+  #----------------------------------------------------------------------------
   def complete
     @goal = @habit.goal
 
@@ -66,10 +82,11 @@ class HabitsController < ApplicationController
   private
 
   def habit_params
-    params.require(:habit).permit(:name,
-                                  :description,
-                                  :days_completed,
-                                  :completed
+    params.require(:habit).permit(
+      :name,
+      :description,
+      :days_completed,
+      :completed
     )
   end
 

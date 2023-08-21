@@ -6,6 +6,8 @@ class GoalsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
+  # GET /goals
+  #----------------------------------------------------------------------------
   def index
     @goals = if params[:search]
                Goal.search(params[:search], current_user)
@@ -21,6 +23,14 @@ class GoalsController < ApplicationController
     @confirmed_goals = goals_in_goal_users.where(goal_users: { user_id: current_user.id, confirm: true })
   end
 
+  # GET /goals/new
+  #----------------------------------------------------------------------------
+  def new
+    @goal = Goal.new
+  end
+
+  # GET /goals/1
+  #----------------------------------------------------------------------------
   def show
     require_invitation
 
@@ -43,10 +53,8 @@ class GoalsController < ApplicationController
     mark_notifications_as_read if params[:mark_as_read] == 'true'
   end
 
-  def new
-    @goal = Goal.new
-  end
-
+  # POST /goals
+  #----------------------------------------------------------------------------
   def create
     @goal = Goal.new(goal_params)
     @goal.user = current_user
@@ -67,6 +75,8 @@ class GoalsController < ApplicationController
     end
   end
 
+  # POST /goals/1/create_invitation
+  #----------------------------------------------------------------------------
   def create_invitation
     @goal = Goal.find(params[:id])
     invited_user = User.find_by(email: params[:email])
@@ -88,6 +98,8 @@ class GoalsController < ApplicationController
     redirect_to goal_path(@goal)
   end
 
+  # PUT /goals/1/confirm_invitation
+  #----------------------------------------------------------------------------
   def confirm_invitation
     if @invitation
       @invitation.update_attribute(:confirm, true)
@@ -97,9 +109,10 @@ class GoalsController < ApplicationController
     end
   end
 
+  # DELETE /goals/1/decline_invitation
+  #----------------------------------------------------------------------------
   def decline_invitation
     if @invitation
-      @invitation.update_attribute(:confirm, false)
       @invitation.destroy
       flash[:noticed] = "You have ignored invitation to #{@invitation.goal.name} group."
     else
@@ -109,16 +122,18 @@ class GoalsController < ApplicationController
     redirect_to goal_path(@goal)
   end
 
+  # DELETE /goals/1/leave
+  #----------------------------------------------------------------------------
   def leave
     @invitation.destroy
     redirect_to goals_path
   end
 
-  def edit
-    # @category = Category.find(params[:category_id])
-    # @goal = @category.goals.find_by(id: params[:id])
-  end
+  # GET /goals/1/edit
+  def edit; end
 
+  # PUT /goals/1
+  #----------------------------------------------------------------------------
   def update
     @category = @goal.category_id
 
@@ -131,6 +146,8 @@ class GoalsController < ApplicationController
     end
   end
 
+  # DELETE /goals/1
+  #----------------------------------------------------------------------------
   def destroy
     @goal.destroy
     flash[:noticed] = "Goal was successfully destroyed."
@@ -140,14 +157,15 @@ class GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permit(:name,
-                                 :description,
-                                 :category_id,
-                                 :days_completed,
-                                 :deadline,
-                                 :complete,
-                                 :color,
-                                 category_attributes: [:name, :user_id]
+    params.require(:goal).permit(
+      :name,
+      :description,
+      :category_id,
+      :days_completed,
+      :deadline,
+      :complete,
+      :color,
+      category_attributes: [:name, :user_id]
     )
   end
 
@@ -166,7 +184,7 @@ class GoalsController < ApplicationController
     notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
   end
 
-  # goal invites
+  # Requires goal invitation to get access
   def require_invitation
     @goal = Goal.find_by(id: params[:id])
     return if @goal.blank?

@@ -1,9 +1,14 @@
 class DashboardTasksController < ApplicationController
+
+  # GET /dashboard_tasks/new
+  #----------------------------------------------------------------------------
   def new
     @task = Task.new
     @task.build_goal
   end
 
+  # POST /dashboard_tasks
+  #----------------------------------------------------------------------------
   def create
     @task = current_user.tasks.build(task_params)
 
@@ -16,6 +21,8 @@ class DashboardTasksController < ApplicationController
     end
   end
 
+  # PUT dashboard_tasks/1/complete
+  #----------------------------------------------------------------------------
   def complete
     @task = Task.find(params[:id])
 
@@ -34,11 +41,12 @@ class DashboardTasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name,
-                                 :complete,
-                                 :goal_id,
-                                 :deadline,
-                                 :complete_date
-                                )
+    params.require(:task).permit(
+      :name,
+      :complete,
+      :goal_id,
+      :deadline,
+      :complete_date
+    )
   end
 end

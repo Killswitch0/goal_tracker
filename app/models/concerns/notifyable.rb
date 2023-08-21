@@ -1,4 +1,6 @@
 module Notifyable
+  extend ActiveSupport::Concern
+
   private
 
   def send_notification_create(params)

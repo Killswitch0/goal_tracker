@@ -1,6 +1,8 @@
 class TaskTrackingController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+  # GET /task_tracking
+  #----------------------------------------------------------------------------
   def show
     if params[:search]
       @tasks = Task.search(params[:search], current_user)

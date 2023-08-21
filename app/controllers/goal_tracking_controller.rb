@@ -3,6 +3,8 @@ class GoalTrackingController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
+  # GET /goal_tracking
+  #----------------------------------------------------------------------------
   def show
     if params[:search]
       @goals = Goal.search(params[:search], current_user)

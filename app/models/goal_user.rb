@@ -1,3 +1,20 @@
+# == Schema information
+#
+# Table name: goal_users
+#
+#  id         :integer          not null, primary key
+#  confirm    :boolean          default(FALSE)
+#  user_id    :bigint           not null
+#  goal_id    :bigint           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_goal_users_on_goal_id                          (goal_id)
+#  index_goal_users_on_user_id_and_goal_id              (user_id,goal_id) UNIQUE
+#  index_goal_users_on_user_id                          (user_id)
+
 class GoalUser < ApplicationRecord
   include Notifyable
 
@@ -23,6 +40,7 @@ class GoalUser < ApplicationRecord
 
   private
 
+  #
   def notification_params
     { goal_user: self, goal: self.goal }
   end

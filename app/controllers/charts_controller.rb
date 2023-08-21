@@ -2,6 +2,8 @@ class ChartsController < ApplicationController
   before_action :redirect_user
   before_action :set_goal, only: %i[ habit task ]
 
+  # GET /chart/habit
+  #----------------------------------------------------------------------------
   def habit
     if @goal
       @habits = current_user.habits.where(goal_id: @goal)
@@ -10,6 +12,8 @@ class ChartsController < ApplicationController
     end
   end
 
+  # GET /chart/task
+  #----------------------------------------------------------------------------
   def task
     if @goal
       @tasks = current_user.tasks.where(goal_id: @goal)
