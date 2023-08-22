@@ -1,0 +1,7 @@
+development:
+  :concurrency: 1 # only 1 stream(one parallel task)
+production:
+  :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 15 %>
+  :queues:
+    - default
+  :max_retries: 1 # how many times a task can be reexecuted when an error occurs

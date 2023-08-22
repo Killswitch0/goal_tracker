@@ -15,7 +15,8 @@ user = User.create(
   name: "Max",
   email: "t@t.com",
   password: "111111",
-  email_confirmed: true # Чтобы подтвердить email, установите значение в true
+  email_confirmed: true, # Чтобы подтвердить email, установите значение в true
+  role: 1
 )
 
 # Создаем категорию

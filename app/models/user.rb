@@ -1,18 +1,23 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: users
 #
-#  id                   :integer          not null, primary key
-#  name                 :string(255)
-#  email                :string(255)
-#  password_digest      :string(255)
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  email_confirmed      :boolean          default(FALSE)
-#  confirm_token        :string(255)
-#  auth_token           :string(255)
-#  password_reset_token :string(255)
-#  password_reset_sent_at :datetime
+#  id                      :integer          not null, primary key
+#  name                    :string(255)
+#  email                   :string(255)
+#  password_digest         :string(255)
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  email_confirmed         :boolean          default(FALSE)
+#  confirm_token           :string(255)
+#  auth_token              :string(255)
+#  password_reset_token    :string(255)
+#  password_reset_sent_at  :datetime
+#  role                    :integer          default(0), not null
+#
+# Indexes
+#
+#  index_users_on_role  (role)
 #
 
 class User < ApplicationRecord
@@ -56,6 +61,10 @@ class User < ApplicationRecord
     self.email_confirmed = true
     self.confirm_token = nil
     save!(validate: false)
+  end
+
+  def admin_role?
+    true if self.role == 1
   end
 
   private
