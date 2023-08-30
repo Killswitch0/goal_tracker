@@ -103,9 +103,7 @@
         <% if @all_habits.present? %>
           <% @all_habits.each do |habit| %>
             <li class="action-item">
-              <%= link_to "#{habit.completed_today? ? 'uncomplete' : 'complete'}",
-                          complete_dashboard_habit_path(habit),
-                          class: "#{habit.completed_today? ? 'btn btn-success btn-sm' : 'btn btn-warning btn-sm'}" %>
+              <%= habit_complete_link(habit, complete_dashboard_habit_path(habit)) %>
               <%= habit.name %>
               <i class="<%= 'bi bi-check-lg' if habit.completed_today? %>"></i>
             </li>

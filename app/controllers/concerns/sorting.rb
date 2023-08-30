@@ -4,9 +4,7 @@ module Sorting
   included do
     private
 
-    def sort_column(column = nil, model = nil)
-      column ||= "name"
-
+    def sort_column(column = 'name', model = nil)
       if model
         model.capitalize.constantize.column_names.include?(params[:sort]) ? params[:sort] : "#{column}"
       else

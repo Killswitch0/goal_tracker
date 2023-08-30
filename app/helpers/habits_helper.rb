@@ -5,9 +5,9 @@ module HabitsHelper
     [completed, all]
   end
 
-  def habit_complete_link(habit)
+  def habit_complete_link(habit, path)
     link_to "#{habit.completed_today? ? 'uncomplete' : 'complete'}",
-            complete_goal_habit_path(habit),
+            path,
             class: "#{habit.completed_today? ? 'btn btn-success btn-sm' : 'btn btn-warning btn-sm'}"
   end
 

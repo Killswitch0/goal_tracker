@@ -16,8 +16,4 @@ class TaskTrackingController < ApplicationController
   def sort_column(column = 'deadline', model = 'task')
     super
   end
-
-  def sort_column
-    Goal.column_names.include?(params[:sort]) ? params[:sort] : "deadline"
-  end
 end
