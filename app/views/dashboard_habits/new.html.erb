@@ -2,7 +2,7 @@
   <h1 class="text-center">New Habit</h1>
 
   <div class="col-sm-12 col-md-4 offset-md-4">
-    <%= form_with(model: @habit, url: new_dashboard_habit_path) do |f| %>
+    <%= form_with(model: @habit, url: dashboard_habits_path) do |f| %>
       <%= render "shared/error_messages", resource: @habit %>
 
       <div class="card">
