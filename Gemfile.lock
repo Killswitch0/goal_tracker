@@ -95,6 +95,12 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.2.0)
       railties (>= 6.0.0)
+    database_cleaner (2.0.2)
+      database_cleaner-active_record (>= 2, < 3)
+    database_cleaner-active_record (2.1.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -362,6 +368,7 @@ DEPENDENCIES
   capybara
   chartkick (~> 5.0)
   cssbundling-rails
+  database_cleaner (~> 2.0)
   debug
   factory_bot_rails
   faker (~> 3.2)

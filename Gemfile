@@ -105,6 +105,9 @@ group :test do
 
   # Linting
   gem "rubocop-rails"
+
+  gem "database_cleaner", "~> 2.0"
 end
+
 
 
