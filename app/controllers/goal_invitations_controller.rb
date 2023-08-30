@@ -1,4 +1,4 @@
-class GoalInvintationController < ApplicationController
+class GoalInvitationsController < ApplicationController
   before_action :redirect_user
   before_action :set_invite, only: %i[index show new]
   before_action :set_group, only: %i[create_invitation confirm_invitation decline_invitation destroy]
