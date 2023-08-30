@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "CompleteDashboardHabits", type: :feature do
   given(:user) { create(:user) }
   given(:category) { create(:category, user: user) }
-  given!(:goal) { create(:goal, user: user, category: category) }
+  given(:goal) { create(:goal, user: user, category: category) }
   given(:habit) { create(:habit, user: user, goal: goal) }
 
   feature 'Complete Habit' do
