@@ -29,12 +29,12 @@ RSpec.feature "CreateTasks" do
 
       click_on 'Add Task'
 
-      expect(current_path).to eq category_goal_path(category, goal)
+      expect(page).to have_content "Task has been successfully created."
       expect(page).to have_content(task.name)
 
 
       ### complete ###
-      visit complete_task_path(task)
+      visit complete_goal_task_path(goal, task)
       expect(page).to have_content 'Task has been successfully completed.'
     end
 

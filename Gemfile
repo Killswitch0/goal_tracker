@@ -51,17 +51,19 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'bcrypt'
-
+gem "bcrypt"
 gem "pg", "~> 1.5"
-
 gem "letter_opener", "~> 1.8"
-
 gem "whenever", "~> 1.0", require: false
-
-gem 'sass-rails'
-
-gem 'rubocop'
+gem "sass-rails"
+gem "rubocop"
+gem "simple_calendar", "~> 2.4"
+gem "yard", "~> 0.9.34"
+gem "faker", "~> 3.2"
+gem "simplecov", "~> 0.22.0"
+gem "noticed", "~> 1.6"
+gem "chartkick", "~> 5.0"
+gem "sidekiq"
 
 # grouping dates by day/week/month
 gem "groupdate", "~> 6.2"
@@ -69,12 +71,12 @@ gem "groupdate", "~> 6.2"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem 'rubocop'
-  gem 'pry-rails'
-  gem 'rspec-rails'
-  gem 'rails-controller-testing'
-  gem 'factory_bot_rails'
-  gem 'selenium-webdriver'
+  gem "rubocop"
+  gem "pry-rails"
+  gem "rspec-rails"
+  gem "rails-controller-testing"
+  gem "factory_bot_rails"
+  gem "selenium-webdriver"
 end
 
 group :development do
@@ -93,24 +95,16 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem 'shoulda-matchers' # gem с макросами для короткой записи тестов на ассоциации, валидации
-  gem 'launchy'
+  gem "shoulda-matchers" # gem с макросами для короткой записи тестов на ассоциации, валидации
+  gem "launchy"
 
   # Security tools
-  gem 'brakeman'
-  gem 'bundler-audit'
-  gem 'ruby_audit'
+  gem "brakeman"
+  gem "bundler-audit"
+  gem "ruby_audit"
 
   # Linting
-  gem 'rubocop-rails'
+  gem "rubocop-rails"
 end
 
-gem "simple_calendar", "~> 2.4"
 
-gem "yard", "~> 0.9.34"
-
-gem "faker", "~> 3.2"
-
-gem "simplecov", "~> 0.22.0"
-
-gem "noticed", "~> 1.6"

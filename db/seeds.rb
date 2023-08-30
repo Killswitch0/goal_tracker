@@ -5,31 +5,79 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-User.create(name: "Max", email: "t@t.com", password: "111111", password_confirmation: "111111")
-Category.create(name: "Sport")
+# User.create(name: "Max", email: "t@t.com", password: "111111", password_confirmation: "111111")
+# Category.create(name: "Sport")
 
-20.times do |i|
-  puts "#{i}"
+# db/seeds.rb
 
-  Goal.create(name: "Goal #{i + 1}",
-              description: "Description #{i + 1}",
-              days_completed: 0,
-              user_id: User.first.id,
-              category_id: Category.first.id,
-              deadline: "#{Date.new(2025, 2, 25)}"
+# Создаем пользователя
+user = User.create(
+  name: "Max",
+  email: "t@t.com",
+  password: "111111",
+  email_confirmed: true, # Чтобы подтвердить email, установите значение в true
+  role: 1
+)
+
+# Создаем категорию
+category = Category.create(name: "Health", user_id: user.id)
+
+# Создаем цель
+goal = Goal.create(
+  name: "Exercise regularly",
+  description: "Stay fit and healthy",
+  color: 'Purple',
+  deadline: Date.today + 2.weeks,
+  user_id: user.id,
+  category_id: category.id
+)
+
+GoalUser.create(
+  user_id: user.id,
+  goal_id: goal.id
+)
+
+# Создаем 10 привычек
+10.times do |i|
+  Habit.create(
+    name: "Morning walk #{i}",
+    description: "Walk for 30 minutes every morning",
+    user_id: user.id,
+    goal_id: goal.id,
+    created_at: Date.today.beginning_of_year,
+    updated_at: Date.today.beginning_of_year
   )
 end
 
-10.times do
-  20.times do |i|
-    Habit.create(name: "Habit #{i}",
-                 description: "Description #{i}",
-                 days_completed: 0,
-                 user_id: User.first.id,
-                 goal_id: i
-    )
-  end
+# Создаем 10 задач
+10.times do |i|
+  Task.create(
+    name: "Buy groceries #{i}",
+    user_id: user.id,
+    goal_id: goal.id,
+    deadline: Date.today + i.weeks
+  )
 end
+
+start_date = Date.new(2023, 1, 1)
+
+(0..6).each do |offset|
+  date = start_date + offset.months
+  CompletionDate.create(date: date, habit_id: 1, created_at: date, updated_at: date)
+end
+
+(0..6).each do |offset|
+  date = start_date + offset.months + 1.month
+  CompletionDate.create(date: date, habit_id: 2, created_at: date, updated_at: date)
+end
+
+(0..6).each do |offset|
+  date = start_date + offset.months + 2.month
+  CompletionDate.create(date: date, habit_id: 3, created_at: date, updated_at: date)
+end
+
+
+
 
 
 

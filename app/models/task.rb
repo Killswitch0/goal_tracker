@@ -1,5 +1,27 @@
+# == Schema information
+#
+# Table name: tasks
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  complete     :boolean          default(FALSE)
+#  goal_id      :bigint           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :bigint           not null
+#  deadline     :datetime
+#  complete_date :date
+#
+# Indexes
+#
+#  index_tasks_on_goal_id  (goal_id)
+#  index_tasks_on_user_id  (user_id)
+#
+
 class Task < ApplicationRecord
   include Streakable
+  include Notifyable
+  include Searchable
 
   belongs_to :goal
   belongs_to :user
@@ -9,7 +31,7 @@ class Task < ApplicationRecord
   after_create_commit :notify_create
   after_update_commit :notify_almost_streak, if: :almost_streak?
 
-  before_destroy :clean_up_notifications
+  before_destroy :cleanup_notifications
 
   has_noticed_notifications model_name: 'Notification'
 

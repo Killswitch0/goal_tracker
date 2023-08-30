@@ -1,14 +1,16 @@
-<h1 class="text-center mt-3">Goal info</h1>
 <div class="col-sm-12 col-md-4 offset-md-4 mb-3 p-3 goal-info <%= @goal.complete? ? 'completed' : 'uncompleted' %>" style="font-size: large">
+  <h1 class="text-center">Goal info</h1>
   <dl class="row">
     <dt class="col-sm-3">Category:</dt>
-    <dd class="col-sm-9 px-5"><%= @goal.category.name unless @goal.category.nil? %></dd>
+    <dd class="col-sm-9 px-5"><%= @goal.category.name %></dd>
     <dt class="col-sm-3">Name:</dt>
     <dd class="col-sm-9 px-5"><%= @goal.name %></dd>
     <dt class="col-sm-3">Description:</dt>
     <dd class="col-sm-9 px-5"><%= @goal.description %></dd>
     <dt class="col-sm-3">Deadline:</dt>
-    <dd class="col-sm-9 px-5"><%= @goal.deadline.to_formatted_s(:long) if @goal.deadline.present? %></dd>
+    <dd class="col-sm-9 px-5"><%= @goal.deadline.to_formatted_s(:long) %></dd>
+    <dt class="col-sm-3">Days left:</dt>
+    <dd class="col-sm-9 px-5"><%= days_left(@goal).zero? ? 'Overdue' : days_left(@goal) %></dd>
   </dl>
 
   <div class="text-center">
@@ -27,9 +29,9 @@
   </div>
 </div>
 
-<div class="col-sm-12 col-md-4 offset-md-1 mb-5 table <%= 'completed' if @goal.habits_streak? %>">
+<div class="col-sm-12 col-md-4 offset-md-1 mb-5 table-main <%= 'completed' if @goal.habits_streak? %>">
   <div class="table-header">
-    <h2 class="text-center"><%= habits_completed(@goal) %> Habits are completed</h2>
+    <h2 class="text-center">Completed <%= habits_completed(@goal).first %> of <%= habits_completed(@goal).last %></h2>
   </div>
 
   <div class="table-wrapper">
@@ -38,7 +40,7 @@
         <thead class="">
         <tr>
           <th scope="col">#</th>
-          <th scope="col"><%= sortable "name" %></th>
+          <th scope="col">Name</th>
           <th scope="col">Description</th>
           <th scope="col">Complete</th>
         </tr>
@@ -51,7 +53,7 @@
               <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit), style: "text-decoration: none" %></td>
               <td><%= habit.description.truncate(15) %></td>
               <td>
-                <%= habit_complete_link(habit) %>
+                <%= habit_complete_link(habit, complete_goal_habit_path(habit)) %>
               </td>
             <% end %>
           </tr>
@@ -59,24 +61,30 @@
         </tbody>
       </table>
     </section>
-    <%= link_to "Add Habit", new_goal_habit_path(@goal), class: "mt-2 btn btn-primary" %>
-    <%= link_to "Show Habits", goal_habits_path(@goal), class: "mt-2 btn btn-primary" %>
+
+    <div class="links d-flex justify-content-between mb-3">
+      <%= link_to "Add Habit", new_goal_habit_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to "Show Habits", goal_habits_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to "Chart", goal_habit_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>
+    </div>
   </div>
 </div>
 
-<div class="col-sm-12 col-md-4 offset-md-1 table <%= 'completed' if @goal.tasks_streak? %>">
+<div class="col-sm-12 col-md-4 offset-md-1 table-main <%= 'completed' if @goal.tasks_streak? %>">
   <div class="table-header">
-    <h2 class="text-center"><%= tasks_complete(@goal) %> Tasks are completed</h2>
+    <h2 class="text-center">Completed <%= tasks_complete(@goal).first %> of <%= tasks_complete(@goal).second %></h2>
   </div>
 
   <div class="table-wrapper">
     <section class="table-body">
-      <table class="">
+      <table>
         <thead class="">
         <tr>
           <th scope="col">#</th>
-          <th scope="col"><%= sortable "name" %></th>
-          <th scope="col"><%= sortable "complete" %></th>
+          <th scope="col">Name</th>
+          <th scope="col">
+            <%= sortable 'complete' %>
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -100,7 +108,13 @@
         </tbody>
       </table>
     </section>
-    <%= link_to "Add Task", new_goal_task_path(@goal), class: "mt-2 btn btn-primary" %>
-    <%= link_to "Show Tasks", goal_tasks_path(@goal), class: "mt-2 btn btn-primary" %>
+
+    <div class="links d-flex justify-content-between mb-3">
+      <%= link_to "Add Task", new_goal_task_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to "Show Tasks", goal_tasks_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to "Chart", goal_task_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>
+    </div>
   </div>
 </div>
+
+<%= render 'goal_invitations/invintation', goal: @goal %>

@@ -1,0 +1,2 @@
+module DashboardHabitsHelper
+end

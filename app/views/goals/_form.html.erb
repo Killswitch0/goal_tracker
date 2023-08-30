@@ -1,4 +1,4 @@
-<%= form_with(model: [@category, @goal]) do |f| %>
+<%= form_with(model: @goal) do |f| %>
   <%= render "shared/error_messages", resource: @goal %>
   <div class="card">
     <div class="card-body">
@@ -14,19 +14,27 @@
       </div>
 
       <div class="mb-3">
-        <%= f.label :category_id %>
-        <%= f.select :category_id, current_user.categories.all.collect { |c| [c.name, c.id] },
-                     include_blank: false,
-                     selected: params[:category_id] %>
+        <%= f.label :color %>
+        <%= f.select :color, options_for_select(available_colors), class: "form-select" %>
       </div>
 
+      <br>
+      <% if current_user.categories.present? %>
+        <div class="mb-3">
+          <%= f.label :category_id %>
+          <%= f.select :category_id, options_for_select(current_user.categories.pluck(:name, :id),
+                                                        params[:category_id]), include_blank: true, class: "form-select" %>
+        </div>
+      <% end %>
+
       <div class="mb-3">
-        <%= f.label :color %>
-        <%= f.select :color, options_for_select(GoalsHelper::AVAILABLE_COLORS
-                                                  .map { |color| [color[0], color[1],
-                                                                  { style: "background-color: #{color[1]}; color: white;" }]
-                                                  }) %>
+          <%= f.fields_for :category_attributes do |category_fields| %>
+            <%= category_fields.label :name, 'New category' %>
+            <%= category_fields.text_field :name, class: 'form-control' %>
+            <%= category_fields.hidden_field :user_id, value: current_user.id %>
+          <% end %>
       </div>
+      <br>
 
       <div class="mb-3">
         <%= f.label :deadline %>

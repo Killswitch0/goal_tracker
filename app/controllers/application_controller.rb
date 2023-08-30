@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include Sorting
 
   before_action :set_notifications, if: :current_user
 
   private
 
+  # Sets notification for current user
   def set_notifications
     notifications = Notification.where(recipient: current_user).newest_first.limit(9)
     @unread = notifications.unread
@@ -26,14 +28,6 @@ class ApplicationController < ActionController::Base
 
       redirect_to login_url
     end
-  end
-
-  def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def date_today

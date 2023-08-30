@@ -1,0 +1,15 @@
+<%= form_with(model: category) do |f| %>
+  <%= render "shared/error_messages", resource: category %>
+
+  <div class="card">
+    <div class="card-body">
+
+      <div class="mb-3">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <%= f.submit "Create Category", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

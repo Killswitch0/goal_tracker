@@ -1,3 +1,25 @@
+# == Schema information
+#
+# Table name: goals
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  description    :string(255)
+#  days_completed :integer          default(0)
+#  user_id        :bigint           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  deadline       :datetime
+#  complete       :boolean          default(FALSE)
+#  category_id    :bigint           not null
+#  color          :string(255)
+#
+# Indexes
+#
+#  index_goals_on_category_id  (category_id)
+#  index_goals_on_user_id      (user_id)
+#
+
 class Goal < ApplicationRecord
   include Searchable
 
@@ -6,9 +28,15 @@ class Goal < ApplicationRecord
 
   has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
-  has_many :notifications, through: :user
+  has_many :goal_users, dependent: :destroy
+  has_many :users, through: :goal_users
+
+  # noticed gem association
+  has_many :notifications, through: :users
 
   has_noticed_notifications model_name: 'Notification'
+
+  accepts_nested_attributes_for :category, reject_if: proc { |attributes| attributes['name'].blank? }
 
   validates :name, presence: true, uniqueness: true,
             format: { with: /[A-Z]+[a-z]*/ },
@@ -18,7 +46,7 @@ class Goal < ApplicationRecord
             format: { with: /\A(.|\s)*[a-zA-Z]+(.|\s)*\z/ },
             length: { minimum: 7, maximum: 200 }
 
-  validates :category_id, presence: true
+  validates :category_id, presence: false
   validates :color, presence: true, uniqueness: true
   validates :deadline, presence: true
   validates :color, presence: true

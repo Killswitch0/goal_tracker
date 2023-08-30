@@ -13,9 +13,10 @@ RSpec.feature "CreateGoals" do
 
     scenario 'Authenticated user try to create, complete and delete Goal' do
       log_in(user)
+      GoalUser.create(goal: goal, user: user, confirm: true)
 
       ### create ###
-      visit new_category_goal_path(category)
+      visit new_goal_path(category)
 
       fill_in 'Name', with: goal.name
       fill_in 'Description', with: goal.description
@@ -28,7 +29,7 @@ RSpec.feature "CreateGoals" do
       expect(current_path).to eq goals_path
 
       ### delete ###
-      visit category_goal_path(category, goal)
+      visit goal_path(goal)
 
       click_on 'Destroy goal'
 
@@ -41,7 +42,7 @@ RSpec.feature "CreateGoals" do
     end
 
     scenario 'Non-authenticated user try to create Goal' do
-      visit new_category_goal_path(category)
+      visit new_goal_path(category)
 
       expect(current_path).to eq home_path
     end

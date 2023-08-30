@@ -3,6 +3,7 @@
 @import "categories/show";
 @import "goals/index";
 @import "goals/show";
+@import "dashboard/show";
 
 
 body {
@@ -50,6 +51,10 @@ th a {
 
 .nav-link:hover:after {
   content: '' ;
+  opacity: 1;
+}
+
+.active:after {
   opacity: 1;
 }
 

@@ -1,0 +1,66 @@
+<h1 class="text-center"><%= goal.name %> Goal</h1>
+
+<div class="col-sm-12 col-md-4 offset-md-4">
+    <div class="card">
+      <div class="card-body">
+        <%= form_with url: create_invitation_goal_path(goal), method: :post do |f| %>
+          <%= render "shared/error_messages", resource: goal %>
+          <%= f.label :email, 'Email of the user to invite:' %>
+          <%= f.text_field :email %>
+
+          <%= f.submit 'Invite' %>
+        <% end %>
+      </div>
+    </div>
+
+  <div class="card mt-5">
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Accept</th>
+          <th scope="col">Decline</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if @invites.present? %>
+          <% @invites.each_with_index do |invite, index| %>
+            <% if invite.confirm? %>
+              No notifications yet
+            <% else %>
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= "Invite to #{invite.goal.name} group" %></td>
+                <td><%= button_to 'Accept invite', confirm_invitation_goal_path, method: :patch, class: 'btn btn-primary btn-sm' %></td>
+                <td><%= button_to 'Decline invite', decline_invitation_goal_path, method: :patch, class: 'btn btn-danger btn-sm' %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="4" class="text-center">Invites have not yet</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-12 d-flex justify-content-sm-around">
+    <%= button_to "Leave group", leave_goal_path, method: :delete, class: 'btn btn-danger mt-3' if @invitation && !@invitation.creator? %>
+  </div>
+
+  <div class="card mt-5">
+    <h2 class="text-center">Members</h2>
+    <div class="card-body">
+      <% if @members.present? %>
+        <% @members.each_with_index do |member, index| %>
+          <p><%= "#{index + 1}: #{member.email}" %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

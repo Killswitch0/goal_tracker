@@ -19,7 +19,7 @@ RSpec.feature "CreateCategories" do
       fill_in 'Name', with: 'IT'
       click_on 'Create Category'
 
-      expect(current_path).to eq categories_path
+      expect(current_path).to eq goals_path
     end
 
     scenario 'Non-authenticated user try to create a categiry' do

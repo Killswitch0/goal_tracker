@@ -5,7 +5,7 @@
   border-radius: 1rem;
 }
 
-div.table {
+div.table-main {
   width: 50vh;
   height: 50vh;
   background-color: #fff5;
@@ -22,11 +22,12 @@ div.completed {
 table {
   width: 100%;
   overflow: auto;
+  background: aliceblue;
 }
 
 table, th, td {
   border-collapse: collapse;
-  padding: 1rem;
+  padding: 12px;
   text-align: left;
 }
 
@@ -52,12 +53,9 @@ table, th, td {
   height: 80%;
   max-height: calc(89% - 1.6rem);
   background-color: #fff4;
-
   margin: .8rem auto;
   border-radius: .6rem;
-
   overflow: auto;
-
   box-shadow: 0 .4rem .8rem #0005;
 }
 
@@ -92,7 +90,15 @@ tbody tr:nth-child(even) {
 
 .table-wrapper {
   height: 90%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .links {
+    padding-inline: 11px;
+  }
 }
+
 
 
 

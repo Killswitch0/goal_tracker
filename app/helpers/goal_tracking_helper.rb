@@ -1,0 +1,2 @@
+module GoalTrackingHelper
+end

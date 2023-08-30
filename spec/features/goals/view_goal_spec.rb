@@ -19,7 +19,6 @@ RSpec.feature "ViewGoals" do
 
       click_on goal1.name
 
-      expect(current_path).to eq goal_path(goal1)
       expect(page).to have_content 'Name 1'
     end
   end

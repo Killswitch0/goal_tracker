@@ -1,0 +1,43 @@
+<h2 class="text-center">TASKS TRACKER</h2>
+<div class="tracking-wrapper">
+  <%= form_with url: task_tracking_path, method: :get, class: 'text-center mb-3' do |f| %>
+    <%= f.text_field :search,
+                     placeholder: "Let's search",
+                     class: 'input-group-text',
+                     style: 'display: inline-block;' %>
+    <%= f.submit 'Search', class: 'btn btn-primary' %>
+  <% end %>
+
+  <div class="d-flex justify-content-start mb-3">
+    <%= link_to 'Goals', goal_tracking_path, class: 'btn btn-primary' %>
+  </div>
+
+  <table class="tracking">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th><%= sortable 'complete' %></th>
+      <th>Created at</th>
+      <th>
+        <%= sortable 'deadline' %>
+      </th>
+      <th>Days left</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @tasks.each_with_index do |item, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= link_to item.name, item.goal %></td>
+        <td><%= item.class.name %></td>
+        <td><%= item.complete? ? 'Completed' : 'In process' %></td>
+        <td><%= item.created_at.to_fs(:long) %></td>
+        <td><%= item.deadline.to_fs(:long) %></td>
+        <td><%= days_left(item) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

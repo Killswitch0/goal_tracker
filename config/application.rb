@@ -33,5 +33,7 @@ module GoalTracker
 
     # path for noticed gem folders
     config.autoload_paths += Dir[Rails.root.join('app', 'notifications', '*')]
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
