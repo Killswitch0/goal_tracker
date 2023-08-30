@@ -28,10 +28,10 @@ class DashboardHabitsController < ApplicationController
 
     if @habit.completed_today?
       @habit.complete_habit_today
-      flash[:noticed] = 'Your habit successfully uncompleted.'
+      flash[:noticed] = 'Habit has been successfully completed.'
     else
       @habit.complete_habit_today
-      flash[:noticed] = 'Your habit successfully completed.'
+      flash[:noticed] = 'Habit has been successfully completed.'
     end
 
     redirect_to dashboard_path

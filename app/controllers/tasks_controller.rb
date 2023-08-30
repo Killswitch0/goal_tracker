@@ -87,11 +87,11 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task ||= Task.find(params[:id])
+    @task = Task.find(params[:id])
   end
 
   def set_goal
-    @goal ||= Goal.find(params[:goal_id])
+    @goal = Goal.find(params[:goal_id])
   end
 
   def sort_column

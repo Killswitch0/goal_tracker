@@ -68,7 +68,6 @@ class Habit < ApplicationRecord
     completion_dates.group_by_period(:day, :date).count
   end
 
-  #
   def complete_habit_today
     if completion_dates.created_today.exists?
       update_attribute(:days_completed, self.days_completed -= 1)
