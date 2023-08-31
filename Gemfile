@@ -66,6 +66,7 @@ gem "chartkick", "~> 5.0"
 gem "sidekiq"
 gem "draper", "~> 4.0.2"
 gem "rails-i18n"
+gem "inline_svg", "~> 1.9"
 
 # grouping dates by day/week/month
 gem "groupdate", "~> 6.2"
@@ -108,5 +109,3 @@ group :test do
   # Linting
   gem "rubocop-rails"
 end
-
-
