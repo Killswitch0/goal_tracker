@@ -2,8 +2,9 @@
   <li class="nav-item dropdown">
     <span class="dropdown-toggle-icon"></span>
     <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= current_user.gravatar %>
       <i class="bi bi-caret-down-fill"></i>
-      Hello, <%= current_user.name %>
+      Hello, <%= current_user.name_or_email %>
     </a>
 
     <!--dropdown-menu-lg-end значит выравнивание выпадающего списка по левому краю-->

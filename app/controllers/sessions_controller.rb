@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       if user.email_confirmed
         log_in user
         remember(user) if params[:session][:remember_me] == '1'
-        flash[:noticed] = "#{current_user.name}, welcome to the app!"
+        flash[:noticed] = "#{current_user.name_or_email}, welcome to the app!"
         redirect_back_or user
       else
         flash[:danger] = 'Please activate your account by following the
