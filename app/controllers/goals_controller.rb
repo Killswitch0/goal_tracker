@@ -61,15 +61,15 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if params[:goal][:category_id].present? && params[:goal][:category_attributes][:name].present?
-        flash[:danger] = "Choose Category or create new."
+        flash[:danger] = t('.category_must_exist')
         format.html { render :new, status: :unprocessable_entity }
       elsif @goal.save
         current_user.goal_users << GoalUser.new(goal: @goal, confirm: true)
-        flash[:noticed] = "Goal was successfully created."
+        flash[:noticed] = t('.success')
         redirect_to goal_path(@goal)
         format.html
       else
-        flash[:danger] = "Goal was not created."
+        flash[:danger] = t('.fail')
         format.html { render :new, status: :unprocessable_entity }
       end
     end
@@ -87,9 +87,9 @@ class GoalsController < ApplicationController
       if @invitation.save
         flash[:noticed] = "Invitation sent to #{invited_user.email}"
       elsif @invitation.present?
-        flash[:danger] = "User already got invite"
+        flash[:danger] = t('.already')
       else
-        flash[:danger] = "Failed to send invitation"
+        flash[:danger] = t('.fail')
       end
     else
       flash[:danger] = "User not found"
@@ -103,9 +103,9 @@ class GoalsController < ApplicationController
   def confirm_invitation
     if @invitation
       @invitation.update_attribute(:confirm, true)
-      flash[:noticed] = "You have accepted invitation and joined to #{@invitation.goal.name} group."
+      flash[:noticed] = t('.success', goal_name: @invitation.goal.name)
     else
-      flash[:danger] = "Invitation not found"
+      flash[:danger] = t('.fail')
     end
   end
 
@@ -114,9 +114,9 @@ class GoalsController < ApplicationController
   def decline_invitation
     if @invitation
       @invitation.destroy
-      flash[:noticed] = "You have ignored invitation to #{@invitation.goal.name} group."
+      flash[:noticed] = t('.success', goal_name: @invitation.goal.name)
     else
-      flash[:danger] = "Invitation not found"
+      flash[:danger] = t('.fail')
     end
 
     redirect_to goal_path(@goal)
@@ -150,7 +150,7 @@ class GoalsController < ApplicationController
   #----------------------------------------------------------------------------
   def destroy
     @goal.destroy
-    flash[:noticed] = "Goal was successfully destroyed."
+    flash[:noticed] = t('.success')
     redirect_to goals_path
   end
 

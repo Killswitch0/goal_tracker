@@ -13,10 +13,10 @@ class DashboardTasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
 
     if @task.save
-      flash[:noticed] = 'Task has been successfully created.'
+      flash[:noticed] = t('tasks.create.success')
       redirect_to dashboard_path
     else
-      flash[:noticed] = 'Task was not created.'
+      flash[:noticed] = t('tasks.create.fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,10 +28,10 @@ class DashboardTasksController < ApplicationController
 
     @goal = @task.goal
     if @task.complete?
-      flash[:noticed] = 'Task has been successfully uncompleted.'
+      flash[:noticed] = t('tasks.complete.uncompleted')
       @task.update(complete: false, complete_date: nil)
     else
-      flash[:noticed] = 'Task has been successfully completed.'
+      flash[:noticed] = t('tasks.complete.completed')
       @task.update(complete: true, complete_date: Date.today)
     end
 

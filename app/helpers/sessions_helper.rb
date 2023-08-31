@@ -17,9 +17,9 @@ module SessionsHelper
 
   def current_user
     if session[:user_id].present?
-      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id]).decorate if session[:user_id]
     elsif cookies.encrypted[:user_id].present?
-      user = User.find_by(id: cookies.encrypted[:user_id])
+      user = User.find_by(id: cookies.encrypted[:user_id]).decorate
       if user&.remember_token_authenticated?(cookies.encrypted[:remember_token])
         log_in user
         @current_user ||= user
