@@ -1,10 +1,6 @@
 <li class="nav-item dropdown">
   <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <% if I18n.locale.to_s.include?('uk') %>
-      <%= inline_svg_tag('flags/ua', options={width: 25}) %>
-    <% elsif I18n.locale.to_s.include?('en') %>
-      <%= inline_svg_tag('flags/us', options={width: 25}) %>
-    <% end %>
+    <%= inline_svg_tag("flags/#{I18n.locale.to_s}", options = { width: 25 }) %>
     <%= t I18n.locale %>
     <i class="bi bi-caret-down-fill"></i>
   </a>
