@@ -14,6 +14,7 @@
 #  password_reset_token    :string(255)
 #  password_reset_sent_at  :datetime
 #  role                    :integer          default(0), not null
+#  gravatar_hash           :string(255)
 #
 # Indexes
 #
@@ -54,6 +55,7 @@ class User < ApplicationRecord
   validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
 
   before_save { self.email = email.downcase }
+  before_save :set_gravatar_hash, if: :email_changed?
 
   before_create :confirmation_token
 
@@ -68,6 +70,13 @@ class User < ApplicationRecord
   end
 
   private
+
+  def set_gravatar_hash
+    return unless email.present?
+
+    hash = Digest::MD5.hexdigest(email.strip.downcase)
+    self.gravatar_hash = hash
+  end
 
   def digest(string)
     cost = if ActiveModel::SecurePassword

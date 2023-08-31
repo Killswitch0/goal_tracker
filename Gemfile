@@ -65,6 +65,7 @@ gem "noticed", "~> 1.6"
 gem "chartkick", "~> 5.0"
 gem "sidekiq"
 gem "draper", "~> 4.0.2"
+gem "rails-i18n"
 
 # grouping dates by day/week/month
 gem "groupdate", "~> 6.2"

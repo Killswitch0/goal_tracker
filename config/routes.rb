@@ -12,91 +12,93 @@ end
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
-  resource :calendar, only: :show, controller: :calendar
+  scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
 
-  resource :goal_tracking, controller: :goal_tracking
-  resource :task_tracking, controller: :task_tracking
+    resource :calendar, only: :show, controller: :calendar
 
-  # Goals
-  resources :goals do
-    member do
-      get 'invite'
-      post 'create_invitation'
-      patch 'confirm_invitation'
-      patch 'decline_invitation'
-      delete 'leave'
+    resource :goal_tracking, controller: :goal_tracking
+    resource :task_tracking, controller: :task_tracking
+
+    # Goals
+    resources :goals do
+      member do
+        get 'invite'
+        post 'create_invitation'
+        patch 'confirm_invitation'
+        patch 'decline_invitation'
+        delete 'leave'
+      end
+
+      get '/habit_chart', to: 'charts#habit', as: 'habit_chart'
+      get '/task_chart', to: 'charts#task', as: 'task_chart'
     end
 
-    get '/habit_chart', to: 'charts#habit', as: 'habit_chart'
-    get '/task_chart', to: 'charts#task', as: 'task_chart'
-  end
+    resources :goals do
+      resources :habits, except: %i[show] do
+        member do
+          get 'complete'
+        end
+      end
 
-  resources :goals do
-    resources :habits, except: %i[show] do
+      resources :tasks, except: %i[show] do
+        member do
+          get 'complete'
+        end
+      end
+    end
+
+    resources :categories
+    resources :tasks
+    resources :habits
+
+    # Users
+    resources :users, except: :new do
+      member do
+        get :confirm_email
+      end
+    end
+
+    # Sign up
+    get "signup", to: "users#new"
+    post "signup", to: "users#create"
+
+    # Log in
+    get "login", to: "sessions#new"
+    post "login", to: "sessions#create"
+
+    # Log out
+    get "logout", to: "sessions#destroy"
+
+    # Password reset
+    resources :password_resets, only: %i[new create edit update]
+
+    # Pages
+    get "home", to: "pages#home"
+    get "about", to: "pages#about"
+
+    # Dashboard
+    get "dashboard", to: "dashboard#show"
+
+    resources :dashboard_tasks, only: %i[new create] do
       member do
         get 'complete'
       end
     end
 
-    resources :tasks, except: %i[show] do
+    resources :dashboard_habits, only: %i[new create] do
       member do
         get 'complete'
       end
     end
-  end
 
-  resources :categories
-  resources :tasks
-  resources :habits
-
-  # Users
-  resources :users, except: :new do
-    member do
-      get :confirm_email
+    # Chart
+    resource :chart do
+      member do
+        get 'habit'
+        get 'task'
+      end
     end
+
+    root "goals#index"
   end
-
-
-  # Sign up
-  get "signup", to: "users#new"
-  post "signup", to: "users#create"
-
-  # Log in
-  get "login", to: "sessions#new"
-  post "login", to: "sessions#create"
-
-  # Log out
-  get "logout", to: "sessions#destroy"
-
-  # Password reset
-  resources :password_resets, only: %i[new create edit update]
-
-  # Pages
-  get "home", to: "pages#home"
-  get "about", to: "pages#about"
-
-  # Dashboard
-  get "dashboard", to: "dashboard#show"
-
-  resources :dashboard_tasks, only: %i[new create] do
-    member do
-      get 'complete'
-    end
-  end
-
-  resources :dashboard_habits, only: %i[new create] do
-    member do
-      get 'complete'
-    end
-  end
-
-  # Chart
-  resource :chart do
-    member do
-      get 'habit'
-      get 'task'
-    end
-  end
-
-  root "goals#index"
 end

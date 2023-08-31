@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[show]
+  before_action :user, only: :update
 
   helper_method :user
 
@@ -16,10 +17,10 @@ class UsersController < ApplicationController
 
     if @user.save
       UserMailer.registration_confirmation(@user).deliver
-      flash[:noticed] = "Please confirm your email address to continue"
+      flash[:noticed] = t('.success')
       redirect_to login_path
     else
-      flash[:danger] = "Something go wrong..."
+      flash[:danger] = t('.fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,10 +38,10 @@ class UsersController < ApplicationController
 
     if user
       user.email_activate
-      flash[:noticed] = "Welcome to the Goal Tracker! Your email has been confirmed. Please sign in to continue."
+      flash[:noticed] = t('.success')
       redirect_to login_path
     else
-      flash[:danger] = "Sorry. User does not exist"
+      flash[:danger] = t('.fail')
       redirect_to home_path
     end
   end

@@ -14,22 +14,21 @@ class SessionsController < ApplicationController
       if user.email_confirmed
         log_in user
         remember(user) if params[:session][:remember_me] == '1'
-        flash[:noticed] = "#{current_user.name_or_email}, welcome to the app!"
+        flash[:noticed] =  t('.success', user_name: current_user.name_or_email)
         redirect_back_or user
       else
-        flash[:danger] = 'Please activate your account by following the
-        instructions in the account confirmation email you received to proceed.'
+        flash[:danger] = t('.activate')
         render :new, status: :unprocessable_entity
       end
     else
-      flash[:danger] = "Invalid email/password combination"
+      flash[:danger] = t('.fail')
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     log_out
-    flash[:noticed] = "See you later."
+    flash[:noticed] = t('.success')
     redirect_to login_path
   end
 end

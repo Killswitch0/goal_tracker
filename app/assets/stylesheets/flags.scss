@@ -1,0 +1,29 @@
+.fflag {
+  background-image:url('../images/flagSprite42.png');
+  background-repeat:no-repeat;
+  background-size: 100% 49494%;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+  box-sizing: content-box;
+}
+.fflag-EN {background-position:center 0.2287%}
+.fflag-UA {background-position:center 0.4524%}
+
+.fflag.ff-sm {width: 18px;height: 11px}
+.fflag.ff-md {width: 27px;height: 17px}
+.fflag.ff-lg {width: 42px;height: 27px}
+.fflag.ff-xl {width: 60px;height: 37px}
+
+/* ff-wave = waving flag look */
+.ff-wave:before {
+  content: '';
+  display: inline-block;
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(106deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.2) 24%, rgba(255,255,255,0.3) 36%, rgba(0,0,0,0.15) 56%, rgba(255,255,255,0.2) 70%, rgba(0,0,0,0.2) 78%, rgba(255,255,255,0.1) 86%, rgba(0,0,0,.4) 100%)
+}
