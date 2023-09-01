@@ -260,11 +260,6 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-flag-icons@^6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/flag-icons/-/flag-icons-6.11.0.tgz#5179bb98c08253a9e408b494a302d69b7bdfcc20"
-  integrity sha512-oK+QhV5UMWq+lmyOnfXUfVhSgHy29gQ0gQpmORdNP6ucAsKzIGm39ncvyThJyvt76Au2qsepDTE9waHRuaYPUw==
-
 fsevents@~2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.2.tgz#8a526f78b8fdf4623b709e0b975c52c24c02fd1a"
@@ -346,11 +341,6 @@ sass@^1.66.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
-
-svg-loader@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/svg-loader/-/svg-loader-0.0.2.tgz#601ab2fdaa1dadae3ca9975b550de92a07e1d92b"
-  integrity sha512-otmaUALijTGJJpvPVTHhHIzseEsrB7DyJJxygb0XkiZPeJT9t+PiK7tDT9YWSUDqHqqqutTqF0ldXth/+T72wg==
 
 to-regex-range@^5.0.1:
   version "5.0.1"
