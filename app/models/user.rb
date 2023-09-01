@@ -46,10 +46,21 @@ class User < ApplicationRecord
 
   has_secure_password validations: false
 
-  validates :name, presence: true
+  validates :name, presence: true,
+            format: {
+              with: /\A[A-Za-z]+\z/,
+              message: "must be in English and contain only letters."
+            }
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
-  validates :password, confirmation: true, allow_blank: true, presence: true, length: { minimum: 6 }
+  validates :password, confirmation: true,
+            allow_blank: true,
+            presence: true,
+            format: {
+              with: /\A(?=.*[A-Za-z])(?=.*\d).+\z/,
+              message: "must contain at least 1 letter and 1 digit."
+            },
+            length: { minimum: 6, maximum: 10, message: 'must be between 6 and 10 characters long.' }
 
   validate :password_presence
   validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }

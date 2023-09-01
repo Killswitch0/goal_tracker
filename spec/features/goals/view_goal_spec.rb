@@ -20,6 +20,8 @@ RSpec.feature "ViewGoals" do
       click_on goal1.name
 
       expect(page).to have_content 'Name 1'
+      expect(page).to have_content 'Name 2'
+      expect(page).to have_content 'Name 3'
     end
   end
 end

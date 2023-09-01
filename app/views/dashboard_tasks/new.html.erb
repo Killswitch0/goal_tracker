@@ -2,7 +2,7 @@
   <h1 class="text-center">New Task</h1>
 
   <div class="col-sm-12 col-md-4 offset-md-4">
-    <%= form_with(model: @task, url: new_dashboard_task_path) do |f| %>
+    <%= form_with(model: @task, url: dashboard_tasks_path) do |f| %>
       <%= render "shared/error_messages", resource: @task %>
 
       <div class="card">
@@ -17,12 +17,10 @@
             <%= f.check_box :complete, {}, class: "form-control" %>
           </div>
 
-          <% if current_user.goals.present? %>
-            <div class="mb-3">
-              <%= f.label :goal_id %>
-              <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] } %>
-            </div>
-          <% end %>
+          <div class="mb-3">
+            <%= f.label :goal_id %>
+            <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] } %>
+          </div>
 
           <div class="mb-3">
             <%= f.label :deadline %>

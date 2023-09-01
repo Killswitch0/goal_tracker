@@ -26,7 +26,11 @@ class Task < ApplicationRecord
   belongs_to :goal
   belongs_to :user
 
-  validates :name, presence: true
+  validates :name, presence: true,
+            format: {
+              with: /\A[\p{L}\p{N}\s]+\z/u,
+              message: 'habit must starts with letter and end with letter or digit.'
+            }
 
   after_create_commit :notify_create
   after_update_commit :notify_almost_streak, if: :almost_streak?

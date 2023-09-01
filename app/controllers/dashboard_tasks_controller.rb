@@ -4,7 +4,6 @@ class DashboardTasksController < ApplicationController
   #----------------------------------------------------------------------------
   def new
     @task = Task.new
-    @task.build_goal
   end
 
   # POST /dashboard_tasks
@@ -26,7 +25,6 @@ class DashboardTasksController < ApplicationController
   def complete
     @task = Task.find(params[:id])
 
-    @goal = @task.goal
     if @task.complete?
       flash[:noticed] = t('tasks.complete.uncompleted')
       @task.update(complete: false, complete_date: nil)
