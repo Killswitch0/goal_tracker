@@ -26,7 +26,12 @@ class Habit < ApplicationRecord
 
   has_many :completion_dates, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true,
+            format: {
+              with: /\A[\p{L}\p{N}\s]+\z/u,
+              message: 'habit must starts with letter and end with letter or digit.'
+            },
+            length: { minimum: 5, maximum: 45 }
   validates :description, presence: true
 
   after_create_commit :notify_create
@@ -68,7 +73,6 @@ class Habit < ApplicationRecord
     completion_dates.group_by_period(:day, :date).count
   end
 
-  #
   def complete_habit_today
     if completion_dates.created_today.exists?
       update_attribute(:days_completed, self.days_completed -= 1)

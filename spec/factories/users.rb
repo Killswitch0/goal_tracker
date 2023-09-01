@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :user do
-    sequence(:name) { |n| "User #{n}" }
-    email { Faker::Internet.email }
-    password { '111111' }
+    name { Faker::Name.unique.name.delete('.').split.first }
+    email { Faker::Internet.unique.email }
+    password { 'Aaaaaa1' }
     email_confirmed { true }
     confirm_token { nil }
-    old_password { '111111' }
+    old_password { 'Aaaaaa1' }
   end
 end
