@@ -8,12 +8,12 @@
       <div class="card-body">
         <div class="mb-3">
           <%= f.label :email %>
-          <%= f.email_field :email, value: hold_email, placeholder: 'E-mail', class: "form-control" %>
+          <%= f.email_field :email, value: hold_email, placeholder: 'my@mail.com', class: "form-control" %>
         </div>
 
         <div class="mb-3">
           <%= f.label :password %>
-          <%= f.password_field :password, placeholder: 'Password', class: "form-control" %>
+          <%= f.password_field :password, placeholder: 'Minimum length is 6 characters', class: "form-control" %>
         </div>
 
         <div class="mb-3">

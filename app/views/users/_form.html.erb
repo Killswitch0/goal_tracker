@@ -5,22 +5,22 @@
     <div class="card-body">
       <div class="mb-3">
         <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
+        <%= f.text_field :name, placeholder: 'Example', class: "form-control" %>
       </div>
 
       <div class="mb-3">
         <%= f.label :email %>
-        <%= f.text_field :email, class: "form-control" %>
+        <%= f.text_field :email, placeholder: 'my@mail.com',class: "form-control" %>
       </div>
 
       <div class="mb-3">
         <%= f.label :password %>
-        <%= f.password_field :password, class: "form-control" %>
+        <%= f.password_field :password, placeholder: 'Minimum length is 6 characters', class: "form-control" %>
       </div>
 
       <div class="mb-3">
         <%= f.label :password_confirmation, "Confirmation" %>
-        <%= f.password_field :password_confirmation, class: "mb-1 form-control" %>
+        <%= f.password_field :password_confirmation, placeholder: 'Minimum length is 6 characters', class: "mb-1 form-control" %>
       </div>
 
       <% unless user.new_record? %>
