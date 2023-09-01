@@ -12,7 +12,7 @@ end
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
+  scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/, defaults: { locale: :en } do
 
     resource :calendar, only: :show, controller: :calendar
 

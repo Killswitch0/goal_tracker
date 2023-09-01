@@ -16,8 +16,8 @@ en:
     destroy:
       success: 'Habit has been successfully destroyed.'
     complete:
-      completed: 'Your habit successfully completed.'
-      uncompleted: 'Your habit successfully uncompleted.'
+      completed: 'Habit has been successfully completed.'
+      uncompleted: 'Habit has been successfully uncompleted.'
   tasks:
     create:
       success: 'Task has been successfully created.'

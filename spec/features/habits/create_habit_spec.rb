@@ -31,7 +31,7 @@ RSpec.feature "CreateHabits" do
 
       ### complete ###
       visit complete_goal_habit_path(goal, habit)
-      expect(page).to have_content("Your habit successfully completed.")
+      expect(page).to have_content("Habit has been successfully completed.")
     end
 
     scenario 'Non-authenticated user try to create Habit' do

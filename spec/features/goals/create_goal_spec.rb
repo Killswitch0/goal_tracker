@@ -16,7 +16,7 @@ RSpec.feature "CreateGoals" do
       GoalUser.create(goal: goal, user: user, confirm: true)
 
       ### create ###
-      visit new_goal_path(category)
+      visit new_goal_path
 
       fill_in 'Name', with: goal.name
       fill_in 'Description', with: goal.description
@@ -42,7 +42,7 @@ RSpec.feature "CreateGoals" do
     end
 
     scenario 'Non-authenticated user try to create Goal' do
-      visit new_goal_path(category)
+      visit new_goal_path
 
       expect(current_path).to eq home_path
     end
