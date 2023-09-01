@@ -2,16 +2,16 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@hotwired/stimulus": "^3.2.1",
-    "@hotwired/turbo-rails": "^7.2.5",
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^7.3.0",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.0",
+    "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
     "chart.js": "^4.3.2",
     "chartkick": "^5.0.1",
-    "esbuild": "^0.18.3",
-    "jquery": "^3.7.0",
-    "sass": "^1.63.4"
+    "esbuild": "^0.18.20",
+    "jquery": "^3.7.1",
+    "sass": "^1.66.1"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",

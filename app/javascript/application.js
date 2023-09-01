@@ -3,4 +3,7 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
 import "chartkick/chart.js"
+import "flag-icons/css/flag-icons.css";
+
+
 

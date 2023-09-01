@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   include Sorting
+  include Internationalization
 
   before_action :set_notifications, if: :current_user
 

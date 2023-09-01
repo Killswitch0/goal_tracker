@@ -37,7 +37,7 @@ class HabitsController < ApplicationController
     @habit.user = current_user
 
     if @habit.save
-      flash[:noticed] = "Habit has been successfully created."
+      flash[:noticed] = t('.success')
       redirect_to goal_path(@goal)
     else
       render :new, status: :unprocessable_entity
@@ -50,6 +50,7 @@ class HabitsController < ApplicationController
     respond_to do |format|
       if @habit.update(habit_params)
         redirect_to goal_path(@goal)
+        flash[:noticed] = t('.success')
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -60,6 +61,7 @@ class HabitsController < ApplicationController
   #----------------------------------------------------------------------------
   def destroy
     @habit.destroy
+    flash[:noticed] = t('.success')
     redirect_to goal_habits_path(@goal, @habit)
   end
 
@@ -70,10 +72,10 @@ class HabitsController < ApplicationController
 
     if @habit.completed_today?
       @habit.complete_habit_today
-      flash[:noticed] = "Your habit successfully uncompleted."
+      flash[:noticed] = t('.uncompleted')
     else
       @habit.complete_habit_today
-      flash[:noticed] = "Your habit successfully completed."
+      flash[:noticed] = t('.completed')
     end
 
     redirect_to goal_path(@goal)

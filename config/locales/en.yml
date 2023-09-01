@@ -1,33 +1,67 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  en: English
+  uk: Ukrainian
+  categories:
+    create:
+      success: 'Category has been successfully created.'
+    destroy:
+      success: 'Category has been successfully destroyed.'
+      fail: 'Category must be empty.'
+  habits:
+    create:
+      success: 'Habit has been successfully created.'
+      fail: 'Habit was not created.'
+    update:
+      success: 'Habit has been successfully updated.'
+    destroy:
+      success: 'Habit has been successfully destroyed.'
+    complete:
+      completed: 'Your habit successfully completed.'
+      uncompleted: 'Your habit successfully uncompleted.'
+  tasks:
+    create:
+      success: 'Task has been successfully created.'
+      fail: 'Task was not created.'
+    complete:
+      completed: 'Task has been successfully completed.'
+      uncompleted: 'Task has been successfully uncompleted.'
+  goals:
+    create:
+      success: 'Goal was successfully created.'
+      fail: 'Goal was not created.'
+      category_must_exist: 'Choose Category or create new.'
+    destroy:
+      success: 'Goal was successfully destroyed.'
+    create_invitation:
+      already: 'User already got invite'
+      fail: 'Failed to send invitation'
+    confirm_invitation:
+      success: 'You have accepted invitation and joined to %{goal_name} group.'
+      fail: 'Invitation not found'
+    decline_invitation:
+      success: 'You have ignored invitation to %{goal_name} group.'
+      fail: 'Invitation not found'
+  password_resets:
+    create:
+      success: 'Email sent with password reset instructions.'
+      fail: 'User not found'
+    update:
+      success: 'Password has been reset!'
+      fail: 'Password reset has expired.'
+  sessions:
+    create:
+      success: '%{user_name}, welcome to the app!'
+      activate: 'Please activate your account by following the
+        instructions in the account confirmation email you received to proceed.'
+      fail: 'Invalid email/password combination'
+    destroy:
+      success: 'See you later.'
+  users:
+    create:
+      success: 'Please confirm your email address to continue'
+      fail: 'Something go wrong...'
+    confirm_email:
+      success: 'Welcome to the Goal Tracker! Your email has been confirmed. Please sign in to continue.'
+      fail: 'Sorry. User does not exist'
+
+

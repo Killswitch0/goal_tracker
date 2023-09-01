@@ -12,10 +12,10 @@ class DashboardHabitsController < ApplicationController
     @habit = current_user.habits.build(task_params)
 
     if @habit.save
-      flash[:noticed] = 'Habit has been successfully created.'
+      flash[:noticed] = t('habits.create.success')
       redirect_to dashboard_path
     else
-      flash[:noticed] = 'Habit was not created.'
+      flash[:noticed] = t('habits.create.fail')
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,10 +28,10 @@ class DashboardHabitsController < ApplicationController
 
     if @habit.completed_today?
       @habit.complete_habit_today
-      flash[:noticed] = 'Habit has been successfully completed.'
+      flash[:noticed] = t('habits.complete.uncompleted')
     else
       @habit.complete_habit_today
-      flash[:noticed] = 'Habit has been successfully completed.'
+      flash[:noticed] = t('habits.complete.completed')
     end
 
     redirect_to dashboard_path

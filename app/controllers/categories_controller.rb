@@ -28,6 +28,7 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.build(category_params)
 
     if @category.save
+      flash[:noticed] = t('.success')
       redirect_to goals_path
     else
       render :new, status: :unprocessable_entity
@@ -38,11 +39,11 @@ class CategoriesController < ApplicationController
   #----------------------------------------------------------------------------
   def destroy
     if @category.goals.any?
-      flash[:danger] = "Category must be empty."
+      flash[:danger] = t('.fail')
       redirect_to categories_path
     else
       @category.destroy
-      flash[:noticed] = "Category has been successfully destroyed."
+      flash[:noticed] = t('.success')
       redirect_to categories_path
     end
   end

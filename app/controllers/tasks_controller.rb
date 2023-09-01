@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     @task.user = current_user
 
     if @task.save
-      flash[:noticed] = "Task has been successfully created."
+      flash[:noticed] = t('.success')
       redirect_to goal_path(@goal)
     else
       render :new, status: :unprocessable_entity
@@ -65,10 +65,10 @@ class TasksController < ApplicationController
   def complete
     @goal = @task.goal
     if @task.complete?
-      flash[:noticed] = "Task has been successfully uncompleted."
+      flash[:noticed] = t('.uncompleted')
       @task.update(complete: false, complete_date: nil)
     else
-      flash[:noticed] = "Task has been successfully completed."
+      flash[:noticed] = t('.completed')
       @task.update(complete: true, complete_date: Date.today)
     end
 

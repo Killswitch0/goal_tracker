@@ -1,0 +1,26 @@
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= inline_svg_tag("flags/#{I18n.locale.to_s}", options = { width: 25 }) %>
+    <%= t I18n.locale %>
+    <i class="bi bi-caret-down-fill"></i>
+  </a>
+
+  <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+    <% I18n.available_locales.each do |locale| %>
+      <li>
+        <% if I18n.locale == locale %>
+          <%= tag.span t(locale), class: 'dropdown-item' %>
+        <% else %>
+          <%= link_to t(locale), url_for(locale: locale),
+                      class: 'dropdown-item' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>
+
+<span class="fi fi-gr"></span> <span class="fi fi-gr fis"></span>
+
+
+
+
