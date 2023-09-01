@@ -94,7 +94,6 @@ RSpec.describe UsersController, type: :controller do
 
       it 'changes user attributes' do
         patch :update, params: { id: user, user: { name: 'Max', email: 'newemail@mail.com', old_password: '111111' } }
-        user.reload
 
         expect(user.name).to eq 'Max'
         expect(user.email).to eq 'newemail@mail.com'
