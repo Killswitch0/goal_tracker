@@ -39,6 +39,8 @@ RSpec.configure do |config|
   config.include FeatureHelper, type: :feature # указываем, что нужны нам только для acceptance тестов
   config.include SessionsHelper, type: :controller
 
+
+
   # Модуль для возможности тестов с аутентифицированным юзером
   # включаем эти хелперы только для контроллера
   # In Rails 5 you must include Devise::Test::IntegrationHelpers instead Devise::Test::ControllerHelpers:
