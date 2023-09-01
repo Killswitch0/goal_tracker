@@ -26,7 +26,12 @@ class Habit < ApplicationRecord
 
   has_many :completion_dates, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true,
+            format: {
+              with: /\A[\p{L}\p{N}\s]+\z/u,
+              message: 'habit must starts with letter and end with letter or digit.'
+            },
+            length: { minimum: 5, maximum: 45 }
   validates :description, presence: true
 
   after_create_commit :notify_create
