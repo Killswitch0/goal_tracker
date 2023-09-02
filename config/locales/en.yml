@@ -1,67 +1,234 @@
 en:
-  en: English
   uk: Ukrainian
+  en: English
+
+  # Generic terms.
+  #----------------------------------------------------------------------------
+  id: Id
+  all: all
+  at: at
+  here: here
+  or: or
+  of: of
+
+  # Navigation
+  navigation:
+    about: About
+    dashboard: Dashboard
+    goals: Goals
+    tracking: Tracking
+    calendar: Calendar
+    chart: Chart
+
+  # Active Record
+  activerecord:
+    errors:
+      models:
+        user:
+          blank: "can't be blank"
+          taken: "has already been taken"
+        goal:
+          blank: "can't be blank"
+          taken: "has already been taken"
+        habit:
+          blank: "can't be blank"
+          taken: "has already been taken"
+        task:
+          blank: "can't be blank"
+          taken: "has already been taken"
+      attributes:
+        user:
+          email:
+            blank: "can't be blank"
+            invalid: "is invalid"
+          name:
+            blank: "can't be blank"
+        goal:
+          name:
+            blank: "can't be blank"
+        habit:
+          name:
+            blank: "can't be blank"
+        task:
+          name:
+            blank: "can't be blank"
+    models:
+      user: User
+      goal: Goal
+      habit: Habit
+      task: Task
+      category: Category
+      completion_date: Completion Date
+      goal_user: Goal User
+    attributes:
+      user:
+        name: Name
+        email: Email
+        password: Password
+        password_digest: Password
+        password_confirmation: Password Confirmation
+        old_password: Old Password
+        created_at: Created At
+        updated_at: Updated At
+        email_confirmed: Email Confirmed
+        confirm_token: Confirmation Token
+        auth_token: Auth Token
+        password_reset_token: Password Reset Token
+        password_reset_sent_at: Password Reset Sent At
+        role: Role
+        gravatar_hash: Gravatar Hash
+      goal:
+        name: Name
+        description: Description
+        days_completed: Days Completed
+        user_id: User ID
+        created_at: Created At
+        updated_at: Updated At
+        deadline: Deadline
+        complete: Complete
+        category_id: Category
+        color: Color
+      habit:
+        name: Name
+        description: Description
+        days_completed: Days Completed
+        user_id: User ID
+        goal_id: Goal ID
+        created_at: Created At
+        updated_at: Updated At
+      task:
+        name: Name
+        complete: Complete
+        goal_id: Goal ID
+        created_at: Created At
+        updated_at: Updated At
+        user_id: User ID
+        deadline: Deadline
+        complete_date: Complete Date
+      category:
+        name: Name
+        created_at: Created At
+        updated_at: Updated At
+        goal_id: Goal ID
+        user_id: User ID
+      completion_date:
+        date: Date
+        habit_id: Habit ID
+      goal_user:
+        confirm: Confirm
+        user_id: User ID
+        goal_id: Goal ID
+        created_at: Created At
+
+  # Authentication and Authorization
+  authenticate:
+    email: Email
+    forgot_password: Forgot Password?
+    log_in: Log in
+    login: Login
+    no_account: Don't have an account?
+    remember_me: Remember Me
+    sign_up: Sign Up
+    signup: SignUp
+
+  # Common
+  new: New
+  update: Update
+  show: Show
+  hide: Hide
+  back: Back
+  delete: Delete
+  edit: Edit
+  completed: Completed
+  uncompleted: Uncompleted
+  manage: Manage
+  search: Search
+
+  # Goals
+  new_goal: New Goal
+  edit_goal: Edit Goal
+  create_goal: Create Goal
+  add_goal: Add Goal
+  delete_goal: Delete Goal
+  back_to_goal: Back to Goal
+
+  # Categories
+  new_category: New category
+
+  # Tasks
+  all_tasks: All Tasks
+  new_task: New Task
+  complete_task: Complete
+  uncomplete_task: Uncomplete
+
+  # Habits
+  all_habits: All Habits
+  new_habit: New Habit
+  complete_habit: Complete
+  uncomplete_habit: Uncomplete
+
+
+  # Dashboard
+  back_to_dashboard: Back to Dashboard
+
   categories:
     create:
-      success: 'Category has been successfully created.'
+      success: 'Category created successfully.'
     destroy:
-      success: 'Category has been successfully destroyed.'
+      success: 'Category deleted successfully.'
       fail: 'Category must be empty.'
   habits:
     create:
-      success: 'Habit has been successfully created.'
-      fail: 'Habit was not created.'
+      success: 'Habit created successfully.'
+      fail: 'Habit not created.'
     update:
-      success: 'Habit has been successfully updated.'
+      success: 'Habit updated successfully.'
     destroy:
-      success: 'Habit has been successfully destroyed.'
+      success: 'Habit deleted successfully.'
     complete:
-      completed: 'Habit has been successfully completed.'
-      uncompleted: 'Habit has been successfully uncompleted.'
+      completed: 'You successfully completed your habit.'
+      uncompleted: 'You successfully uncompleted your habit.'
   tasks:
     create:
-      success: 'Task has been successfully created.'
-      fail: 'Task was not created.'
+      success: 'Task created successfully.'
+      fail: 'Task not created.'
     complete:
-      completed: 'Task has been successfully completed.'
-      uncompleted: 'Task has been successfully uncompleted.'
+      completed: 'Task completed successfully.'
+      uncompleted: 'Task uncompleted successfully.'
   goals:
     create:
-      success: 'Goal was successfully created.'
-      fail: 'Goal was not created.'
-      category_must_exist: 'Choose Category or create new.'
+      success: 'Goal created successfully.'
+      fail: 'Goal not created.'
+      category_must_exist: 'Select a category or create a new one.'
     destroy:
-      success: 'Goal was successfully destroyed.'
+      success: 'Goal deleted successfully.'
     create_invitation:
-      already: 'User already got invite'
-      fail: 'Failed to send invitation'
+      already: 'User has already received an invitation.'
+      fail: 'Failed to send invitation.'
     confirm_invitation:
-      success: 'You have accepted invitation and joined to %{goal_name} group.'
-      fail: 'Invitation not found'
+      success: 'You have accepted the invitation and joined the %{goal_name} group.'
+      fail: 'Invitation not found.'
     decline_invitation:
-      success: 'You have ignored invitation to %{goal_name} group.'
-      fail: 'Invitation not found'
+      success: 'You declined the invitation to the %{goal_name} group.'
+      fail: 'Invitation not found.'
   password_resets:
     create:
       success: 'Email sent with password reset instructions.'
-      fail: 'User not found'
+      fail: 'User not found.'
     update:
       success: 'Password has been reset!'
-      fail: 'Password reset has expired.'
+      fail: 'Password reset token has expired.'
   sessions:
     create:
-      success: '%{user_name}, welcome to the app!'
-      activate: 'Please activate your account by following the
-        instructions in the account confirmation email you received to proceed.'
-      fail: 'Invalid email/password combination'
+      success: 'Welcome, %{user_name}!'
+      activate: 'Please activate your account by following the instructions in the email confirmation sent to continue.'
+      fail: 'Invalid email/password combination.'
     destroy:
-      success: 'See you later.'
+      success: 'Goodbye.'
   users:
     create:
       success: 'Please confirm your email address to continue'
-      fail: 'Something go wrong...'
+      fail: 'Something went wrong...'
     confirm_email:
-      success: 'Welcome to the Goal Tracker! Your email has been confirmed. Please sign in to continue.'
-      fail: 'Sorry. User does not exist'
-
-
+      success: 'Welcome to Goal Tracker! Your email address has been confirmed. Please log in to continue.'
+      fail: 'Sorry, the user does not exist.'

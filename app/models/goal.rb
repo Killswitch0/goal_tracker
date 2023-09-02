@@ -22,6 +22,7 @@
 
 class Goal < ApplicationRecord
   include Searchable
+  include ValidationConstants
 
   belongs_to :user
   belongs_to :category
@@ -40,15 +41,15 @@ class Goal < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true,
             format: {
-              with: /\A[\p{L}\p{N}\s]+\z/u,
+              with: BASE_VALIDATION,
               message: "must starts with letter and end with letter or digit."
             },
             length: { minimum: 5, maximum: 50 }
 
   validates :description, presence: true,
             format: {
-              with: /\A[\p{L}\p{N},.\-:\s]+\z/u,
-              message: "allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons." },
+              with: BASE_VALIDATION,
+              message: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.' },
             length: { minimum: 7, maximum: 200 }
 
   validates :category_id, presence: false

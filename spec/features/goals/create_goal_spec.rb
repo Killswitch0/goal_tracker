@@ -33,7 +33,7 @@ RSpec.feature "CreateGoals" do
 
       click_on 'Destroy goal'
 
-      expect(page).to have_content 'Goal was successfully destroyed.'
+      expect(page).to have_content 'Goal deleted successfully.'
 
       expect(page).not_to have_content(goal.name)
       expect(page).not_to have_content(goal.description)

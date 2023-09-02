@@ -20,6 +20,7 @@ class Habit < ApplicationRecord
   include Searchable
   include Streakable
   include Notifyable
+  include ValidationConstants
 
   belongs_to :user
   belongs_to :goal
@@ -28,8 +29,8 @@ class Habit < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true,
             format: {
-              with: /\A[\p{L}\p{N}\s]+\z/u,
-              message: 'habit must starts with letter and end with letter or digit.'
+              with: BASE_VALIDATION,
+              message: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
             },
             length: { minimum: 5, maximum: 45 }
   validates :description, presence: true

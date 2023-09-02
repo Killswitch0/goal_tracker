@@ -29,13 +29,13 @@ RSpec.feature "CreateTasks" do
 
       click_on 'Add Task'
 
-      expect(page).to have_content "Task has been successfully created."
+      expect(page).to have_content 'Task created successfully.'
       expect(page).to have_content(task.name)
 
 
       ### complete ###
       visit complete_goal_task_path(goal, task)
-      expect(page).to have_content 'Task has been successfully completed.'
+      expect(page).to have_content 'Task completed successfully.'
     end
 
     scenario 'Non-authenticated user try to create Task' do

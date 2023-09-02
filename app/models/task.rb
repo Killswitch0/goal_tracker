@@ -22,14 +22,15 @@ class Task < ApplicationRecord
   include Streakable
   include Notifyable
   include Searchable
+  include ValidationConstants
 
   belongs_to :goal
   belongs_to :user
 
   validates :name, presence: true,
             format: {
-              with: /\A[\p{L}\p{N}\s]+\z/u,
-              message: 'habit must starts with letter and end with letter or digit.'
+              with: BASE_VALIDATION,
+              message: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
             }
 
   after_create_commit :notify_create

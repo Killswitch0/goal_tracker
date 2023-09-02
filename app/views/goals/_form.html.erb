@@ -29,7 +29,7 @@
 
       <div class="mb-3">
           <%= f.fields_for :category_attributes do |category_fields| %>
-            <%= category_fields.label :name, 'New category' %>
+            <%= category_fields.label :name, t('new_category') %>
             <%= category_fields.text_field :name, class: 'form-control' %>
             <%= category_fields.hidden_field :user_id, value: current_user.id %>
           <% end %>
@@ -46,7 +46,7 @@
         <%= f.check_box :complete, {}, true, false %>
       </div>
 
-      <%= f.submit "#{@goal.new_record? ? 'Create' : 'Update'}", class: "btn btn-primary" %>
+      <%= f.submit "#{@goal.new_record? ? t('create_goal') : t('update')}", class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>

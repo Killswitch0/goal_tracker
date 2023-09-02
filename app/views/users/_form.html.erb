@@ -19,7 +19,7 @@
       </div>
 
       <div class="mb-3">
-        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, placeholder: 'Minimum length is 6 characters', class: "mb-1 form-control" %>
       </div>
 
@@ -30,7 +30,7 @@
         </div>
       <% end %>
 
-      <%= f.submit "#{user.new_record? ? 'Create account' : 'Update'}", class: "mb-2 btn btn-primary" %>
+      <%= f.submit "#{user.new_record? ? t('authenticate.sign_up') : t('update')}", class: "mb-2 btn btn-primary" %>
     </div>
   </div>
 <% end %>

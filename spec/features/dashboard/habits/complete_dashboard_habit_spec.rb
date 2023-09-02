@@ -14,7 +14,7 @@ RSpec.feature "CompleteDashboardHabits", type: :feature do
       visit dashboard_path
       visit complete_dashboard_habit_path(habit)
 
-      expect(page).to have_content 'Habit has been successfully completed.'
+      expect(page).to have_content 'You successfully completed your habit.'
       expect(page).to have_current_path(dashboard_path)
     end
   end

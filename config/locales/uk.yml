@@ -1,6 +1,191 @@
 uk:
   uk: Українська
   en: Англійська
+
+  # Generic terms.
+  #----------------------------------------------------------------------------
+  id: Id
+  all: усі
+  at: в
+  here: тут
+  or: або
+  of: з
+
+  navigation:
+    about: Про додаток
+    dashboard: Панель управління
+    goals: Мої Цілі
+    tracking: Відстеження
+    calendar: Календар
+    chart: Чарт
+
+  activerecord:
+    errors:
+      models:
+        user:
+          blank: "не може бути порожнім"
+          taken: "вже зайнято"
+        goal:
+          blank: "не може бути порожнім"
+          taken: "вже зайнято"
+        habit:
+          blank: "не може бути порожнім"
+          taken: "вже зайнято"
+        task:
+          blank: "не може бути порожнім"
+          taken: "вже зайнято"
+      attributes:
+        user:
+          email:
+            blank: "не може бути порожньою"
+            invalid: "не вірний формат"
+          name:
+            blank: "не може бути порожнім"
+        goal:
+          name:
+            blank: "не може бути порожнім"
+        habit:
+          name:
+            blank: "не може бути порожнім"
+        task:
+          name:
+            blank: "не може бути порожнім"
+    models:
+      user: Користувач
+      goal: Ціль
+      habit: Звичка
+      task: Завдання
+      category: Категорія
+      completion_date: Дата виконання
+      goal_user: Користувач мети
+    attributes:
+      user:
+        name: Ім'я
+        email: Електронна пошта
+        password: Пароль
+        password_digest: Пароль
+        password_confirmation: Підтвердження пароля
+        old_password: Старий пароль
+        created_at: Дата створення
+        updated_at: Дата оновлення
+        email_confirmed: Підтвердження електронної пошти
+        confirm_token: Токен підтвердження
+        auth_token: Токен авторизації
+        password_reset_token: Токен скидання пароля
+        password_reset_sent_at: Дата відправки токену скидання пароля
+        role: Роль
+        gravatar_hash: Хеш Gravatar
+      goal:
+        name: Назва
+        description: Опис
+        days_completed: Кількість днів виконання
+        user_id: ID користувача
+        created_at: Дата створення
+        updated_at: Дата оновлення
+        deadline: Крайній термін
+        complete: Завершено
+        category_id: Категорія
+        color: Колір
+      habit:
+        name: Назва
+        description: Опис
+        days_completed: Кількість днів виконання
+        user_id: Користувач
+        goal_id: Ціль
+        created_at: Дата створення
+        updated_at: Дата оновлення
+      task:
+        name: Назва
+        complete: Завершено
+        goal_id: Ціль
+        created_at: Дата створення
+        updated_at: Дата оновлення
+        user_id: Користувач
+        deadline: Крайній термін
+        complete_date: Дата завершення
+      category:
+        name: Назва
+        created_at: Дата створення
+        updated_at: Дата оновлення
+        goal_id: Ціль
+        user_id: Користувач
+      completion_date:
+        date: Дата виконання
+        habit_id: Звичка
+      goal_user:
+        confirm: Підтвердження
+        user_id: Користувач
+        goal_id: Ціль
+        created_at: Дата створення
+        updated_at: Дата оновлення
+
+  # Views -> Authenticate.
+  #----------------------------------------------------------------------------
+  authenticate:
+    email: Електронна пошта
+    forgot_password: Забули пароль?
+    login: Вхід
+    no_account: Ви ще не зареєстровані?
+    remember_me: Запам'ятати мене
+    sign_up: Реєстрація
+
+  # Views -> Session manager.
+  #----------------------------------------------------------------------------
+  edit_account: Редагувати акаунт
+  log_out: Вийти
+
+  # Views -> Common.
+  #----------------------------------------------------------------------------
+  new: Новий
+  update: Оновити
+  show: Показати
+  hide: Сховати
+  back: Назад
+  delete: Видалити
+  edit: Редагувати
+  completed: Виконане
+  uncompleted: Невиконане
+  done: Виконано
+  manage: Управляти
+  search: Шукати
+
+  # Views -> Goals.
+  #----------------------------------------------------------------------------
+  new_goal: Нова ціль
+  edit_goal: Редагувати ціль
+  create_goal: Створити ціль
+  add_goal: Додати ціль
+  delete_goal: Видалити ціль
+  back_to_goal: Назад до цілі
+
+  # Views -> Categories.
+  #----------------------------------------------------------------------------
+  new_category: Нова категорія
+
+  # Views -> Tasks.
+  #----------------------------------------------------------------------------
+  all_tasks: Усі завдання
+  new_task: Нове завдання
+  complete_task: Виконати
+  uncomplete_task: Зняти
+
+
+  # Views -> Habits.
+  #----------------------------------------------------------------------------
+  all_habits: Усі звички
+  new_habit: Нова звичка
+  complete_habit: Виконати
+  uncomplete_habit: Зняти
+
+  # Views -> Dashboard.
+  #----------------------------------------------------------------------------
+  back_to_dashboard: Назад до панелі
+
+  # Views -> Chart.
+  #----------------------------------------------------------------------------
+
+  # Controllers
+  #----------------------------------------------------------------------------
   categories:
     create:
       success: 'Категорію успішно створено.'

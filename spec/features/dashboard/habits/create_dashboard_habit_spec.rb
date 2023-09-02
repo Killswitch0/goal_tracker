@@ -26,7 +26,7 @@ RSpec.feature "CreateDashboardHabits" do
 
       click_on 'Add Habit'
 
-      expect(page).to have_content 'Habit has been successfully created.'
+      expect(page).to have_content 'Habit created successfully.'
 
     end
   end

@@ -28,7 +28,7 @@ RSpec.feature "CreateDashboardTasks" do
 
       click_on 'Add Task'
 
-      expect(page).to have_content 'Task has been successfully created.'
+      expect(page).to have_content 'Task created successfully.'
       expect(page).to have_content(task.name)
       expect(page).to have_current_path(dashboard_path)
     end

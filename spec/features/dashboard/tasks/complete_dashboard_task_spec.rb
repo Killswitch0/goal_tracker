@@ -14,7 +14,7 @@ RSpec.feature "CompleteDashboardTasks" do
       visit dashboard_path
       visit complete_dashboard_task_path(task)
 
-      expect(page).to have_content 'Task has been successfully completed.'
+      expect(page).to have_content 'Task completed successfully.'
       expect(page).to have_current_path(dashboard_path)
     end
   end

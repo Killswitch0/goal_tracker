@@ -31,7 +31,7 @@
 
 <div class="col-sm-12 col-md-4 offset-md-1 mb-5 table-main <%= 'completed' if @goal.habits_streak? %>">
   <div class="table-header">
-    <h2 class="text-center">Completed <%= habits_completed(@goal).first %> of <%= habits_completed(@goal).last %></h2>
+    <h2 class="text-center">Completed <%= habits_completed_for(@goal).first %> of <%= habits_completed_for(@goal).last %></h2>
   </div>
 
   <div class="table-wrapper">
@@ -53,7 +53,7 @@
               <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit), style: "text-decoration: none" %></td>
               <td><%= habit.description.truncate(15) %></td>
               <td>
-                <%= habit_complete_link(habit, complete_goal_habit_path(habit)) %>
+                <%= habit_complete_link(habit, complete_goal_habit_path(@goal, habit)) %>
               </td>
             <% end %>
           </tr>
@@ -72,7 +72,7 @@
 
 <div class="col-sm-12 col-md-4 offset-md-1 table-main <%= 'completed' if @goal.tasks_streak? %>">
   <div class="table-header">
-    <h2 class="text-center">Completed <%= tasks_complete(@goal).first %> of <%= tasks_complete(@goal).second %></h2>
+    <h2 class="text-center">Completed <%= tasks_completed_for(@goal).first %> of <%= tasks_completed_for(@goal).second %></h2>
   </div>
 
   <div class="table-wrapper">
@@ -101,7 +101,7 @@
               </td>
             <% end %>
             <td>
-              <%= task_complete_link(task) %>
+              <%= task_complete_link(task, complete_goal_task_path(@goal, task)) %>
             </td>
           </tr>
         <% end %>

@@ -17,7 +17,7 @@ RSpec.feature "LogIns" do
       click_on 'Log in'
 
       expect(current_path).to eq user_path(user)
-      expect(page).to have_content "#{user.name}, welcome to the app!"
+      expect(page).to have_content "Welcome, #{user.name}"
     end
 
     scenario 'Non-registred user try to log in' do

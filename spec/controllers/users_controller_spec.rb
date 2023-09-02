@@ -66,7 +66,7 @@ RSpec.describe UsersController, type: :controller do
 
       it 'sets a flash danger message' do
         post :create, params: { user: invalid_params }
-        expect(flash[:danger]).to eq "Something go wrong..."
+        expect(flash[:danger]).to eq "Something went wrong..."
       end
 
       it 'renders the new template with unprocessable_entity status' do

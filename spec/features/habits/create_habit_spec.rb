@@ -25,13 +25,13 @@ RSpec.feature "CreateHabits" do
 
       click_on 'Create'
 
-      expect(page).to have_content "Habit has been successfully created."
+      expect(page).to have_content 'Habit created successfully.'
       expect(page).to have_content(habit.name)
       expect(page).to have_content(habit.description)
 
       ### complete ###
       visit complete_goal_habit_path(goal, habit)
-      expect(page).to have_content("Habit has been successfully completed.")
+      expect(page).to have_content('You successfully completed your habit.')
     end
 
     scenario 'Non-authenticated user try to create Habit' do

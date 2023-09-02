@@ -15,7 +15,7 @@ RSpec.feature "LogOuts" do
       visit logout_path
 
       expect(current_path).to eq login_path
-      expect(page).to have_content "See you later."
+      expect(page).to have_content 'Goodbye.'
     end
 
     scenario 'Non-authenticated user try to log out' do
