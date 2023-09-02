@@ -3,7 +3,7 @@
 # UserGroupNotification.with(post: @post).deliver_later(current_user)
 # UserGroupNotification.with(post: @post).deliver(current_user)
 
-class GoalUserNotification < Noticed::Base
+class GoalUserNotification < ApplicationNotifications
   # Add your delivery methods
   #
   deliver_by :database

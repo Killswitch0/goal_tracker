@@ -3,7 +3,7 @@
 # TaskNotification.with(post: @post).deliver_later(current_user)
 # TaskNotification.with(post: @post).deliver(current_user)
 
-class TaskNotification < Noticed::Base
+class TaskNotification < ApplicationNotifications
   # Add your delivery methods
   #
   deliver_by :database

@@ -3,7 +3,7 @@
 # HabitNotification.with(post: @post).deliver_later(current_user)
 # HabitNotification.with(post: @post).deliver(current_user)
 
-class HabitNotification < Noticed::Base
+class HabitNotification < ApplicationNotifications
   # Add your delivery methods
   #
   deliver_by :database
