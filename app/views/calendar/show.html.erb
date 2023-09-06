@@ -1,5 +1,5 @@
 <div class="mt-3 text-center">
-  <h1>Calendar</h1>
+  <h2><%= t('navigation.calendar').upcase %></h2>
   
   <div class="row">
     <div class="table-wrapper-scroll-y my-custom-scrollbar col-md-3">
@@ -7,8 +7,8 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Goal</th>
-            <th scope="col">Mark</th>
+            <th scope="col"><%= t('activerecord.attributes.goal.name') %></th>
+            <th scope="col"><%= t('activerecord.attributes.goal.color') %></th>
           </tr>
         </thead>
         <% @goals.each_with_index do |goal, index| %>
@@ -23,14 +23,8 @@
       </table>
     </div>
     
-    <div class="col-md-4 offset-md-1"><%= form_with url: calendar_path, method: :get, class: 'text-center mb-3' do %>
-        <%= text_field_tag :search, params[:search],
-                           placeholder: "Let's search your habits",
-                           class: 'input-group-text',
-                           style: 'display: inline-block;' %>
-        <%= submit_tag 'Search', name: nil,
-                       class: 'btn btn-primary mb-1' %>
-      <% end %>
+    <div class="col-md-4 offset-md-1">
+      <%= render 'layouts/search', path: calendar_path %>
     </div>
     
     <%= month_calendar do |date| %>

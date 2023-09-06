@@ -1,29 +1,22 @@
-<h1 class="text-center">My Goals (<%= goals_complete(@goals) %> are completed)</h1>
+<h2 class="text-center"><%= t('all_goals') %> (<%= goals_complete(@goals) %> <%= t('done').downcase %>)</h2>
 <hr>
 
 <div class="text-center">
-  <%= form_with url: goals_path, method: :get, class: 'text-center mb-3' do %>
-    <%= text_field_tag :search, params[:search],
-                       placeholder: 'Search...',
-                       class: 'input-group-text',
-                       style: 'display: inline-block;' %>
-    <%= submit_tag 'Search', name: nil,
-                   class: 'btn btn-primary mb-1' %>
-  <% end %>
+  <%= render 'layouts/search', path: goals_path %>
 
 </div>
 
 <div class="goals-block">
   <div class="categories-wrapper">
     <div class="new-category">
-      <%= link_to 'New', new_category_path, class: 'btn btn-primary btn-sm' %>
-      <%= link_to 'Manage', categories_path, class: 'btn btn-primary btn-sm' %>
+      <%= link_to t('new'), new_category_path, class: 'btn btn-primary btn-sm' %>
+      <%= link_to t('manage'), categories_path, class: 'btn btn-primary btn-sm' %>
     </div>
     <div class="divider"></div>
 
-    <div class="categories-title">Categories</div>
+    <div class="categories-title"><%= t('all_categories') %></div>
     <div class="categories-item all">
-      <%= link_to 'All', goals_path %>
+      <%= link_to t('all').capitalize, goals_path %>
     </div>
 
     <ul class="categories-list">
@@ -39,15 +32,15 @@
 
   <div class="list-wrapper goals">
     <div class="col-sm-12 col-md-4 offset-md-4 box" style="">
-      <h2>Goals</h2>
+      <h2><%= t('all_goals') %></h2>
       <ul class="">
         <%= render 'goals' %>
       </ul>
     </div>
 
     <div class="list-buttons mt-3">
-      <%= link_to 'Back to Dashboard', dashboard_path, class: 'btn btn-secondary' %>
-      <%= link_to 'Add Goal', new_goal_path(@goal), class: 'btn btn-primary' %>
+      <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary' %>
+      <%= link_to t('add_goal'), new_goal_path, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>

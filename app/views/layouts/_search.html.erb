@@ -1,0 +1,7 @@
+<%= form_with url: path, method: :get, class: 'text-center mb-3' do |f| %>
+  <%= f.text_field :search,
+                   placeholder: t('search').concat('...'),
+                   class: 'input-group-text',
+                   style: 'display: inline-block;' %>
+  <%= f.submit t('search'), class: 'btn btn-primary' %>
+<% end %>

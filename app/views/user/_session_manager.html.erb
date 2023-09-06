@@ -3,7 +3,7 @@
     <span class="dropdown-toggle-icon"></span>
     <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <%= current_user.gravatar %>
-      Hello, <%= current_user.name_or_email %>
+      <%= t('hello') %>, <%= current_user.name_or_email %>
       <i class="bi bi-caret-down-fill"></i>
     </a>
 

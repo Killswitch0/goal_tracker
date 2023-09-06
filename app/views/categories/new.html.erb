@@ -1,9 +1,9 @@
-<h1 class="text-center mt-3">New Category</h1>
+<h1 class="text-center mt-3"><%= t('new_category') %></h1>
 
 <div class="col-sm-12 col-md-4 offset-md-4">
     <%= render 'form', category: @category %>
 
   <div class="mt-3">
-    <%= link_to 'Back', url_for(:back), class: 'btn btn-secondary' %>
+    <%= link_to t('back'), categories_path, class: 'btn btn-secondary' %>
   </div>
 </div>

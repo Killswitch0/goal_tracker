@@ -14,7 +14,7 @@
         <%= f.text_area :description, class: "mb-1 form-control" %>
       </div>
 
-      <%= f.submit "#{@habit.new_record? ? 'Create' : 'Update'}", class: "mb-2 btn btn-primary" %>
+      <%= f.submit "#{@habit.new_record? ? t('create') : t('update')}", class: "mb-2 btn btn-primary" %>
     </div>
   </div>
 <% end %>

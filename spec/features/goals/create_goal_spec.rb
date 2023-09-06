@@ -31,7 +31,7 @@ RSpec.feature "CreateGoals" do
       ### delete ###
       visit goal_path(goal)
 
-      click_on 'Destroy goal'
+      click_on 'Delete'
 
       expect(page).to have_content 'Goal deleted successfully.'
 

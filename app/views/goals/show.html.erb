@@ -1,15 +1,15 @@
 <div class="col-sm-12 col-md-4 offset-md-4 mb-3 p-3 goal-info <%= @goal.complete? ? 'completed' : 'uncompleted' %>" style="font-size: large">
-  <h1 class="text-center">Goal info</h1>
+  <h2 class="text-center mb-3"><%= t('goal_info') %></h2>
   <dl class="row">
-    <dt class="col-sm-3">Category:</dt>
+    <dt class="col-sm-3"><%= t('activerecord.models.category') %>:</dt>
     <dd class="col-sm-9 px-5"><%= @goal.category.name %></dd>
-    <dt class="col-sm-3">Name:</dt>
+    <dt class="col-sm-3"><%= t('activerecord.attributes.goal.name') %>:</dt>
     <dd class="col-sm-9 px-5"><%= @goal.name %></dd>
-    <dt class="col-sm-3">Description:</dt>
+    <dt class="col-sm-3"><%= t('activerecord.attributes.goal.description') %></dt>
     <dd class="col-sm-9 px-5"><%= @goal.description %></dd>
-    <dt class="col-sm-3">Deadline:</dt>
+    <dt class="col-sm-3"><%= t('activerecord.attributes.goal.deadline') %></dt>
     <dd class="col-sm-9 px-5"><%= @goal.deadline.to_formatted_s(:long) %></dd>
-    <dt class="col-sm-3">Days left:</dt>
+    <dt class="col-sm-3"><%= t('days_left') %></dt>
     <dd class="col-sm-9 px-5"><%= days_left(@goal).zero? ? 'Overdue' : days_left(@goal) %></dd>
   </dl>
 
@@ -18,20 +18,20 @@
       <div class="mt-3">
         <%= f.label :complete %>
         <%= f.check_box :complete, {}, true %>
-        <%= f.submit "#{@goal.complete? ? 'Uncomplete goal' : 'Complete goal'}", class: "mb-2 btn btn-primary btn-sm" %>
+        <%= f.submit "#{@goal.complete? ? t('uncomplete_goal') : t('complete_goal')}", class: "mb-2 btn btn-primary btn-sm" %>
       </div>
     <% end %>
   </div>
 
   <div class="col-md-12 text-center">
-    <%= link_to 'Back to goals', goals_path, class: "btn btn-secondary" %>
-    <%= link_to "Destroy goal", @goal, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <%= link_to t('back_to_goals'), goals_path, class: "btn btn-secondary" %>
+    <%= link_to t('delete_goal'), @goal, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
   </div>
 </div>
 
 <div class="col-sm-12 col-md-4 offset-md-1 mb-5 table-main <%= 'completed' if @goal.habits_streak? %>">
   <div class="table-header">
-    <h2 class="text-center">Completed <%= habits_completed_for(@goal).first %> of <%= habits_completed_for(@goal).last %></h2>
+    <h2 class="text-center"><%= t('done') %> <%= habits_completed_for(@goal).first %> <%= t('of') %> <%= habits_completed_for(@goal).last %></h2>
   </div>
 
   <div class="table-wrapper">
@@ -40,9 +40,9 @@
         <thead class="">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Complete</th>
+          <th scope="col"><%= t('activerecord.attributes.habit.name') %></th>
+          <th scope="col"><%= t('activerecord.attributes.habit.description') %></th>
+          <th scope="col"><%= t('complete') %></th>
         </tr>
         </thead>
         <tbody>
@@ -63,16 +63,16 @@
     </section>
 
     <div class="links d-flex justify-content-between mb-3">
-      <%= link_to "Add Habit", new_goal_habit_path(@goal), class: "mt-2 btn btn-primary" %>
-      <%= link_to "Show Habits", goal_habits_path(@goal), class: "mt-2 btn btn-primary" %>
-      <%= link_to "Chart", goal_habit_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>
+      <%= link_to t('new_habit'), new_goal_habit_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to t('all_habits'), goal_habits_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to t('navigation.chart'), goal_habit_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>
     </div>
   </div>
 </div>
 
 <div class="col-sm-12 col-md-4 offset-md-1 table-main <%= 'completed' if @goal.tasks_streak? %>">
   <div class="table-header">
-    <h2 class="text-center">Completed <%= tasks_completed_for(@goal).first %> of <%= tasks_completed_for(@goal).second %></h2>
+    <h2 class="text-center"><%= t('done') %> <%= tasks_completed_for(@goal).first %> <%= t('of') %> <%= tasks_completed_for(@goal).second %></h2>
   </div>
 
   <div class="table-wrapper">
@@ -81,7 +81,7 @@
         <thead class="">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
+          <th scope="col"><%= t('activerecord.attributes.task.name') %></th>
           <th scope="col">
             <%= sortable 'complete' %>
           </th>
@@ -110,9 +110,9 @@
     </section>
 
     <div class="links d-flex justify-content-between mb-3">
-      <%= link_to "Add Task", new_goal_task_path(@goal), class: "mt-2 btn btn-primary" %>
-      <%= link_to "Show Tasks", goal_tasks_path(@goal), class: "mt-2 btn btn-primary" %>
-      <%= link_to "Chart", goal_task_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>
+      <%= link_to t('new_task'), new_goal_task_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to t('all_tasks'), goal_tasks_path(@goal), class: "mt-2 btn btn-primary" %>
+      <%= link_to t('navigation.chart'), goal_task_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>
     </div>
   </div>
 </div>

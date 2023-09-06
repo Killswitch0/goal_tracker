@@ -26,7 +26,7 @@ RSpec.feature "CreateDashboardTasks" do
       select task.deadline.hour, from: 'task_deadline_4i'
       select task.deadline.min, from: 'task_deadline_5i'
 
-      click_on 'Add Task'
+      click_on 'Create'
 
       expect(page).to have_content 'Task created successfully.'
       expect(page).to have_content(task.name)

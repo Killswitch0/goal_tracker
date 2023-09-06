@@ -1,16 +1,11 @@
-<h2 class="text-center">GOALS TRACKER</h2>
+<h2 class="text-center"><%= t('goals_tracker').upcase %></h2>
 <div class="tracking-wrapper">
-  <%= form_with url: goal_tracking_path, method: :get, class: 'text-center mb-3' do |f| %>
-    <%= f.text_field :search,
-                     placeholder: "Let's search",
-                     class: 'input-group-text',
-                     style: 'display: inline-block;' %>
-    <%= f.submit 'Search', class: 'btn btn-primary' %>
-  <% end %>
+  <%= render 'layouts/search', path: goal_tracking_path %>
 
   <div class="d-flex justify-content-start mb-3">
-    <%= link_to 'Tasks', task_tracking_path, class: 'btn btn-primary' %>
+    <%= link_to t('switch_to_tasks'), task_tracking_path, class: 'btn btn-primary' %>
   </div>
-  <%= render 'table', items: @goals %>
+
+  <%= render 'goal_tracking/table', items: @goals %>
 </div>
 

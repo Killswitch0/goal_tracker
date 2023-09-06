@@ -24,7 +24,7 @@ RSpec.feature "CreateDashboardHabits" do
 
       select goal.name, from: 'habit_goal_id'
 
-      click_on 'Add Habit'
+      click_on 'Create'
 
       expect(page).to have_content 'Habit created successfully.'
 

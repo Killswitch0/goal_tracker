@@ -17,7 +17,7 @@ RSpec.feature "CreateCategories" do
       visit new_category_path
 
       fill_in 'Name', with: 'IT'
-      click_on 'Create Category'
+      click_on 'Create'
 
       expect(current_path).to eq goals_path
     end

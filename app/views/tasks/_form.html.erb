@@ -16,7 +16,7 @@
 
 
 
-      <%= f.submit "#{@task.new_record? ? 'Create' : 'Update'}", class: 'btn btn-primary' %>
+      <%= f.submit "#{@task.new_record? ? t('create') : t('update')}", class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>

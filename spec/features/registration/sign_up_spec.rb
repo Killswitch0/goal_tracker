@@ -15,7 +15,7 @@ RSpec.feature "SignUps" do
       fill_in 'Email', with: 'max@max.com'
       fill_in 'Password', with: user.password
       fill_in 'Confirmation', with: user.password
-      click_on 'Sign Up'
+      click_on 'Sign up'
 
       expect(page).to have_content "Please confirm your email address to continue"
       expect(current_path).to eq login_path
@@ -27,7 +27,7 @@ RSpec.feature "SignUps" do
       fill_in 'Email', with: "#{user.email}"
       fill_in 'Password', with: "#{user.password}"
       fill_in 'Confirmation', with: "#{user.password}"
-      click_on 'Sign Up'
+      click_on 'Sign up'
 
       expect(page).to have_content('Email has already been taken', count: 1)
       expect(current_path).to eq signup_path

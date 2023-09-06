@@ -1,11 +1,11 @@
-<h1 class="text-center">Manage Categories</h1>
+<h1 class="text-center"><%= t('all_categories') %></h1>
 <hr>
 
 <div class="categories-index-wrapper">
   <div class="actions-items">
     <div class="actions-header">
-      <div class="items-title">Categories</div>
-      <%= link_to 'Add category', new_category_path,
+      <div class="items-title"><%= t('all_categories') %></div>
+      <%= link_to t('new_category'), new_category_path,
                   class: 'btn btn-primary btn-sm new-task' %>
     </div>
 
@@ -17,10 +17,10 @@
           <li class="action-item">
             <span class="fw-bold"><%= category.name %></span>
             <div class="">
-              <%= link_to 'Edit', edit_category_path(category),
+              <%= link_to t('edit'), edit_category_path(category),
                           class: 'btn btn-primary btn-sm' %>
-              <%= link_to 'Destroy', category,
-                          data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+              <%= link_to t('delete'), category,
+                          data: { turbo_method: :delete, turbo_confirm: t('sure') },
                           class: 'btn btn-danger btn-sm' %>
             </div>
           </li>
@@ -31,5 +31,5 @@
 </div>
 
 <div class="d-flex justify-content-center mt-3">
-  <%= link_to 'Back to Goals', goals_path, class: 'btn btn-secondary' %>
+  <%= link_to t('back_to_goals'), goals_path, class: 'btn btn-secondary' %>
 </div>

@@ -21,7 +21,7 @@ RSpec.feature "UserCompleteGoals" do
       expect(page).to have_current_path goal_path goal
 
       check 'Complete'
-      click_on 'Complete goal'
+      click_on 'Complete'
 
       expect(current_path).to eq goal_path(goal)
       expect(page).to have_checked_field('goal_complete')

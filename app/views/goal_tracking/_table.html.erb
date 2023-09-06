@@ -2,13 +2,13 @@
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Status</th>
-    <th>Created at</th>
+    <th><%= t('name') %></th>
+    <th><%= t('type') %></th>
+    <th><%= sortable 'complete' %></th>
+    <th><%= t('created_at') %></th>
     <th>
       <%= sortable 'deadline' %>
-    <th>Days left</th>
+    <th><%= t('days_left') %></th>
   </tr>
   </thead>
   <tbody>

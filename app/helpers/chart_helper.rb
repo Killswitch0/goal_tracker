@@ -38,7 +38,7 @@ module ChartHelper
   end
 
   def chart_link_to(title, path, period)
-    link_to t("#{title}"), path, class: "#{params[:period] == "#{period}" ?
+    link_to title, path, class: "#{params[:period] == "#{period}" ?
                                      'btn btn-primary btn-sm' :
                                      'btn btn-outline-primary btn-sm'}"
   end

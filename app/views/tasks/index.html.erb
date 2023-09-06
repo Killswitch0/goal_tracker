@@ -1,7 +1,7 @@
-<h1 class="text-center">Tasks</h1>
+<h1 class="text-center"><%= t('all_tasks') %></h1>
 
 <div class="col-md-6">
-  <h2 class="text-center">Completed</h2>
+  <h2 class="text-center"><%= t('completed') %></h2>
 
   <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
     <table class="table table-bordered table-striped text-center">
@@ -17,7 +17,7 @@
         <tr>
           <th scope="row"><%= index + 1 %></th>
           <td><%= link_to task.name.truncate(15), goal_task_path(@goal, task) %></td>
-          <td><%= link_to "Destroy", goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+          <td><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
         </tr>
       <% end %>
     </table>
@@ -25,7 +25,7 @@
 </div>
 
 <div class="col-md-6">
-  <h2 class="text-center">Uncompleted</h2>
+  <h2 class="text-center"><%= t('uncompleted') %></h2>
 
   <div class="" style="border: 1px solid; width: 350px; height: 450px; overflow: scroll; margin: 0 auto;">
     <table class="table table-bordered table-striped text-center">
@@ -42,7 +42,7 @@
         <tr>
           <th scope="row"><%= index + 1 %></th>
           <td><%= link_to task.name.truncate(35), goal_task_path(@goal, task) %></td>
-          <td><%= link_to "Destroy", goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+          <td><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
         </tr>
       <% end %>
       </tbody>
@@ -51,7 +51,7 @@
 </div>
 
 <div class="text-center">
-  <%= link_to "Back to Goal", goal_path(@goal), class: "btn btn-secondary" %>
+  <%= link_to t('back_to_goal'), goal_path(@goal), class: "btn btn-secondary" %>
 </div>
 
 

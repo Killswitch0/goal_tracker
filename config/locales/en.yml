@@ -11,7 +11,14 @@ en:
   or: or
   of: of
 
-  # Navigation
+
+  date:
+    day: Day
+    week: Week
+    month: Month
+
+  # Navigation.
+  #----------------------------------------------------------------------------
   navigation:
     about: About
     dashboard: Dashboard
@@ -20,7 +27,8 @@ en:
     calendar: Calendar
     chart: Chart
 
-  # Active Record
+  # Active Record.
+  #----------------------------------------------------------------------------
   activerecord:
     errors:
       models:
@@ -120,7 +128,16 @@ en:
         goal_id: Goal ID
         created_at: Created At
 
-  # Authentication and Authorization
+  # Common table columns.
+  #----------------------------------------------------------------------------
+  name: Name
+  type: Type
+  created_at: Created at
+  updated_at: Updated at
+  status: Status
+
+  # Authentication.
+  #----------------------------------------------------------------------------
   authenticate:
     email: Email
     forgot_password: Forgot Password?
@@ -128,12 +145,21 @@ en:
     login: Login
     no_account: Don't have an account?
     remember_me: Remember Me
-    sign_up: Sign Up
-    signup: SignUp
+    sign_up: Sign up
+    signup: Signup
 
-  # Common
-  new: New
+  # Views -> User.
+  #----------------------------------------------------------------------------
+  edit_user: Edit User
+  new_user: New User
+  hello: Hello
+
+  # Common.
+  #----------------------------------------------------------------------------
+  action: Action
+  create: Create
   update: Update
+  new: New
   show: Show
   hide: Hide
   back: Back
@@ -141,36 +167,67 @@ en:
   edit: Edit
   completed: Completed
   uncompleted: Uncompleted
+  complete: complete
+  done: Done
   manage: Manage
   search: Search
+  sure: Are you sure?
+  next: Next
+  previous: Previous
+  days_left: Days left
 
-  # Goals
+  # Views -> Goals.
+  #----------------------------------------------------------------------------
   new_goal: New Goal
   edit_goal: Edit Goal
   create_goal: Create Goal
   add_goal: Add Goal
   delete_goal: Delete Goal
   back_to_goal: Back to Goal
+  back_to_goals: Back to Goals
+  complete_goal: Complete
+  uncomplete_goal: Uncomplete
+  all_goals: Goals
+  switch_to_goals: Switch to Goals
+  goals_tracker: Goals Tracker
+  goal_info: Goal info
 
-  # Categories
+  # Views -> Categories.
+  #----------------------------------------------------------------------------
   new_category: New category
+  all_categories: Categories
 
-  # Tasks
+  # Views -> Tasks.
+  #----------------------------------------------------------------------------
   all_tasks: All Tasks
   new_task: New Task
   complete_task: Complete
   uncomplete_task: Uncomplete
+  show_tasks: Show tasks
+  switch_to_tasks: Switch to Tasks
+  tasks_tracker: Tasks Tracker
 
-  # Habits
+  # Views -> Habits.
+  #----------------------------------------------------------------------------
   all_habits: All Habits
   new_habit: New Habit
   complete_habit: Complete
   uncomplete_habit: Uncomplete
+  show_habits: Show Habits
+  switch_to_habits: Switch to Tasks
 
 
-  # Dashboard
+  # Views -> Dashboard.
+  #----------------------------------------------------------------------------
   back_to_dashboard: Back to Dashboard
 
+  # Views -> Chart.
+  #----------------------------------------------------------------------------
+  habits_chart: Habits Chart
+  tasks_chart: Tasks Chart
+
+  # Controllers.
+  #----------------------------------------------------------------------------
   categories:
     create:
       success: 'Category created successfully.'
@@ -232,3 +289,8 @@ en:
     confirm_email:
       success: 'Welcome to Goal Tracker! Your email address has been confirmed. Please log in to continue.'
       fail: 'Sorry, the user does not exist.'
+
+  # Messages.
+  #----------------------------------------------------------------------------
+  messages:
+    sign_or_log: Please sign up or login to use the application.
