@@ -15,7 +15,7 @@
 #  index_goal_users_on_user_id_and_goal_id              (user_id,goal_id) UNIQUE
 #  index_goal_users_on_user_id                          (user_id)
 
-class GoalUser < ApplicationRecord
+class ChallengeUser < ApplicationRecord
   include Notifyable
 
   belongs_to :user

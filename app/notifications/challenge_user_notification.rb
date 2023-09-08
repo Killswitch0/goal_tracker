@@ -3,7 +3,7 @@
 # UserGroupNotification.with(post: @post).deliver_later(current_user)
 # UserGroupNotification.with(post: @post).deliver(current_user)
 
-class GoalUserNotification < ApplicationNotifications
+class ChallengeUserNotification < ApplicationNotifications
   # Add your delivery methods
   #
   deliver_by :database
@@ -19,7 +19,7 @@ class GoalUserNotification < ApplicationNotifications
 
   def message
     @goal = Goal.find(params[:goal_user][:goal_id])
-    @goal_user = GoalUser.find(params[:goal_user][:id])
+    @goal_user = ChallengeUser.find(params[:goal_user][:id])
     @user = User.find(params[:goal_user][:user_id])
     "Your invite to #{@goal.name}"
   end
