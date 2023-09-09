@@ -19,7 +19,7 @@
 
           <div class="mb-3">
             <%= f.label :goal_id %>
-            <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] } %>
+            <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] }, {}, class: 'form-select' %>
           </div>
 
           <%= f.submit t('create'), class: "btn btn-primary" %>

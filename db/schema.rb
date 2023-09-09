@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_100911) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_09_174758) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,23 +24,45 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_100911) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
+  create_table "challenge_goals", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "goal_id", null: false
+    t.bigint "challenge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "challenge_user_id", null: false
+    t.index ["challenge_id"], name: "index_challenge_goals_on_challenge_id"
+    t.index ["challenge_user_id"], name: "index_challenge_goals_on_challenge_user_id"
+    t.index ["goal_id"], name: "index_challenge_goals_on_goal_id"
+    t.index ["user_id"], name: "index_challenge_goals_on_user_id"
+  end
+
+  create_table "challenge_users", force: :cascade do |t|
+    t.boolean "confirm", default: false
+    t.bigint "user_id", null: false
+    t.bigint "challenge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_challenge_users_on_challenge_id"
+    t.index ["user_id"], name: "index_challenge_users_on_user_id"
+  end
+
+  create_table "challenges", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "deadline"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
   create_table "completion_dates", force: :cascade do |t|
     t.date "date"
     t.bigint "habit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["habit_id"], name: "index_completion_dates_on_habit_id"
-  end
-
-  create_table "goal_users", force: :cascade do |t|
-    t.boolean "confirm", default: false
-    t.bigint "user_id", null: false
-    t.bigint "goal_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["goal_id"], name: "index_goal_users_on_goal_id"
-    t.index ["user_id", "goal_id"], name: "index_goal_users_on_user_id_and_goal_id", unique: true
-    t.index ["user_id"], name: "index_goal_users_on_user_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -113,9 +135,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_100911) do
 
   add_foreign_key "categories", "goals"
   add_foreign_key "categories", "users"
+  add_foreign_key "challenge_goals", "challenge_users"
+  add_foreign_key "challenge_goals", "challenges"
+  add_foreign_key "challenge_goals", "goals"
+  add_foreign_key "challenge_goals", "users"
+  add_foreign_key "challenge_users", "challenges"
+  add_foreign_key "challenge_users", "users"
+  add_foreign_key "challenges", "users"
   add_foreign_key "completion_dates", "habits"
-  add_foreign_key "goal_users", "goals"
-  add_foreign_key "goal_users", "users"
   add_foreign_key "goals", "categories"
   add_foreign_key "goals", "users"
   add_foreign_key "habits", "goals"

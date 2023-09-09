@@ -24,6 +24,7 @@
 class User < ApplicationRecord
   include Rememberable
   include Recoverable
+  include Challengeable
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -38,8 +39,9 @@ class User < ApplicationRecord
   has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :categories, dependent: :destroy
-  has_many :goal_users
-  has_many :common_goals, through: :goal_users, source: :goal
+  has_many :challenge_users, dependent: :destroy
+  has_many :challenges, through: :challenge_users, dependent: :destroy
+  has_many :challenge_goals, dependent: :destroy
 
   # noticed gem association
   has_many :notifications, as: :recipient, dependent: :destroy

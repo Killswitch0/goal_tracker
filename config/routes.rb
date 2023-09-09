@@ -25,15 +25,22 @@ Rails.application.routes.draw do
     resource :goal_tracking, controller: :goal_tracking
     resource :task_tracking, controller: :task_tracking
 
-    # Goals
-    resources :goals do
+    resources :challenges do
       member do
-        get 'invite'
+        get 'add_goal'
+        post 'add_goal'
+
+        get 'create_invitation'
         post 'create_invitation'
+        get 'invite'
         patch 'confirm_invitation'
         patch 'decline_invitation'
         delete 'leave'
       end
+    end
+
+    # Goals
+    resources :goals do
 
       get '/habit_chart', to: 'charts#habit', as: 'habit_chart'
       get '/task_chart', to: 'charts#task', as: 'task_chart'

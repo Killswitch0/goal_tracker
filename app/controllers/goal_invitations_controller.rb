@@ -32,7 +32,7 @@ class GoalInvitationsController < ApplicationController
     @goal.user_id = current_user.id
 
     if @goal.save
-      current_user.goal_users << GoalUser.new(goal: @goal, confirm: true)
+      current_user.goal_users << ChallengeUser.new(goal: @goal, confirm: true)
       flash[:noticed] = "Group has been successfully created."
       redirect_to goal_path(@goal)
     else
@@ -45,7 +45,7 @@ class GoalInvitationsController < ApplicationController
     invited_user = User.find_by(email: params[:email])
 
     if invited_user
-      @invitation = GoalUser.new(goal: @goal, user: invited_user)
+      @invitation = ChallengeUser.new(goal: @goal, user: invited_user)
 
       if @invitation.save
         flash[:noticed] = "Invitation sent to #{invited_user.email}"

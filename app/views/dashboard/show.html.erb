@@ -21,12 +21,12 @@
                     </div>
                     <div class="">
                       <span>
-                        <%= calculate_items(goal).round.to_s + '%' %>
+                        <%= calculate_items(goal: goal, user: current_user).to_s + '%' %>
                       </span>
                     </div>
                   </div>
                   <div class="progress-bar goal-bar">
-                    <div class="progress" style="width: <%= calculate_items(goal) %>%;"></div>
+                    <div class="progress" style="width: <%= calculate_items(goal: goal, user: current_user) %>%;"></div>
                   </div>
                 </div>
               </li>
@@ -64,7 +64,7 @@
 
       <div class="completed-wrapper">
         <div class="progress-bar">
-          <div class="progress" style="width: <%= calculate_items(@goal) %>%;"></div>
+          <div class="progress" style="width: <%= calculate_items(goal: @goal, user: current_user) %>%;"></div>
         </div>
 
         <div class="completed-info">

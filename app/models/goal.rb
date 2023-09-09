@@ -29,8 +29,7 @@ class Goal < ApplicationRecord
 
   has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
-  has_many :goal_users, dependent: :destroy
-  has_many :users, through: :goal_users
+  has_many :challenge_goals, dependent: :destroy
 
   # noticed gem association
   has_many :notifications, through: :users
@@ -53,9 +52,13 @@ class Goal < ApplicationRecord
             length: { minimum: 7, maximum: 200 }
 
   validates :category_id, presence: false
-  validates :color, presence: true, uniqueness: true
+  validates :color, presence: true, uniqueness: { scope: :user_id }
   validates :deadline, presence: true
   validates :color, presence: true
+
+  def goal_in_challenge(challenge)
+    challenge_goals.where(challenge_id: challenge, goal: self)
+  end
 
   def tasks_streak?
     return if self.tasks.completed.count == 0

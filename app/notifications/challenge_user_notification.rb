@@ -18,13 +18,13 @@ class ChallengeUserNotification < ApplicationNotifications
   # Define helper methods to make rendering easier.
 
   def message
-    @goal = Goal.find(params[:goal_user][:goal_id])
-    @goal_user = ChallengeUser.find(params[:goal_user][:id])
-    @user = User.find(params[:goal_user][:user_id])
-    "Your invite to #{@goal.name}"
+    @challenge = Challenge.find(params[:challenge_user][:challenge_id])
+    @goal_user = ChallengeUser.find(params[:challenge_user][:id])
+    @user = User.find(params[:challenge_user][:user_id])
+    "Your invite to #{@challenge.name}"
   end
 
   def url
-    goal_path(Goal.find(params[:goal_user][:goal_id]), mark_as_read: 'true')
+    challenge_path(Challenge.find(params[:challenge_user][:challenge_id]), mark_as_read: 'true')
   end
 end

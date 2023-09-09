@@ -26,6 +26,7 @@ en:
     tracking: Tracking
     calendar: Calendar
     chart: Chart
+    challenges: Challenges
 
   # Active Record.
   #----------------------------------------------------------------------------

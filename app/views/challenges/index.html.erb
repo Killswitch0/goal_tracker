@@ -1,6 +1,14 @@
-<h1 class="text-center"><%= Goal %></h1>
+<div class="col-sm-12 col-md-4 offset-md-2">
+  <h2>Challenges</h2>
 
-<div class="col-sm-12 col-md-4 offset-md-4">
+  <% @challenges.each_with_index do |challenge, index| %>
+    <%= link_to "#{index + 1}) #{challenge.name}", challenge %>
+  <% end %>
+</div>
+
+<div class="col-sm-12 col-md-4">
+
+  <h2 class="text-center">Invitations</h2>
   <div class="card mt-5">
     <div class="card-body">
       <table class="table">
@@ -20,9 +28,9 @@
             <% else %>
               <tr>
                 <th scope="row"><%= index + 1 %></th>
-                <td><%= "Invite to #{invite.goal.name} group" %></td>
-                <td><%= button_to 'Accept invite', confirm_invitation_challenge_path, method: :patch, class: 'btn btn-primary btn-sm' %></td>
-                <td><%= button_to 'Decline invite', decline_invitation_challenge_path, method: :patch, class: 'btn btn-danger btn-sm' %></td>
+                <td><%= "Invite to #{invite.challenge.name} group" %></td>
+                <td><%= button_to 'Accept invite', confirm_invitation_challenge_path(invite), method: :patch, class: 'btn btn-primary btn-sm' %></td>
+                <td><%= button_to 'Decline invite', decline_invitation_challenge_path(invite), method: :patch, class: 'btn btn-danger btn-sm' %></td>
               </tr>
             <% end %>
           <% end %>
@@ -51,4 +59,3 @@
     </div>
   </div>
 </div>
-

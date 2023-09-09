@@ -13,7 +13,7 @@ RSpec.feature "UserCompleteGoals" do
 
     scenario 'Authenticated user try to complete Goal' do
       log_in(user)
-      GoalUser.create(goal: goal, user: user, confirm: true)
+      ChallengeUser.create(goal: goal, user: user, confirm: true)
 
       ### complete ###
       visit goal_path goal

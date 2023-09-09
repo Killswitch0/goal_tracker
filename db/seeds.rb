@@ -32,7 +32,7 @@ goal = Goal.create(
   category_id: category.id
 )
 
-GoalUser.create(
+ChallengeUser.create(
   user_id: user.id,
   goal_id: goal.id
 )

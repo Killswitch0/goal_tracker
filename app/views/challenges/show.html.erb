@@ -1,0 +1,49 @@
+<section class="challenge">
+  <h1 class="text-center mt-3">Challenge: <%= @challenge.name %></h1>
+
+  <div class="text-start fs-4">
+    <%= @challenge.created_at.to_date.to_formatted_s(:long_ordinal) %> -
+    <%= @challenge.deadline.to_date.to_formatted_s(:long_ordinal) %>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= link_to 'Invite user', create_invitation_challenge_path(@challenge), class: 'btn btn-primary' %>
+    <%= link_to 'Add Goal', add_goal_challenge_path(@challenge), class: 'btn btn-primary' %>
+    <%= link_to 'Leave challenge', leave_challenge_path(@challenge), data: { turbo_method: :delete }, class: 'btn btn-primary mx-5' %>
+  </div>
+
+  <div class="challenge-wrapper">
+    <ul class="goal-items">
+      <% @challenge_goals.each do |goal| %>
+        <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>" >
+          <% if goal.user.has_goals_within_challenge?(@challenge) %>
+
+            <% percentage = calculate_items(goal: goal, user: goal.user) %>
+
+            <div class="goal-item__progress fw-bold fs-4" style="background:
+              radial-gradient(closest-side, white 79%, transparent 80%),
+                conic-gradient(rgba(9, 194, 30, 1) <%= percentage %>%, rgba(39, 245, 63, 0.21) 0%);">
+              <span><%= percentage %>%</span></div>
+            <div class="goal-item__user text-center mt-1 fw-medium"><%= goal.user.name %></div>
+
+            <div class="goal-item__tasks text-center mt-1">
+              <%= goal.tasks.count %> targets
+            </div>
+
+            <div class="bottom-wrapper">
+              <div class="bottom-wrapper__user-photo"><%= goal.user.decorate.gravatar %></div>
+              <div class="bottom-wrapper__created-ago fst-italic">
+                <%= time_ago_in_words(goal.goal_in_challenge(@challenge).first.created_at) %>
+                ago
+              </div>
+            </div>
+          <% else %>
+            <div class="text-center">No goals added</div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+
+

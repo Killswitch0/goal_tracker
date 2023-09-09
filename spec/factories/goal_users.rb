@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :goal_user do
+  factory :challenge_user do
     user
     goal
   end
