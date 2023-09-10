@@ -46,6 +46,8 @@ class User < ApplicationRecord
   # noticed gem association
   has_many :notifications, as: :recipient, dependent: :destroy
 
+  has_one_attached :avatar
+
   has_secure_password validations: false
 
   validates :name, presence: true,

@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     resources :users, except: :new do
       member do
         get :confirm_email
+        delete :delete_image_attachment
       end
     end
 

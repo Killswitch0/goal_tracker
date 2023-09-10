@@ -12,7 +12,7 @@
     <%= link_to 'Leave challenge', leave_challenge_path(@challenge), data: { turbo_method: :delete }, class: 'btn btn-primary mx-5' %>
   </div>
 
-  <div class="challenge-wrapper">
+  <div class="challenge-wrapper mt-3">
     <ul class="goal-items">
       <% @challenge_goals.each do |goal| %>
         <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>" >
@@ -31,7 +31,7 @@
             </div>
 
             <div class="bottom-wrapper">
-              <div class="bottom-wrapper__user-photo"><%= goal.user.decorate.gravatar %></div>
+              <div class="bottom-wrapper__user-photo"><%= user_avatar(goal.user, css_class: '') %></div>
               <div class="bottom-wrapper__created-ago fst-italic">
                 <%= time_ago_in_words(goal.goal_in_challenge(@challenge).first.created_at) %>
                 ago

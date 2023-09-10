@@ -13,4 +13,12 @@ module ApplicationHelper
     when :danger then 'alert alert-danger'
     end
   end
+
+  def user_avatar(user, size: 30, css_class: 'rounded-circle')
+    if user.avatar.attached?
+      image_tag user.avatar.variant(resize_to_fill: [size, nil]), class: css_class
+    else
+      user.decorate.gravatar(size: size, css_class: css_class)
+    end
+  end
 end

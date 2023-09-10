@@ -3,6 +3,26 @@
 
   <div class="card">
     <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <% unless user.new_record? %>
+            <% if user.avatar.attached? %>
+              <%= image_tag user.avatar.variant(resize_to_fill: [100, nil]), class: 'rounded-circle' %>
+              <%= link_to t('delete'), delete_image_attachment_user_url(user),
+                          data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                          class: 'btn btn-sm btn-danger d-block mt-3 col-sm-4 m-auto' %>
+            <% else %>
+              <%= user.decorate.gravatar(size: 100, css_class: 'rounded-circle') %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="mb-3 mt-3">
+          <%= f.label :avatar %>
+          <%= f.file_field :avatar, class: 'form-control' %>
+        </div>
+      </div>
+
       <div class="mb-3">
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
@@ -15,7 +35,7 @@
 
       <div class="mb-3">
         <%= f.label :password %>
-        <%= f.password_field :password,  class: "form-control" %>
+        <%= f.password_field :password, class: "form-control" %>
       </div>
 
       <div class="mb-3">

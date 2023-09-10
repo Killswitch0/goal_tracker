@@ -1,8 +1,9 @@
 .challenge-wrapper {
   .goal-items {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     list-style-type: none;
+    flex-wrap: wrap;
 
     .goal-item {
       padding: 15px;

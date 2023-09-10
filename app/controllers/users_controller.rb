@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[show]
-  before_action :user, only: :update
+  before_action :user, only: %i[update delete_image_attachment]
 
   helper_method :user
 
@@ -46,6 +46,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete_image_attachment
+    #@avatar = ActiveStorage::Attachment.find(params[:id])
+    @user.avatar.purge
+    redirect_to edit_user_path(@user)
+  end
+
   private
 
   def user
@@ -58,7 +64,8 @@ class UsersController < ApplicationController
       :email,
       :password,
       :password_confirmation,
-      :old_password
+      :old_password,
+      :avatar
     )
   end
 end
