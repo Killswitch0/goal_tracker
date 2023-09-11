@@ -1,23 +1,52 @@
 <section class="challenge">
   <h1 class="text-center mt-3">Challenge: <%= @challenge.name %></h1>
 
-  <div class="text-start fs-4">
+  <div class="text-center fs-4">
     <%= @challenge.created_at.to_date.to_formatted_s(:long_ordinal) %> -
     <%= @challenge.deadline.to_date.to_formatted_s(:long_ordinal) %>
   </div>
 
-  <div class="text-center mt-3">
-    <%= link_to 'Invite user', create_invitation_challenge_path(@challenge), class: 'btn btn-primary' %>
-    <%= link_to 'Add Goal', add_goal_challenge_path(@challenge), class: 'btn btn-primary' %>
-    <%= link_to 'Leave challenge', leave_challenge_path(@challenge), data: { turbo_method: :delete }, class: 'btn btn-primary mx-5' %>
+  <div class="text-center mt-3 d-flex justify-content-center align-items-center">
+    <div class="">
+      <%= link_to 'Invite user', create_invitation_challenge_path(@challenge), class: 'btn btn-primary' if @challenge.check_creator(current_user) %>
+      <%= link_to 'Add Goal', add_goal_challenge_path(@challenge), class: 'btn btn-primary' %>
+      <%= link_to 'Leave challenge', leave_challenge_path(@challenge),
+                  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                  class: 'btn btn-warning mx-5' %>
+
+      <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        Rating
+      </a>
+    </div>
+
+    <div class="winner-board mx-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="fs-4 fw-medium text-uppercase">
+            Winner
+          </div>
+
+          <% winner = determine_winner(@challenge_goals, @challenge) %>
+          <div class="winner-board__user d-flex flex-column">
+            <% if winner.present? %>
+              <%= user_avatar(winner, size: 60) %>
+              <span class="fw-medium"><%= winner.name %></span>
+            <% else %>
+              <%= inline_svg_tag("icons/basic/question", options = { height: 60, width: 60, class: 'question' }) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="challenge-wrapper mt-3">
     <ul class="goal-items">
-      <% @challenge_goals.each do |goal| %>
-        <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>" >
-          <% if goal.user.has_goals_within_challenge?(@challenge) %>
 
+      <% if @challenge_goals.present? %>
+        <% @challenge_goals.each_with_index do |goal, index| %>
+
+          <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>">
             <% percentage = calculate_items(goal: goal, user: goal.user) %>
 
             <div class="goal-item__progress fw-bold fs-4" style="background:
@@ -31,19 +60,59 @@
             </div>
 
             <div class="bottom-wrapper">
-              <div class="bottom-wrapper__user-photo"><%= user_avatar(goal.user, css_class: '') %></div>
+              <div class="bottom-wrapper__user-photo"><%= user_avatar(goal.user) %></div>
               <div class="bottom-wrapper__created-ago fst-italic">
-                <%= time_ago_in_words(goal.goal_in_challenge(@challenge).first.created_at) %>
+                <%= time_ago_in_words(goal.created_at) %>
                 ago
               </div>
             </div>
-          <% else %>
-            <div class="text-center">No goals added</div>
-          <% end %>
-        </li>
+          </li>
+        <% end %>
+
+      <% else %>
+        <div class="text-center fs-2">No goals</div>
       <% end %>
     </ul>
   </div>
 </section>
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Challenge users</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <div>
+      <table class="table table-hover">
+        <thead class="table-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Member</th>
+          <th scope="col"><%= t('name') %></th>
+          <th scope="col">Targets</th>
+          <th scope="col">Load</th>
+        </tr>
+        </thead>
+        <tbody class="overflow-y-auto">
+        <% @challenge_goals.each_with_index do |goal, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= user_avatar(goal.user, size: 25) %></td>
+            <td><%= goal.user.name %></td>
+            <td><%= goal.tasks.count %></td>
+            <td class="fs-4">
+              <i class="bi bi-minecart-loaded" style="color: <%= load_level_color(goal.tasks) %>"></i>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
 
 

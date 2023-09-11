@@ -24,7 +24,6 @@
 class User < ApplicationRecord
   include Rememberable
   include Recoverable
-  include Challengeable
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

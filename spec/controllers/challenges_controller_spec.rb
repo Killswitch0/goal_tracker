@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChallangeController, type: :controller do
+RSpec.describe ChallengesController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do

@@ -1,61 +1,91 @@
-<div class="col-sm-12 col-md-4 offset-md-2">
-  <h2>Challenges</h2>
+<div class="d-flex justify-content-center mt-3">
+  <div class="table-main">
+    <div class="table-wrapper">
+      <div class="table-header">
+        <h2 class="text-center">Challenges</h2>
+      </div>
 
-  <% @challenges.each_with_index do |challenge, index| %>
-    <%= link_to "#{index + 1}) #{challenge.name}", challenge %>
-  <% end %>
+      <section class="table-body">
+        <table class="">
+          <thead class="">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Creator</th>
+            <th scope="col">Name</th>
+            <th scope="col"><%= t('challenge') %></th>
+            <th scope="col" colspan="2"><%= t('action') %></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @challenges.each_with_index do |challenge, index| %>
+            <tr>
+              <% if ChallengeUser.where(challenge_id: challenge, user_id: challenge.user).first&.confirm? %>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= user_avatar(challenge.user) %></td>
+                <td><%= challenge.user.name %></td>
+                <td><%= link_to challenge.name, challenge, style: "text-decoration: none" %></td>
+                <td><%= link_to t('leave'), leave_challenge_path(challenge),
+                                data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                                class: 'btn btn-sm btn-warning' %></td>
+                <td><%= link_to t('delete'), challenge, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' if challenge.user == current_user %> </td>
+              <% end %>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <div class="d-flex justify-content-around">
+      <%= link_to t('new'), new_challenge_path, class: 'btn btn-primary' %>
+      <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        Invites
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <%= @invites.count > 99 ? '99+' : @invites.count %>
+          <span class="visually-hidden">New alerts</span>
+        </span>
+      </button>
+    </div>
+  </div>
 </div>
 
-<div class="col-sm-12 col-md-4">
-
-  <h2 class="text-center">Invitations</h2>
-  <div class="card mt-5">
-    <div class="card-body">
-      <table class="table">
-        <thead>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExample">Invites</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <table class="table table-hover">
+        <thead class="table-light">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Accept</th>
-          <th scope="col">Decline</th>
+          <th scope="col">User</th>
+          <th scope="col"><%= t('name') %></th>
+          <th scope="col">Challenge</th>
+          <th class="text-center" scope="col" colspan="2">Action</th>
         </tr>
         </thead>
-        <tbody>
-        <% if @invites.present? %>
-          <% @invites.each_with_index do |invite, index| %>
+        <tbody class="overflow-y-auto">
+        <% @invites.each_with_index do |invite, index| %>
+          <tr>
             <% if invite.confirm? %>
               No notifications yet
             <% else %>
-              <tr>
-                <th scope="row"><%= index + 1 %></th>
-                <td><%= "Invite to #{invite.challenge.name} group" %></td>
-                <td><%= button_to 'Accept invite', confirm_invitation_challenge_path(invite), method: :patch, class: 'btn btn-primary btn-sm' %></td>
-                <td><%= button_to 'Decline invite', decline_invitation_challenge_path(invite), method: :patch, class: 'btn btn-danger btn-sm' %></td>
-              </tr>
-            <% end %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= user_avatar(invite.challenge.user) %></td>
+              <td><%= invite.challenge.user.name %></td>
+              <td><%= invite.challenge.name %></td>
+              <td><%= button_to 'Accept', confirm_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-primary btn-sm' %></td>
+              <td><%= button_to 'Decline', decline_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-danger btn-sm' %></td>
+            </tr>
           <% end %>
-        <% else %>
-          <tr>
-            <td colspan="4" class="text-center">Invites have not yet</td>
           </tr>
         <% end %>
         </tbody>
       </table>
     </div>
-  </div>
 
-  <div class="col-md-12 d-flex justify-content-sm-around">
-    <%= button_to "Leave group", leave_goal_path, method: :delete, class: 'btn btn-danger mt-3' if @invitation && !@invitation.creator? %>
-  </div>
-
-  <div class="card mt-5">
-    <h2 class="text-center">Members</h2>
-    <div class="card-body">
-      <% if @members.present? %>
-        <% @members.each_with_index do |member, index| %>
-          <p><%= "#{index + 1}: #{member.email}" %></p>
-        <% end %>
-      <% end %>
-    </div>
   </div>
 </div>

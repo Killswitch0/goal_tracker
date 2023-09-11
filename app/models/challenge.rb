@@ -16,9 +16,15 @@
 
 
 class Challenge < ApplicationRecord
+  belongs_to :user
+
   has_many :challenge_users, dependent: :destroy
   has_many :users, through: :challenge_users
 
   has_many :challenge_goals, dependent: :destroy
   has_many :goals, through: :challenge_goals
+
+  def check_creator(user)
+    self.user == user
+  end
 end

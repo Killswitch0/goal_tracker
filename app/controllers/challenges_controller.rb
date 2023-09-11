@@ -4,17 +4,23 @@ class ChallengesController < ApplicationController
   before_action :set_invitation, only: %i[confirm_invitation decline_invitation leave show]
 
   def index
-    @challenges = current_user.challenges
+    @challenges = Challenge.includes(:challenge_users)
+                           .where(
+                             challenge_users: {
+                               user: current_user, confirm: true
+                             }
+                           )
   end
 
   def new
     @challenge = Challenge.new
+    @challenge_goal = ChallengeGoal.new
   end
 
   def show
-    @challenge = Challenge.find(params[:id])
-
     require_invitation
+
+    @challenge = Challenge.find(params[:id])
 
     if @challenge
       @members = User.joins(:challenge_users)
@@ -24,13 +30,13 @@ class ChallengesController < ApplicationController
                          goal_id: @challenge.id
                        }).distinct
 
-      mark_notifications_as_read if params[:mark_as_read] == 'true'
+      #mark_notifications_as_read if params[:mark_as_read] == 'true'
     end
 
     @challenge_goals = Goal.includes(:challenge_goals)
                            .where(
                              challenge_goals: { challenge_id: @challenge }
-                           ).joins(:tasks)
+                           ).left_joins(:tasks)
                            .group('goals.id, challenge_goals.id')
                            .select(
                              'goals.*, COUNT(
@@ -52,8 +58,16 @@ class ChallengesController < ApplicationController
     end
   end
 
+  def destroy
+    @challenge = Challenge.find(params[:id])
+    @challenge.destroy
+    flash[:noticed] = "Challenge successfully destroyed."
+    redirect_to challenges_path
+  end
+
   def add_goal
     @challenge = Challenge.find(params[:id])
+    @challenge_goal = ChallengeGoal.new
 
     if request.post?
       @challenge_goal = current_user
@@ -72,8 +86,7 @@ class ChallengesController < ApplicationController
         flash[:noticed] = "Goal successfully added"
         redirect_to @challenge
       else
-        flash[:danger] = "Something go wrong..."
-        redirect_to @challenge
+        render :add_goal
       end
     end
   end
@@ -108,7 +121,7 @@ class ChallengesController < ApplicationController
   #----------------------------------------------------------------------------
   def confirm_invitation
     if @invitation
-      @invitation.update_attribute(:confirm, true)
+      @invitation.update(confirm: true)
       flash[:noticed] = t('.success', goal_name: @invitation.challenge.name)
     else
       flash[:danger] = t('.fail')
@@ -157,7 +170,8 @@ class ChallengesController < ApplicationController
   end
 
   def set_invitation
-    @invitation = ChallengeUser.find_by(user: current_user)
+    @challenge = Challenge.find(params[:id])
+    @invitation = ChallengeUser.find_by(challenge: @challenge, user: current_user)
   end
 
   def set_invite
