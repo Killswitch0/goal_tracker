@@ -90,7 +90,7 @@ en:
         name: Name
         description: Description
         days_completed: Days Completed
-        user_id: User ID
+        user_id: User
         created_at: Created At
         updated_at: Updated At
         deadline: Deadline
@@ -101,32 +101,32 @@ en:
         name: Name
         description: Description
         days_completed: Days Completed
-        user_id: User ID
-        goal_id: Goal ID
+        user_id: User
+        goal_id: Goal
         created_at: Created At
         updated_at: Updated At
       task:
         name: Name
         complete: Complete
-        goal_id: Goal ID
+        goal_id: Goal
         created_at: Created At
         updated_at: Updated At
-        user_id: User ID
+        user_id: User
         deadline: Deadline
         complete_date: Complete Date
       category:
         name: Name
         created_at: Created At
         updated_at: Updated At
-        goal_id: Goal ID
-        user_id: User ID
+        goal_id: Goal
+        user_id: User
       completion_date:
         date: Date
-        habit_id: Habit ID
+        habit_id: Habit
       goal_user:
         confirm: Confirm
-        user_id: User ID
-        goal_id: Goal ID
+        user_id: User
+        goal_id: Goal
         created_at: Created At
 
   # Common table columns.

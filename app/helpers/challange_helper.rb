@@ -5,23 +5,18 @@ module ChallangeHelper
     tasks = tasks.count
 
     case
-    when tasks <= 4
+    when tasks <= 3
       '#797773'
-    when tasks <= 7
+    when tasks <= 6
       '#2060E0'
-    when tasks >= 7
+    when tasks > 6
       '#EBA031'
     end
   end
 
-  def determine_winner(goals, challenge)
-    if challenge.deadline <= Date.today
+  def winner(challenge)
+    return if challenge.deadline > Date.today
 
-      goal = goals.first
-      completed = goal.tasks.where(complete: true).count
-      all = goal.tasks.count
-
-      goal.user if completed == all
-    end
+    challenge.determine_winner
   end
 end

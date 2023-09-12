@@ -17,6 +17,8 @@ class ChallengesController < ApplicationController
     @challenge_goal = ChallengeGoal.new
   end
 
+  # GET /challenges/1
+  #----------------------------------------------------------------------------
   def show
     require_invitation
 
@@ -33,16 +35,11 @@ class ChallengesController < ApplicationController
       #mark_notifications_as_read if params[:mark_as_read] == 'true'
     end
 
-    @challenge_goals = Goal.includes(:challenge_goals)
-                           .where(
-                             challenge_goals: { challenge_id: @challenge }
-                           ).left_joins(:tasks)
-                           .group('goals.id, challenge_goals.id')
-                           .select(
-                             'goals.*, COUNT(
-                                        CASE WHEN tasks.complete = true THEN 1 ELSE NULL END
-                                       ) completed_tasks_count'
-                           ).order('completed_tasks_count DESC')
+    @challenge_goals = if params[:filter]
+                         @challenge.goals.where(user: current_user)
+                       else
+                         @challenge.goals.sort_by_completed_tasks
+                       end
   end
 
   def create

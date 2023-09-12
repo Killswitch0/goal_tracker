@@ -8,11 +8,22 @@
 
   <div class="text-center mt-3 d-flex justify-content-center align-items-center">
     <div class="">
-      <%= link_to 'Invite user', create_invitation_challenge_path(@challenge), class: 'btn btn-primary' if @challenge.check_creator(current_user) %>
-      <%= link_to 'Add Goal', add_goal_challenge_path(@challenge), class: 'btn btn-primary' %>
+      <%= link_to 'Invite user', create_invitation_challenge_path(@challenge),
+                  class: 'btn btn-primary' if @challenge.check_creator(current_user) %>
+      <%= link_to 'Add Goal', add_goal_challenge_path(@challenge),
+                  class: 'btn btn-primary' %>
       <%= link_to 'Leave challenge', leave_challenge_path(@challenge),
                   data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
                   class: 'btn btn-warning mx-5' %>
+
+      <%= link_to 'My Goal', challenge_path(@challenge, filter: "#{current_user.id}"),
+                  class: "#{params[:filter] == "#{current_user.id}" ?
+                              'btn btn-primary btn-sm' :
+                              'btn btn-outline-primary btn-sm'}" %>
+      <%= link_to 'All Goals', challenge_path(@challenge),
+                  class: "#{params[:filter].nil? ?
+                              'btn btn-primary btn-sm' :
+                              'btn btn-outline-primary btn-sm'}" %>
 
       <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         Rating
@@ -26,7 +37,7 @@
             Winner
           </div>
 
-          <% winner = determine_winner(@challenge_goals, @challenge) %>
+          <% winner = winner(@challenge) %>
           <div class="winner-board__user d-flex flex-column">
             <% if winner.present? %>
               <%= user_avatar(winner, size: 60) %>

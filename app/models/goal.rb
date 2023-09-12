@@ -56,6 +56,13 @@ class Goal < ApplicationRecord
   validates :deadline, presence: true
   validates :color, presence: true
 
+  scope :sort_by_completed_tasks, -> { left_joins(:tasks)
+                                         .group('goals.id, challenge_goals.id')
+                                         .select('goals.*, COUNT(
+                                                 CASE WHEN tasks.complete = true THEN 1 ELSE NULL END
+                                                ) completed_tasks_count')
+                                         .order('completed_tasks_count DESC') }
+
   def goal_in_challenge(challenge)
     challenge_goals.where(challenge_id: challenge, goal: self)
   end

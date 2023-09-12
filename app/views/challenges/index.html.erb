@@ -17,9 +17,9 @@
           </tr>
           </thead>
           <tbody>
-          <% @challenges.each_with_index do |challenge, index| %>
-            <tr>
-              <% if ChallengeUser.where(challenge_id: challenge, user_id: challenge.user).first&.confirm? %>
+          <% if @challenges.present? %>
+            <% @challenges.each_with_index do |challenge, index| %>
+              <tr>
                 <th scope="row"><%= index + 1 %></th>
                 <td><%= user_avatar(challenge.user) %></td>
                 <td><%= challenge.user.name %></td>
@@ -28,7 +28,7 @@
                                 data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
                                 class: 'btn btn-sm btn-warning' %></td>
                 <td><%= link_to t('delete'), challenge, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' if challenge.user == current_user %> </td>
-              <% end %>
+            <% end %>
             </tr>
           <% end %>
           </tbody>
@@ -40,10 +40,12 @@
       <%= link_to t('new'), new_challenge_path, class: 'btn btn-primary' %>
       <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
         Invites
+        <% if @invites.present? %>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           <%= @invites.count > 99 ? '99+' : @invites.count %>
           <span class="visually-hidden">New alerts</span>
         </span>
+        <% end %>
       </button>
     </div>
   </div>
@@ -76,7 +78,7 @@
               <th scope="row"><%= index + 1 %></th>
               <td><%= user_avatar(invite.challenge.user) %></td>
               <td><%= invite.challenge.user.name %></td>
-              <td><%= invite.challenge.name %></td>
+              <td><%= invite.challenge.name.truncate(20) %></td>
               <td><%= button_to 'Accept', confirm_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-primary btn-sm' %></td>
               <td><%= button_to 'Decline', decline_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-danger btn-sm' %></td>
             </tr>
@@ -89,3 +91,4 @@
 
   </div>
 </div>
+

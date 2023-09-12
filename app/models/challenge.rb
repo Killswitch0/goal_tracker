@@ -24,6 +24,33 @@ class Challenge < ApplicationRecord
   has_many :challenge_goals, dependent: :destroy
   has_many :goals, through: :challenge_goals
 
+  def determine_winner
+    user_tasks_count = {}
+
+    goals.each do |goal|
+      goal.tasks.each do |task|
+        if task.complete?
+          user_id = task.user
+
+          user_tasks_count[user_id] ||= 0
+          user_tasks_count[user_id] += 1
+        end
+      end
+    end
+
+    user_tasks_count.max_by { |_, count| count }&.first
+  end
+
+  def determine_category
+    if tasks.count <= 3
+      "low"
+    elsif tasks.count <= 6
+      "medium"
+    else
+      "hard"
+    end
+  end
+
   def check_creator(user)
     self.user == user
   end
