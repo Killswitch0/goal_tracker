@@ -1,0 +1,10 @@
+#challenges-index {
+  .challenges-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .table-main {
+      margin-inline: auto;
+    }
+  }
+}

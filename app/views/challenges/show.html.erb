@@ -39,16 +39,16 @@
 
           <% winners = winners_of(@challenge) %>
           <div class="winner-board__user d-flex justify-content-between">
-              <% if winners.present? %>
-                <% winners.each do |winner, tasks| %>
-                  <div class="mx-2 mt-2">
-                    <%= user_avatar(winner, size: 60, style: "border: 5px solid #{load_level_color(tasks)};") %>
-                    <span class="fw-medium d-block"><%= winner.name %></span>
-                  </div>
-                <% end %>
-              <% else %>
-                <%= inline_svg_tag("icons/basic/question", options = { height: 60, width: 60, class: 'question mt-2' }) %>
+            <% if winners.present? %>
+              <% winners.each do |winner, tasks| %>
+                <div class="mx-2 mt-2">
+                  <%= user_avatar(winner, size: 60, style: "border: 5px solid #{load_level_color(tasks)};") %>
+                  <span class="fw-medium d-block"><%= winner.name %></span>
+                </div>
               <% end %>
+            <% else %>
+              <%= inline_svg_tag("icons/basic/question", options = { height: 60, width: 60, class: 'question mt-2' }) %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -71,7 +71,11 @@
             <div class="goal-item__user text-center mt-1 fw-medium"><%= goal.user.name %></div>
 
             <div class="goal-item__tasks text-center mt-1">
-              <%= goal.tasks.count %> targets
+              <% if goal.user == current_user %>
+                <%= link_to "#{goal.tasks.count} targets", goal, class: 'link-offset-2 link-underline' %>
+              <% else %>
+                <%= goal.tasks.count %> targets
+              <% end %>
             </div>
 
             <div class="bottom-wrapper">

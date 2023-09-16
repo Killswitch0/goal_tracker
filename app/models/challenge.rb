@@ -15,6 +15,8 @@
 #  index_challenges_on_user_id  (user_id)
 
 class Challenge < ApplicationRecord
+  include Searchable
+
   belongs_to :user
 
   has_many :challenge_users, dependent: :destroy
@@ -28,7 +30,11 @@ class Challenge < ApplicationRecord
 
     goals.each do |goal|
       user = goal.user
-      user_tasks_count[user] = goal.tasks.count
+      completed = user.tasks.completed.count == user.tasks.count
+
+      if completed || deadline < Date.today
+        user_tasks_count[user] = goal.tasks.count
+      end
     end
 
     user_tasks_count

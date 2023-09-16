@@ -6,12 +6,18 @@ class ChallengesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @challenges = Challenge.includes(:challenge_users)
-                           .where(
-                             challenge_users: {
-                               user: current_user, confirm: true
-                             }
-                           ).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
+    accepted_challenges = Challenge.includes(:challenge_users)
+             .where(
+               challenge_users: {
+                 user: current_user, confirm: true
+               }
+             ).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
+
+    @challenges = if params[:search]
+                    accepted_challenges.search(params[:search], current_user, Challenge.table_name)
+                  else
+                    accepted_challenges
+                  end
   end
 
   def new

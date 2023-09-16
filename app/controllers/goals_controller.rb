@@ -8,7 +8,7 @@ class GoalsController < ApplicationController
   #----------------------------------------------------------------------------
   def index
     @goals = if params[:search]
-               Goal.search(params[:search], current_user)
+               Goal.search(params[:search], current_user, Goal.table_name)
              elsif params[:filter]
                Goal.where(category_id: params[:filter], user: current_user)
              else
