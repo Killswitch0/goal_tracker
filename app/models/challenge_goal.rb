@@ -24,19 +24,5 @@ class ChallengeGoal < ApplicationRecord
 
   belongs_to :challenge_user
 
-  validate :allow_only_one_goal
-
-  validates :user_id, uniqueness: { scope: :goal_id }
-
-  def set_winner
-    self.update(winner: true)
-  end
-
-  private
-
-  def allow_only_one_goal
-    if challenge_user.challenge_id == challenge_id
-      errors.add(:challenge_id, 'must contain only one goal')
-    end
-  end
+  validates :user_id, uniqueness: { scope: :challenge_id, message: 'can add only one goal' }
 end

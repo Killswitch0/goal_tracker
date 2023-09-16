@@ -2,7 +2,11 @@ module ChallangeHelper
   include DashboardHelper
 
   def load_level_color(tasks)
-    tasks = tasks.count
+    if tasks.is_a? Integer
+      tasks
+    else
+      tasks = tasks.count
+    end
 
     case
     when tasks <= 3
@@ -14,9 +18,9 @@ module ChallangeHelper
     end
   end
 
-  def winner(challenge)
+  def winners_of(challenge)
     return if challenge.deadline > Date.today
 
-    challenge.determine_winner
+    challenge.determine_category_winners
   end
 end

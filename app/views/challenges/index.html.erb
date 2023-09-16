@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center mt-3">
-  <div class="table-main">
+  <div class="table-main challenge">
     <div class="table-wrapper">
       <div class="table-header">
         <h2 class="text-center">Challenges</h2>
@@ -10,7 +10,7 @@
           <thead class="">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Creator</th>
+            <th scope="col"><%= sortable('user_id', title = 'Creator') %></th>
             <th scope="col">Name</th>
             <th scope="col"><%= t('challenge') %></th>
             <th scope="col" colspan="2"><%= t('action') %></th>

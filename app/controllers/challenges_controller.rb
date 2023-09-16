@@ -3,13 +3,15 @@ class ChallengesController < ApplicationController
   before_action :set_invite, only: %i[index show new]
   before_action :set_invitation, only: %i[confirm_invitation decline_invitation leave show]
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @challenges = Challenge.includes(:challenge_users)
                            .where(
                              challenge_users: {
                                user: current_user, confirm: true
                              }
-                           )
+                           ).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
   end
 
   def new

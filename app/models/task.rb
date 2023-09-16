@@ -27,6 +27,8 @@ class Task < ApplicationRecord
   belongs_to :goal
   belongs_to :user
 
+  after_update_commit :check_goal_completion
+
   validates :name, presence: true,
             format: {
               with: BASE_VALIDATION,
@@ -44,6 +46,14 @@ class Task < ApplicationRecord
   scope :uncompleted, -> { where(complete: false) }
 
   private
+
+  def check_goal_completion
+    if goal.tasks.all? { |task| task.complete? }
+      goal.update(complete: true)
+    else
+      goal.update(complete: false)
+    end
+  end
 
   # for Streakable concern
   def completed_count

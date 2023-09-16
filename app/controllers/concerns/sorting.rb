@@ -8,7 +8,7 @@ module Sorting
       if model
         model.capitalize.constantize.column_names.include?(params[:sort]) ? params[:sort] : "#{column}"
       else
-        model = controller_name.singularize.constantize
+        model = controller_name.singularize.capitalize.constantize
         model.column_names.include?(params[:sort]) ? params[:sort] : "#{column}"
       end
     end

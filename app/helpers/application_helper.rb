@@ -14,11 +14,11 @@ module ApplicationHelper
     end
   end
 
-  def user_avatar(user, size: 30, css_class: 'rounded-circle')
+  def user_avatar(user, size: 30, css_class: 'rounded-circle', style: '')
     if user.avatar.attached?
-      image_tag user.avatar.variant(resize_to_fill: [size, nil]), class: css_class
+      image_tag user.avatar.variant(resize_to_fill: [size, nil]), class: css_class, style: style
     else
-      user.decorate.gravatar(size: size, css_class: css_class)
+      user.decorate.gravatar(size: size, css_class: css_class, style: style)
     end
   end
 end

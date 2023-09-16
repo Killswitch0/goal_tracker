@@ -34,17 +34,21 @@
       <div class="card">
         <div class="card-body">
           <div class="fs-4 fw-medium text-uppercase">
-            Winner
+            Winners
           </div>
 
-          <% winner = winner(@challenge) %>
-          <div class="winner-board__user d-flex flex-column">
-            <% if winner.present? %>
-              <%= user_avatar(winner, size: 60) %>
-              <span class="fw-medium"><%= winner.name %></span>
-            <% else %>
-              <%= inline_svg_tag("icons/basic/question", options = { height: 60, width: 60, class: 'question' }) %>
-            <% end %>
+          <% winners = winners_of(@challenge) %>
+          <div class="winner-board__user d-flex justify-content-between">
+              <% if winners.present? %>
+                <% winners.each do |winner, tasks| %>
+                  <div class="mx-2 mt-2">
+                    <%= user_avatar(winner, size: 60, style: "border: 5px solid #{load_level_color(tasks)};") %>
+                    <span class="fw-medium d-block"><%= winner.name %></span>
+                  </div>
+                <% end %>
+              <% else %>
+                <%= inline_svg_tag("icons/basic/question", options = { height: 60, width: 60, class: 'question mt-2' }) %>
+              <% end %>
           </div>
         </div>
       </div>
