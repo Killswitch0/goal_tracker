@@ -9,7 +9,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col"><%= sortable 'name' %></th>
-        <th scope="col">Action</th>
+        <th scope="col" class="text-center"><%= t('action') %></th>
       </tr>
       </thead>
 
@@ -17,7 +17,7 @@
         <tr>
           <th scope="row"><%= index + 1 %></th>
           <td><%= link_to task.name.truncate(15), goal_task_path(@goal, task) %></td>
-          <td><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+          <td class="text-center"><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
         </tr>
       <% end %>
     </table>
@@ -33,7 +33,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col"><%= sortable "name" %></th>
-        <th scope="col">Action</th>
+        <th scope="col" class="text-center"><%= t('action') %></th>
       </tr>
       </thead>
 
@@ -42,7 +42,7 @@
         <tr>
           <th scope="row"><%= index + 1 %></th>
           <td><%= link_to task.name.truncate(35), goal_task_path(@goal, task) %></td>
-          <td><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+          <td class="text-center"><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
         </tr>
       <% end %>
       </tbody>

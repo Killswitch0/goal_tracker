@@ -9,7 +9,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col"><%= t('name') %></th>
-        <th scope="col"><%= t('action') %></th>
+        <th scope="col" class="text-center"><%= t('action') %></th>
       </tr>
       </thead>
 
@@ -18,7 +18,7 @@
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %></td>
-            <td><%= link_to t('delete'), goal_habit_path(@goal, habit), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+            <td class="text-center"><%= link_to t('delete'), goal_habit_path(@goal, habit), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
           </tr>
         <% end %>
       <% end %>
@@ -35,7 +35,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col"><%= t('name') %></th>
-        <th scope="col"><%= t('action') %></th>
+        <th scope="col" class="text-center"><%= t('action') %></th>
       </tr>
       </thead>
 
@@ -44,7 +44,7 @@
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %></td>
-            <td><%= link_to t('delete'), goal_habit_path(@goal, habit), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+            <td class="text-center"><%= link_to t('delete'), goal_habit_path(@goal, habit), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
           </tr>
         <% end %>
       <% end %>

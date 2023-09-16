@@ -5,13 +5,15 @@ class ChallengesController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
+  # GET /challenges
+  #----------------------------------------------------------------------------
   def index
     accepted_challenges = Challenge.includes(:challenge_users)
-             .where(
-               challenge_users: {
-                 user: current_user, confirm: true
-               }
-             ).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
+                                   .where(
+                                     challenge_users: {
+                                       user: current_user, confirm: true
+                                     }
+                                   ).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
 
     @challenges = if params[:search]
                     accepted_challenges.search(params[:search], current_user, Challenge.table_name)
@@ -39,8 +41,6 @@ class ChallengesController < ApplicationController
                          confirm: true,
                          goal_id: @challenge.id
                        }).distinct
-
-      #mark_notifications_as_read if params[:mark_as_read] == 'true'
     end
 
     @challenge_goals = if params[:filter]
@@ -50,23 +50,28 @@ class ChallengesController < ApplicationController
                        end
   end
 
+  # POST /challenges
+  #----------------------------------------------------------------------------
   def create
-    #@challenge = current_user.challenges.build(challenge_params)
     @challenge = Challenge.new(challenge_params)
     @challenge.user_id = current_user.id
 
     if @challenge.save
       ChallengeUser.create(user: current_user, challenge: @challenge, confirm: true)
+      flash[:noticed] = t('.success')
       redirect_to challenge_path(@challenge)
     else
+      flash[:danger] = t('.fail')
       render :new
     end
   end
 
+  # DELETE /challenges/1
+  #----------------------------------------------------------------------------
   def destroy
     @challenge = Challenge.find(params[:id])
     @challenge.destroy
-    flash[:noticed] = "Challenge successfully destroyed."
+    flash[:noticed] = t('success')
     redirect_to challenges_path
   end
 
@@ -88,9 +93,10 @@ class ChallengesController < ApplicationController
       @challenge_goal.challenge_id = @challenge.id
 
       if @challenge_goal.save
-        flash[:noticed] = "Goal successfully added"
+        flash[:noticed] = t('.success')
         redirect_to @challenge
       else
+        flash[:danger] = t('.fail')
         render :add_goal
       end
     end
@@ -108,14 +114,14 @@ class ChallengesController < ApplicationController
         @invitation = ChallengeUser.new(challenge: @challenge, user: invited_user)
 
         if @invitation.save
-          flash[:noticed] = "Invitation sent to #{invited_user.email}"
+          flash[:noticed] = t('.success', invited_user: invited_user.email)
         elsif @invitation.present?
           flash[:danger] = t('.already')
         else
           flash[:danger] = t('.fail')
         end
       else
-        flash[:danger] = "User not found"
+        flash[:danger] = t('.not_found')
       end
 
       redirect_to @challenge
@@ -127,7 +133,7 @@ class ChallengesController < ApplicationController
   def confirm_invitation
     if @invitation
       @invitation.update(confirm: true)
-      flash[:noticed] = t('.success', goal_name: @invitation.challenge.name)
+      flash[:noticed] = t('.success', challenge_name: @invitation.challenge.name)
     else
       flash[:danger] = t('.fail')
     end
@@ -140,7 +146,7 @@ class ChallengesController < ApplicationController
   def decline_invitation
     if @invitation
       @invitation.destroy
-      flash[:noticed] = t('.success', goal_name: @invitation.challenge.name)
+      flash[:noticed] = t('.success', challenge_name: @invitation.challenge.name)
     else
       flash[:danger] = t('.fail')
     end
@@ -151,8 +157,13 @@ class ChallengesController < ApplicationController
   # DELETE /challenge/1/leave
   #----------------------------------------------------------------------------
   def leave
-    @invitation.destroy
-    redirect_to goals_path
+    if @invitation.destroy
+      flash[:noticed] = t('challenges.leave.success')
+    else
+      flash[:noticed] = t('challenges.leave.fail')
+    end
+
+    redirect_to challenges_path
   end
 
   private
@@ -169,7 +180,7 @@ class ChallengesController < ApplicationController
     invitation = ChallengeUser.find_by(challenge: @challenge, user: current_user, confirm: true)
 
     unless invitation
-      flash[:noticed] = "You need to confirm your invitation :)"
+      flash[:noticed] = t('.create_invitation.need_confirm')
       redirect_to challenges_path
     end
   end

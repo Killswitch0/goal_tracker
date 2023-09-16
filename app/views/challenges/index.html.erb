@@ -26,7 +26,7 @@
                   <th scope="row"><%= index + 1 %></th>
                   <td><%= user_avatar(challenge.user) %></td>
                   <td><%= challenge.user.name %></td>
-                  <td><%= link_to challenge.name, challenge, style: "text-decoration: none" %></td>
+                  <td><%= link_to challenge.name.truncate(17), challenge, style: "text-decoration: none" %></td>
                   <td><%= link_to t('leave'), leave_challenge_path(challenge),
                                   data: { turbo_method: :delete, turbo_confirm: t('sure') },
                                   class: 'btn btn-sm btn-warning' %></td>

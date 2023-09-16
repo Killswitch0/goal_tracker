@@ -10,6 +10,7 @@ en:
   here: here
   or: or
   of: of
+  ago: ago
 
 
   date:
@@ -275,19 +276,28 @@ en:
       category_must_exist: 'Select a category or create a new one.'
     destroy:
       success: 'Goal deleted successfully.'
-    create_invitation:
-      already: 'User has already received an invitation.'
-      fail: 'Failed to send invitation.'
-    confirm_invitation:
-      success: 'You have accepted the invitation and joined the %{goal_name} group.'
-      fail: 'Invitation not found.'
-    decline_invitation:
-      success: 'You declined the invitation to the %{goal_name} group.'
-      fail: 'Invitation not found.'
   challenges:
     create:
       success: 'Challenge created successfully.'
-      fail: 'Challenge not created.'
+      fail: 'Challenge was not created.'
+    create_invitation:
+      success: 'Invitation sent successfully to user %{invited_user}.'
+      already: 'User has already received an invitation.'
+      fail: 'Failed to send invitation.'
+      not_found: 'User with this email not found.'
+      need_confirm: 'You need to confirm the invitation :)'
+    confirm_invitation:
+      success: 'You have accepted the invitation and joined the %{challenge_name} challenge.'
+      fail: 'Invitation not found.'
+    decline_invitation:
+      success: 'You declined the invitation to the %{challenge_name} challenge.'
+      fail: 'Invitation not found.'
+    add_goal:
+      success: 'Goal successfully added to the challenge.'
+      fail: 'Failed to add the goal to the challenge.'
+    leave:
+      success: 'You have left the challenge.'
+      fail: 'Failed to leave the challenge.'
   password_resets:
     create:
       success: 'Email sent with password reset instructions.'
