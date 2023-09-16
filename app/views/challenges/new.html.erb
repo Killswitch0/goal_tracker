@@ -2,6 +2,7 @@
 
 <div class="col-sm-12 col-md-4 offset-md-4">
   <%= form_with(model: @challenge) do |f| %>
+    <%= render 'shared/error_messages', resource: @challenge %>
     <div class="card">
       <div class="card-body">
         <div class="mb-3">

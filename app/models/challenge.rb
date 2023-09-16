@@ -27,7 +27,9 @@ class Challenge < ApplicationRecord
 
   validates :name, presence: true, format: { with: BASE_VALIDATION }
   validates :description, presence: true, format: { with: BASE_VALIDATION }
+
   validates :deadline, presence: true
+  validate :min_deadline_period
 
   def determine_category_winners
     user_tasks_count = {}
@@ -46,5 +48,13 @@ class Challenge < ApplicationRecord
 
   def check_creator(user)
     self.user == user
+  end
+
+  private
+
+  def min_deadline_period
+    if deadline < Date.today + 1.day
+      errors.add(:deadline, 'period should be at least 1 day')
+    end
   end
 end
