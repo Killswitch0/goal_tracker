@@ -63,6 +63,10 @@ class Goal < ApplicationRecord
                                                 ) completed_tasks_count')
                                          .order('completed_tasks_count DESC') }
 
+  def goal_in_challenge
+    challenge_goals.where(goal: self).first&.challenge
+  end
+
   def tasks_streak?
     return if self.tasks.completed.count == 0
 

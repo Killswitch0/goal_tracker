@@ -21,6 +21,7 @@
 class ChallengeGoal < ApplicationRecord
   belongs_to :user
   belongs_to :goal
+  belongs_to :challenge
 
   belongs_to :challenge_user
 

@@ -12,6 +12,11 @@
       <dd class="col-sm-9 px-5"><%= @goal.deadline.to_formatted_s(:long) %></dd>
       <dt class="col-sm-3"><%= t('days_left') %></dt>
       <dd class="col-sm-9 px-5"><%= days_left(@goal).zero? ? 'Overdue' : days_left(@goal) %></dd>
+      <% challenge = @goal.goal_in_challenge&.name.present? %>
+      <% if challenge %>
+        <dt class="col-sm-3"><%= t('in_challenge') %></dt>
+        <dd class="col-sm-9 px-5"><%= link_to "#{@goal.goal_in_challenge&.name}", @goal.goal_in_challenge %></dd>
+      <% end %>
     </dl>
 
     <div class="text-center">
