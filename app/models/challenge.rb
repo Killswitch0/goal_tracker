@@ -25,6 +25,10 @@ class Challenge < ApplicationRecord
   has_many :challenge_goals, dependent: :destroy
   has_many :goals, through: :challenge_goals
 
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :deadline, presence: true
+
   def determine_category_winners
     user_tasks_count = {}
 

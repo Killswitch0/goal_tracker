@@ -1,68 +1,80 @@
-.challenge-wrapper {
-  .goal-items {
-    display: flex;
-    justify-content: space-around;
-    list-style-type: none;
-    flex-wrap: wrap;
+section#challenges-show {
+  .challenge-header {
+    background: #fff5;
+    border-radius: 2rem;
+    width: 45%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid #fff5;
+    box-shadow: 0 0.4rem 0.8rem #0005;
+  }
 
-    .goal-item {
-      padding: 15px;
-      width: 230px;
-      height: 230px;
-      background: #fff5;
-      border-radius: 5%;
-      border: 2px solid #fff5;
-      box-shadow: 0 0.4rem 0.8rem #0005;
+  .challenge-wrapper {
+    .goal-items {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      list-style-type: none;
+      flex-wrap: wrap;
 
-      &__progress {
-        margin: 0 auto;
+      .goal-item {
+        padding: 15px;
+        width: 230px;
+        height: 230px;
+        background: #fff5;
+        border-radius: 5%;
+        border: 2px solid #fff5;
+        box-shadow: 0 0.4rem 0.8rem #0005;
+
+        &__progress {
+          margin: 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: radial-gradient(closest-side, white 79%, transparent 80%),
+          conic-gradient(rgba(9, 194, 30, 1) 0%, rgba(39, 245, 63, 0.21) 0);
+
+          span {
+            color: rgba(9, 194, 30, 1)
+          }
+        }
+
+      }
+
+      .bottom-wrapper {
+        margin-top: 15px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
 
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: radial-gradient(closest-side, white 79%, transparent 80%),
-        conic-gradient(rgba(9, 194, 30, 1) 0%, rgba(39, 245, 63, 0.21) 0);
-
-        span {
-          color: rgba(9, 194, 30, 1)
+        &__created-ago {
+          color: #808080;
         }
       }
 
     }
+  }
 
-    .bottom-wrapper {
-      margin-top: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .winner-board {
+    width: 50%;
+    margin: 15px auto;
 
-      &__created-ago {
-        color: #808080;
+    &__user {
+      margin: 0 auto;
+      width: fit-content;
+
+      .question {
+        fill: #fff5;
       }
+
     }
-
-  }
-}
-
-.challenge .winner-board {
-  .card {
-    background: #fff5;
   }
 
-  &__user {
-    margin: 0 auto;
-    width: fit-content;
-
-    .question {
-      fill: #fff5;
-    }
-
+  .table-main.challenge {
+    width: 62vh;
   }
-}
-
-.table-main.challenge {
-  width: 62vh;
 }

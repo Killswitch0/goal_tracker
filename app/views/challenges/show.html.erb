@@ -1,36 +1,29 @@
-<section class="challenge">
-  <h1 class="text-center mt-3">Challenge: <%= @challenge.name %></h1>
+<section id="challenges-show">
+  <div class="challenge-header text-center mt-3">
+    <h1 class="text-center mt-3">Challenge: <%= @challenge.name %></h1>
+    <div class="divider"></div>
 
-  <div class="text-center fs-4">
-    <%= @challenge.created_at.to_date.to_formatted_s(:long_ordinal) %> -
-    <%= @challenge.deadline.to_date.to_formatted_s(:long_ordinal) %>
-  </div>
-
-  <div class="text-center mt-3 d-flex justify-content-center align-items-center">
-    <div class="">
-      <%= link_to 'Invite user', create_invitation_challenge_path(@challenge),
-                  class: 'btn btn-primary' if @challenge.check_creator(current_user) %>
-      <%= link_to 'Add Goal', add_goal_challenge_path(@challenge),
-                  class: 'btn btn-primary' %>
-      <%= link_to 'Leave challenge', leave_challenge_path(@challenge),
-                  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                  class: 'btn btn-warning mx-5' %>
-
-      <%= link_to 'My Goal', challenge_path(@challenge, filter: "#{current_user.id}"),
-                  class: "#{params[:filter] == "#{current_user.id}" ?
-                              'btn btn-primary btn-sm' :
-                              'btn btn-outline-primary btn-sm'}" %>
-      <%= link_to 'All Goals', challenge_path(@challenge),
-                  class: "#{params[:filter].nil? ?
-                              'btn btn-primary btn-sm' :
-                              'btn btn-outline-primary btn-sm'}" %>
-
-      <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-        Rating
-      </a>
+    <div class="text-center fs-4">
+      <%= @challenge.created_at.to_date.to_formatted_s(:long_ordinal) %> -
+      <%= @challenge.deadline.to_date.to_formatted_s(:long_ordinal) %>
     </div>
 
-    <div class="winner-board mx-5">
+    <div class="mt-1 d-flex justify-content-around">
+      <div>
+        <%= link_to 'Invite user', create_invitation_challenge_path(@challenge),
+                    class: 'btn btn-sm btn-primary' if @challenge.check_creator(current_user) %>
+        <%= link_to 'Add Goal', add_goal_challenge_path(@challenge),
+                    class: 'btn btn-sm btn-primary mx-3' %>
+      </div>
+      <div>
+        <%= link_to 'Leave challenge', leave_challenge_path(@challenge),
+                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                    class: 'btn btn-sm btn-warning' %>
+      </div>
+
+    </div>
+
+    <div class="winner-board">
       <div class="card">
         <div class="card-body">
           <div class="fs-4 fw-medium text-uppercase">
@@ -52,6 +45,21 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div>
+      <%= link_to 'My Goal', challenge_path(@challenge, filter: "#{current_user.id}"),
+                  class: "#{params[:filter] == "#{current_user.id}" ?
+                              'btn btn-primary btn-sm' :
+                              'btn btn-outline-primary btn-sm'}" %>
+      <%= link_to 'All Goals', challenge_path(@challenge),
+                  class: "#{params[:filter].nil? ?
+                              'btn btn-primary btn-sm' :
+                              'btn btn-outline-primary btn-sm'}" %>
+
+      <a class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        Rating
+      </a>
     </div>
   </div>
 
@@ -108,10 +116,10 @@
         <thead class="table-light">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Member</th>
+          <th scope="col"><%= t('member') %></th>
           <th scope="col"><%= t('name') %></th>
-          <th scope="col">Targets</th>
-          <th scope="col">Load</th>
+          <th scope="col"><%= t('targets') %></th>
+          <th scope="col"><%= t('load') %></th>
         </tr>
         </thead>
         <tbody class="overflow-y-auto">

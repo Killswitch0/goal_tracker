@@ -120,6 +120,13 @@ en:
         updated_at: Updated At
         goal_id: Goal
         user_id: User
+      challenge:
+        name: Name
+        description: Description
+        deadline: Deadline
+        user_id: User
+        created_at: Created At
+        updated_at: Updated At
       completion_date:
         date: Date
         habit_id: Habit
@@ -227,6 +234,11 @@ en:
   habits_chart: Habits Chart
   tasks_chart: Tasks Chart
 
+  # Views -> Challenges.
+  #----------------------------------------------------------------------------
+  challenge: Challenge
+  new_challenge: New Challenge
+
   # Controllers.
   #----------------------------------------------------------------------------
   categories:
@@ -269,6 +281,10 @@ en:
     decline_invitation:
       success: 'You declined the invitation to the %{goal_name} group.'
       fail: 'Invitation not found.'
+  challenges:
+    create:
+      success: 'Challenge created successfully.'
+      fail: 'Challenge not created.'
   password_resets:
     create:
       success: 'Email sent with password reset instructions.'

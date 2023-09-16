@@ -64,7 +64,7 @@
           </table>
         </section>
 
-        <div class="links d-flex justify-content-between mb-3">
+        <div class="links d-flex justify-content-around mb-3">
           <%= link_to t('new_habit'), new_goal_habit_path(@goal), class: "mt-2 btn btn-primary" %>
           <%= link_to t('all_habits'), goal_habits_path(@goal), class: "mt-2 btn btn-primary" %>
           <%= link_to t('navigation.chart'), goal_habit_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>
@@ -111,7 +111,7 @@
           </table>
         </section>
 
-        <div class="links d-flex justify-content-between mb-3">
+        <div class="links d-flex justify-content-around mb-3">
           <%= link_to t('new_task'), new_goal_task_path(@goal), class: "mt-2 btn btn-primary" %>
           <%= link_to t('all_tasks'), goal_tasks_path(@goal), class: "mt-2 btn btn-primary" %>
           <%= link_to t('navigation.chart'), goal_task_chart_path(@goal, period: 'day'), class: "mt-2 btn btn-primary" %>

@@ -1,21 +1,20 @@
 <div id="challenges-index">
   <div class="challenges-wrapper mt-3">
-
-    <%= render 'layouts/search', path: challenges_path %>
-
     <div class="table-main challenge">
       <div class="table-wrapper">
         <div class="table-header">
-          <h2 class="text-center">Challenges</h2>
+          <h2 class="text-center"><%= t('navigation.challenges') %></h2>
         </div>
 
+        <%= render 'layouts/search', path: challenges_path %>
+
         <section class="table-body">
-          <table class="">
-            <thead class="">
+          <table>
+            <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col"><%= sortable('user_id', title = 'Creator') %></th>
-              <th scope="col">Name</th>
+              <th scope="col"><%= sortable('user_id', title = t('creator')) %></th>
+              <th scope="col"><%= t('name') %></th>
               <th scope="col"><%= t('challenge') %></th>
               <th scope="col" colspan="2"><%= t('action') %></th>
             </tr>
@@ -29,9 +28,10 @@
                   <td><%= challenge.user.name %></td>
                   <td><%= link_to challenge.name, challenge, style: "text-decoration: none" %></td>
                   <td><%= link_to t('leave'), leave_challenge_path(challenge),
-                                  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                                  data: { turbo_method: :delete, turbo_confirm: t('sure') },
                                   class: 'btn btn-sm btn-warning' %></td>
-                  <td><%= link_to t('delete'), challenge, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' if challenge.user == current_user %> </td>
+                  <td><%= link_to t('delete'), challenge, data: { turbo_method: :delete, turbo_confirm: t('sure') },
+                                  class: 'btn btn-sm btn-danger' if challenge.user == current_user %> </td>
               <% end %>
               </tr>
             <% end %>
@@ -41,9 +41,9 @@
       </div>
 
       <div class="d-flex justify-content-around">
-        <%= link_to t('new'), new_challenge_path, class: 'btn btn-primary' %>
+        <%= link_to t('new_challenge'), new_challenge_path, class: 'btn btn-primary' %>
         <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-          Invites
+          <%= t('invites') %>
           <% if @invites.present? %>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
           <%= @invites.count > 99 ? '99+' : @invites.count %>
@@ -57,7 +57,7 @@
 
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExample">Invites</h5>
+      <h5 class="offcanvas-title" id="offcanvasExample"><%= t('invites') %></h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -66,10 +66,10 @@
           <thead class="table-light">
           <tr>
             <th scope="col">#</th>
-            <th scope="col">User</th>
-            <th scope="col"><%= t('name') %></th>
-            <th scope="col">Challenge</th>
-            <th class="text-center" scope="col" colspan="2">Action</th>
+            <th scope="col"><%= t('activerecord.models.user') %></th>
+            <th scope="col"><%= t('activerecord.attributes.user.name') %></th>
+            <th scope="col"><%= t('challenge') %></th>
+            <th class="text-center" scope="col" colspan="2"><%= t('action') %></th>
           </tr>
           </thead>
           <tbody class="overflow-y-auto">
@@ -83,8 +83,8 @@
                 <td><%= user_avatar(invite.challenge.user) %></td>
                 <td><%= invite.challenge.user.name %></td>
                 <td><%= invite.challenge.name.truncate(20) %></td>
-                <td><%= button_to 'Accept', confirm_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-primary btn-sm' %></td>
-                <td><%= button_to 'Decline', decline_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-danger btn-sm' %></td>
+                <td><%= button_to t('accept'), confirm_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-primary btn-sm' %></td>
+                <td><%= button_to t('decline'), decline_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-danger btn-sm' %></td>
               </tr>
             <% end %>
             </tr>

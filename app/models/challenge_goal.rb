@@ -24,5 +24,5 @@ class ChallengeGoal < ApplicationRecord
 
   belongs_to :challenge_user
 
-  validates :user_id, uniqueness: { scope: :challenge_id, message: 'can add only one goal' }
+  validates :user_id, presence: true, uniqueness: { scope: :challenge_id, message: 'can add only one goal' }
 end
