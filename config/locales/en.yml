@@ -238,6 +238,9 @@ en:
   #----------------------------------------------------------------------------
   challenge: Challenge
   new_challenge: New Challenge
+  target:
+    one: "1 target"
+    other: "%{count} targets"
 
   # Controllers.
   #----------------------------------------------------------------------------

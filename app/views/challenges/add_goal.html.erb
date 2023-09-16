@@ -8,7 +8,7 @@
       <div class="card-body">
 
         <div class="mb-3">
-          <%= f.label :goal_id %>
+          <%= f.label :goal_id, t('activerecord.attributes.category.goal_id') %>
           <%= f.select :goal_id, options_for_select(current_user.goals.pluck(:name, :id),
                                                     params[:goal_id]), {}, class: 'form-select', include_blank: false
           %>
