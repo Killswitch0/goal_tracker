@@ -24,6 +24,7 @@ class ChallengeUser < ApplicationRecord
   has_many :challenge_goals, dependent: :destroy
 
   validates :challenge_id, presence: true, uniqueness: { scope: :user_id }
+  validates :user_id, presence: true
 
   after_create_commit :notify_create, if: :check_creator
 

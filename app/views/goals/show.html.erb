@@ -74,7 +74,7 @@
 
     <div class="col-sm-12 table-main <%= 'completed' if @goal.tasks_streak? %>">
       <div class="table-header">
-        <h2 class="text-center"><%= t('done') %> <%= tasks_completed_for(@goal).first %> <%= t('of') %> <%= tasks_completed_for(@goal).second %></h2>
+        <h2 class="text-center"><%= t('done') %> <%= completed_for(@goal).first %> <%= t('of') %> <%= completed_for(@goal).second %></h2>
       </div>
 
       <div class="table-wrapper">

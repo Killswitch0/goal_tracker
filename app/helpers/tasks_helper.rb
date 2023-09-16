@@ -5,7 +5,7 @@ module TasksHelper
             class: "btn btn-primary btn-sm"
   end
 
-  def tasks_completed_for(target)
+  def completed_for(target)
     completed = target.tasks.where(complete: true).count
     all = target.tasks.count
     [completed, all]

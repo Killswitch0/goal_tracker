@@ -17,7 +17,7 @@
                   <% end %>
                   <div class="progress-info">
                     <div class="">
-                      <%= t('done') %> <span><%= tasks_completed_for(goal).first %></span> <%= t('of') %> <%= tasks_completed_for(goal).last %>
+                      <%= t('done') %> <span><%= completed_for(goal).first %></span> <%= t('of') %> <%= completed_for(goal).last %>
                     </div>
                     <div class="">
                       <span>
@@ -69,7 +69,7 @@
 
         <div class="completed-info">
           <div class="">
-            <%= t('done') %> <span><%= tasks_completed_for(current_user).first %></span> <%= t('of') %> <%= tasks_completed_for(current_user).last %>
+            <%= t('done') %> <span><%= completed_for(current_user).first %></span> <%= t('of') %> <%= completed_for(current_user).last %>
           </div>
 
           <div class="show-all">

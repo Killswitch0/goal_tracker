@@ -16,17 +16,17 @@
 
 class Challenge < ApplicationRecord
   include Searchable
+  include ValidationConstants
 
   belongs_to :user
 
   has_many :challenge_users, dependent: :destroy
   has_many :users, through: :challenge_users
-
   has_many :challenge_goals, dependent: :destroy
   has_many :goals, through: :challenge_goals
 
-  validates :name, presence: true
-  validates :description, presence: true
+  validates :name, presence: true, format: { with: BASE_VALIDATION }
+  validates :description, presence: true, format: { with: BASE_VALIDATION }
   validates :deadline, presence: true
 
   def determine_category_winners

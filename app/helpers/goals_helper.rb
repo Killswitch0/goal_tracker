@@ -77,6 +77,7 @@ module GoalsHelper
 
   def available_colors
     used_colors = current_user.goals.pluck(:color)
+
     AVAILABLE_COLORS.map do |color|
       if used_colors.include?(color[1])
         color[0]

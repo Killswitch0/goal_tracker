@@ -48,6 +48,8 @@ class ChallengesController < ApplicationController
                        else
                          @challenge.goals.sort_by_completed_tasks
                        end
+
+    mark_notifications_as_read if params[:mark_as_read] == 'true'
   end
 
   # POST /challenges
@@ -192,5 +194,12 @@ class ChallengesController < ApplicationController
 
   def set_invite
     @invites ||= ChallengeUser.where(confirm: false, user: current_user)
+  end
+
+  def mark_notifications_as_read
+    return unless current_user
+
+    notifications_to_mark_as_read = @invitation.notifications_as_challenge_user.where(recipient: current_user)
+    notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
   end
 end
