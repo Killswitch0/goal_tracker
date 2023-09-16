@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "CreateGoals" do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
+  given!(:category) { create(:category, user: user) }
   given(:goal) { create(:goal, user: user, category: category) }
 
   feature 'Create goal', '%q{
@@ -13,7 +13,6 @@ RSpec.feature "CreateGoals" do
 
     scenario 'Authenticated user try to create, complete and delete Goal' do
       log_in(user)
-      ChallengeUser.create(goal: goal, user: user, confirm: true)
 
       ### create ###
       visit new_goal_path
@@ -22,7 +21,9 @@ RSpec.feature "CreateGoals" do
       fill_in 'Description', with: goal.description
       select category.name, from: 'Category'
       select goal.color, from: 'Color'
-      fill_in 'Deadline', with: goal.deadline
+      select goal.deadline.year, from: 'goal_deadline_1i'
+      select goal.deadline.strftime('%B'), from: 'goal_deadline_2i'
+      select goal.deadline.day.to_s, from: 'goal_deadline_3i'
 
       click_button 'Create'
 
