@@ -21,4 +21,14 @@ module ApplicationHelper
       user.decorate.gravatar(size: size, css_class: css_class, style: style)
     end
   end
+
+  def days_left(target)
+    days = (target.deadline.to_date - Date.today).to_i
+
+    if days.negative? || days.zero?
+      0
+    else
+      days
+    end
+  end
 end

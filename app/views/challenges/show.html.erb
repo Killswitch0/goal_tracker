@@ -6,6 +6,7 @@
     <div class="text-center fs-4">
       <%= @challenge.created_at.strftime('%d-%m-%Y') %> /
       <%= @challenge.deadline.strftime('%d-%m-%Y') %>
+      (<%= days_left(@challenge) %> <%= t('days_left').downcase %>)
     </div>
 
     <div class="mt-1 d-flex justify-content-around">

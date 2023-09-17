@@ -96,14 +96,4 @@ module GoalsHelper
     goals = goals.count
     "#{comp}/#{goals}"
   end
-
-  def days_left(goal)
-    days = (goal.deadline.to_date - Date.today).to_i
-
-    if days.negative? || days.zero?
-      0
-    else
-      days
-    end
-  end
 end
