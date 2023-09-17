@@ -183,7 +183,11 @@ en:
   sure: Are you sure?
   next: Next
   previous: Previous
-  days_left: Days left
+  days_left:
+    one: '%{count} day left'
+    few: '%{count} days left'
+    many: '%{count} days left'
+    other: '%{count} days left'
 
   # Views -> Goals.
   #----------------------------------------------------------------------------
@@ -239,6 +243,7 @@ en:
   #----------------------------------------------------------------------------
   challenge: Challenge
   new_challenge: New Challenge
+  challenge_end: Challenge end
   target:
     one: "1 target"
     other: "%{count} targets"

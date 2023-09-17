@@ -192,7 +192,12 @@ uk:
   sure: Ви впевнені?
   next: Наступний
   previous: Попередій
-  days_left: Днів залишилося
+  days_left:
+    one: '%{count} день залишився'
+    few: '%{count} днів залишилося'
+    many: '%{count} днів залишилося'
+    other: '%{count} днів залишилося'
+
   leave: Вийти
   invites: Запрошення
   invite_user: Запросити користувача
@@ -263,6 +268,7 @@ uk:
   member: Учасник
   targets: Завдання
   challenge_users: Учаснки челленджу
+  challenge_end: Челлендж завершено
   target:
     one: "%{count} завдання"
     few: "%{count} завдання"

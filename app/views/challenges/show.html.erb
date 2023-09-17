@@ -6,7 +6,11 @@
     <div class="text-center fs-4">
       <%= @challenge.created_at.strftime('%d-%m-%Y') %> /
       <%= @challenge.deadline.strftime('%d-%m-%Y') %>
-      (<%= days_left(@challenge) %> <%= t('days_left').downcase %>)
+      <% if days_left(@challenge) == 0 %>
+        (<%= t('challenge_end').downcase %>)
+      <% else %>
+        (<%= t('days_left', count: days_left(@challenge)).downcase %>)
+      <% end %>
     </div>
 
     <div class="mt-1 d-flex justify-content-around">
@@ -16,12 +20,12 @@
         <%= link_to t('add_goal'), add_goal_challenge_path(@challenge),
                     class: 'btn btn-sm btn-primary mx-3' %>
       </div>
+
       <div>
         <%= link_to t('leave_challenge'), leave_challenge_path(@challenge),
                     data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
                     class: 'btn btn-sm btn-warning' %>
       </div>
-
     </div>
 
     <div class="winner-board">
