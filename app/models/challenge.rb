@@ -53,6 +53,8 @@ class Challenge < ApplicationRecord
   private
 
   def min_deadline_period
+    return unless deadline
+
     if deadline < Date.today + 1.day
       errors.add(:deadline, 'period should be at least 1 day.')
     end
