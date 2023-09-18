@@ -64,11 +64,18 @@ th a {
 
   .table-header {
     margin-top: 16px;
-    padding: 0.5rem 1rem;
   }
 
   input.form-control, select.form-select, textarea.form-control {
     background: #fff5;
+  }
+}
+
+.offcanvas {
+  background-color: $third-color;
+
+  .offcanvas-title {
+    font-size: 25px;
   }
 }
 

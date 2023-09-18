@@ -1,8 +1,8 @@
 #goals-index {
   .goals-block {
-    margin-top: 20px;
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    margin-top: 20px;
   }
 
   ul {
@@ -12,12 +12,13 @@
   }
 
   .categories-wrapper {
-    height: 414px;
+    height: 50vh;
     width: 200px;
     background: $third-color;
     box-shadow: 0 0.4rem 0.8rem #0005;
     border-radius: 1rem;
     padding: 5px;
+    margin-right: 30px;
 
     .new-category {
       display: flex;
@@ -62,6 +63,12 @@
 
   .list-wrapper.goals {
     margin-left: 19%;
+  }
+
+  .table-main {
+    margin-inline: auto;
+    width: 600px;
+    background-color: $third-color;
   }
 }
 

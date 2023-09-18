@@ -20,20 +20,24 @@
     flex-direction: column;
     list-style-type: none;
     padding: 10px;
+
     .goal-item {
       width: 100%;
       height: 130px;
       background-color: $third-color;
       margin-bottom: 20px;
+
       .goal-title {
         text-transform: uppercase;
         font-size: 17px;
         font-weight: bold;
         padding: 5px;
       }
+
       .goal-bar {
         width: 100%;
       }
+
       .completed-goal {
         padding-inline: 10px;
         text-align: right;
@@ -59,6 +63,7 @@
     margin-top: 1px;
     display: flex;
     justify-content: space-between;
+
     span {
       font-weight: bold;
     }
@@ -78,6 +83,7 @@
 
   .completed-wrapper {
     padding-left: 11px;
+
     span {
       font-weight: bold;
     }
@@ -92,16 +98,28 @@
       display: flex;
       justify-content: space-between;
       padding-right: 40%;
+
       .show-all {
-        border: 1px solid #2E2F30;
+        border: 2px solid $second-color;
         padding: 0 4px;
 
         a, i {
-          color: #2E2F30;
+          color: $second-color;
           text-decoration: none;
         }
 
       }
+
+      .show-all:hover {
+        border-color: $primary-hover;
+        color: $primary-hover;
+        transition: 0.6ms all;
+
+        a, i {
+          color: inherit;
+        }
+      }
+
       i.bi {
         font-size: 17px;
       }
@@ -122,7 +140,7 @@
 }
 
 
-      /// Scrollbar ///
+/// Scrollbar ///
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

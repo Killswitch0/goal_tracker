@@ -1,6 +1,6 @@
 div.table-main {
   width: 50vh;
-  height: 50vh;
+  height: 70vh;
   background-color: #fff5;
   box-shadow: 0 .4rem .8rem #0005;
   border-radius: .8rem;
@@ -24,12 +24,12 @@ table, th, td {
   width: 95%;
   height: 10%;
   background-color: #DBE2E6;
-  padding: .8rem 1rem;
+  padding: .4rem 1rem;
   border-radius: 6rem;
+  align-items: center;
 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 }
 
 .table-header h2 {

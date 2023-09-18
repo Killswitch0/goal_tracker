@@ -11,6 +11,8 @@ class GoalsController < ApplicationController
                Goal.search(params[:search], current_user, Goal.table_name)
              elsif params[:filter]
                Goal.where(category_id: params[:filter], user: current_user)
+             elsif params[:sort]
+               Goal.all.order("#{sort_column} #{sort_direction}")
              else
                current_user.goals.order(complete: :asc)
              end
