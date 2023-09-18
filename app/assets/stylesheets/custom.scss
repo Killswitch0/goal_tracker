@@ -8,6 +8,24 @@ body {
   background: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
 }
 
+.home {
+  background: $third-color;
+  height: 43vh;
+  width: 60vh;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  margin: 0 auto;
+
+  img {
+    margin: 0 auto;
+    position: relative;
+    top: -8%;
+  }
+}
+
 .offcanvas.offcanvas-start {
   width: 500px;
 }
