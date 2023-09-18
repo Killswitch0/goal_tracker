@@ -1,8 +1,5 @@
 <%= form_with(model: user, url: path, local: true) do |f| %>
   <%= render "shared/error_messages", resource: user %>
-
-  <div class="card">
-    <div class="card-body">
       <div class="row">
         <div class="col-sm-12 text-center">
           <% unless user.new_record? %>
@@ -50,7 +47,5 @@
         </div>
       <% end %>
 
-      <%= f.submit "#{user.new_record? ? t('authenticate.sign_up') : t('update')}", class: "mb-2 btn btn-primary" %>
-    </div>
-  </div>
+      <%= f.submit "#{user.new_record? ? t('authenticate.sign_up') : t('update')}", class: "mb-2 btn btn-primary action" %>
 <% end %>

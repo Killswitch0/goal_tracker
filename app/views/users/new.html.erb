@@ -1,7 +1,15 @@
-<h1 class="text-center mt-3"><%= t('new_user') %></h1>
-
 <div class="col-sm-12 col-md-4 offset-md-4">
-  <%= render "form", user: user, path: signup_path %>
+  <div class="card">
+    <div class="table-header">
+      <h2 class="text-center mt-3">
+        <%= t('new_user') %>
+      </h2>
+    </div>
+
+    <div class="card-body">
+      <%= render "form", user: user, path: signup_path %>
+    </div>
+  </div>
 </div>
 
 

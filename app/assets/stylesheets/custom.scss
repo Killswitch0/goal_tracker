@@ -1,10 +1,11 @@
+@import "variables/*";
 @import "components/*";
 @import "views/**/*";
 
 body {
   min-height: 100vh;
   background: #03dfff;
-  background: linear-gradient(139deg, #03ddffcb 0%, #ff0381b6 90%);
+  background: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
 }
 
 .offcanvas.offcanvas-start {
@@ -57,9 +58,14 @@ th a {
   opacity: 1;
 }
 
-
+// Forms
 .card {
-  background: #fff5;
+  background: $third-color;
+
+  .table-header {
+    margin-top: 16px;
+    padding: 0.5rem 1rem;
+  }
 
   input.form-control, select.form-select, textarea.form-control {
     background: #fff5;

@@ -184,6 +184,7 @@ en:
   next: Next
   previous: Previous
   days_left:
+    base: 'Days left'
     one: '%{count} day left'
     few: '%{count} days left'
     many: '%{count} days left'

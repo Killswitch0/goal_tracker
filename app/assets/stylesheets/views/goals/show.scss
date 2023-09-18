@@ -2,8 +2,13 @@
   /// Goal info
   .goal-info {
     box-shadow: 0 .4rem .8rem #0005;
-    background-color: #fff5;
+    background-color: $third-color;
     border-radius: 1rem;
+    width: 43%;
+  }
+
+  .table-main {
+    background-color: $third-color;
   }
 
   /// goals, habits, tasks: goals/show

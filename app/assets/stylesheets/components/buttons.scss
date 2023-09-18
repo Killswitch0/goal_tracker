@@ -1,0 +1,39 @@
+// Main buttons
+.btn-primary,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: $primary !important;
+  border-color: $primary !important;
+}
+
+
+.btn-primary:hover {
+  background-color: $primary-hover !important;
+  border-color: $primary-hover !important;
+  transition: 0.30ms all;
+}
+
+.btn-secondary,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background-color: $fifth-color !important;
+  border-color: $fifth-color !important;
+}
+
+.btn-secondary:hover {
+  background-color: $secondary-hover !important;
+  border-color: $secondary-hover !important;
+}
+
+// Hover for action buttons
+a.action, input.action {
+  background-image: linear-gradient(to right, #b490ca, #5ee7df, #b490ca) !important;
+  background-size: 200%;
+  transition: 0.4s all;
+  border: none;
+}
+
+a.action:hover, input.action:hover {
+  background-position: right;
+  transition: 0.5s all;
+}

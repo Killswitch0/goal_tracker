@@ -4,6 +4,8 @@ module ChallangeHelper
   def load_level_color(tasks)
     if tasks.is_a? Integer
       tasks
+    elsif tasks.nil?
+      tasks = 0
     else
       tasks = tasks.count
     end

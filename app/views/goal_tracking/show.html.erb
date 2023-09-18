@@ -1,11 +1,13 @@
-<h2 class="text-center"><%= t('goals_tracker').upcase %></h2>
-<div class="tracking-wrapper">
-  <%= render 'layouts/search', path: goal_tracking_path %>
+<div id="goal_tracking-show">
+  <h2 class="text-center"><%= t('goals_tracker').upcase %></h2>
+  <div class="tracking-wrapper">
+    <%= render 'layouts/search', path: goal_tracking_path %>
 
-  <div class="d-flex justify-content-start mb-3">
-    <%= link_to t('switch_to_tasks'), task_tracking_path, class: 'btn btn-primary' %>
+    <div class="d-flex justify-content-start mb-3">
+      <%= link_to t('switch_to_tasks'), task_tracking_path, class: 'btn btn-primary' %>
+    </div>
+
+    <%= render 'goal_tracking/table', items: @goals %>
   </div>
-
-  <%= render 'goal_tracking/table', items: @goals %>
 </div>
 

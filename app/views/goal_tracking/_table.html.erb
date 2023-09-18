@@ -8,7 +8,7 @@
     <th><%= t('created_at') %></th>
     <th>
       <%= sortable 'deadline' %>
-    <th><%= t('days_left') %></th>
+    <th><%= t('days_left.base') %></th>
   </tr>
   </thead>
   <tbody>
@@ -18,8 +18,8 @@
       <td><%= link_to item.name, item %></td>
       <td><%= item.class.name %></td>
       <td><%= item.complete? ? 'Completed' : 'In process' %></td>
-      <td><%= item.created_at.to_fs(:long) %></td>
-      <td><%= item.deadline.to_fs(:long) %></td>
+      <td><%= item.created_at&.strftime('%d-%m-%Y') %></td>
+      <td><%= item.deadline&.strftime('%d-%m-%Y') %></td>
       <td><%= days_left(item) %></td>
     </tr>
   <% end %>

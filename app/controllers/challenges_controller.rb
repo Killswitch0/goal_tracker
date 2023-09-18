@@ -38,8 +38,7 @@ class ChallengesController < ApplicationController
       @members = User.joins(:challenge_users)
                      .where(
                        challenge_users: {
-                         confirm: true,
-                         goal_id: @challenge.id
+                         confirm: true
                        }).distinct
     end
 
@@ -166,6 +165,21 @@ class ChallengesController < ApplicationController
     end
 
     redirect_to challenges_path
+  end
+
+  def destroy_goal
+    @challenge = Challenge.find(params[:id])
+    @goal = Goal.find(params[:goal_id])
+    @challenge_goal = ChallengeGoal.where(challenge_id: @challenge, user: current_user, goal_id: @goal).first
+
+    if @challenge_goal
+      @challenge_goal.destroy
+      flash[:noticed] = "Goal was successfully destroyed from #{@challenge.name}"
+    else
+      flash[:noticed] = "Goal was not destroyed from #{@challenge.name}"
+    end
+
+    redirect_to @challenge
   end
 
   private

@@ -76,6 +76,9 @@
 
           <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>">
             <% percentage = calculate_items(goal: goal, user: goal.user) %>
+            <%= button_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
+                          method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } },
+                          class: 'btn-close position-absolute' if goal.user == current_user %>
 
             <div class="goal-item__progress fw-bold fs-4" style="background:
               radial-gradient(closest-side, white 79%, transparent 80%),
@@ -128,14 +131,16 @@
         </tr>
         </thead>
         <tbody class="overflow-y-auto">
-        <% @challenge_goals.each_with_index do |goal, index| %>
+        <% @members.each_with_index do |user, index| %>
+          <% user_goal = user.user_goal_in(@challenge)&.tasks&.count %>
+
           <tr>
             <th scope="row"><%= index + 1 %></th>
-            <td><%= user_avatar(goal.user, size: 25) %></td>
-            <td><%= goal.user.name %></td>
-            <td><%= goal.tasks.count %></td>
+            <td><%= user_avatar(user, size: 25) %></td>
+            <td><%= user.name %></td>
+            <td><%= user_goal.present? ? user_goal : 0 %></td>
             <td class="fs-4">
-              <i class="bi bi-minecart-loaded" style="color: <%= load_level_color(goal.tasks) %>"></i>
+              <i class="bi bi-minecart-loaded" style="color: <%= load_level_color(user_goal)  %>"></i>
             </td>
           </tr>
         <% end %>

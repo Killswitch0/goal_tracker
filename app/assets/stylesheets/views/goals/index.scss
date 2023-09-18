@@ -14,8 +14,10 @@
   .categories-wrapper {
     height: 414px;
     width: 200px;
-    background: #fff5;
+    background: $third-color;
     box-shadow: 0 0.4rem 0.8rem #0005;
+    border-radius: 1rem;
+    padding: 5px;
 
     .new-category {
       display: flex;

@@ -1,11 +1,13 @@
 <div class="container">
-  <h1 class="text-center"><%= t('new_habit') %> </h1>
-
-  <div class="col-sm-12 col-md-4 offset-md-4">
+  <div class="col-sm-12 col-md-4 offset-md-4 mt-5">
     <%= form_with(model: @habit, url: dashboard_habits_path) do |f| %>
       <%= render "shared/error_messages", resource: @habit %>
 
       <div class="card">
+        <div class="table-header">
+          <h2 class="text-center"><%= t('new_habit') %> </h2>
+        </div>
+
         <div class="card-body">
           <div class="mb-3">
             <%= f.label :name %>
@@ -22,7 +24,7 @@
             <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] }, {}, class: 'form-select' %>
           </div>
 
-          <%= f.submit t('create'), class: "btn btn-primary" %>
+          <%= f.submit t('create'), class: "btn btn-primary action" %>
         </div>
       </div>
     <% end %>

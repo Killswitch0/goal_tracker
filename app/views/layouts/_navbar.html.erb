@@ -1,19 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark shadow-5-strong">
   <div class="container-fluid">
-    <%= link_to 'Goal Tracker', goals_path, class: 'navbar-brand' %>
+    <%= link_to 'Goal Tracker', goals_path, class: 'navbar-brand fw-medium' %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-medium">
-        <li><%= link_to t('navigation.dashboard').upcase, dashboard_path, class: "nav-link #{'active' if current_page?(dashboard_path)}"  %></li>
-        <li><%= link_to t('navigation.goals').upcase, goals_path, class: "nav-link #{'active' if current_page?(goals_path)}" %></li>
-        <li><%= link_to t('navigation.challenges').upcase, challenges_path, class: "nav-link #{'active' if current_page?(challenges_path)}" %></li>
-        <li><%= link_to t('navigation.about').upcase, about_path, class: "nav-link #{'active' if current_page?(about_path)}" %></li>
-        <li><%= link_to t('navigation.tracking').upcase, goal_tracking_path, class: "nav-link #{'active' if current_page?(goal_tracking_path) || current_page?(task_tracking_path)}" %></li>
-        <li><%= link_to t('navigation.calendar').upcase, calendar_path, class: "nav-link #{'active' if current_page?(calendar_path)}" %></li>
-        <li><%= link_to t('navigation.chart').upcase, habit_chart_path(period: 'day'), class: "nav-link #{'active' if current_page?(habit_chart_path) || current_page?(task_chart_path)}"  %></li>
+        <li><%= link_to t('navigation.dashboard').upcase, dashboard_path,
+                        class: "nav-link #{'active' if current_page?(dashboard_path)}" %></li>
+        <li><%= link_to t('navigation.goals').upcase, goals_path,
+                        class: "nav-link #{'active' if current_page?(goals_path)}" %></li>
+        <li><%= link_to t('navigation.challenges').upcase, challenges_path,
+                        class: "nav-link #{'active' if current_page?(challenges_path)}" %></li>
+        <li><%= link_to t('navigation.about').upcase, about_path,
+                        class: "nav-link #{'active' if current_page?(about_path)}" %></li>
+        <li><%= link_to t('navigation.tracking').upcase, goal_tracking_path,
+                        class: "nav-link #{'active' if current_page?(goal_tracking_path) || current_page?(task_tracking_path)}" %></li>
+        <li><%= link_to t('navigation.calendar').upcase, calendar_path,
+                        class: "nav-link #{'active' if current_page?(calendar_path)}" %></li>
+        <li><%= link_to t('navigation.chart').upcase, habit_chart_path(period: 'day'),
+                        class: "nav-link #{'active' if current_page?(habit_chart_path) || current_page?(task_chart_path)}" %></li>
       </ul>
 
       <ul class="navbar-nav">

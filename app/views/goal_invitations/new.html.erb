@@ -1,7 +1,9 @@
-<h1 class="text-center">New Group</h1>
-
 <div class="col-sm-12 col-md-4 offset-md-4">
   <div class="card">
+    <div class="table-header">
+      <h2 class="text-center">New Group</h2>
+    </div>
+
     <div class="card-body">
       <%= form_with(model: @goal) do |f| %>
         <%= render "shared/error_messages", resource: @group %>

@@ -83,6 +83,11 @@ class User < ApplicationRecord
     true if self.role == 1
   end
 
+  # returns user goal in challenge or nil
+  def user_goal_in(challenge)
+    challenge_goals.where(challenge: challenge, user: self).first&.goal
+  end
+
   private
 
   def set_gravatar_hash

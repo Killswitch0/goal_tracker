@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         patch 'confirm_invitation'
         patch 'decline_invitation'
         delete 'leave'
+        delete 'destroy_goal'
       end
     end
 

@@ -19,9 +19,9 @@ class ChallengeUserNotification < ApplicationNotifications
 
   def message
     @challenge = Challenge.find(params[:challenge_user][:challenge_id])
-    @goal_user = ChallengeUser.find(params[:challenge_user][:id])
+    @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
     @user = User.find(params[:challenge_user][:user_id])
-    "Your invite to #{@challenge.name}"
+    "You've been invited to the #{@challenge.name} challenge"
   end
 
   def url

@@ -193,6 +193,7 @@ uk:
   next: Наступний
   previous: Попередій
   days_left:
+    base: 'Днів залишилося'
     one: '%{count} день залишився'
     few: '%{count} днів залишилося'
     many: '%{count} днів залишилося'

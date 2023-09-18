@@ -1,7 +1,15 @@
-<h1 class="text-center mt-3"><%= t('edit_user') %></h1>
-
 <div class="col-sm-12 col-md-4 offset-md-4">
-  <%= render "form", user: user, path: user_path(user) %>
+  <div class="card">
+    <div class="table-header">
+      <h2 class="text-center">
+        <%= t('edit_user') %>
+      </h2>
+    </div>
+
+    <div class="card-body">
+      <%= render "form", user: user, path: user_path(user) %>
+    </div>
+  </div>
 
   <%= link_to t('back'), user_path(user), class: "btn btn-secondary mt-3" %>
 </div>

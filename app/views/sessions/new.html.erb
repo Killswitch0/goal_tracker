@@ -1,10 +1,14 @@
-<h1 class="text-center mt-3"><%= t('authenticate.login') %></h1>
-
-<div class="col-md-4 offset-md-4">
+<div class="col-md-4 offset-md-4 mt-5">
   <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
     <%= render "shared/flash" %>
 
     <div class="card">
+      <div class="table-header">
+        <h2 class="text-center mt-3">
+          <%= t('authenticate.login') %>
+        </h2>
+      </div>
+
       <div class="card-body">
         <div class="mb-3">
           <%= f.label :email, t('authenticate.email') %>
@@ -25,7 +29,7 @@
           </div>
         </div>
 
-        <%= f.submit t('authenticate.log_in'), class: "mt-2 btn btn-primary" %>
+        <%= f.submit t('authenticate.log_in'), class: "mt-2 btn btn-primary action" %>
       </div>
     </div>
   <% end %>

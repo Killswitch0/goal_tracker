@@ -1,9 +1,13 @@
-<h2 class="text-center mt-3"><%= t('new_challenge') %></h2>
-
-<div class="col-sm-12 col-md-4 offset-md-4">
+<div class="col-sm-12 col-md-4 offset-md-4 mt-5">
   <%= form_with(model: @challenge) do |f| %>
     <%= render 'shared/error_messages', resource: @challenge %>
     <div class="card">
+      <div class="table-header">
+        <h2 class="text-center">
+          <%= t('new_challenge') %>
+        </h2>
+      </div>
+
       <div class="card-body">
         <div class="mb-3">
           <%= f.label :name %>
@@ -20,7 +24,7 @@
           <%= f.datetime_field :deadline, class: 'form-control' %>
         </div>
 
-        <%= f.submit t('create'), class: "btn btn-primary" %>
+        <%= f.submit t('create'), class: "btn btn-primary action" %>
       </div>
     </div>
   <% end %>

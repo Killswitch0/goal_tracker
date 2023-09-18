@@ -7,7 +7,7 @@ class GoalTrackingController < ApplicationController
   #----------------------------------------------------------------------------
   def show
     if params[:search]
-      @goals = Goal.search(params[:search], current_user)
+      @goals = Goal.search(params[:search], current_user, Goal.table_name)
     else
       @goals = current_user.goals.order("#{sort_column} #{sort_direction}")
     end
