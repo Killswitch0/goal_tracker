@@ -7,3 +7,5 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ShowAllController from "./hover_to_link"
+application.register("show-all", ShowAllController)

@@ -26,6 +26,7 @@
       height: 130px;
       background-color: $third-color;
       margin-bottom: 20px;
+      border-radius: 1rem;
 
       .goal-title {
         text-transform: uppercase;
@@ -102,6 +103,12 @@
       .show-all {
         border: 2px solid $second-color;
         padding: 0 4px;
+        width: 78px;
+        border-radius: 1rem;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+        color: $second-color;
 
         a, i {
           color: $second-color;
