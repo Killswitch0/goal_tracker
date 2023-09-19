@@ -1,4 +1,7 @@
 // Main buttons
+
+
+// primary
 .btn-primary,
 .btn-primary:focus,
 .btn-primary:active {
@@ -8,6 +11,22 @@
 
 
 .btn-primary:hover {
+  background-color: $primary-hover !important;
+  border-color: $primary-hover !important;
+  transition: 0.30ms all;
+}
+
+
+// primary-outline
+.btn-outline-primary,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  color: $primary;
+  border-color: $primary !important;
+}
+
+
+.btn-outline-primary:hover {
   background-color: $primary-hover !important;
   border-color: $primary-hover !important;
   transition: 0.30ms all;

@@ -1,14 +1,11 @@
-#goal_tracking-show {
+#chart {
+  min-height: 66vh;
   background-color: $third-color;
   border-radius: 2rem;
   padding: 0 20px 20px 20px;
   box-shadow: 0 .4rem .8rem #0005;
 
-  .table-header {
-  }
-
-  .table-body {
-    width: 100%;
-    height: 76%;
+  .empty-chart {
+    min-height: 400px;
   }
 }

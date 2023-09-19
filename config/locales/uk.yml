@@ -270,7 +270,7 @@ uk:
   load: Завантаження
   member: Учасник
   targets: Завдання
-  challenge_users: Учаснки челленджу
+  challenge_users: Учасники челленджу
   challenge_end: Челлендж завершено
   target:
     one: "%{count} завдання"

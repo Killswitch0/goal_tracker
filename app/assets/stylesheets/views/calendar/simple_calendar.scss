@@ -6,7 +6,6 @@
 
 .completed {
   background-color: rgba(24, 225, 68, 0.5);
-
 }
 
 .uncompleted {
@@ -16,15 +15,18 @@
 
 
 .simple-calendar {
-  background-color: #fff5;
-  box-shadow: 0 5px 25px rgba(0,0,0, .2);
   border-radius: 2rem;
-  margin-top: 10px;
-  overflow-x: auto;
+  margin-top: 30px;
+  overflow-x: hidden;
 
   .calendar-heading {
     position: sticky;
     margin: 10px;
+  }
+
+  .table {
+    width: 95%;
+    margin-inline: auto;
   }
 
 
@@ -52,13 +54,12 @@
 
   .has-events {}
 }
-
 .my-custom-scrollbar {
   position: relative;
   height: 150px;
   overflow: auto;
-  }
-  
+}
+
 .table-wrapper-scroll-y {
   display: block;
-  }
+}

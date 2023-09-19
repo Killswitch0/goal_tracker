@@ -17,7 +17,13 @@
       <th scope="row"><%= index + 1 %></th>
       <td><%= link_to item.name, item %></td>
       <td><%= item.class.name %></td>
-      <td><%= item.complete? ? 'Completed' : 'In process' %></td>
+      <td>
+        <% if item.complete? %>
+          <span class="badge rounded-pill text-bg-success"><%= t('done') %></span>
+        <% else %>
+          <span class="badge rounded-pill text-bg-light"><%= t('in_process') %></span>
+        <% end %>
+      </td>
       <td><%= item.created_at&.strftime('%d-%m-%Y') %></td>
       <td><%= item.deadline&.strftime('%d-%m-%Y') %></td>
       <td><%= days_left(item) %></td>

@@ -1,13 +1,19 @@
-<div class="col-sm-12 offset-md-4 col-md-4">
-  <h1 class="text-center">User info</h1>
+<div class="col-sm-12 offset-md-4 col-md-4 mt-3">
+  <div class="card">
+    <div class="table-header">
+      <h1 class="text-center mb-0">User info</h1>
+    </div>
 
-  <dl class="row text-center border border-black">
-    <dt class="col-sm-3">Name:</dt>
-    <dd class="col-sm-9"><%= user.name %></dd>
+    <div class="card-body">
+      <dl class="row">
+        <dt class="col-sm-5"><%= t('activerecord.attributes.user.name') %></dt>
+        <dd class="col-sm-7"><%= user.name %></dd>
 
-    <dt class="col-sm-3">Email:</dt>
-    <dd class="col-sm-9"><%= user.email %></dd>
-  </dl>
+        <dt class="col-sm-5"><%= t('activerecord.attributes.user.email') %></dt>
+        <dd class="col-sm-7"><%= user.email %></dd>
+      </dl>
+    </div>
+  </div>
 </div>
 </div>
 
