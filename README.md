@@ -2,6 +2,9 @@
  <img style="height: 500px; width: 500px;" src="https://github.com/Killswitch0/goal_tracker/assets/89165782/23068ff3-d4e7-4f5c-956f-356db7dea9d8"></img>
 </div>
 
+
+
+## About :information_source:
 The "Goal Tracker" project is a web application designed to help users set and achieve their goals, manage tasks, and build habits. The application provides a platform for individuals to create, track, and accomplish their personal and professional objectives efficiently. It also incorporates a social aspect by allowing users to participate in challenges where they can share their progress with others.
 
 Main features of this website are:
@@ -25,14 +28,18 @@ Main features of this website are:
 - Security Features: The application includes features like email confirmation, password reset, and authentication tokens to ensure the security and privacy of user accounts.
 
 - Responsive Design: The web application is designed to be responsive, ensuring a seamless experience on various devices, including desktops, tablets, and smartphones.
- 
+
+## Localization :globe_with_meridians:
+Goal Tracker supports: </br> <img src="https://github.com/Killswitch0/goal_tracker/assets/89165782/ece0b897-c9ef-4ebd-95db-9f214bb1a989" style="width: 30px; height: 30px;"></img>
+<img src="https://github.com/Killswitch0/goal_tracker/assets/89165782/e6384e51-db51-45ad-b6c7-4d342e547f09" style="width: 30px; height: 30px;"></img>
+
 ## Built With 🛠️
 
  - Programming Languages: Ruby, SQL.
  - Framework: Ruby on Rails.
  - Database: PostgreSQL.
  
-## Getting Started
+## Getting Started :rocket:
  
 To get a local copy up and running follow these simple steps.
 
