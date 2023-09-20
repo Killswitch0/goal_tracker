@@ -43,16 +43,16 @@ To get a local copy up and running follow these simple steps.
 
 > You can check if Git is installed by running the following command in the terminal.
 ```
-$ git --version
+git --version
 ```
 > Likewise for Ruby installation.
 ```
-$ ruby --version && irb
+ruby --version && irb
 ```
 To install rails, in the terminal kindly run this command:
 
 ```
-$ gem install rails
+gem install rails
 ```
 
 ### Setup
@@ -63,7 +63,7 @@ Clone the repository using the GitHub link provided below.
 
 In the terminal, go to your file directory and run this command.
 ```
-$ git clone https://github.com/Killswitch0/goal_tracker.git
+git clone https://github.com/Killswitch0/goal_tracker.git
 ```
 
 ### Run locally
@@ -71,25 +71,25 @@ $ git clone https://github.com/Killswitch0/goal_tracker.git
 Make your way to the correct directory by running this command:
 
 ```
-$ cd /goal_tracker
+cd /goal_tracker
 ```
 
 Install the required dependencies to run the project with this command:
 ```
-$ bundle install
+bundle install
 ```
 
 Setup the database, run:
 ```
-$ rails db:create
-$ rails db:migrate
-$ rails db:seed
+rails db:create
+rails db:migrate
+rails db:seed
 ```
 
 Then run it in your browser with this command:
 
 ```
-$ rails server
+rails server
 ```
 
 ---
@@ -110,5 +110,5 @@ walter@mail.com
 
 To run tests, please run this command:
 ```
-$ bundle exec rspec
+bundle exec rspec
 ```
