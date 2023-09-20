@@ -1,5 +1,5 @@
 <div align="center">
- <img style="height: 300px; width: 300px;" src="https://github.com/Killswitch0/goal_tracker/assets/89165782/23068ff3-d4e7-4f5c-956f-356db7dea9d8"></img>
+ <img style="height: 80%; width: 80%;" src="https://github.com/Killswitch0/goal_tracker/assets/89165782/23068ff3-d4e7-4f5c-956f-356db7dea9d8"></img>
 </div>
 
 
