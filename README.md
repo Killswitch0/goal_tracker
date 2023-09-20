@@ -7,27 +7,27 @@
 ## About :information_source:
 The "Goal Tracker" project is a web application designed to help users set and achieve their goals, manage tasks, and build habits. The application provides a platform for individuals to create, track, and accomplish their personal and professional objectives efficiently. It also incorporates a social aspect by allowing users to participate in challenges where they can share their progress with others.
 
-Main features of this website are:
+### Features 🎯
 
-- User Authentication: Users can create accounts, log in, and securely manage their goals, tasks, and habits.
+- `User Authentication:` Users can create accounts, log in, and securely manage their goals, tasks, and habits.
 
-- Goal Management: Users can create goals with names, descriptions, and deadlines. Goals can be categorized for better organization.
+- `Goal Management:` Users can create goals with names, descriptions, and deadlines. Goals can be categorized for better organization.
 
-- Task Tracking: Within each goal, users can create tasks, set deadlines, and mark them as complete when finished. Users can easily keep track of their tasks and monitor their progress.
+- `Task Tracking:` Within each goal, users can create tasks, set deadlines, and mark them as complete when finished. Users can easily keep track of their tasks and monitor their progress.
 
-- Habit Building: Users can establish habits by creating habits associated with specific goals. They can track their daily or periodic habit completion.
+- `Habit Building:` Users can establish habits by creating habits associated with specific goals. They can track their daily or periodic habit completion.
 
-- Challenge Participation: Users can join challenges where they commit to achieving specific goals. Challenges foster a sense of community and healthy competition among participants.
+- `Challenge Participation:` Users can join challenges where they commit to achieving specific goals. Challenges foster a sense of community and healthy competition among participants.
 
-- Notifications: The system sends notifications to users for important events, such as task deadlines, challenge updates, or new invitations.
+- `Notifications:` The system sends notifications to users for important events, such as task deadlines, challenge updates, or new invitations.
 
-- User Roles: Users have different roles, such as regular users and challenge creators, each with their set of permissions and responsibilities.
+- `User Roles:` Users have different roles, such as regular users and challenge creators, each with their set of permissions and responsibilities.
 
-- Profile Customization: Users can personalize their profiles by adding avatars or profile pictures, providing information about themselves, and updating their account settings.
+- `Profile Customization:` Users can personalize their profiles by adding avatars or profile pictures, providing information about themselves, and updating their account settings.
 
-- Security Features: The application includes features like email confirmation, password reset, and authentication tokens to ensure the security and privacy of user accounts.
+- `Security Features:` The application includes features like email confirmation, password reset, and authentication tokens to ensure the security and privacy of user accounts.
 
-- Responsive Design: The web application is designed to be responsive, ensuring a seamless experience on various devices, including desktops, tablets, and smartphones.
+- `Responsive Design:` The web application is designed to be responsive, ensuring a seamless experience on various devices, including desktops, tablets, and smartphones.
 
 ## Localization :globe_with_meridians:
 Goal Tracker supports: </br> <img src="https://github.com/Killswitch0/goal_tracker/assets/89165782/ece0b897-c9ef-4ebd-95db-9f214bb1a989" style="width: 30px; height: 30px;"></img>
@@ -35,9 +35,9 @@ Goal Tracker supports: </br> <img src="https://github.com/Killswitch0/goal_track
 
 ## Built With 🛠️
 
- - Programming Languages: Ruby, SQL.
- - Framework: Ruby on Rails.
- - Database: PostgreSQL.
+ - Programming Languages: `Ruby`.
+ - Framework: `Ruby on Rails`.
+ - Database: `PostgreSQL`.
  
 ## Getting Started :rocket:
  
@@ -113,7 +113,7 @@ walter@mail.com
 ```
 ---
 
-### Run tests
+## Run tests
 
 To run tests, please run this command:
 ```
