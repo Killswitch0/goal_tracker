@@ -90,6 +90,20 @@ Then run it in your browser with this command:
 $ rails server
 ```
 
+---
+### Quick start
+To get started quickly, use these login details:
+### email
+```
+walter@mail.com
+```
+
+### password
+```
+111111a
+```
+---
+
 ### Run tests
 
 To run tests, please run this command:
