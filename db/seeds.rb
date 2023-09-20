@@ -10,19 +10,19 @@
 
 # db/seeds.rb
 
-# Создаем пользователя
+# Create user
 user = User.create(
-  name: "Max",
-  email: "t@t.com",
-  password: "111111",
-  email_confirmed: true, # Чтобы подтвердить email, установите значение в true
+  name: "Walter",
+  email: "walt@mail.com",
+  password: "111111a",
+  email_confirmed: true,
   role: 1
 )
 
-# Создаем категорию
+# Create category
 category = Category.create(name: "Health", user_id: user.id)
 
-# Создаем цель
+# Create goal
 goal = Goal.create(
   name: "Exercise regularly",
   description: "Stay fit and healthy",
@@ -32,16 +32,22 @@ goal = Goal.create(
   category_id: category.id
 )
 
-ChallengeUser.create(
-  user_id: user.id,
-  goal_id: goal.id
+challenge = Challenge.create(
+  name: 'Who the best?',
+  description: 'We need to know who the best',
+  user_id: user.id
 )
 
-# Создаем 10 привычек
+ChallengeUser.create(
+  user_id: user.id,
+  challenge_id: challenge.id
+)
+
+# Create 10 habits
 10.times do |i|
   Habit.create(
-    name: "Morning walk #{i}",
-    description: "Walk for 30 minutes every morning",
+    name: "Morning exercise #{i}",
+    description: "Exercise for 30 minutes every morning.",
     user_id: user.id,
     goal_id: goal.id,
     created_at: Date.today.beginning_of_year,
@@ -49,7 +55,7 @@ ChallengeUser.create(
   )
 end
 
-# Создаем 10 задач
+# Create 10 tasks
 10.times do |i|
   Task.create(
     name: "Buy groceries #{i}",
@@ -72,7 +78,7 @@ end
 end
 
 (0..6).each do |offset|
-  date = start_date + offset.months + 2.month
+  date = start_date + offset.months + 2.months
   CompletionDate.create(date: date, habit_id: 3, created_at: date, updated_at: date)
 end
 
