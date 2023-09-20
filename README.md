@@ -61,7 +61,7 @@ Clone the repository using the GitHub link provided below.
 
 In the terminal, go to your file directory and run this command.
 ```
-$ https://github.com/Killswitch0/goal_tracker.git
+$ git clone https://github.com/Killswitch0/goal_tracker.git
 ```
 
 ### Run locally
