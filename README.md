@@ -1,4 +1,6 @@
-# Goal Tracker
+<div align="center">
+ <img style="height: 500px; width: 500px;" src="https://github.com/Killswitch0/goal_tracker/assets/89165782/23068ff3-d4e7-4f5c-956f-356db7dea9d8"></img>
+</div>
 
 The "Goal Tracker" project is a web application designed to help users set and achieve their goals, manage tasks, and build habits. The application provides a platform for individuals to create, track, and accomplish their personal and professional objectives efficiently. It also incorporates a social aspect by allowing users to participate in challenges where they can share their progress with others.
 
