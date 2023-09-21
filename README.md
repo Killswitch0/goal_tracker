@@ -36,7 +36,7 @@ Goal Tracker supports: </br> <img src="https://github.com/Killswitch0/goal_track
 ## Built With 🛠️
 
  - Programming Languages: `Ruby`.
- - Framework: `Ruby on Rails`, `Rspec`.
+ - Frameworks: `Ruby on Rails`, `Rspec`.
  - Database: `PostgreSQL`.
  
 ## Getting Started :rocket:
@@ -100,11 +100,9 @@ rails server
 ```
 
 ---
-<<<<<<< HEAD
 ## Quick start
 =======
-## Quick start :zap:
->>>>>>> f589c3a796fce8528a3e9d1fbbbf8f8b5c05b9db
+## Quick start ⚡
 To get started quickly, use these login details:
 ### email
 ```
