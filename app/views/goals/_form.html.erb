@@ -44,5 +44,8 @@
     <%= f.check_box :complete, {}, true, false %>
   </div>
 
-  <%= f.submit "#{@goal.new_record? ? t('create_goal') : t('update')}", class: "btn btn-primary action" %>
+  <div class="form-buttons">
+    <%= link_to t('back'), goals_path, class: 'btn btn-secondary' %>
+    <%= f.submit "#{@goal.new_record? ? t('create_goal') : t('update')}", class: "btn btn-primary action" %>
+  </div>
 <% end %>

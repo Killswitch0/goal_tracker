@@ -56,7 +56,7 @@ class Challenge < ApplicationRecord
     return unless deadline
 
     if deadline < Date.today + 1.day
-      errors.add(:deadline, 'period should be at least 1 day.')
+      errors.add(:deadline, I18n.t('activerecord.errors.models.challenge.min_period'))
     end
   end
 end

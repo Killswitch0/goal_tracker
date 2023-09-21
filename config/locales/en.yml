@@ -33,10 +33,26 @@ en:
   #----------------------------------------------------------------------------
   activerecord:
     errors:
+      base:
+        validations:
+          messages:
+            text_input: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
+            incorrect: 'is incorrect.'
       models:
+        category:
+          only_letters: "must contain only letters."
+        challenge:
+          min_period: 'period should be at least 1 day.'
+        challenge_goal:
+          one_goal: 'can add only one goal.'
         user:
           blank: "can't be blank"
           taken: "has already been taken"
+          validations:
+            messages:
+              password_format: "must be in English and contain only letters."
+              length_format: 'must be between %{min} and %{max} characters long.'
+              name_format: "must be in English and contain only letters."
         goal:
           blank: "can't be blank"
           taken: "has already been taken"
@@ -125,6 +141,17 @@ en:
         name: Name
         description: Description
         deadline: Deadline
+        user_id: User
+        created_at: Created At
+        updated_at: Updated At
+      challenge_goal:
+        challenge_id: Challenge
+        goal_id: Goal
+        user_id: User
+        created_at: Created At
+        updated_at: Updated At
+      challenge_user:
+        challenge_id: Challenge
         user_id: User
         created_at: Created At
         updated_at: Updated At

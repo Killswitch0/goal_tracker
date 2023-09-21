@@ -88,6 +88,11 @@ th a {
   input.form-control, select.form-select, textarea.form-control {
     background: #fff5;
   }
+
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .offcanvas {

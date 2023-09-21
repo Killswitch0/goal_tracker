@@ -24,14 +24,13 @@
             <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] }, {}, class: 'form-select' %>
           </div>
 
-          <%= f.submit t('create'), class: "btn btn-primary action" %>
+          <div class="form-buttons">
+            <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary' %>
+            <%= f.submit t('create'), class: "btn btn-primary action" %>
+          </div>
         </div>
       </div>
     <% end %>
-
-    <div class="mt-3">
-      <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary' %>
-    </div>
   </div>
 </div>
 

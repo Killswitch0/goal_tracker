@@ -52,7 +52,7 @@ class User < ApplicationRecord
   validates :name, presence: true,
             format: {
               with: /\A[A-Za-z]+\z/,
-              message: "must be in English and contain only letters."
+              message: I18n.t('activerecord.errors.models.user.validations.messages.name_format')
             }
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
@@ -61,9 +61,9 @@ class User < ApplicationRecord
             presence: true,
             format: {
               with: /\A(?=.*[A-Za-z])(?=.*\d).+\z/,
-              message: "must contain at least 1 letter and 1 digit."
+              message: I18n.t('activerecord.errors.models.user.validations.messages.password_format')
             },
-            length: { minimum: 6, maximum: 10, message: 'must be between 6 and 10 characters long.' }
+            length: { minimum: 6, maximum: 10, message: I18n.t('activerecord.errors.models.user.validations.messages.password_length', min: 6, max: 10) }
 
   validate :password_presence
   validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
@@ -117,8 +117,7 @@ class User < ApplicationRecord
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     return if password.blank? || password =~ /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/
 
-    msg = 'complexity requirement not met. Length should be 8-70 characters and ' \
-          'include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
+    msg = I18n.t('activerecord.errors.models.user.validations.messages.password_complexity')
     errors.add :password, msg
   end
 
@@ -132,7 +131,7 @@ class User < ApplicationRecord
     # which is stored in the database, not in memory
     return if BCrypt::Password.new(password_digest_was).is_password?(old_password)
 
-    errors.add :old_password, 'is incorrect'
+    errors.add :old_password, I18n.t('activerecord.errors.base.validations.messages.incorrect')
   end
 
 end

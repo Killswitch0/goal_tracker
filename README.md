@@ -91,11 +91,11 @@ $ rails server
 ```
 
 ---
-### Quick start
+## Quick start
 To get started quickly, use these login details:
 ### email
 ```
-walter@mail.com
+walt@mail.com
 ```
 
 ### password

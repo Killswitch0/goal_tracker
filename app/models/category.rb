@@ -23,7 +23,7 @@ class Category < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :user_id },
             format: {
               with: /\A\p{L}+\z/u,
-              message: "must contain only letters."
+              message: I18n.t('activerecord.errors.models.category.only_letters')
             },
             length: { minimum: 2, maximum: 20 }
 

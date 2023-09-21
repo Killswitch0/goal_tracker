@@ -30,7 +30,7 @@ class Habit < ApplicationRecord
   validates :name, presence: true, uniqueness: true,
             format: {
               with: BASE_VALIDATION,
-              message: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
+              message: I18n.t('activerecord.errors.base.validations.messages.text_input')
             },
             length: { minimum: 5, maximum: 45 }
   validates :description, presence: true

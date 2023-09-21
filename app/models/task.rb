@@ -32,7 +32,7 @@ class Task < ApplicationRecord
   validates :name, presence: true,
             format: {
               with: BASE_VALIDATION,
-              message: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
+              message: I18n.t('activerecord.errors.base.validations.messages.text_input')
             }
 
   after_create_commit :notify_create
