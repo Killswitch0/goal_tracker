@@ -100,8 +100,6 @@ rails server
 ```
 
 ---
-## Quick start
-=======
 ## Quick start ⚡
 To get started quickly, use these login details:
 ### email
