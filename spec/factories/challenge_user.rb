@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :challenge_user do
     user
-    goal
+    challenge
+    confirm { true }
   end
 end
