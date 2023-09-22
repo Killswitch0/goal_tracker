@@ -25,7 +25,7 @@ class ChallengeGoal < ApplicationRecord
 
   belongs_to :challenge_user
 
-  validates :user_id, presence: true, uniqueness: { scope: :challenge_id, message: I18n.t('activerecord.errors.models.challenge_goal.one_goal') }
+  validates :user_id, presence: true, uniqueness: { scope: :challenge_id, message: :one_goal }
   validates :goal_id, presence: true
   validates :challenge_id, presence: true
 end

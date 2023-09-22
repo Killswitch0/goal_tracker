@@ -41,14 +41,15 @@ class Goal < ApplicationRecord
   validates :name, presence: true, uniqueness: true,
             format: {
               with: BASE_VALIDATION,
-              message: I18n.t('activerecord.errors.base.validations.messages.text_input')
+              message: :text_input
             },
             length: { minimum: 5, maximum: 50 }
 
   validates :description, presence: true,
             format: {
               with: BASE_VALIDATION,
-              message: I18n.t('activerecord.errors.base.validations.messages.text_input') },
+              message: :text_input
+            },
             length: { minimum: 7, maximum: 200 }
 
   validates :category_id, presence: false

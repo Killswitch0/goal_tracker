@@ -32,7 +32,7 @@ class Task < ApplicationRecord
   validates :name, presence: true,
             format: {
               with: BASE_VALIDATION,
-              message: I18n.t('activerecord.errors.base.validations.messages.text_input')
+              message: :text_input
             }
 
   after_create_commit :notify_create

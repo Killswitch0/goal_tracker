@@ -33,11 +33,11 @@ en:
   #----------------------------------------------------------------------------
   activerecord:
     errors:
-      base:
-        validations:
-          messages:
-            text_input: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
-            incorrect: 'is incorrect.'
+      one: '%{count} error'
+      other: '%{count} errors'
+      messages:
+        text_input: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
+        incorrect: 'is incorrect.'
       models:
         category:
           only_letters: "must contain only letters."
@@ -48,11 +48,6 @@ en:
         user:
           blank: "can't be blank"
           taken: "has already been taken"
-          validations:
-            messages:
-              password_format: "must be in English and contain only letters."
-              length_format: 'must be between %{min} and %{max} characters long.'
-              name_format: "must be in English and contain only letters."
         goal:
           blank: "can't be blank"
           taken: "has already been taken"
@@ -67,6 +62,13 @@ en:
           email:
             blank: "can't be blank"
             invalid: "is invalid"
+          password:
+            password_format: "must be in English and contain only letters."
+            password_length: "must be between 6 and 10 characters."
+            password_complexity: >
+              complexity requirement not met. Length should be 8-70 characters and include:
+              1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character."
+              name_format: "must be in English and contain only letters."
           name:
             blank: "can't be blank"
         goal:
@@ -172,7 +174,7 @@ en:
   updated_at: Updated at
   status: Status
 
-  # Authentication.
+  # Views -> Authentication.
   #----------------------------------------------------------------------------
   authenticate:
     email: Email
@@ -190,7 +192,7 @@ en:
   new_user: New User
   hello: Hello
 
-  # Common.
+  # Views -> Common.
   #----------------------------------------------------------------------------
   action: Action
   create: Create
@@ -216,6 +218,10 @@ en:
     few: '%{count} days left'
     many: '%{count} days left'
     other: '%{count} days left'
+
+  # Views -> Form.
+  #----------------------------------------------------------------------------
+  form_contains: Form contains
 
   # Views -> Goals.
   #----------------------------------------------------------------------------

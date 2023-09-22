@@ -47,7 +47,6 @@ class UsersController < ApplicationController
   end
 
   def delete_image_attachment
-    #@avatar = ActiveStorage::Attachment.find(params[:id])
     @user.avatar.purge
     redirect_to edit_user_path(@user)
   end

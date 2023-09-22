@@ -18,7 +18,6 @@ class GoalsController < ApplicationController
              end
 
     @user_goals = Goal.where(user_id: current_user)
-    #@creator_goals = users_in_challenge_users.where(challenge_users: { user_id: current_user.id })
   end
 
   # GET /goals/new
@@ -52,7 +51,6 @@ class GoalsController < ApplicationController
         flash[:danger] = t('.category_must_exist')
         format.html { render :new, status: :unprocessable_entity }
       elsif @goal.save
-        # current_user.challenge_users << ChallengeUser.new(goal: @goal, confirm: true)
         flash[:noticed] = t('.success')
         redirect_to goal_path(@goal)
         format.html

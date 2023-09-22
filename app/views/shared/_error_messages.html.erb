@@ -1,7 +1,7 @@
 <% if resource.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
-      The form contains <%= pluralize(resource.errors.count, "error") %>.
+      <%= t('form_contains') %> <%= t('activerecord.errors', count: resource.errors.count) %>:
     </div>
     <ul>
       <% resource.errors.each do |msg| %>
