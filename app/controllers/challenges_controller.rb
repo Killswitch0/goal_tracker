@@ -1,4 +1,6 @@
 class ChallengesController < ApplicationController
+  include ChallengeInvitation
+
   before_action :redirect_user
   before_action :set_invite, only: %i[index show new]
   before_action :set_invitation, only: %i[confirm_invitation decline_invitation leave show]
@@ -79,19 +81,16 @@ class ChallengesController < ApplicationController
   def add_goal
     @challenge = Challenge.find(params[:id])
     @challenge_goal = ChallengeGoal.new
+    @challenge_user = current_user.challenge_users.find_by(challenge: @challenge)
 
     if request.post?
       @challenge_goal = current_user
                           .challenge_goals
                           .build(
                             goal_id: params[:goal_id],
-                            challenge_user:
-                              current_user
-                                .challenge_users
-                                .find_by(challenge: @challenge)
+                            challenge: @challenge,
+                            challenge_user: @challenge_user
                           )
-
-      @challenge_goal.challenge_id = @challenge.id
 
       if @challenge_goal.save
         flash[:noticed] = t('.success')
@@ -186,34 +185,5 @@ class ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(:name, :description, :deadline)
-  end
-
-  # Requires challenge invitation to get access
-  def require_invitation
-    @challenge = Challenge.find_by(id: params[:id])
-    return if @challenge.blank?
-
-    invitation = ChallengeUser.find_by(challenge: @challenge, user: current_user, confirm: true)
-
-    unless invitation
-      flash[:noticed] = t('.create_invitation.need_confirm')
-      redirect_to challenges_path
-    end
-  end
-
-  def set_invitation
-    @challenge = Challenge.find(params[:id])
-    @invitation = ChallengeUser.find_by(challenge: @challenge, user: current_user)
-  end
-
-  def set_invite
-    @invites ||= ChallengeUser.where(confirm: false, user: current_user)
-  end
-
-  def mark_notifications_as_read
-    return unless current_user
-
-    notifications_to_mark_as_read = @invitation.notifications_as_challenge_user.where(recipient: current_user)
-    notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
   end
 end

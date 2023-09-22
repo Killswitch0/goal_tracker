@@ -14,7 +14,6 @@ module ChartHelper
 
       if tasks.pluck(:complete_date).all? { |d| d.nil? }
         line_chart tasks.map { |t|
-
           {
             name: t.name,
             data: Array.new(tasks.length, {})

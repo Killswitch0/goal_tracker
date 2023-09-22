@@ -5,7 +5,7 @@ module DashboardHelper
                       else
                         user.tasks.where(complete: true).count
                       end
-    calculate_percentage(completed_tasks, 'tasks', goal: goal, user: user)
+    calculate_percentage(completed_tasks, 'tasks', goal:, user:)
   end
 
   def calculate_habits
