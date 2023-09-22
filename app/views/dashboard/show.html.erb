@@ -127,7 +127,9 @@
         <div class="completed-info">
           <div>
             <%= t('done') %>
-            <span><%= habits_completed_for(current_user).first %></span> <%= t('of') %> <%= habits_completed_for(current_user).last %>
+            <span><%= habits_completed_for(current_user).first %></span>
+            <%= t('of') %>
+            <%= habits_completed_for(current_user).last %>
           </div>
 
           <% unless params[:all_habits].present? %>

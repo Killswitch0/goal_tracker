@@ -9,13 +9,14 @@ RSpec.feature "SortDashboardHabits" do
   given!(:habit2) { create(:habit, user: user, goal: goal, name: 'My string 2') }
   given!(:habit3) { create(:habit, user: user, goal: goal, name: 'My string 3') }
   given!(:habit4) { create(:habit, user: user, goal: goal, name: 'My string 4') }
+  given!(:completion_date) { create :completion_date, habit: habit1, date: Date.today }
 
   feature 'Filter Habits' do
 
     before do
       log_in(user)
 
-      create(:completion_date, habit: habit1, date: Date.today)
+      # create(:completion_date, habit: habit1, date: Date.today)
     end
 
     scenario 'User try to show uncompleted and completed Habits' do
