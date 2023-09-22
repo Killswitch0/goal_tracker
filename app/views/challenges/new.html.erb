@@ -24,10 +24,14 @@
           <%= f.datetime_field :deadline, class: 'form-control' %>
         </div>
 
-        <%= f.submit t('create'), class: "btn btn-primary action" %>
+        <div class="form-buttons">
+          <%= link_to t('back'), challenges_path, class: 'btn btn-secondary mt-3' %>
+          <div>
+            <%= f.submit t('create'), class: "btn btn-primary action mt-3" %>
+          </div>
+        </div>
       </div>
+
     </div>
   <% end %>
-
-  <%= link_to t('back'), challenges_path, class: 'btn btn-secondary mt-3' %>
 </div>

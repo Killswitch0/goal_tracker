@@ -17,10 +17,11 @@
           %>
         </div>
 
-        <%= f.submit t('create'), class: "btn btn-primary action" %>
+        <div class="form-buttons">
+          <%= link_to t('back'), challenge_path(@challenge), class: 'btn btn-secondary mt-3' %>
+          <%= f.submit t('create'), class: "btn btn-primary action mt-3" %>
+        </div>
       </div>
     </div>
   <% end %>
-
-  <%= link_to t('back'), challenge_path(@challenge), class: 'btn btn-secondary mt-3' %>
 </div>
