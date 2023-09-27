@@ -45,7 +45,7 @@
   </div>
 
   <div class="form-buttons">
-    <%= link_to t('back'), goals_path, class: 'btn btn-secondary' %>
+    <%= link_to t('back'), :back, class: 'btn btn-secondary' %>
     <%= f.submit "#{@goal.new_record? ? t('create_goal') : t('update')}", class: "btn btn-primary action" %>
   </div>
 <% end %>

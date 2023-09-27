@@ -17,7 +17,10 @@
     <%= f.date_select :deadline, { prompt: { day: 'Select Day', month: 'Select Month', year: 'Select Year' } }, class: "form-select mt-3" %>
   </div>
 
-  <%= f.submit "#{@task.new_record? ? t('create') : t('update')}", class: 'btn btn-primary action' %>
+  <div class="form-buttons">
+    <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary' %>
+    <%= f.submit "#{@task.new_record? ? t('create') : t('update')}", class: 'btn btn-primary action' %>
+  </div>
 
 <% end %>
 
