@@ -1,4 +1,4 @@
-<div class="mt-3" id="goal_tracking-show">
+<div class="large_table_board mt-3" id="goal_tracking-show">
   <div class="table-header">
     <h2 class="text-center">
       <%= t('goals_tracker').upcase %>
@@ -7,7 +7,7 @@
 
   <%= render 'layouts/search', path: goal_tracking_path %>
 
-  <div class="d-flex justify-content-start mb-3">
+  <div class="text-center my-3">
     <%= link_to t('switch_to_tasks'), task_tracking_path, class: 'btn btn-sm btn-primary' %>
   </div>
 

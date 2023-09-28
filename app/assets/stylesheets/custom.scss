@@ -1,6 +1,7 @@
 @import "variables/*";
 @import "components/*";
 @import "views/**/*";
+@import "mobile";
 
 body {
   min-height: 100vh;
@@ -103,6 +104,11 @@ th a {
   }
 }
 
+// dropdown-background color
+.dropdown-menu {
+  background-color: $third-color;
+}
+
 // user/_session_manager
 #navbarDropdown {
   display: flex;
@@ -111,5 +117,7 @@ th a {
     margin-right: 5px;
   }
 }
+
+
 
 

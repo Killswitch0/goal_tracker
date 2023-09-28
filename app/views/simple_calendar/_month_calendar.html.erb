@@ -7,13 +7,6 @@
     </div>
   </div>
 
-  <div class="date_select">
-    <%= form_with url: calendar_path, method: :get, class: 'd-flex justify-content-center' do |f| %>
-      <%= f.date_field :start_date %>
-      <%= f.submit t('search'), default: 'Go', class: 'btn btn-primary btn-sm action mx-1' %>
-    <% end %>
-  </div>
-
   <table class="table table-striped mt-2">
     <thead>
     <tr>

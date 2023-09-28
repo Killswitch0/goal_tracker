@@ -4,7 +4,7 @@
     <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <%= user_avatar(current_user) %>
       <%= t('hello') %>, <%= current_user.name_or_email %>
-      <i class="bi bi-caret-down-fill"></i>
+      <%= icon 'caret-down-fill' %>
     </a>
 
     <!--dropdown-menu-lg-end значит выравнивание выпадающего списка по левому краю-->

@@ -1,7 +1,10 @@
-<%= form_with url: path, method: :get, class: 'd-flex justify-content-center mt-2' do |f| %>
+<%= form_with url: path, method: :get, class: 'd-flex justify-content-center mt-3' do |f| %>
   <%= f.text_field :search,
                    placeholder: t('search').concat('...'),
                    class: 'input-group-text',
                    style: 'display: inline-block;' %>
-  <%= f.submit t('search'), class: 'btn btn-primary mx-1 action'%>
+
+  <%= button_tag class: 'btn btn-primary mx-1 action' do %>
+    <%= icon 'search' %>
+  <% end %>
 <% end %>

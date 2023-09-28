@@ -6,10 +6,23 @@
       </h2>
     </div>
 
-    <div class="text-center">
+    <div class="d-flex justify-content-around">
       <%= render 'layouts/search', path: calendar_path %>
+
+      <button class="btn btn-primary position-relative mt-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        Goal markers
+      </button>
+
+      <div class="date_select d-flex justify-content-around">
+        <%= form_with url: calendar_path, method: :get, class: 'd-flex mt-3' do |f| %>
+          <%= f.date_field :start_date, value: "#{params[:start_date].present? ? params[:start_date] : Date.today}",
+                           class: 'form-control' %>
+          <%= f.submit t('search'), default: 'Go', class: 'btn btn-primary btn-sm action mx-1' %>
+        <% end %>
+      </div>
     </div>
   </div>
+
 
   <%= month_calendar do |date| %>
     <%= date %>
@@ -35,25 +48,36 @@
   <% end %>
 </div>
 
-<div class="row">
-  <div class="table-wrapper-scroll-y my-custom-scrollbar col-md-3">
-    <table class="table border border-light">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col"><%= t('activerecord.attributes.goal.name') %></th>
-        <th scope="col"><%= t('activerecord.attributes.goal.color') %></th>
-      </tr>
-      </thead>
-      <% @goals.each_with_index do |goal, index| %>
-        <tbody>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExample"><%= t('goal_markers') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <div class="table-body">
+      <table class="table table-hover">
+        <thead class="table-light">
         <tr>
-          <th scope="row"><%= index + 1 %></th>
-          <td><%= goal.name %></td>
-          <td style="background-color: <%= goal.color %>;"></td>
+          <th scope="col">#</th>
+          <th scope="col"><%= t('activerecord.attributes.goal.name') %></th>
+          <th scope="col"><%= t('activerecord.attributes.goal.color') %></th>
+        </tr>
+        </thead>
+        <tbody class="overflow-y-auto">
+        <% @goals.each_with_index do |goal, index| %>
+          <tr>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= goal.name %></td>
+            <td style="background-color: <%= goal.color %>;"></td>
+          </tr>
+        <% end %>
         </tr>
         </tbody>
-      <% end %>
-    </table>
+      </table>
+    </div>
   </div>
+
 </div>
+

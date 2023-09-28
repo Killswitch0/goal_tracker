@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include BootstrapIconHelper
+
   def sortable(column, title = nil)
     title ||= t("#{column}")
     css_class = column == sort_column ? "current-#{sort_direction}" : nil
@@ -21,6 +23,8 @@ module ApplicationHelper
       user.decorate.gravatar(size: size, css_class: css_class, style: style)
     end
   end
+
+
 
   def days_left(target)
     days = (target.deadline.to_date - Date.today).to_i

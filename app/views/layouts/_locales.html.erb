@@ -2,7 +2,7 @@
   <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <%= inline_svg_tag("icons/flags/#{I18n.locale.to_s}", options = { width: 25 }) %>
     <%= t I18n.locale %>
-    <i class="bi bi-caret-down-fill"></i>
+    <%= icon 'caret-down-fill' %>
   </a>
 
   <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
@@ -18,8 +18,6 @@
     <% end %>
   </ul>
 </li>
-
-<span class="fi fi-gr"></span> <span class="fi fi-gr fis"></span>
 
 
 

@@ -9,13 +9,13 @@
 
               <li class="goal-item" style="border: solid 5px <%= goal.color %>">
                 <div class="goal-title">
-                  <%= goal.name.truncate(25) %>
+                  <%= goal.name.truncate(20) %>
                 </div>
                 <div class="divider"></div>
 
                 <div class="completed-wrapper completed-goal">
                   <%= link_to goal_path(goal) do %>
-                    <i class="bi bi-arrow-up-square-fill"></i>
+                    <%= icon 'arrow-up-square-fill' %>
                   <% end %>
 
                   <div class="progress-info">
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="actions-items">
+    <div class="actions-items col-sm-12">
 
       <div class="actions-header">
         <div class="items-title"><%= t('all_tasks') %></div>
@@ -82,15 +82,17 @@
             <%= t('done') %>
             <span><%= completed_for(current_user).first %></span> <%= t('of') %> <%= completed_for(current_user).last %>
           </div>
+        </div>
 
+        <div class="completed-show">
           <% unless params[:all_tasks].present? %>
-            <%= link_to dashboard_path(all_tasks: 'all'), class: 'show-all d-block' do %>
-              <i class="bi bi-check-square"></i>
+            <%= link_to dashboard_path(all_tasks: 'all'), class: 'show-all' do %>
+              <%= icon 'check-square' %>
               <%= t('show') %>
             <% end %>
           <% else %>
-            <%= link_to dashboard_path(open_tasks: 'open'), class: 'show-all d-block' do %>
-              <i class="bi bi-check-square"></i>
+            <%= link_to dashboard_path(open_tasks: 'open'), class: 'show-all' do %>
+              <%= icon 'check-square' %>
               <%= t('hide') %>
             <% end %>
           <% end %>
@@ -131,15 +133,17 @@
             <%= t('of') %>
             <%= habits_completed_for(current_user).last %>
           </div>
+        </div>
 
+        <div class="completed-show">
           <% unless params[:all_habits].present? %>
             <%= link_to dashboard_path(all_habits: 'all'), class: 'show-all d-block' do %>
-              <i class="bi bi-check-square"></i>
+              <%= icon 'check-square' %>
               <%= t('show') %>
             <% end %>
           <% else %>
             <%= link_to dashboard_path(open_habits: 'open'), class: 'show-all d-block' do %>
-              <i class="bi bi-check-square"></i>
+              <%= icon 'check-square' %>
               <%= t('hide') %>
             <% end %>
           <% end %>

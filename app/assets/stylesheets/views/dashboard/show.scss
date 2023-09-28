@@ -97,8 +97,13 @@
 
     .completed-info {
       display: flex;
-      justify-content: space-between;
-      padding-right: 40%;
+      justify-content: flex-start;
+    }
+
+    .completed-show {
+      display: flex;
+      justify-content: center;
+      margin: 16px 4px;
 
       .show-all {
         border: 2px solid $second-color;
@@ -135,6 +140,7 @@
 
 .actions-items {
   border-radius: 1rem;
+  height: 650px;
 
   .action-list {
 
