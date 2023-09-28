@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.feature "ShowMembersInChallenges" do
-  given!(:user) { create :user }
-  given!(:user2) { create :user }
+  given(:user) { create :user }
+  given(:user2) { create :user }
 
-  given!(:goal1) { create :goal, user: user }
-  given!(:goal2) { create :goal, user: user2, name: 'Buy home', color: 'red' }
+  given(:goal1) { create :goal, user: user }
+  given(:goal2) { create :goal, user: user2, name: 'Buy home', color: 'red' }
 
-  given!(:challenge) { create :challenge, user: user }
+  given(:challenge) { create :challenge, user: user }
   given!(:challenge_user) { create :challenge_user, challenge: challenge, user: user, confirm: true }
   given!(:challenge_user2) { create :challenge_user, challenge: challenge, user: user2, confirm: true }
 

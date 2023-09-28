@@ -28,7 +28,7 @@ RSpec.feature "LogIns" do
       click_on 'Log in'
 
       expect(current_path).to eq login_path
-      expect(page).to have_content 'Invalid email/password combination'
+      expect(page).to have_content I18n.t('sessions.create.fail')
     end
   end
 end

@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.feature "FilterGoalsInChallenges" do
-  given!(:user) { create :user }
-  given!(:user2) { create :user }
+  given(:user) { create :user }
+  given(:user2) { create :user }
 
   given!(:goal1) { create :goal, user: user }
   given!(:goal2) { create :goal, user: user2, name: 'Buy home', color: 'red' }
   given!(:goal3) { create :goal, user: user2, name: 'Buy lambo', color: 'green' }
 
-  given!(:challenge) { create :challenge, user: user }
-  given!(:challenge_user) { create :challenge_user, challenge: challenge, user: user, confirm: true }
-  given!(:challenge_user2) { create :challenge_user, challenge: challenge, user: user2, confirm: true }
+  given(:challenge) { create :challenge, user: user }
+  given(:challenge_user) { create :challenge_user, challenge: challenge, user: user, confirm: true }
+  given(:challenge_user2) { create :challenge_user, challenge: challenge, user: user2, confirm: true }
   given!(:challenge_goal) { create :challenge_goal, challenge: challenge, challenge_user: challenge_user, goal: goal1, user: user }
   given!(:challenge_goal2) { create :challenge_goal, challenge: challenge, challenge_user: challenge_user2, goal: goal2, user: user2 }
 

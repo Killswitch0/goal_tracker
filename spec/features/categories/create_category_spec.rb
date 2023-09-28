@@ -20,6 +20,7 @@ RSpec.feature "CreateCategories" do
       click_on 'Create'
 
       expect(current_path).to eq goals_path
+      expect(page).to have_content I18n.t('categories.create.success')
     end
 
     scenario 'Non-authenticated user try to create a categiry' do

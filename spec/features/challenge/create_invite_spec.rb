@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Create Invite to Challenge", type: :feature do
   given(:user) { create :user }
-  given!(:user2) { create :user }
+  given(:user2) { create :user }
   given(:challenge) { create :challenge, user: user }
   given!(:challenge_user) { create :challenge_user, challenge: challenge, user: user, confirm: true }
 

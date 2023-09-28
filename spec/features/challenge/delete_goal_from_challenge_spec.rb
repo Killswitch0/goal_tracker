@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature "DeleteGoalFromChallenges" do
-  given!(:user) { create :user }
+  given(:user) { create :user }
 
-  given!(:goal) { create :goal, user: user }
+  given(:goal) { create :goal, user: user }
 
-  given!(:challenge) { create :challenge, user: user }
-  given!(:challenge_user) { create :challenge_user, challenge: challenge, user: user }
+  given(:challenge) { create :challenge, user: user }
+  given(:challenge_user) { create :challenge_user, challenge: challenge, user: user }
   given!(:challenge_goal) { create :challenge_goal, challenge: challenge, challenge_user: challenge_user, goal: goal, user: user }
 
   describe 'Delete goal' do
