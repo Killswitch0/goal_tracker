@@ -41,6 +41,8 @@
 }
 
 @media (max-width: 991px) {
+
+  // Navbar
   #navbarSupportedContent {
     font-size: 23px;
 
@@ -71,6 +73,7 @@
     transition: unset;
   }
 
+  // Mobile visibility
   .mobile-hide {
     display: none;
   }
@@ -179,6 +182,7 @@
     font-size: 20px;
   }
 
+  // Goals
   #goals-index {
     .categories-wrapper {
       margin: 0 auto;
