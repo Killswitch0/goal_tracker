@@ -28,13 +28,13 @@ module Internationalization
 
       return if header.nil?
 
-      locales = parse_header(header)
+      locales = parse_header header
 
       return if locales.empty?
 
       return locales.last unless I18n.enforce_available_locales
 
-      detect_from_available(locales)
+      detect_from_available locales
     end
 
     # Adapted from https://github.com/rack/rack-contrib/blob/main/lib/rack/contrib/locale.rb
@@ -44,7 +44,7 @@ module Internationalization
         quality = quality ? quality.to_f : 1.0
         [locale, quality]
       end.reject do |(locale, quality)|
-        locale == '*' || quality == 0
+        locale == '*' || quality.zero?
       end.sort_by do |(_, quality)|
         quality
       end.map(&:first)
@@ -56,7 +56,7 @@ module Internationalization
     end
 
     def match?(s1, s2)
-      s1.to_s.casecmp(s2.to_s) == 0
+      s1.to_s.casecmp(s2.to_s).zero?
     end
 
     # Built-in RoR method that we override

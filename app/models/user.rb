@@ -38,18 +38,21 @@ class User < ApplicationRecord
   has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :categories, dependent: :destroy
-  has_many :goal_users
-  has_many :common_goals, through: :goal_users, source: :goal
+  has_many :challenge_users, dependent: :destroy
+  has_many :challenges, through: :challenge_users, dependent: :destroy
+  has_many :challenge_goals, dependent: :destroy
 
   # noticed gem association
   has_many :notifications, as: :recipient, dependent: :destroy
+
+  has_one_attached :avatar
 
   has_secure_password validations: false
 
   validates :name, presence: true,
             format: {
               with: /\A[A-Za-z]+\z/,
-              message: "must be in English and contain only letters."
+              message: :name_format
             }
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
@@ -58,9 +61,11 @@ class User < ApplicationRecord
             presence: true,
             format: {
               with: /\A(?=.*[A-Za-z])(?=.*\d).+\z/,
-              message: "must contain at least 1 letter and 1 digit."
+              message: :password_format
             },
-            length: { minimum: 6, maximum: 10, message: 'must be between 6 and 10 characters long.' }
+            length: { minimum: 6, maximum: 10,
+                      message: :password_length
+            }
 
   validate :password_presence
   validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
@@ -78,6 +83,11 @@ class User < ApplicationRecord
 
   def admin_role?
     true if self.role == 1
+  end
+
+  # returns user goal in challenge or nil
+  def user_goal_in(challenge)
+    challenge_goals.where(challenge: challenge, user: self).first&.goal
   end
 
   private
@@ -109,8 +119,7 @@ class User < ApplicationRecord
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     return if password.blank? || password =~ /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/
 
-    msg = 'complexity requirement not met. Length should be 8-70 characters and ' \
-          'include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
+    msg = I18n.t('activerecord.errors.models.user.password_complexity')
     errors.add :password, msg
   end
 
@@ -124,7 +133,7 @@ class User < ApplicationRecord
     # which is stored in the database, not in memory
     return if BCrypt::Password.new(password_digest_was).is_password?(old_password)
 
-    errors.add :old_password, 'is incorrect'
+    errors.add :old_password, I18n.t('activerecord.errors.messages.incorrect')
   end
 
 end

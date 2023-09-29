@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   include Sorting
   include Internationalization
+  include ErrorHandling
 
   before_action :set_notifications, if: :current_user
 

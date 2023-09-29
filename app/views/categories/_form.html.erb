@@ -1,15 +1,12 @@
 <%= form_with(model: category) do |f| %>
   <%= render "shared/error_messages", resource: category %>
+  <div class="mb-3">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
 
-  <div class="card">
-    <div class="card-body">
-
-      <div class="mb-3">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
-
-      <%= f.submit t('create'), class: "btn btn-primary" %>
-    </div>
+  <div class="form-buttons">
+    <%= link_to t('back'), :back, class: 'btn btn-secondary' %>
+    <%= f.submit "#{@category.new_record? ? t('create') : t('update')}", class: "btn btn-primary action" %>
   </div>
 <% end %>

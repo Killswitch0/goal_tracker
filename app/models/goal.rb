@@ -29,8 +29,7 @@ class Goal < ApplicationRecord
 
   has_many :habits, dependent: :destroy
   has_many :tasks, dependent: :destroy
-  has_many :goal_users, dependent: :destroy
-  has_many :users, through: :goal_users
+  has_many :challenge_goals, dependent: :destroy
 
   # noticed gem association
   has_many :notifications, through: :users
@@ -42,20 +41,34 @@ class Goal < ApplicationRecord
   validates :name, presence: true, uniqueness: true,
             format: {
               with: BASE_VALIDATION,
-              message: "must starts with letter and end with letter or digit."
+              message: :text_input
             },
             length: { minimum: 5, maximum: 50 }
 
   validates :description, presence: true,
             format: {
               with: BASE_VALIDATION,
-              message: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.' },
+              message: :text_input
+            },
             length: { minimum: 7, maximum: 200 }
 
   validates :category_id, presence: false
-  validates :color, presence: true, uniqueness: true
+  validates :color, presence: true, uniqueness: { scope: :user_id }
   validates :deadline, presence: true
   validates :color, presence: true
+
+  scope :sort_by_completed_tasks, -> {
+    left_joins(:tasks)
+      .group('goals.id, challenge_goals.id')
+      .select(
+        'goals.*, COUNT(
+                    CASE WHEN tasks.complete = true THEN 1 ELSE NULL END
+                  ) completed_tasks_count')
+      .order('completed_tasks_count DESC') }
+
+  def goal_in_challenge
+    challenge_goals.where(goal: self).first&.challenge
+  end
 
   def tasks_streak?
     return if self.tasks.completed.count == 0

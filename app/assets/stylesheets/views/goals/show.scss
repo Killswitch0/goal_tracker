@@ -1,0 +1,39 @@
+#goals-show {
+
+  /// Goal info
+  .goal-info {
+    box-shadow: 0 .4rem .8rem #0005;
+    background-color: $third-color;
+    border-radius: 1rem;
+    width: 43%;
+    margin: 0 auto;
+
+    .table-header {
+      margin: 0 auto;
+    }
+  }
+
+  .table-main {
+    background-color: $third-color;
+    height: 50vh;
+  }
+
+  /// goals, habits, tasks: goals/show
+  div.completed {
+    background-color: rgba(39, 245, 93, 0.6);
+  }
+
+  .completion-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+
+    .table-wrapper {
+      height: 88%;
+    }
+  }
+}
+
+
+
+

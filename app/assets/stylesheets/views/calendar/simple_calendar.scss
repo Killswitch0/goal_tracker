@@ -1,0 +1,70 @@
+.habit-record {
+  border: 2px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+
+
+.simple-calendar {
+  border-radius: 2rem;
+  margin-top: 30px;
+  overflow-x: hidden;
+
+  .completed {
+    background-color: rgba(24, 225, 68, 0.5);
+  }
+
+  .uncompleted {
+    background-color: rgba(239, 22, 22, 0.5);
+  }
+
+  .uncompleted, .completed {
+    border-radius: 1rem;
+    margin-bottom: 3px;
+    text-align: center;
+  }
+
+  .calendar-heading {
+    position: sticky;
+    margin: 10px;
+  }
+
+  .table {
+    width: 95%;
+    margin-inline: auto;
+  }
+
+
+  .day {}
+
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+
+  .today {}
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {
+  }
+  .next-month { }
+  .current-month {
+  }
+
+  .has-events {}
+}
+.my-custom-scrollbar {
+  position: relative;
+  height: 150px;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}

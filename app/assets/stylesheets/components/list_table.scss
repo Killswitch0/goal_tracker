@@ -1,0 +1,92 @@
+div.table-main {
+  width: 50vh;
+  height: 70vh;
+  background-color: #fff5;
+  box-shadow: 0 .4rem .8rem #0005;
+  border-radius: 2rem;
+  // overflow: auto;
+}
+
+table {
+  width: 100%;
+  overflow: auto;
+  background: aliceblue;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  padding: 12px;
+  text-align: left;
+}
+
+.table-header {
+  margin: 15px auto 0;
+  width: 95%;
+  //height: 10%;
+  background-color: #DBE2E6;
+  padding: .4rem 1rem;
+  border-radius: 6rem;
+  align-items: center;
+
+  display: flex;
+  justify-content: center;
+}
+
+.table-header h2 {
+  margin: 0 auto;
+}
+
+.table-body {
+  width: 95%;
+  height: 75%;
+  max-height: calc(89% - 1.6rem);
+  background-color: #fff4;
+  margin: .8rem auto;
+  border-radius: .6rem;
+  overflow: auto;
+  box-shadow: 0 .4rem .8rem #0005;
+
+  td > a {
+    text-decoration: none;
+  }
+}
+
+
+.table-body::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.table-body::-webkit-scrollbar-thumb {
+  border-radius: .5rem;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+.table-body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #d5d1defe;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #0000000b;
+}
+
+.table-wrapper {
+  height: 90%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .links {
+    padding-inline: 11px;
+  }
+}

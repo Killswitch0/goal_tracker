@@ -18,8 +18,8 @@ RSpec.feature "SearchGoals" do
 
       visit goals_path
 
-      fill_in 'search', with: '2'
-      click_on 'Search'
+      find(:css, '[@id="search"]').set('2')
+      find('[@id="goals-index"]/div/div[2]/div/div[1]/form/button').click
 
       expect(page).to have_content 'Name 2'
 

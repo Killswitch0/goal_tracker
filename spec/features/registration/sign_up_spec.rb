@@ -17,7 +17,7 @@ RSpec.feature "SignUps" do
       fill_in 'Confirmation', with: user.password
       click_on 'Sign up'
 
-      expect(page).to have_content "Please confirm your email address to continue"
+      expect(page).to have_content I18n.t('users.create.success')
       expect(current_path).to eq login_path
     end
 
@@ -29,7 +29,7 @@ RSpec.feature "SignUps" do
       fill_in 'Confirmation', with: "#{user.password}"
       click_on 'Sign up'
 
-      expect(page).to have_content('Email has already been taken', count: 1)
+      expect(page).to have_content I18n.t('activerecord.errors.models.user.taken'), count: 1
       expect(current_path).to eq signup_path
     end
   end

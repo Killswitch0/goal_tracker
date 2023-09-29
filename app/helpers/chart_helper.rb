@@ -14,12 +14,11 @@ module ChartHelper
 
       if tasks.pluck(:complete_date).all? { |d| d.nil? }
         line_chart tasks.map { |t|
-
           {
             name: t.name,
             data: Array.new(tasks.length, {})
           }
-        }, height: '400px'
+        }
       else
         line_chart tasks.group(:name).group_by_period(period, :complete_date).count
       end
@@ -32,8 +31,7 @@ module ChartHelper
           name: goal.name,
           data: completion_data.empty? ? empty_data : completion_data.group_by_period(period, :date).count
         }
-
-      }, height: '400px'
+      }
     end
   end
 

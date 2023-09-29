@@ -1,9 +1,13 @@
-<div class="text-center home mt-3">
-  <h1><%= t('authenticate.signup') %> <%= t('or') %> <%= t('authenticate.login') %></h1>
-  <p><%= t('messages.sign_or_log') %></p>
+<div class="text-center home mt-5">
+  <%= image_tag('logo', height: 200, width: 200) %>
+
+  <div class="div">
+    <h1><%= t('authenticate.signup') %> <%= t('or') %> <%= t('authenticate.login') %></h1>
+    <p><%= t('messages.sign_or_log') %></p>
     <div>
-      <%= link_to t('authenticate.signup'), signup_path, class: "btn btn-primary", style: "margin-right: 15px" %>
+      <%= link_to t('authenticate.signup'), signup_path, class: "btn btn-primary action", style: "margin-right: 15px" %>
       <%= link_to t('authenticate.login'), login_path, class: "btn btn-success", style: "margin-left: 15px" %>
     </div>
+  </div>
 </div>
 

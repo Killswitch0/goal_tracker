@@ -10,6 +10,7 @@ en:
   here: here
   or: or
   of: of
+  ago: ago
 
 
   date:
@@ -26,12 +27,24 @@ en:
     tracking: Tracking
     calendar: Calendar
     chart: Chart
+    challenges: Challenges
 
   # Active Record.
   #----------------------------------------------------------------------------
   activerecord:
     errors:
+      one: '%{count} error'
+      other: '%{count} errors'
+      messages:
+        text_input: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
+        incorrect: 'is incorrect.'
       models:
+        category:
+          only_letters: "must contain only letters."
+        challenge:
+          min_period: 'period should be at least 1 day.'
+        challenge_goal:
+          one_goal: 'can add only one goal.'
         user:
           blank: "can't be blank"
           taken: "has already been taken"
@@ -49,6 +62,13 @@ en:
           email:
             blank: "can't be blank"
             invalid: "is invalid"
+          password:
+            password_format: "must be in English and contain only letters."
+            password_length: "must be between 6 and 10 characters."
+            password_complexity: >
+              complexity requirement not met. Length should be 8-70 characters and include:
+              1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character."
+              name_format: "must be in English and contain only letters."
           name:
             blank: "can't be blank"
         goal:
@@ -89,7 +109,7 @@ en:
         name: Name
         description: Description
         days_completed: Days Completed
-        user_id: User ID
+        user_id: User
         created_at: Created At
         updated_at: Updated At
         deadline: Deadline
@@ -100,32 +120,50 @@ en:
         name: Name
         description: Description
         days_completed: Days Completed
-        user_id: User ID
-        goal_id: Goal ID
+        user_id: User
+        goal_id: Goal
         created_at: Created At
         updated_at: Updated At
       task:
         name: Name
         complete: Complete
-        goal_id: Goal ID
+        goal_id: Goal
         created_at: Created At
         updated_at: Updated At
-        user_id: User ID
+        user_id: User
         deadline: Deadline
         complete_date: Complete Date
       category:
         name: Name
         created_at: Created At
         updated_at: Updated At
-        goal_id: Goal ID
-        user_id: User ID
+        goal_id: Goal
+        user_id: User
+      challenge:
+        name: Name
+        description: Description
+        deadline: Deadline
+        user_id: User
+        created_at: Created At
+        updated_at: Updated At
+      challenge_goal:
+        challenge_id: Challenge
+        goal_id: Goal
+        user_id: User
+        created_at: Created At
+        updated_at: Updated At
+      challenge_user:
+        challenge_id: Challenge
+        user_id: User
+        created_at: Created At
+        updated_at: Updated At
       completion_date:
         date: Date
-        habit_id: Habit ID
+        habit_id: Habit
       goal_user:
         confirm: Confirm
-        user_id: User ID
-        goal_id: Goal ID
+        user_id: User
+        goal_id: Goal
         created_at: Created At
 
   # Common table columns.
@@ -136,7 +174,7 @@ en:
   updated_at: Updated at
   status: Status
 
-  # Authentication.
+  # Views -> Authentication.
   #----------------------------------------------------------------------------
   authenticate:
     email: Email
@@ -154,7 +192,7 @@ en:
   new_user: New User
   hello: Hello
 
-  # Common.
+  # Views -> Common.
   #----------------------------------------------------------------------------
   action: Action
   create: Create
@@ -174,7 +212,16 @@ en:
   sure: Are you sure?
   next: Next
   previous: Previous
-  days_left: Days left
+  days_left:
+    base: 'Days left'
+    one: '%{count} day left'
+    few: '%{count} days left'
+    many: '%{count} days left'
+    other: '%{count} days left'
+
+  # Views -> Form.
+  #----------------------------------------------------------------------------
+  form_contains: Form contains
 
   # Views -> Goals.
   #----------------------------------------------------------------------------
@@ -196,6 +243,7 @@ en:
   #----------------------------------------------------------------------------
   new_category: New category
   all_categories: Categories
+  filter_or_manage: Category filter / Management
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------
@@ -225,6 +273,19 @@ en:
   #----------------------------------------------------------------------------
   habits_chart: Habits Chart
   tasks_chart: Tasks Chart
+
+  # Views -> Challenges.
+  #----------------------------------------------------------------------------
+  challenge: Challenge
+  new_challenge: New Challenge
+  challenge_end: Challenge end
+  target:
+    one: "1 target"
+    other: "%{count} targets"
+
+  # Views -> Calendar.
+  #----------------------------------------------------------------------------
+  goal_markers: Goal markers
 
   # Controllers.
   #----------------------------------------------------------------------------
@@ -259,15 +320,28 @@ en:
       category_must_exist: 'Select a category or create a new one.'
     destroy:
       success: 'Goal deleted successfully.'
+  challenges:
+    create:
+      success: 'Challenge created successfully.'
+      fail: 'Challenge was not created.'
     create_invitation:
+      success: 'Invitation sent successfully to user %{invited_user}.'
       already: 'User has already received an invitation.'
       fail: 'Failed to send invitation.'
+      not_found: 'User with this email not found.'
+      need_confirm: 'You need to confirm the invitation :)'
     confirm_invitation:
-      success: 'You have accepted the invitation and joined the %{goal_name} group.'
+      success: 'You have accepted the invitation and joined the %{challenge_name} challenge.'
       fail: 'Invitation not found.'
     decline_invitation:
-      success: 'You declined the invitation to the %{goal_name} group.'
+      success: 'You declined the invitation to the %{challenge_name} challenge.'
       fail: 'Invitation not found.'
+    add_goal:
+      success: 'Goal successfully added to the challenge.'
+      fail: 'Failed to add the goal to the challenge.'
+    leave:
+      success: 'You have left the challenge.'
+      fail: 'Failed to leave the challenge.'
   password_resets:
     create:
       success: 'Email sent with password reset instructions.'

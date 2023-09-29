@@ -1,14 +1,16 @@
-<div class="col-md-4 offset-md-4">
-  <h1 class="text-center">Password reset</h1>
-
+<div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
   <div class="card">
+    <div class="table-header">
+      <h2 class="text-center"><%= t('password_reset') %></h2>
+    </div>
+
     <div class="card-body">
       <%= form_with url: password_resets_path, method: :post do |f| %>
         <div class="mb-3">
           <%= f.label :email %>
           <%= f.text_field :email %>
         </div>
-        <div class="actions"><%= f.submit 'Reset Password', class: 'btn btn-primary' %></div>
+        <div class="actions"><%= f.submit 'Reset Password', class: 'btn btn-primary action' %></div>
       <% end %>
     </div>
   </div>

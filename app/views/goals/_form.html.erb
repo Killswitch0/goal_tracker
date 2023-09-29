@@ -1,52 +1,56 @@
 <%= form_with(model: @goal) do |f| %>
   <%= render "shared/error_messages", resource: @goal %>
-  <div class="card">
-    <div class="card-body">
 
-      <div class="mb-3">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
+  <div class="mb-3">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
 
-      <div class="mb-3">
-        <%= f.label :description %>
-        <%= f.text_area :description, class: "form-control" %>
-      </div>
+  <div class="mb-3">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
 
-      <div class="mb-3">
-        <%= f.label :color %>
-        <%= f.select :color, options_for_select(available_colors), class: "form-select" %>
-      </div>
+  <div class="mb-3">
+    <%= f.label :color %>
+    <%= f.select :color, options_for_select(available_colors), {}, class: 'form-select' %>
+  </div>
 
-      <br>
-      <% if current_user.categories.present? %>
-        <div class="mb-3">
-          <%= f.label :category_id %>
-          <%= f.select :category_id, options_for_select(current_user.categories.pluck(:name, :id),
-                                                        params[:category_id]), include_blank: true, class: "form-select" %>
-        </div>
-      <% end %>
-
-      <div class="mb-3">
-          <%= f.fields_for :category_attributes do |category_fields| %>
-            <%= category_fields.label :name, t('new_category') %>
-            <%= category_fields.text_field :name, class: 'form-control' %>
-            <%= category_fields.hidden_field :user_id, value: current_user.id %>
-          <% end %>
-      </div>
-      <br>
-
-      <div class="mb-3">
-        <%= f.label :deadline %>
-        <%= f.datetime_field :deadline, class: "form-select" %>
-      </div>
-
-      <div class="mb-3">
-        <%= f.label :complete %>
-        <%= f.check_box :complete, {}, true, false %>
-      </div>
-
-      <%= f.submit "#{@goal.new_record? ? t('create_goal') : t('update')}", class: "btn btn-primary" %>
+  <br>
+  <% if current_user.categories.present? %>
+    <div class="mb-3">
+      <%= f.label :category_id %>
+      <%= f.select :category_id, options_for_select(current_user.categories.pluck(:name, :id),
+                                                    params[:category_id]), { include_blank: true }, class: 'form-select' %>
     </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.fields_for :category_attributes do |category_fields| %>
+      <%= category_fields.label :name, t('new_category') %>
+      <%= category_fields.text_field :name, class: 'form-control' %>
+      <%= category_fields.hidden_field :user_id, value: current_user.id %>
+    <% end %>
+  </div>
+  <br>
+
+  <div class="mb-3">
+    <%= f.label :deadline %>
+    <%= f.date_select :deadline,
+                      {
+                        prompt: { day: :select_day, month: :select_month, year: :select_year },
+                        start_year: Date.current.year
+                      },
+                      class: "form-select mb-3" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :complete %>
+    <%= f.check_box :complete, {}, true, false %>
+  </div>
+
+  <div class="form-buttons">
+    <%= link_to t('back'), :back, class: 'btn btn-secondary' %>
+    <%= f.submit "#{@goal.new_record? ? t('create_goal') : t('update')}", class: "btn btn-primary action" %>
   </div>
 <% end %>

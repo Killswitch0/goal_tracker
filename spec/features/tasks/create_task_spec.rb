@@ -23,19 +23,16 @@ RSpec.feature "CreateTasks" do
       select task.deadline.year, from: 'task_deadline_1i'
       select task.deadline.strftime('%B'), from: 'task_deadline_2i'
       select task.deadline.day.to_s, from: 'task_deadline_3i'
-      select task.deadline.hour, from: 'task_deadline_4i'
-      select task.deadline.min, from: 'task_deadline_5i'
-
 
       click_on 'Create'
 
-      expect(page).to have_content 'Task created successfully.'
+      expect(page).to have_content I18n.t('tasks.create.success')
       expect(page).to have_content(task.name)
 
 
       ### complete ###
       visit complete_goal_task_path(goal, task)
-      expect(page).to have_content 'Task completed successfully.'
+      expect(page).to have_content I18n.t('tasks.complete.completed')
     end
 
     scenario 'Non-authenticated user try to create Task' do

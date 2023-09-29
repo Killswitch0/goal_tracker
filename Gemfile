@@ -49,7 +49,7 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 gem "bcrypt"
 gem "pg", "~> 1.5"
@@ -111,3 +111,5 @@ group :test do
 
   gem "database_cleaner", "~> 2.0"
 end
+
+gem "gravatar_image_tag", "~> 1.2"

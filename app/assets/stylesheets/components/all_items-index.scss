@@ -1,0 +1,20 @@
+#all_items-index {
+  display: flex;
+  justify-content: space-around;
+
+  .table-header {
+    margin-top: 0;
+  }
+
+  .table-wrapper {
+    width: 40vh;
+    height: 55vh;
+    background-color: $third-color;
+    border-radius: 1rem;
+    padding: 10px;
+  }
+
+  .table-body {
+    height: 84%;
+  }
+}

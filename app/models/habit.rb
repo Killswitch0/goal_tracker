@@ -30,7 +30,7 @@ class Habit < ApplicationRecord
   validates :name, presence: true, uniqueness: true,
             format: {
               with: BASE_VALIDATION,
-              message: 'allows only letters(uppercase and lowercase), numbers, commas, dots, dashes and colons.'
+              message: :text_input
             },
             length: { minimum: 5, maximum: 45 }
   validates :description, presence: true
@@ -51,7 +51,7 @@ class Habit < ApplicationRecord
   scope :not_completed_today, -> {
     today = Date.today
     left_joins(:completion_dates)
-      .where('completion_dates.created_at IS NULL OR DATE(completion_dates.created_at) != ?', today)
+      .where('completion_dates.created_at IS NULL')
       .where.not(
         'EXISTS (
          SELECT 1

@@ -10,9 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_31_100911) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_10_114639) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -24,23 +52,45 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_100911) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
+  create_table "challenge_goals", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "goal_id", null: false
+    t.bigint "challenge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "challenge_user_id", null: false
+    t.index ["challenge_id"], name: "index_challenge_goals_on_challenge_id"
+    t.index ["challenge_user_id"], name: "index_challenge_goals_on_challenge_user_id"
+    t.index ["goal_id"], name: "index_challenge_goals_on_goal_id"
+    t.index ["user_id"], name: "index_challenge_goals_on_user_id"
+  end
+
+  create_table "challenge_users", force: :cascade do |t|
+    t.boolean "confirm", default: false
+    t.bigint "user_id", null: false
+    t.bigint "challenge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_challenge_users_on_challenge_id"
+    t.index ["user_id"], name: "index_challenge_users_on_user_id"
+  end
+
+  create_table "challenges", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "deadline"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
   create_table "completion_dates", force: :cascade do |t|
     t.date "date"
     t.bigint "habit_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["habit_id"], name: "index_completion_dates_on_habit_id"
-  end
-
-  create_table "goal_users", force: :cascade do |t|
-    t.boolean "confirm", default: false
-    t.bigint "user_id", null: false
-    t.bigint "goal_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["goal_id"], name: "index_goal_users_on_goal_id"
-    t.index ["user_id", "goal_id"], name: "index_goal_users_on_user_id_and_goal_id", unique: true
-    t.index ["user_id"], name: "index_goal_users_on_user_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -111,11 +161,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_31_100911) do
     t.index ["role"], name: "index_users_on_role"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "categories", "goals"
   add_foreign_key "categories", "users"
+  add_foreign_key "challenge_goals", "challenge_users"
+  add_foreign_key "challenge_goals", "challenges"
+  add_foreign_key "challenge_goals", "goals"
+  add_foreign_key "challenge_goals", "users"
+  add_foreign_key "challenge_users", "challenges"
+  add_foreign_key "challenge_users", "users"
+  add_foreign_key "challenges", "users"
   add_foreign_key "completion_dates", "habits"
-  add_foreign_key "goal_users", "goals"
-  add_foreign_key "goal_users", "users"
   add_foreign_key "goals", "categories"
   add_foreign_key "goals", "users"
   add_foreign_key "habits", "goals"

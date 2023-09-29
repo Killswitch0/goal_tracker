@@ -1,14 +1,40 @@
-@import "simple_calendar";
-@import "categories/index";
-@import "categories/show";
-@import "goals/index";
-@import "goals/show";
-@import "dashboard/show";
+@import "variables/*";
+@import "components/*";
+@import "views/**/*";
+@import "mobile";
 
 body {
   min-height: 100vh;
   background: #03dfff;
-  background: linear-gradient(139deg, #03ddffcb 0%, #ff0381b6 90%);
+  background: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+}
+
+.home {
+  background: $third-color;
+  height: 43vh;
+  width: 60vh;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  margin: 0 auto;
+
+  img {
+    margin: 0 auto;
+    position: relative;
+    top: -8%;
+  }
+}
+
+// content for mobile screen
+.mobile-show {
+  display: none;
+}
+
+
+.offcanvas.offcanvas-start {
+  width: 500px;
 }
 
 th a {
@@ -18,9 +44,7 @@ th a {
   text-decoration: none;
  }
 
-
-
-      /// Bootstrap ///
+      /// Bootstrap navbar ///
 .navbar-collapse {
   font-size: 18px;
 }
@@ -56,5 +80,30 @@ th a {
 .active:after {
   opacity: 1;
 }
+
+// canvas
+.offcanvas {
+  background-color: $third-color;
+
+  .offcanvas-title {
+    font-size: 25px;
+  }
+}
+
+// dropdown-background color
+.dropdown-menu {
+  background-color: $third-color;
+}
+
+// user/_session_manager
+#navbarDropdown {
+  display: flex;
+
+  svg, img {
+    margin-right: 5px;
+  }
+}
+
+
 
 

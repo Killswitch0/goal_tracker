@@ -1,53 +1,80 @@
-<div class="mt-3 text-center">
-  <h2><%= t('navigation.calendar').upcase %></h2>
-  
-  <div class="row">
-    <div class="table-wrapper-scroll-y my-custom-scrollbar col-md-3">
-      <table class="table border border-light">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col"><%= t('activerecord.attributes.goal.name') %></th>
-            <th scope="col"><%= t('activerecord.attributes.goal.color') %></th>
-          </tr>
-        </thead>
-        <% @goals.each_with_index do |goal, index| %>
-          <tbody>
-            <tr>
-              <th scope="row"><%= index + 1 %></th>
-              <td><%= goal.name %></td>
-              <td style="background-color: <%= goal.color %>;"></td>
-            </tr>
-          </tbody>
-        <% end %>
-      </table>
+<div class="mt-3" id="calendar-show">
+  <div class="mt-3 text-center">
+    <div class="table-header">
+      <h2>
+        <%= t('navigation.calendar').upcase %>
+      </h2>
     </div>
-    
-    <div class="col-md-4 offset-md-1">
+
+    <div class="d-flex justify-content-around">
       <%= render 'layouts/search', path: calendar_path %>
-    </div>
-    
-    <%= month_calendar do |date| %>
-      <%= date %>
-      <% habits_for.each do |habit| %>
-        <% if habit.completion_dates.any? { |cd| cd.date == date.to_date } %>
-          <div class="completed border border-dark" 
-               style="background: linear-gradient(
-                                  to right,
-                                  <%= habit.goal.color %> 5%,
-                                  rgba(24, 225, 68, 0.5) 10%);">
-            <%= habit.name %>
-          </div>
-        <% else %>
-          <div class="uncompleted border border-dark" 
-               style="background: linear-gradient(
-                                  to right,
-                                  <%= habit.goal.color %> 5%,
-                                  rgba(239, 22, 22, 0.5) 10%);">
-             <%= habit.name %>
-          </div>
+      <%= canvas_button 'goal_markers', klass: 'mt-3' %>
+
+      <div class="date_select d-flex justify-content-around">
+        <%= form_with url: calendar_path, method: :get, class: 'd-flex mt-3' do |f| %>
+          <%= f.date_field :start_date, value: "#{params[:start_date].present? ? params[:start_date] : Date.today}",
+                           class: 'form-control' %>
+          <%= f.submit t('search'), default: 'Go', class: 'btn btn-primary btn-sm action mx-1' %>
         <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <%= month_calendar do |date| %>
+    <%= date %>
+    <% habits_for.each do |habit| %>
+      <% if habit.completion_dates.any? { |cd| cd.date == date.to_date } %>
+        <div class="completed border border-dark"
+             style="background: linear-gradient(
+               to right,
+                 <%= habit.goal.color %> 7%,
+                 rgba(24, 225, 68, 0.5) 0%);">
+          <%= habit.name %>
+        </div>
+      <% else %>
+        <div class="uncompleted border border-dark"
+             style="background: linear-gradient(
+               90deg,
+                 <%= habit.goal.color %> 7%,
+                 rgba(239, 22, 22, 0.5) 0%);">
+          <%= habit.name %>
+        </div>
       <% end %>
     <% end %>
-  </div>
+  <% end %>
 </div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExample"><%= t('goal_markers') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <div class="table-body">
+      <table class="table table-hover">
+        <thead class="table-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"><%= t('activerecord.attributes.goal.name') %></th>
+          <th scope="col"><%= t('activerecord.attributes.goal.color') %></th>
+        </tr>
+        </thead>
+        <tbody class="overflow-y-auto">
+        <% @goals.each_with_index do |goal, index| %>
+          <tr>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= goal.name %></td>
+            <td style="background-color: <%= goal.color %>;"></td>
+          </tr>
+        <% end %>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+

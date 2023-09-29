@@ -1,0 +1,100 @@
+<div id="challenges-index">
+  <div class="challenges-wrapper col-sm-12 col-md-12 col-lg-8 offset-lg-2 mt-3">
+    <div class="table-main challenge">
+      <div class="table-wrapper">
+        <div class="table-header">
+          <h2 class="text-center"><%= t('navigation.challenges') %></h2>
+        </div>
+
+        <%= render 'layouts/search', path: challenges_path %>
+
+        <section class="table-body">
+          <table>
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"><%= sortable('user_id', title = t('creator')) %></th>
+              <th scope="col"><%= t('name') %></th>
+              <th scope="col"><%= t('challenge') %></th>
+              <th scope="col" colspan="2"><%= t('action') %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if @challenges.present? %>
+              <% @challenges.each_with_index do |challenge, index| %>
+                <tr>
+                  <th scope="row"><%= index + 1 %></th>
+                  <td><%= user_avatar(challenge.user) %></td>
+                  <td><%= challenge.user.name %></td>
+                  <td><%= link_to challenge.name.truncate(17), challenge, style: "text-decoration: none" %></td>
+                  <td><%= link_to t('leave'), leave_challenge_path(challenge),
+                                  data: { turbo_method: :delete, turbo_confirm: t('sure') },
+                                  class: 'btn btn-sm btn-warning' %></td>
+                  <td><%= link_to t('delete'), challenge, data: { turbo_method: :delete, turbo_confirm: t('sure') },
+                                  class: 'btn btn-sm btn-danger' if challenge.user == current_user %> </td>
+              <% end %>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <div class="d-flex justify-content-around">
+        <%= link_to t('new_challenge'), new_challenge_path, class: 'btn btn-primary' %>
+        <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <%= t('invites') %>
+          <% if @invites.present? %>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+          <%= @invites.count > 99 ? '99+' : @invites.count %>
+          <span class="visually-hidden">New alerts</span>
+        </span>
+          <% end %>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExample"><%= t('invites') %></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="table-body">
+        <table class="table table-hover">
+          <thead class="table-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"><%= t('activerecord.models.user') %></th>
+            <th scope="col"><%= t('activerecord.attributes.user.name') %></th>
+            <th scope="col"><%= t('challenge') %></th>
+            <th class="text-center" scope="col" colspan="2"><%= t('action') %></th>
+          </tr>
+          </thead>
+          <tbody class="overflow-y-auto">
+          <% @invites.each_with_index do |invite, index| %>
+            <tr>
+              <% if invite.confirm? %>
+                No notifications yet
+              <% else %>
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= user_avatar(invite.challenge.user) %></td>
+                <td><%= invite.challenge.user.name %></td>
+                <td><%= invite.challenge.name.truncate(20) %></td>
+                <td><%= button_to t('accept'), confirm_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-primary btn-sm' %></td>
+                <td><%= button_to t('decline'), decline_invitation_challenge_path(invite.challenge), method: :patch, class: 'btn btn-danger btn-sm' %></td>
+              </tr>
+            <% end %>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

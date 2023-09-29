@@ -1,20 +1,13 @@
 <div class="simple-calendar">
   <div class="row">
-    <div class="calendar-heading col-md-12">
+    <div class="calendar-heading col-md-12 text-center">
       <%= link_to t('previous', default: 'Previous'), calendar.url_for_previous_view, class: "btn btn-secondary btn-sm" %>
       <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
       <%= link_to t('next', default: 'Next'), calendar.url_for_next_view, class: "btn btn-primary btn-sm" %>
     </div>
   </div>
 
-  <div class="date_select">
-    <%= form_with url: calendar_path, method: :get do |f| %>
-      <%= f.date_field :start_date %>
-      <%= f.submit t('search'), default: 'Go', class: 'btn btn-primary btn-sm' %>
-    <% end %>
-  </div>
-
-  <table class="table table-striped">
+  <table class="table table-striped mt-2">
     <thead>
     <tr>
       <% date_range.slice(0, 7).each do |day| %>
