@@ -3,7 +3,7 @@ div.table-main {
   height: 70vh;
   background-color: #fff5;
   box-shadow: 0 .4rem .8rem #0005;
-  border-radius: .8rem;
+  border-radius: 2rem;
   // overflow: auto;
 }
 
@@ -45,6 +45,10 @@ table, th, td {
   border-radius: .6rem;
   overflow: auto;
   box-shadow: 0 .4rem .8rem #0005;
+
+  td > a {
+    text-decoration: none;
+  }
 }
 
 

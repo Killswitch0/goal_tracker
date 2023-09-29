@@ -1,0 +1,22 @@
+<div class="categories-wrapper">
+  <div class="new-category">
+    <%= link_to t('new'), new_category_path, class: 'btn btn-primary btn-sm' %>
+    <%= link_to t('manage'), categories_path, class: 'btn btn-primary btn-sm' %>
+  </div>
+  <div class="divider"></div>
+
+  <div class="categories-title"><%= t('all_categories') %></div>
+  <div class="categories-item all">
+    <%= link_to t('all').capitalize, goals_path %>
+  </div>
+
+  <ul class="categories-list">
+    <% current_user.categories.each do |category| %>
+      <li class="categories-item">
+        <%= link_to category.name, goals_path(filter: "#{category.id}") %>
+        <span><%= category.goals.count %></span>
+      </li>
+      <div class="divider"></div>
+    <% end %>
+  </ul>
+</div>

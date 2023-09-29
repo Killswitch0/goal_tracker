@@ -1,6 +1,6 @@
 <section id="dashboard-show">
   <div class="actions-wrapper">
-    <div>
+    <div class="goals-background">
 
       <div class="goals-wrapper">
         <ul class="goals-list">
@@ -50,7 +50,7 @@
       </div>
     </div>
 
-    <div class="actions-items col-sm-12">
+    <div class="actions-items">
 
       <div class="actions-header">
         <div class="items-title"><%= t('all_tasks') %></div>
@@ -80,7 +80,9 @@
         <div class="completed-info">
           <div>
             <%= t('done') %>
-            <span><%= completed_for(current_user).first %></span> <%= t('of') %> <%= completed_for(current_user).last %>
+            <span><%= completed_for(current_user).first %></span>
+            <%= t('of') %>
+            <%= completed_for(current_user).last %>
           </div>
         </div>
 
@@ -136,15 +138,15 @@
         </div>
 
         <div class="completed-show">
-          <% unless params[:all_habits].present? %>
-            <%= link_to dashboard_path(all_habits: 'all'), class: 'show-all d-block' do %>
-              <%= icon 'check-square' %>
-              <%= t('show') %>
-            <% end %>
-          <% else %>
+          <% if params[:all_habits].present? %>
             <%= link_to dashboard_path(open_habits: 'open'), class: 'show-all d-block' do %>
               <%= icon 'check-square' %>
               <%= t('hide') %>
+            <% end %>
+          <% else %>
+            <%= link_to dashboard_path(all_habits: 'all'), class: 'show-all d-block' do %>
+              <%= icon 'check-square' %>
+              <%= t('show') %>
             <% end %>
           <% end %>
         </div>

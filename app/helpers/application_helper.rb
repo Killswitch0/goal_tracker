@@ -1,5 +1,5 @@
 module ApplicationHelper
-  include BootstrapIconHelper
+  include BootstrapHelper
 
   def sortable(column, title = nil)
     title ||= t("#{column}")

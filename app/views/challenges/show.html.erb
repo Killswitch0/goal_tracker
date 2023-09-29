@@ -1,5 +1,5 @@
 <section id="challenges-show">
-  <div class="challenge-header text-center mt-3">
+  <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 challenge-header text-center mt-3">
       <h2 class="text-center mt-2">
         <%= @challenge.name %>
       </h2>
@@ -24,7 +24,7 @@
       </div>
 
       <div>
-        <%= link_to t('leave_challenge'), leave_challenge_path(@challenge),
+        <%= link_to t('leave'), leave_challenge_path(@challenge),
                     data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
                     class: 'btn btn-sm btn-warning' %>
       </div>
@@ -64,9 +64,7 @@
                               'btn btn-primary btn-sm' :
                               'btn btn-outline-primary btn-sm'}" %>
 
-      <a class="btn btn-sm btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-        <%= t('rating') %>
-      </a>
+      <%= canvas_button 'rating', klass: 'btn btn-sm btn-primary'%>
     </div>
   </div>
 
@@ -113,44 +111,7 @@
   </div>
 </section>
 
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel"><%= t('challenge_users') %></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-
-  <div class="offcanvas-body">
-    <div class="table-body">
-      <table class="table table-hover">
-        <thead class="table-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col"><%= t('member') %></th>
-          <th scope="col"><%= t('name') %></th>
-          <th scope="col"><%= t('targets') %></th>
-          <th scope="col"><%= t('load') %></th>
-        </tr>
-        </thead>
-        <tbody class="overflow-y-auto">
-        <% @members.each_with_index do |user, index| %>
-          <% user_goal = user.user_goal_in(@challenge)&.tasks&.count %>
-
-          <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td><%= user_avatar(user, size: 25) %></td>
-            <td><%= user.name %></td>
-            <td><%= user_goal.present? ? user_goal : 0 %></td>
-            <td class="fs-4">
-              <i class="bi bi-minecart-loaded" style="color: <%= load_level_color(user_goal)  %>"></i>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<%= render 'members_canvas', members: @members, challenge: @challenge %>
 
 
 

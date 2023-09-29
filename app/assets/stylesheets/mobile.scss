@@ -1,3 +1,11 @@
+@media (max-width: 1400px) {
+  #dashboard-show {
+    .actions-items {
+      width: 380px;
+    }
+  }
+}
+
 @media (max-width: 1200px) {
   #navbarSupportedContent {
     font-size: 14px;
@@ -34,20 +42,65 @@
 
 @media (max-width: 991px) {
   #navbarSupportedContent {
-    font-size: 20px;
+    font-size: 23px;
+
+    #navbarDropdown {
+      svg, img {
+        width: 36px;
+      }
+    }
+
+    .dropdown-menu {
+      font-size: 25px;
+    }
+
+    .navbar-nav {
+      a.nav-link {
+        position: unset;
+      }
+    }
   }
 
+  // App logo
   a.navbar-brand {
     font-size: 38px;
   }
 
+  a.btn, button.btn, input.btn {
+    font-size: 23px;
+    transition: unset;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  .mobile-show {
+    display: unset !important;
+  }
+
+  // Dashboard
   #dashboard-show {
     .actions-wrapper {
       flex-direction: column;
 
+      .goals-background {
+        background-color: $third-color;
+        border-radius: 1rem;
+        padding: 20px;
+
+        .new_goal {
+          margin-top: 20px;
+
+          a {
+            font-size: 25px;
+          }
+        }
+      }
+
       .goals-wrapper {
         width: 100%;
-        height: 200px;
+        height: 238px;
         overflow-y: hidden;
         overflow-x: auto;
         border-radius: 1rem;
@@ -55,14 +108,30 @@
         .goals-list {
           flex-direction: row;
           justify-content: space-between;
-          width: 1000px;
+          width: 1800px;
+          background-color: #DBE2E6;
 
           .goal-item {
             width: 500px;
-            height: 150px;
+            height: 215px;
             margin-inline: 20px;
+
+            .goal-title {
+              font-size: 25px;
+            }
+
+            i:before {
+              font-size: 45px;
+              margin-top: 15px;
+            }
           }
         }
+
+        .progress-info {
+          font-size: 24px;
+          margin-top: 20px;
+        }
+
       }
 
       .actions-header {
@@ -95,12 +164,47 @@
 
           a {
             font-size: 25px;
+            transition: none;
           }
         }
 
-        .completed-info  {
+        .completed-info {
           font-size: 24px;
         }
+      }
+    }
+  }
+
+  .table-body {
+    font-size: 20px;
+  }
+
+  #goals-index {
+    .categories-wrapper {
+      margin: 0 auto;
+      height: 70vh;
+      width: 35vh;
+      font-size: 25px;
+
+      .new-category {
+        a.btn {
+          font-size: 23px;
+        }
+      }
+    }
+  }
+
+  #goals-show {
+    div.goal-info {
+      width: unset;
+      font-size: 22px;
+    }
+
+    .completion-wrapper {
+      flex-direction: column;
+
+      .table-main {
+        width: unset;
       }
     }
   }

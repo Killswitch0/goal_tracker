@@ -27,6 +27,12 @@ body {
   }
 }
 
+// content for mobile screen
+.mobile-show {
+  display: none;
+}
+
+
 .offcanvas.offcanvas-start {
   width: 500px;
 }
@@ -38,9 +44,7 @@ th a {
   text-decoration: none;
  }
 
-
-
-      /// Bootstrap ///
+      /// Bootstrap navbar ///
 .navbar-collapse {
   font-size: 18px;
 }
@@ -77,25 +81,7 @@ th a {
   opacity: 1;
 }
 
-// Forms
-.card {
-  background: $third-color;
-  box-shadow: 0 .4rem .8rem #0005;
-
-  .table-header {
-    margin-top: 16px;
-  }
-
-  input.form-control, select.form-select, textarea.form-control {
-    background: #fff5;
-  }
-
-  .form-buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
+// canvas
 .offcanvas {
   background-color: $third-color;
 

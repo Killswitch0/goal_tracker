@@ -8,10 +8,7 @@
 
     <div class="d-flex justify-content-around">
       <%= render 'layouts/search', path: calendar_path %>
-
-      <button class="btn btn-primary position-relative mt-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-        Goal markers
-      </button>
+      <%= canvas_button 'goal_markers', klass: 'mt-3' %>
 
       <div class="date_select d-flex justify-content-around">
         <%= form_with url: calendar_path, method: :get, class: 'd-flex mt-3' do |f| %>
@@ -31,16 +28,16 @@
         <div class="completed border border-dark"
              style="background: linear-gradient(
                to right,
-                 <%= habit.goal.color %> 5%,
-                 rgba(24, 225, 68, 0.5) 10%);">
+                 <%= habit.goal.color %> 7%,
+                 rgba(24, 225, 68, 0.5) 0%);">
           <%= habit.name %>
         </div>
       <% else %>
         <div class="uncompleted border border-dark"
              style="background: linear-gradient(
-               to right,
-                 <%= habit.goal.color %> 5%,
-                 rgba(239, 22, 22, 0.5) 10%);">
+               90deg,
+                 <%= habit.goal.color %> 7%,
+                 rgba(239, 22, 22, 0.5) 0%);">
           <%= habit.name %>
         </div>
       <% end %>

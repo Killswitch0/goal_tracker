@@ -1,29 +1,10 @@
 <div id="goals-index">
   <div class="goals-block">
-    <div class="categories-wrapper">
-      <div class="new-category">
-        <%= link_to t('new'), new_category_path, class: 'btn btn-primary btn-sm' %>
-        <%= link_to t('manage'), categories_path, class: 'btn btn-primary btn-sm' %>
-      </div>
-      <div class="divider"></div>
-
-      <div class="categories-title"><%= t('all_categories') %></div>
-      <div class="categories-item all">
-        <%= link_to t('all').capitalize, goals_path %>
-      </div>
-
-      <ul class="categories-list">
-        <% current_user.categories.each do |category| %>
-          <li class="categories-item">
-            <%= link_to category.name, goals_path(filter: "#{category.id}") %>
-            <span><%= category.goals.count %></span>
-          </li>
-          <div class="divider"></div>
-        <% end %>
-      </ul>
+    <div class="mobile-hide">
+      <%= render 'categories/categories' %>
     </div>
 
-    <div class="goals-wrapper">
+    <div class="goals-wrapper col-sm-12 col-md-12 col-lg-8 col-xxl-8">
       <div class="table-main">
         <div class="table-wrapper">
           <div class="table-header">
@@ -68,8 +49,19 @@
 
         <div class="d-flex justify-content-around">
           <%= link_to t('add_goal'), new_goal_path, class: 'btn btn-primary' %>
+          <%= canvas_button 'all_categories', klass: 'mobile-show' %>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel"><%= t('filter_or_manage') %></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <%= render 'categories/categories' %>
     </div>
   </div>
 </div>

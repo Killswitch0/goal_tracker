@@ -4,20 +4,25 @@
   padding: 5px;
 }
 
-.completed {
-  background-color: rgba(24, 225, 68, 0.5);
-}
-
-.uncompleted {
-  background-color: rgba(239, 22, 22, 0.5);
-}
-
-
 
 .simple-calendar {
   border-radius: 2rem;
   margin-top: 30px;
   overflow-x: hidden;
+
+  .completed {
+    background-color: rgba(24, 225, 68, 0.5);
+  }
+
+  .uncompleted {
+    background-color: rgba(239, 22, 22, 0.5);
+  }
+
+  .uncompleted, .completed {
+    border-radius: 1rem;
+    margin-bottom: 3px;
+    text-align: center;
+  }
 
   .calendar-heading {
     position: sticky;

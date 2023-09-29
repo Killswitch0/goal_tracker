@@ -36,7 +36,12 @@
 
   <div class="mb-3">
     <%= f.label :deadline %>
-    <%= f.date_select :deadline, { prompt: { day: 'Select Day', month: 'Select Month', year: 'Select Year' } }, class: "form-select mb-3" %>
+    <%= f.date_select :deadline,
+                      {
+                        prompt: { day: :select_day, month: :select_month, year: :select_year },
+                        start_year: Date.current.year
+                      },
+                      class: "form-select mb-3" %>
   </div>
 
   <div class="mb-3">

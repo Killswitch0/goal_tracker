@@ -1,7 +1,9 @@
 <div id="goals-show">
-  <div class="col-sm-12 mb-3 p-3 goal-info <%= @goal.complete? ? 'completed' : 'uncompleted' %>" style="font-size: large">
-    <h2 class="text-center mb-3"><%= t('goal_info') %></h2>
-    <dl class="row">
+  <div class="col-sm-12 mb-3 p-3 goal-info <%= @goal.complete? ? 'completed' : 'uncompleted' %>">
+    <div class="table-header">
+      <h2 class="text-center"><%= t('goal_info') %></h2>
+    </div>
+    <dl class="row mt-3">
       <dt class="col-sm-4"><%= t('activerecord.models.category') %>:</dt>
       <dd class="col-sm-8 px-5"><%= @goal.category.name %></dd>
       <dt class="col-sm-4"><%= t('activerecord.attributes.goal.name') %>:</dt>
@@ -9,7 +11,7 @@
       <dt class="col-sm-4"><%= t('activerecord.attributes.goal.description') %>:</dt>
       <dd class="col-sm-8 px-5"><%= @goal.description %></dd>
       <dt class="col-sm-4"><%= t('activerecord.attributes.goal.deadline') %>:</dt>
-      <dd class="col-sm-8 px-5"><%= @goal.deadline.to_formatted_s(:long) %></dd>
+      <dd class="col-sm-8 px-5"><%= l(@goal.deadline, format: :long).split(',').first %> </dd>
       <dt class="col-sm-4"><%= t('days_left.base') %>:</dt>
       <dd class="col-sm-8 px-5"><%= days_left(@goal).zero? ? 'Overdue' : days_left(@goal) %></dd>
       <% challenge = @goal.goal_in_challenge&.name.present? %>
@@ -31,9 +33,9 @@
     </div>
 
     <div class="col-md-12 text-center">
-      <%= link_to t('back_to_goals'), goals_path, class: "btn btn-secondary" %>
+      <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
       <%= link_to t('delete_goal'), @goal, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                  class: "btn btn-danger" %>
+                  class: "btn btn-sm btn-danger" %>
     </div>
   </div>
 
@@ -41,7 +43,7 @@
     <div class="col-sm-12 mb-5 table-main <%= 'completed' if @goal.habits_streak? %>">
       <div class="table-header">
         <h2 class="text-center">
-          <%= t('done') %>
+          <%= t('all_habits').split.last.capitalize %>
           <%= habits_completed_for(@goal).first %>
           <%= t('of') %>
           <%= habits_completed_for(@goal).last %>
@@ -91,7 +93,7 @@
     <div class="col-sm-12 table-main <%= 'completed' if @goal.tasks_streak? %>">
       <div class="table-header">
         <h2 class="text-center">
-          <%= t('done') %>
+          <%= t('all_tasks').split.last.capitalize %>
           <%= completed_for(@goal).first %>
           <%= t('of') %>
           <%= completed_for(@goal).second %>
