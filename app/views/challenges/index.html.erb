@@ -38,19 +38,19 @@
             </tbody>
           </table>
         </section>
-      </div>
 
-      <div class="d-flex justify-content-around">
-        <%= link_to t('new_challenge'), new_challenge_path, class: 'btn btn-primary' %>
-        <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-          <%= t('invites') %>
-          <% if @invites.present? %>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-          <%= @invites.count > 99 ? '99+' : @invites.count %>
-          <span class="visually-hidden">New alerts</span>
-        </span>
-          <% end %>
-        </button>
+        <div class="d-flex justify-content-around">
+          <%= link_to t('new_challenge'), new_challenge_path, class: 'btn btn-primary' %>
+          <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <%= t('invites') %>
+            <% if @invites.present? %>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <%= @invites.count > 99 ? '99+' : @invites.count %>
+              <span class="visually-hidden">New alerts</span>
+              </span>
+            <% end %>
+          </button>
+        </div>
       </div>
     </div>
   </div>

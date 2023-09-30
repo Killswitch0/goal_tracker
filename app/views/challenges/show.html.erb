@@ -1,11 +1,12 @@
 <section id="challenges-show">
   <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 challenge-header text-center mt-3">
-      <h2 class="text-center mt-2">
+    <div class="table-header">
+      <h2 class="text-center">
         <%= @challenge.name %>
       </h2>
-    <div class="divider"></div>
+    </div>
 
-    <div class="text-center fs-4">
+    <div class="text-center fs-4 mt-2">
       <%= @challenge.created_at.strftime('%d-%m-%Y') %> /
       <%= @challenge.deadline.strftime('%d-%m-%Y') %>
       <% if days_left(@challenge) == 0 %>
@@ -15,7 +16,7 @@
       <% end %>
     </div>
 
-    <div class="mt-1 d-flex justify-content-around">
+    <div class="mt-1 d-flex justify-content-around mt-2">
       <div>
         <%= link_to t('invite_user'), create_invitation_challenge_path(@challenge),
                     class: 'btn btn-sm btn-primary' if @challenge.check_creator(current_user) %>
@@ -41,7 +42,7 @@
           <div class="winner-board__user d-flex justify-content-between">
             <% if winners.present? %>
               <% winners.each do |winner, tasks| %>
-                <div class="mx-2 mt-2">
+                <div class="mx-2 mt-2" id="avatar-wrapper">
                   <%= user_avatar(winner, size: 60, style: "border: 5px solid #{load_level_color(tasks)};") %>
                   <span class="fw-medium d-block"><%= winner.name %></span>
                 </div>

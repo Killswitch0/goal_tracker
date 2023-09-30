@@ -4,11 +4,15 @@
   padding: 5px;
 }
 
+.calendar-heading {
+  position: sticky;
+  margin-top: 30px;
+}
 
 .simple-calendar {
   border-radius: 2rem;
-  margin-top: 30px;
   overflow-x: hidden;
+  margin-top: 10px;
 
   .completed {
     background-color: rgba(24, 225, 68, 0.5);
@@ -22,11 +26,6 @@
     border-radius: 1rem;
     margin-bottom: 3px;
     text-align: center;
-  }
-
-  .calendar-heading {
-    position: sticky;
-    margin: 10px;
   }
 
   .table {

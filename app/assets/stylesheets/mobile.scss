@@ -69,7 +69,7 @@
   }
 
   a.btn, button.btn, input.btn {
-    font-size: 23px;
+    font-size: 22px;
     transition: unset;
   }
 
@@ -80,6 +80,12 @@
 
   .mobile-show {
     display: unset !important;
+  }
+
+  .table-header {
+    h2 {
+      font-size: 36px;
+    }
   }
 
   // Dashboard
@@ -120,7 +126,7 @@
             margin-inline: 20px;
 
             .goal-title {
-              font-size: 25px;
+              font-size: 21px;
             }
 
             i:before {
@@ -131,16 +137,10 @@
         }
 
         .progress-info {
-          font-size: 24px;
+          font-size: 20px;
           margin-top: 20px;
         }
 
-      }
-
-      .actions-header {
-        a {
-          font-size: 25px;
-        }
       }
 
 
@@ -164,11 +164,6 @@
         .action-item {
           margin-bottom: 25px;
           font-size: 25px;
-
-          a {
-            font-size: 25px;
-            transition: none;
-          }
         }
 
         .completed-info {
@@ -176,10 +171,6 @@
         }
       }
     }
-  }
-
-  .table-body {
-    font-size: 20px;
   }
 
   // Goals
@@ -208,8 +199,97 @@
       flex-direction: column;
 
       .table-main {
+        height: 70vh;
         width: unset;
+
+        .table-wrapper {
+          height: 89%;
+
+          .table-body {
+            height: 83%;
+          }
+        }
       }
+    }
+  }
+
+}
+
+@media (max-width: 768px) {
+  a.btn, button.btn, input.btn {
+    font-size: 20px;
+  }
+
+  .table-header {
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  .simple-calendar {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  #navbarSupportedContent {
+    .dropdown-menu {
+      font-size: 16px;
+      li {
+        padding: 10px;
+      }
+    }
+  }
+
+  a.btn, button.btn, input.btn {
+    font-size: 15px;
+    margin-top: 3px;
+  }
+
+  .table-header {
+    h2 {
+      font-size: 27px;
+    }
+  }
+
+  #dashboard-show {
+    div.goal-item > .goal-title {
+      font-size: 15px;
+    }
+
+    .actions-wrapper > .goals-background > .new_goal {
+      a {
+        font-size: 20px;
+      }
+    }
+
+    .actions-items {
+      .actions-header > div.items-title {
+        font-size: 20px;
+      }
+
+      .action-list > li.action-item {
+        font-size: 19px;
+      }
+
+      a.show-all {
+        font-size: 15px !important;
+
+        i:before {
+          font-size: 15px !important;
+        }
+      }
+
+    }
+  }
+
+  #challenges-show {
+    .challenge-header > .winner-board {
+      width: 45%;
+    }
+
+    #avatar-wrapper img {
+      width: 50px;
     }
   }
 }

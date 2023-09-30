@@ -1,0 +1,21 @@
+.go-top {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  background: $second-color;
+  bottom: 40px;
+  right: 50px;
+  border-radius: 50%;
+
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-size: 22px;
+
+  i {
+    position: relative;
+    font-size: 50px;
+    top: 17%;
+  }
+}

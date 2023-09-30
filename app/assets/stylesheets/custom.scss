@@ -3,6 +3,10 @@
 @import "views/**/*";
 @import "mobile";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
   background: #03dfff;

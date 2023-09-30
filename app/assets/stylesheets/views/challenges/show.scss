@@ -16,6 +16,7 @@ section#challenges-show {
       justify-content: space-around;
       list-style-type: none;
       flex-wrap: wrap;
+      padding: 0;
 
       .goal-item {
         padding: 15px;
@@ -25,6 +26,8 @@ section#challenges-show {
         border-radius: 5%;
         border: 2px solid #fff5;
         box-shadow: 0 0.4rem 0.8rem #0005;
+        margin-top: 20px;
+        margin-inline: 10px;
 
         &__progress {
           margin: 0 auto;
@@ -61,7 +64,7 @@ section#challenges-show {
   }
 
   .winner-board {
-    width: 50%;
+    width: 65%;
     margin: 15px auto;
 
     &__user {

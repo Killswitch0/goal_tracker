@@ -147,6 +147,11 @@
     .action-item {
       background-color: #DBE2E6;
       font-weight: 500;
+
+      span {
+        text-align: center;
+        padding-left: 15px;
+      }
     }
   }
 }

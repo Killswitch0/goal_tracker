@@ -64,7 +64,7 @@
           <% @all_tasks.each do |task| %>
             <li class="action-item">
               <%= task_complete_link(task, complete_dashboard_task_path(task)) %>
-              <%= task.name %>
+              <span><%= task.name %></span>
               <i class="<%= 'bi bi-check-lg' if task.complete? %>"></i>
             </li>
           <% end %>
@@ -116,7 +116,7 @@
           <% @all_habits.each do |habit| %>
             <li class="action-item">
               <%= habit_complete_link(habit, complete_dashboard_habit_path(habit)) %>
-              <%= habit.name %>
+              <span><%= habit.name %></span>
               <i class="<%= 'bi bi-check-lg' if habit.completed_today? %>"></i>
             </li>
           <% end %>
