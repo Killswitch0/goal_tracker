@@ -4,31 +4,31 @@ uk:
 
   # Generic terms.
   #----------------------------------------------------------------------------
-  id: Id
-  all: усі
-  at: в
-  here: тут
-  or: або
-  of: з
-  ago: тому
+  id: 'Id'
+  all: 'усі'
+  at: 'в'
+  here: 'тут'
+  or: 'або'
+  of: 'з'
+  ago: 'тому'
 
   # Date.
   #----------------------------------------------------------------------------
   date:
-    day: День
-    week: Неділя
-    month: Місяць
+    day: 'День'
+    week: 'Неділя'
+    month: 'Місяць'
 
   # Navigation.
   #----------------------------------------------------------------------------
   navigation:
-    about: Додаток
-    dashboard: Управління
-    goals: Цілі
-    tracking: Відстеження
-    calendar: Календар
-    chart: Чарт
-    challenges: Челленджи
+    about: 'Додаток'
+    dashboard: 'Управління'
+    goals: 'Цілі'
+    tracking: 'Відстеження'
+    calendar: 'Календар'
+    chart: 'Чарт'
+    challenges: 'Челленджи'
 
   # Active Record.
   #----------------------------------------------------------------------------
@@ -39,284 +39,279 @@ uk:
       many: '%{count} помилок'
       other: '%{count} помилок'
       messages:
-        text_input: дозволяє лише літери (великі та малі), цифри, коми, крапки, тире та двокрапки.
+        text_input: 'дозволяє лише літери (великі та малі), цифри, коми, крапки, тире та двокрапки.'
         incorrect: 'є неправильним.'
       models:
         category:
-          only_letters: "має містити лише літери."
+          only_letters: 'має містити лише літери.'
         challenge:
-          min_period: "період має бути принаймні 1 день."
+          min_period: 'період має бути принаймні 1 день.'
         challenge_goal:
-          one_goal: "може додати лише одну ціль."
+          one_goal: 'може додати лише одну ціль.'
         user:
-          blank: "не може бути порожнім"
-          taken: "вже зайнято"
+          blank: 'не може бути порожнім'
+          taken: 'вже зайнято'
           password_length: 'має бути від 6 до 10 символів.'
-          password_format: "має бути англійською мовою та містити лише літери."
+          password_format: 'має бути англійською мовою та містити лише літери.'
           password_complexity: >
             вимога складності не виконана. Довжина має бути 8-70 символів і включати:
             1 великий регістр, 1 нижній регістр, 1 цифру та 1 спеціальний символ.
             name_format: "має бути англійською мовою та містити лише літери."
         goal:
-          blank: "не може бути порожнім"
-          taken: "вже зайнято"
+          blank: 'не може бути порожнім'
+          taken: 'вже зайнято'
         habit:
-          blank: "не може бути порожнім"
-          taken: "вже зайнято"
+          blank: 'не може бути порожнім'
+          taken: 'вже зайнято'
         task:
-          blank: "не може бути порожньою"
-          taken: "вже зайнято"
+          blank: 'не може бути порожньою'
+          taken: 'вже зайнято'
       attributes:
         user:
           email:
-            blank: "не може бути порожньою"
-            invalid: "не вірний формат"
+            blank: 'не може бути порожньою'
+            invalid: 'не вірний формат'
           name:
-            blank: "не може бути порожнім"
+            blank: 'не може бути порожнім'
         goal:
           name:
-            blank: "не може бути порожнім"
+            blank: 'не може бути порожнім'
         habit:
           name:
-            blank: "не може бути порожнім"
+            blank: 'не може бути порожнім'
         task:
           name:
             incorrect: 'є неправильним.'
-            blank: "не може бути порожньою"
+            blank: 'не може бути порожньою'
     models:
-      user: Користувач
-      goal: Ціль
-      habit: Звичка
-      task: Завдання
-      category: Категорія
-      completion_date: Дата виконання
-      goal_user: Користувач мети
+      user: 'Користувач'
+      goal: 'Ціль'
+      habit: 'Звичка'
+      task: 'Завдання'
+      category: 'Категорія'
+      completion_date: 'Дата виконання'
+      goal_user: 'Користувач мети'
     attributes:
       user:
-        name: Ім'я
-        email: Електронна пошта
-        password: Пароль
-        password_digest: Пароль
-        password_confirmation: Підтвердження пароля
-        old_password: Старий пароль
-        created_at: Дата створення
-        updated_at: Дата оновлення
-        email_confirmed: Підтвердження електронної пошти
-        confirm_token: Токен підтвердження
-        auth_token: Токен авторизації
-        password_reset_token: Токен скидання пароля
-        password_reset_sent_at: Дата відправки токену скидання пароля
-        role: Роль
-        gravatar_hash: Хеш Gravatar
+        name: 'Імя'
+        email: 'Електронна пошта'
+        password: 'Пароль'
+        password_digest: 'Пароль'
+        password_confirmation: 'Підтвердження пароля'
+        old_password: 'Старий пароль'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
+        email_confirmed: 'Підтвердження електронної пошти'
+        confirm_token: 'Токен підтвердження'
+        auth_token: 'Токен авторизації'
+        password_reset_token: 'Токен скидання пароля'
+        password_reset_sent_at: 'Дата відправки токену скидання пароля'
+        role: 'Роль'
+        gravatar_hash: 'Хеш Gravatar'
       goal:
-        name: Назва
-        description: Опис
-        days_completed: Кількість днів виконання
-        user_id: ID користувача
-        created_at: Дата створення
-        updated_at: Дата оновлення
-        deadline: Крайній термін
-        complete: Завершено
-        category_id: Категорія
-        color: Колір
+        name: 'Назва'
+        description: 'Опис'
+        days_completed: 'Кількість днів виконання'
+        user_id: 'ID користувача'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
+        deadline: 'Крайній термін'
+        complete: 'Завершено'
+        category_id: 'Категорія'
+        color: 'Колір'
       habit:
-        name: Назва
-        description: Опис
-        days_completed: Кількість днів виконання
-        user_id: Користувач
-        goal_id: Ціль
-        created_at: Дата створення
-        updated_at: Дата оновлення
+        name: 'Назва'
+        description: 'Опис'
+        days_completed: 'Кількість днів виконання'
+        user_id: 'Користувач'
+        goal_id: 'Ціль'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
       task:
-        name: Назва
-        complete: Завершено
-        goal_id: Ціль
-        created_at: Дата створення
-        updated_at: Дата оновлення
-        user_id: Користувач
-        deadline: Крайній термін
-        complete_date: Дата завершення
+        name: 'Назва'
+        complete: 'Завершено'
+        goal_id: 'Ціль'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
+        user_id: 'Користувач'
+        deadline: 'Крайній термін'
+        complete_date: 'Дата завершення'
       category:
-        name: Назва
-        created_at: Дата створення
-        updated_at: Дата оновлення
-        goal_id: Ціль
-        user_id: Користувач
+        name: 'Назва'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
+        goal_id: 'Ціль'
+        user_id: 'Користувач'
       challenge:
-        name: Назва
-        description: Опис
-        deadline: Крайній термін
-        user_id: Користувач
-        created_at: Дата створення
-        updated_at: Дата оновлення
+        name: 'Назва'
+        description: 'Опис'
+        deadline: 'Крайній термін'
+        user_id: 'Користувач'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
       challenge_goal:
-        challenge_id: Челлендж
-        goal_id: Ціль
-        user_id: Користувач
-        created_at: Дата створення
-        updated_at: Дата оновлення
+        challenge_id: 'Челлендж'
+        goal_id: 'Ціль'
+        user_id: 'Користувач'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
       challenge_user:
-        challenge_id: Челендж
-        user_id: Користувач
-        created_at: Дата створення
-        updated_at: Дата оновлення
+        challenge_id: 'Челендж'
+        user_id: 'Користувач'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
       completion_date:
-        date: Дата виконання
-        habit_id: Звичка
+        date: 'Дата виконання'
+        habit_id: 'Звичка'
       goal_user:
-        confirm: Підтвердження
-        user_id: Користувач
-        goal_id: Ціль
-        created_at: Дата створення
-        updated_at: Дата оновлення
+        confirm: 'Підтвердження'
+        user_id: 'Користувач'
+        goal_id: 'Ціль'
+        created_at: 'Дата створення'
+        updated_at: 'Дата оновлення'
 
-  # Common table columns.
+  # [Common table columns.]
   #----------------------------------------------------------------------------
-  name: Назва
-  type: Тип
-  created_at: Створено
-  updated_at: Оновлено
-  status: Статус
-  deadline: Крайній термін
-  creator: Голова
+  name: 'Назва'
+  type: 'Тип'
+  created_at: 'Створено'
+  updated_at: 'Оновлено'
+  status: 'Статус'
+  deadline: 'Крайній термін'
+  creator: 'Голова'
 
-  # Views -> Authenticate.
+  # [Common Views.]
   #----------------------------------------------------------------------------
-  authenticate:
-    email: Електронна пошта
-    forgot_password: Забули пароль?
-    login: Вхід
-    log_in: Увійти
-    no_account: Ви ще не зареєстровані?
-    remember_me: Запам'ятати мене
-    sign_up: Зареєструватися
-    signup: Реєстрація
-
-  # Views -> User.
-  #----------------------------------------------------------------------------
-  edit_user: Редагувати користувача
-  new_user: Створити користувача
-  user_info: Інформація про користувача
-  hello: Привіт
-  avatar: Аватар
-
-  # Views -> Session manager.
-  #----------------------------------------------------------------------------
-  edit_account: Редагувати акаунт
-  log_out: Вийти
-
-  # Views -> Common.
-  #----------------------------------------------------------------------------
-  action: Дія
-  new: Нова
-  create: Створити
-  update: Оновити
-  show: Показати
-  hide: Сховати
-  back: Назад
-  delete: Видалити
-  edit: Редагувати
-  completed: Виконані
-  uncompleted: Невиконані
-  complete: Виконано
-  done: Виконано
-  manage: Управляти
-  search: Шукати
-  sure: Ви впевнені?
-  next: Наступний
-  previous: Попередій
-  in_process: В процесі
+  action: 'Дія'
+  new: 'Нова'
+  create: 'Створити'
+  update: 'Оновити'
+  show: 'Показати'
+  hide: 'Сховати'
+  back: 'Назад'
+  delete: 'Видалити'
+  edit: 'Редагувати'
+  completed: 'Виконані'
+  uncompleted: 'Невиконані'
+  complete: 'Виконано'
+  done: 'Виконано'
+  manage: 'Управляти'
+  search: 'Шукати'
+  sure: 'Ви впевнені?'
+  next: 'Наступний'
+  previous: 'Попередій'
+  in_process: 'В процесі'
   days_left:
     base: 'Днів залишилося'
     one: '%{count} день залишився'
     few: '%{count} днів залишилося'
     many: '%{count} днів залишилося'
     other: '%{count} днів залишилося'
-  leave: Вийти
-  invites: Запрошення
-  invite_user: Запросити користувача
-  accept: Прийняти
-  decline: Схилити
+  leave: 'Вийти'
+  invites: 'Запрошення'
+  invite_user: 'Запросити користувача'
+  accept: 'Прийняти'
+  decline: 'Схилити'
+
+  # Views -> Authenticate.
+  #----------------------------------------------------------------------------
+  authenticate:
+    email: 'Електронна пошта'
+    forgot_password: 'Забули пароль?'
+    login: 'Вхід'
+    log_in: 'Увійти'
+    no_account: 'Ви ще не зареєстровані?'
+    remember_me: 'Запамятати мене'
+    sign_up: 'Зареєструватися'
+    signup: 'Реєстрація'
+
+  # Views -> Users.
+  #----------------------------------------------------------------------------
+  edit_user: 'Редагувати користувача'
+  new_user: 'Створити користувача'
+  user_info: 'Інформація про користувача'
+  hello: 'Привіт'
+  avatar: 'Аватар'
+  edit_account: 'Редагувати акаунт'
+  log_out: 'Вийти'
 
   # Views -> Form.
   #----------------------------------------------------------------------------
-  form_contains: Форма містить
+  form_contains: 'Форма містить'
 
   # Views -> Goals.
   #----------------------------------------------------------------------------
-  new_goal: Нова ціль
-  edit_goal: Редагувати ціль
-  create_goal: Створити ціль
-  add_goal: Додати ціль
-  delete_goal: Видалити ціль
-  back_to_goal: Назад до цілі
-  back_to_goals: Назад до цілей
-  complete_goal: Виконати
-  uncomplete_goal: Зняти виконання
-  all_goals: Цілі
-  switch_to_goals: Переключитись до цілей
-  goals_tracker: Трекер цілей
-  goal_info: Інформація про ціль
-  my_goals: Мої цілі
-  in_challenge: В челленджі
-
+  new_goal: 'Нова ціль'
+  edit_goal: 'Редагувати ціль'
+  create_goal: 'Створити ціль'
+  add_goal: 'Додати ціль'
+  delete_goal: 'Видалити ціль'
+  back_to_goal: 'Назад до цілі'
+  back_to_goals: 'Назад до цілей'
+  complete_goal: 'Виконати'
+  uncomplete_goal: 'Зняти виконання'
+  all_goals: 'Цілі'
+  switch_to_goals: 'Переключитись до цілей'
+  goals_tracker: 'Трекер цілей'
+  goal_info: 'Інформація про ціль'
+  my_goals: 'Мої цілі'
+  in_challenge: 'В челленджі'
 
   # Views -> Categories.
   #----------------------------------------------------------------------------
-  new_category: Нова категорія
-  all_categories: Категорії
-  filter_or_manage: Фільтр категорій / Управління
+  new_category: 'Нова категорія'
+  all_categories: 'Категорії'
+  filter_or_manage: 'Фільтр категорій / Управління'
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------
-  all_tasks: Усі завдання
-  new_task: Нове завдання
-  complete_task: Виконати
-  uncomplete_task: Зняти
-  show_tasks: Показати завдання
-  switch_to_tasks: Переключитись до завдань
-  tasks_tracker: Трекер завдань
-
+  all_tasks: 'Усі завдання'
+  new_task: 'Нове завдання'
+  complete_task: 'Виконати'
+  uncomplete_task: 'Зняти'
+  show_tasks: 'Показати завдання'
+  switch_to_tasks: 'Переключитись до завдань'
+  tasks_tracker: 'Трекер завдань'
 
   # Views -> Habits.
   #----------------------------------------------------------------------------
-  all_habits: Усі звички
-  new_habit: Нова звичка
-  complete_habit: Виконати
-  uncomplete_habit: Зняти
-  show_habits: Показати звички
-  switch_to_habits: Переключитись до звичок
+  all_habits: 'Усі звички'
+  new_habit: 'Нова звичка'
+  complete_habit: 'Виконати'
+  uncomplete_habit: 'Зняти'
+  show_habits: 'Показати звички'
+  switch_to_habits: 'Переключитись до звичок'
 
   # Views -> Dashboard.
   #----------------------------------------------------------------------------
-  back_to_dashboard: Назад до панелі
+  back_to_dashboard: 'Назад до панелі'
 
   # Views -> Chart.
   #----------------------------------------------------------------------------
-  habits_chart: Графік звичок
-  tasks_chart: Графік завдань
+  habits_chart: 'Графік звичок'
+  tasks_chart: 'Графік завдань'
 
   # Views -> Challenges.
   #----------------------------------------------------------------------------
-  challenge: Челлендж
-  new_challenge: Новый челлендж
-  leave_challenge: Вийти з челленджу
-  rating: Рейтинг
-  winners: Переможці
-  load: Завантаження
-  member: Учасник
-  targets: Завдання
-  challenge_users: Учасники челленджу
-  challenge_end: Челлендж завершено
+  challenge: 'Челлендж'
+  new_challenge: 'Новый челлендж'
+  leave_challenge: 'Вийти з челленджу'
+  rating: 'Рейтинг'
+  winners: 'Переможці'
+  load: 'Завантаження'
+  member: 'Учасник'
+  targets: 'Завдання'
+  challenge_users: 'Учасники челленджу'
+  challenge_end: 'Челлендж завершено'
   target:
-    one: "%{count} завдання"
-    few: "%{count} завдання"
-    many: "%{count} завдань"
-    other: "%{count} завдань"
+    one: '%{count} завдання'
+    few: '%{count} завдання'
+    many: '%{count} завдань'
+    other: '%{count} завдань'
 
   # Views -> Calendar.
   #----------------------------------------------------------------------------
-  goal_markers: Маркування цілей
+  goal_markers: 'Маркування цілей'
 
   # Controllers
   #----------------------------------------------------------------------------
@@ -398,4 +393,4 @@ uk:
   # Messages.
   #----------------------------------------------------------------------------
   messages:
-    sign_or_log: Будь ласка, зареєструйтеся або увійдіть, щоб використовувати програму.
+    sign_or_log: 'Будь ласка, зареєструйтеся або увійдіть, щоб використовувати програму.'

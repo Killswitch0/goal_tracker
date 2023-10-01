@@ -4,30 +4,30 @@ en:
 
   # Generic terms.
   #----------------------------------------------------------------------------
-  id: Id
-  all: all
-  at: at
-  here: here
-  or: or
-  of: of
-  ago: ago
+  id: 'Id'
+  all: 'all'
+  at: 'at'
+  here: 'here'
+  or: 'or'
+  of: 'of'
+  ago: 'ago'
 
 
   date:
-    day: Day
-    week: Week
-    month: Month
+    day: 'Day'
+    week: 'Week'
+    month: 'Month'
 
   # Navigation.
   #----------------------------------------------------------------------------
   navigation:
-    about: About
-    dashboard: Dashboard
-    goals: Goals
-    tracking: Tracking
-    calendar: Calendar
-    chart: Chart
-    challenges: Challenges
+    about: 'About'
+    dashboard: 'Dashboard'
+    goals: 'Goals'
+    tracking: 'Tracking'
+    calendar: 'Calendar'
+    chart: 'Chart'
+    challenges: 'Challenges'
 
   # Active Record.
   #----------------------------------------------------------------------------
@@ -40,31 +40,31 @@ en:
         incorrect: 'is incorrect.'
       models:
         category:
-          only_letters: "must contain only letters."
+          only_letters: 'must contain only letters.'
         challenge:
           min_period: 'period should be at least 1 day.'
         challenge_goal:
           one_goal: 'can add only one goal.'
         user:
           blank: "can't be blank"
-          taken: "has already been taken"
+          taken: 'has already been taken'
         goal:
           blank: "can't be blank"
-          taken: "has already been taken"
+          taken: 'has already been taken'
         habit:
           blank: "can't be blank"
-          taken: "has already been taken"
+          taken: 'has already been taken'
         task:
           blank: "can't be blank"
-          taken: "has already been taken"
+          taken: 'has already been taken'
       attributes:
         user:
           email:
             blank: "can't be blank"
-            invalid: "is invalid"
+            invalid: 'is invalid'
           password:
-            password_format: "must be in English and contain only letters."
-            password_length: "must be between 6 and 10 characters."
+            password_format: 'must be in English and contain only letters.'
+            password_length: 'must be between 6 and 10 characters.'
             password_complexity: >
               complexity requirement not met. Length should be 8-70 characters and include:
               1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character."
@@ -81,137 +81,119 @@ en:
           name:
             blank: "can't be blank"
     models:
-      user: User
-      goal: Goal
-      habit: Habit
-      task: Task
-      category: Category
-      completion_date: Completion Date
-      goal_user: Goal User
+      user: 'User'
+      goal: 'Goal'
+      habit: 'Habit'
+      task: 'Task'
+      category: 'Category'
+      completion_date: 'Completion Date'
+      goal_user: 'Goal User'
     attributes:
       user:
-        name: Name
-        email: Email
-        password: Password
-        password_digest: Password
-        password_confirmation: Password Confirmation
-        old_password: Old Password
-        created_at: Created At
-        updated_at: Updated At
-        email_confirmed: Email Confirmed
-        confirm_token: Confirmation Token
-        auth_token: Auth Token
-        password_reset_token: Password Reset Token
-        password_reset_sent_at: Password Reset Sent At
-        role: Role
-        gravatar_hash: Gravatar Hash
+        name: 'Name'
+        email: 'Email'
+        password: 'Password'
+        password_digest: 'Password'
+        password_confirmation: 'Password Confirmation'
+        old_password: 'Old Password'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
+        email_confirmed: 'Email Confirmed'
+        confirm_token: 'Confirmation Token'
+        auth_token: 'Auth Token'
+        password_reset_token: 'Password Reset Token'
+        password_reset_sent_at: 'Password Reset Sent At'
+        role: 'Role'
+        gravatar_hash: 'Gravatar Hash'
       goal:
-        name: Name
-        description: Description
-        days_completed: Days Completed
-        user_id: User
-        created_at: Created At
-        updated_at: Updated At
-        deadline: Deadline
-        complete: Complete
-        category_id: Category
-        color: Color
+        name: 'Name'
+        description: 'Description'
+        days_completed: 'Days Completed'
+        user_id: 'User'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
+        deadline: 'Deadline'
+        complete: 'Complete'
+        category_id: 'Category'
+        color: 'Color'
       habit:
-        name: Name
-        description: Description
-        days_completed: Days Completed
-        user_id: User
-        goal_id: Goal
-        created_at: Created At
-        updated_at: Updated At
+        name: 'Name'
+        description: 'Description'
+        days_completed: 'Days Completed'
+        user_id: 'User'
+        goal_id: 'Goal'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
       task:
-        name: Name
-        complete: Complete
-        goal_id: Goal
-        created_at: Created At
-        updated_at: Updated At
-        user_id: User
-        deadline: Deadline
-        complete_date: Complete Date
+        name: 'Name'
+        complete: 'Complete'
+        goal_id: 'Goal'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
+        user_id: 'User'
+        deadline: 'Deadline'
+        complete_date: 'Complete Date'
       category:
-        name: Name
-        created_at: Created At
-        updated_at: Updated At
-        goal_id: Goal
-        user_id: User
+        name: 'Name'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
+        goal_id: 'Goal'
+        user_id: 'User'
       challenge:
-        name: Name
-        description: Description
-        deadline: Deadline
-        user_id: User
-        created_at: Created At
-        updated_at: Updated At
+        name: 'Name'
+        description: 'Description'
+        deadline: 'Deadline'
+        user_id: 'User'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
       challenge_goal:
-        challenge_id: Challenge
-        goal_id: Goal
-        user_id: User
-        created_at: Created At
-        updated_at: Updated At
+        challenge_id: 'Challenge'
+        goal_id: 'Goal'
+        user_id: 'User'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
       challenge_user:
-        challenge_id: Challenge
-        user_id: User
-        created_at: Created At
-        updated_at: Updated At
+        challenge_id: 'Challenge'
+        user_id: 'User'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
       completion_date:
-        date: Date
-        habit_id: Habit
+        date: 'Date'
+        habit_id: 'Habit'
       goal_user:
-        confirm: Confirm
-        user_id: User
-        goal_id: Goal
-        created_at: Created At
+        confirm: 'Confirm'
+        user_id: 'User'
+        goal_id: 'Goal'
+        created_at: 'Created At'
 
-  # Common table columns.
+  # [Common table columns.]
   #----------------------------------------------------------------------------
-  name: Name
-  type: Type
-  created_at: Created at
-  updated_at: Updated at
-  status: Status
+  name: 'Name'
+  type: 'Type'
+  created_at: 'Created at'
+  updated_at: 'Updated at'
+  status: 'Status'
 
-  # Views -> Authentication.
+  # [Common Views.]
   #----------------------------------------------------------------------------
-  authenticate:
-    email: Email
-    forgot_password: Forgot Password?
-    log_in: Log in
-    login: Login
-    no_account: Don't have an account?
-    remember_me: Remember Me
-    sign_up: Sign up
-    signup: Signup
-
-  # Views -> User.
-  #----------------------------------------------------------------------------
-  edit_user: Edit User
-  new_user: New User
-  hello: Hello
-
-  # Views -> Common.
-  #----------------------------------------------------------------------------
-  action: Action
-  create: Create
-  update: Update
-  new: New
-  show: Show
-  hide: Hide
-  back: Back
-  delete: Delete
-  edit: Edit
-  completed: Completed
-  uncompleted: Uncompleted
-  complete: complete
-  done: Done
-  manage: Manage
-  search: Search
-  sure: Are you sure?
-  next: Next
-  previous: Previous
+  action: 'Action'
+  create: 'Create'
+  update: 'Update'
+  new: 'New'
+  show: 'Show'
+  hide: 'Hide'
+  back: 'Back'
+  delete: 'Delete'
+  edit: 'Edit'
+  completed: 'Completed'
+  uncompleted: 'Uncompleted'
+  complete: 'complete'
+  done: 'Done'
+  manage: 'Manage'
+  search: 'Search'
+  sure: 'Are you sure?'
+  next: 'Next'
+  previous: 'Previous'
   days_left:
     base: 'Days left'
     one: '%{count} day left'
@@ -219,73 +201,90 @@ en:
     many: '%{count} days left'
     other: '%{count} days left'
 
+  # Views -> Authentication.
+  #----------------------------------------------------------------------------
+  authenticate:
+    email: 'Email'
+    forgot_password: 'Forgot Password?'
+    log_in: 'Log in'
+    login: 'Login'
+    no_account: "Don't have an account?"
+    remember_me: 'Remember Me'
+    sign_up: 'Sign up'
+    signup: 'Signup'
+
+  # Views -> Users.
+  #----------------------------------------------------------------------------
+  edit_user: 'Edit User'
+  new_user: 'New User'
+  hello: 'Hello'
+
   # Views -> Form.
   #----------------------------------------------------------------------------
-  form_contains: Form contains
+  form_contains: 'Form contains'
 
   # Views -> Goals.
   #----------------------------------------------------------------------------
-  new_goal: New Goal
-  edit_goal: Edit Goal
-  create_goal: Create Goal
-  add_goal: Add Goal
-  delete_goal: Delete Goal
-  back_to_goal: Back to Goal
-  back_to_goals: Back to Goals
-  complete_goal: Complete
-  uncomplete_goal: Uncomplete
-  all_goals: Goals
-  switch_to_goals: Switch to Goals
-  goals_tracker: Goals Tracker
-  goal_info: Goal info
+  new_goal: 'New Goal'
+  edit_goal: 'Edit Goal'
+  create_goal: 'Create Goal'
+  add_goal: 'Add Goal'
+  delete_goal: 'Delete Goal'
+  back_to_goal: 'Back to Goal'
+  back_to_goals: 'Back to Goals'
+  complete_goal: 'Complete'
+  uncomplete_goal: 'Uncomplete'
+  all_goals: 'Goals'
+  switch_to_goals: 'Switch to Goals'
+  goals_tracker: 'Goals Tracker'
+  goal_info: 'Goal info'
 
   # Views -> Categories.
   #----------------------------------------------------------------------------
-  new_category: New category
-  all_categories: Categories
-  filter_or_manage: Category filter / Management
+  new_category: 'New category'
+  all_categories: 'Categories'
+  filter_or_manage: 'Category filter / Management'
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------
-  all_tasks: All Tasks
-  new_task: New Task
-  complete_task: Complete
-  uncomplete_task: Uncomplete
-  show_tasks: Show tasks
-  switch_to_tasks: Switch to Tasks
-  tasks_tracker: Tasks Tracker
+  all_tasks: 'All Tasks'
+  new_task: 'New Task'
+  complete_task: 'Complete'
+  uncomplete_task: 'Uncomplete'
+  show_tasks: 'Show tasks'
+  switch_to_tasks: 'Switch to Tasks'
+  tasks_tracker: 'Tasks Tracker'
 
   # Views -> Habits.
   #----------------------------------------------------------------------------
-  all_habits: All Habits
-  new_habit: New Habit
-  complete_habit: Complete
-  uncomplete_habit: Uncomplete
-  show_habits: Show Habits
-  switch_to_habits: Switch to Tasks
-
+  all_habits: 'All Habits'
+  new_habit: 'New Habit'
+  complete_habit: 'Complete'
+  uncomplete_habit: 'Uncomplete'
+  show_habits: 'Show Habits'
+  switch_to_habits: 'Switch to Tasks'
 
   # Views -> Dashboard.
   #----------------------------------------------------------------------------
-  back_to_dashboard: Back to Dashboard
+  back_to_dashboard: 'Back to Dashboard'
 
   # Views -> Chart.
   #----------------------------------------------------------------------------
-  habits_chart: Habits Chart
-  tasks_chart: Tasks Chart
+  habits_chart: 'Habits Chart'
+  tasks_chart: 'Tasks Chart'
 
   # Views -> Challenges.
   #----------------------------------------------------------------------------
-  challenge: Challenge
-  new_challenge: New Challenge
-  challenge_end: Challenge end
+  challenge: 'Challenge'
+  new_challenge: 'New Challenge'
+  challenge_end: 'Challenge end'
   target:
-    one: "1 target"
-    other: "%{count} targets"
+    one: '1 target'
+    other: '%{count} targets'
 
   # Views -> Calendar.
   #----------------------------------------------------------------------------
-  goal_markers: Goal markers
+  goal_markers: 'Goal markers'
 
   # Controllers.
   #----------------------------------------------------------------------------
@@ -367,4 +366,4 @@ en:
   # Messages.
   #----------------------------------------------------------------------------
   messages:
-    sign_or_log: Please sign up or login to use the application.
+    sign_or_log: 'Please sign up or login to use the application.'

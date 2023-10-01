@@ -62,6 +62,7 @@ class GoalsController < ApplicationController
   end
 
   # GET /goals/1/edit
+  #----------------------------------------------------------------------------
   def edit; end
 
   # PUT /goals/1

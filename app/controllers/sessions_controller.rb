@@ -3,10 +3,12 @@ class SessionsController < ApplicationController
 
   before_action :require_no_authentication, only: %i[new create]
 
-  # GET /login_path
+  # GET /login
   #----------------------------------------------------------------------------
   def new; end
 
+  # POST /login
+  #----------------------------------------------------------------------------
   def create
     user = User.find_by(email: params[:session][:email].downcase)
 
@@ -26,6 +28,8 @@ class SessionsController < ApplicationController
     end
   end
 
+  # DELETE /logout
+  #----------------------------------------------------------------------------
   def destroy
     log_out
     flash[:noticed] = t('.success')

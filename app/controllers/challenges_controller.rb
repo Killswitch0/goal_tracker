@@ -24,6 +24,8 @@ class ChallengesController < ApplicationController
                   end
   end
 
+  # GET /challenges/new
+  #----------------------------------------------------------------------------
   def new
     @challenge = Challenge.new
     @challenge_goal = ChallengeGoal.new
@@ -78,6 +80,8 @@ class ChallengesController < ApplicationController
     redirect_to challenges_path
   end
 
+  # POST /challenges/1/add_goal
+  #----------------------------------------------------------------------------
   def add_goal
     @challenge = Challenge.find(params[:id])
     @challenge_goal = ChallengeGoal.new
@@ -166,6 +170,8 @@ class ChallengesController < ApplicationController
     redirect_to challenges_path
   end
 
+  # DELETE /challenges/:id/destroy_goal
+  #----------------------------------------------------------------------------
   def destroy_goal
     @challenge = Challenge.find(params[:id])
     @goal = Goal.find(params[:goal_id])
