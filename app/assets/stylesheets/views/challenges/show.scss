@@ -68,8 +68,9 @@ section#challenges-show {
     margin: 15px auto;
 
     &__user {
+      display: flex;
+      justify-content: space-around;
       margin: 0 auto;
-      width: fit-content;
 
       .question {
         fill: $fourth-color;

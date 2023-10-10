@@ -38,6 +38,13 @@
       }
     }
   }
+
+
+  .all_items-index {
+    .table-wrapper {
+      width: 50vh;
+    }
+  }
 }
 
 @media (max-width: 991px) {
@@ -69,7 +76,7 @@
   }
 
   a.btn, button.btn, input.btn {
-    font-size: 22px;
+    font-size: 19px;
     transition: unset;
   }
 
@@ -213,11 +220,25 @@
     }
   }
 
+  // All items
+    .all_items-index {
+      flex-direction: column;
+
+      .table-wrapper {
+        margin-inline: auto;
+        width: 90%;
+      }
+
+      .buttons-list {
+        margin-bottom: 10px;
+      }
+    }
+
 }
 
 @media (max-width: 768px) {
   a.btn, button.btn, input.btn {
-    font-size: 20px;
+    font-size: 17px;
   }
 
   .table-header {
@@ -235,6 +256,7 @@
   #navbarSupportedContent {
     .dropdown-menu {
       font-size: 16px;
+
       li {
         padding: 10px;
       }
@@ -285,7 +307,7 @@
 
   #challenges-show {
     .challenge-header > .winner-board {
-      width: 45%;
+      width: 65%;
     }
 
     #avatar-wrapper img {

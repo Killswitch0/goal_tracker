@@ -1,5 +1,5 @@
 <section id="challenges-show">
-  <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 challenge-header text-center mt-3">
+  <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 text-center mt-3 challenge-header">
     <div class="table-header">
       <h2 class="text-center">
         <%= @challenge.name %>
@@ -16,7 +16,7 @@
       <% end %>
     </div>
 
-    <div class="mt-1 d-flex justify-content-around mt-2">
+    <div class="buttons-list mt-2">
       <div>
         <%= link_to t('invite_user'), create_invitation_challenge_path(@challenge),
                     class: 'btn btn-sm btn-primary' if @challenge.check_creator(current_user) %>
@@ -39,10 +39,10 @@
           </div>
 
           <% winners = winners_of(@challenge) %>
-          <div class="winner-board__user d-flex justify-content-between">
+          <div class="winner-board__user">
             <% if winners.present? %>
               <% winners.each do |winner, tasks| %>
-                <div class="mx-2 mt-2" id="avatar-wrapper">
+                <div class="mt-2" id="avatar-wrapper">
                   <%= user_avatar(winner, size: 60, style: "border: 5px solid #{load_level_color(tasks)};") %>
                   <span class="fw-medium d-block"><%= winner.name %></span>
                 </div>
