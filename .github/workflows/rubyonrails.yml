@@ -55,8 +55,6 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec
-      - name: Start Sidekiq
-        run: bundle exec sidekiq
         env:
           DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
           REDIS_URL: "redis://localhost:6379/0"
