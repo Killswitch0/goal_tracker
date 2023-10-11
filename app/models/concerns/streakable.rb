@@ -23,7 +23,7 @@ module Streakable
   end
 
   def notify_almost_streak
-    self.send_notification(notification_params)
+    self.send_notification(params: notification_params)
   end
 
   # count completion
