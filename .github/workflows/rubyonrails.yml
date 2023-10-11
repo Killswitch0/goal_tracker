@@ -22,10 +22,10 @@ jobs:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
-        redis:
-          image: redis:latest
-          ports:
-            - "6379:6379"
+      redis:
+        image: redis:latest
+        ports:
+          - "6379:6379"
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
@@ -55,9 +55,6 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec
-      - name: Start Sidekiq
-        run: bundle exec sidekiq
-        background: true
         env:
           DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
           REDIS_URL: "redis://localhost:6379/0"
