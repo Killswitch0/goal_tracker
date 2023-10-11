@@ -3,3 +3,4 @@ js: yarn build --watch
 css: yarn build:css --watch
 css: yarn build:css --watch
 js: yarn build --watch
+sidekiq: bundle exec sidekiq -C config/sidekiq.yml

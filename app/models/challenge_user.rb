@@ -16,7 +16,7 @@
 
 
 class ChallengeUser < ApplicationRecord
-  include Notifyable
+  include Notifiable
 
   belongs_to :user
   belongs_to :challenge

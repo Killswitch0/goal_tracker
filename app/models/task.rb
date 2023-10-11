@@ -20,7 +20,7 @@
 
 class Task < ApplicationRecord
   include Streakable
-  include Notifyable
+  include Notifiable
   include Searchable
   include ValidationConstants
 
@@ -60,9 +60,11 @@ class Task < ApplicationRecord
     goal.tasks.where(complete: true).size
   end
 
-  def completed_condition
+  def completion_condition
     complete?
   end
+
+  private
 
   def notification_params
     { task: self, goal: goal }

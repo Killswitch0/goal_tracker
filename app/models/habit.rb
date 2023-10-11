@@ -19,7 +19,7 @@
 class Habit < ApplicationRecord
   include Searchable
   include Streakable
-  include Notifyable
+  include Notifiable
   include ValidationConstants
 
   belongs_to :user
@@ -27,7 +27,7 @@ class Habit < ApplicationRecord
 
   has_many :completion_dates, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true,
+  validates :name, presence: true, uniqueness: { scope: :user_id },
             format: {
               with: BASE_VALIDATION,
               message: :text_input
@@ -89,7 +89,7 @@ class Habit < ApplicationRecord
     goal.habits.completed_today.count
   end
 
-  def completed_condition
+  def completion_condition
     completion_dates.created_today.count.zero?
   end
 

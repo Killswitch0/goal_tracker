@@ -20,7 +20,7 @@ class HabitNotification < ApplicationNotifications
     @goal = Goal.find(params[:habit][:goal_id])
     @habit = Habit.find(params[:habit][:id])
     @user = User.find(@habit.user_id)
-    "#{@user.name} created #{@habit.name.truncate(10)} habits in #{@goal.name.truncate(10)}"
+    I18n.t('notifications.common.created', child_target: @habit.name.truncate(10), parent_target: @habit.name.truncate(10))
   end
 
   def url

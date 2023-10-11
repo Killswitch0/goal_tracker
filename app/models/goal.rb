@@ -21,6 +21,7 @@
 #
 
 class Goal < ApplicationRecord
+  include Notifiable
   include Searchable
   include ValidationConstants
 
@@ -34,11 +35,13 @@ class Goal < ApplicationRecord
   # noticed gem association
   has_many :notifications, through: :users
 
+  before_destroy :cleanup_notifications
+
   has_noticed_notifications model_name: 'Notification'
 
   accepts_nested_attributes_for :category, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  validates :name, presence: true, uniqueness: true,
+  validates :name, presence: true, uniqueness: { scope: :user_id },
             format: {
               with: BASE_VALIDATION,
               message: :text_input
@@ -80,5 +83,15 @@ class Goal < ApplicationRecord
     return if self.habits.completed_today.count == 0
 
     self.habits.completed_today.count == self.habits.count
+  end
+
+  private
+
+  def notification_params
+    { goal: self }
+  end
+
+  def cleanup_notifications
+    notifications_as_goal.destroy_all
   end
 end

@@ -367,3 +367,13 @@ en:
   #----------------------------------------------------------------------------
   messages:
     sign_or_log: 'Please sign up or login to use the application.'
+
+  # Notifications.
+  #----------------------------------------------------------------------------
+  notifications:
+    common:
+      almost: "You almost made habits streak in «%{target_name}»! Let's GO!"
+      created: "#{@user.name} created «%{child_target}» tasks in «%{parent_target}»."
+      left_for_complete: "You remain %{days} days to complete Goal «%{target_name}»."
+    challenge:
+      invited: "You've been invited to the «%{challenge}» challenge"

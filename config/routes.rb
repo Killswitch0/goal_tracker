@@ -1,4 +1,5 @@
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 class AdminConstraint
   def matches?(request)

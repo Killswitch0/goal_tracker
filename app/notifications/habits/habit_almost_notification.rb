@@ -19,7 +19,7 @@ class HabitAlmostNotification < ApplicationNotifications
   #
   def message
     @goal = Goal.find(params[:habit][:goal_id])
-    "You almost made habits streak in #{@goal.name.truncate(10)}! Let's GO!".truncate(45)
+    I18n.t('notifications.common.almost', target_name: @goal.name.truncate(10)).truncate(45)
   end
 
   def url

@@ -19,7 +19,7 @@ module Streakable
 
     (all_items - completed_count).between?(range.first, range.last) &&
       all_items.positive? &&
-      completed_condition
+      completion_condition
   end
 
   def notify_almost_streak
