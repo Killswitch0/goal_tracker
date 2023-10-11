@@ -22,6 +22,10 @@ jobs:
           POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
+      redis:
+        image: redis:latest
+        ports:
+          - "6379:6379"
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
@@ -33,6 +37,12 @@ jobs:
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
           bundler-cache: true
+      - name: Install Redis
+        run: |
+          sudo apt-get update
+          sudo apt-get install redis-server
+      - name: Start Redis
+        run: redis-server --daemonize yes
       - name: Precompile assets
         run: bundle exec rails assets:precompile
       # Add or replace database setup steps here
@@ -45,6 +55,11 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec
+      - name: Start Sidekiq
+        run: bundle exec sidekiq
+        env:
+          DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+          REDIS_URL: "redis://localhost:6379/0"
 
 #   lint:
 #     runs-on: ubuntu-latest
