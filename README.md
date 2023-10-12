@@ -56,10 +56,16 @@ git --version
 ```
 ruby --version && irb
 ```
-To install rails, in the terminal kindly run this command:
+To install Rails, in the terminal kindly run this command:
 
 ```
 gem install rails
+```
+
+To install Redis server, run this command in the terminal:
+
+```
+sudo apt-get update && sudo apt-get install redis
 ```
 
 ### Setup
@@ -91,6 +97,18 @@ Setup the database, run:
 rails db:create
 rails db:migrate
 rails db:seed
+```
+
+Run Redis server in a separate terminal window:
+
+```
+redis-server
+```
+
+Same for run Sidekiq:
+
+```
+bundle exec sidekiq
 ```
 
 Then run it in your browser with this command:
