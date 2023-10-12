@@ -65,22 +65,8 @@ end
   )
 end
 
-start_date = Date.new(2023, 1, 1)
-
-(0..6).each do |offset|
-  date = start_date + offset.months
-  CompletionDate.create(date: date, habit_id: 1, created_at: date, updated_at: date)
-end
-
-(0..6).each do |offset|
-  date = start_date + offset.months + 1.month
-  CompletionDate.create(date: date, habit_id: 2, created_at: date, updated_at: date)
-end
-
-(0..6).each do |offset|
-  date = start_date + offset.months + 2.months
-  CompletionDate.create(date: date, habit_id: 3, created_at: date, updated_at: date)
-end
+user.habits.last(4).each { |habit| habit.complete_habit_today }
+user.tasks.last(4).each { |task| task.update(complete: true) }
 
 
 

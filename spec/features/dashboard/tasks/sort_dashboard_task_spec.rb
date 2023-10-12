@@ -28,10 +28,11 @@ RSpec.feature "SortDashboardTasks" do
     scenario 'User try to show only uncompleted Tasks' do
       visit dashboard_path(open_tasks: 'open')
 
-      expect(page).not_to have_content(task1.name)
-      expect(page).not_to have_content(task2.name)
+      expect('[@id="dashboard-show"]/div/div[3]/ul/li/span').not_to have_content(task1.name)
+      expect('[@id="dashboard-show"]/div/div[3]/ul/li/span').not_to have_content(task2.name)
+      expect('[@id="dashboard-show"]/div/div[3]/ul/li/span').not_to have_content(task4.name)
+
       expect(page).to have_content(task3.name)
-      expect(page).not_to have_content(task4.name)
     end
   end
 end

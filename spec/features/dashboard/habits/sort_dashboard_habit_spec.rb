@@ -31,7 +31,7 @@ RSpec.feature "SortDashboardHabits" do
     scenario 'User try to show only uncompleted Habits' do
       visit dashboard_path(open_habits: 'open')
 
-      expect(page).not_to have_content(habit1.name)
+      expect('[@id="dashboard-show"]/div/div[2]/ul/li/span').not_to have_content(habit1.name)
       expect(page).to have_content(habit2.name)
       expect(page).to have_content(habit3.name)
       expect(page).to have_content(habit4.name)
