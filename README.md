@@ -102,19 +102,19 @@ rails db:seed
 Run Redis server in a separate terminal window:
 
 ```
-redis-server
+cd /goal_tracker && redis-server
 ```
 
 Same for run Sidekiq:
 
 ```
-bundle exec sidekiq
+cd /goal_tracker && bundle exec sidekiq
 ```
 
 Then run it in your browser with this command:
 
 ```
-rails server
+cd /goal_tracker && rails server
 ```
 
 ---
