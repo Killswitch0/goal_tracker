@@ -76,7 +76,7 @@
         <% @challenge_goals.each_with_index do |goal, index| %>
 
           <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>">
-            <% percentage = calculate_items(goal: goal, user: goal.user) %>
+            <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
             <%= button_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
                           method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } },
                           class: 'btn-close position-absolute' if goal.user == current_user %>

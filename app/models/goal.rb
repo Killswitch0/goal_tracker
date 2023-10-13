@@ -21,7 +21,8 @@
 #
 
 class Goal < ApplicationRecord
-  include Notifiable
+  include Notifiable::Base
+  include Notifiable::Create
   include Searchable
   include ValidationConstants
 
@@ -74,13 +75,13 @@ class Goal < ApplicationRecord
   end
 
   def tasks_streak?
-    return if self.tasks.completed.count == 0
+    return if (self.tasks.completed.count).zero?
 
     self.tasks.completed.count == self.tasks.count
   end
 
   def habits_streak?
-    return if self.habits.completed_today.count == 0
+    return if (self.habits.completed_today.count).zero?
 
     self.habits.completed_today.count == self.habits.count
   end
@@ -89,9 +90,5 @@ class Goal < ApplicationRecord
 
   def notification_params
     { goal: self }
-  end
-
-  def cleanup_notifications
-    notifications_as_goal.destroy_all
   end
 end

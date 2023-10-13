@@ -27,13 +27,13 @@
                     </div>
                     <div>
                       <span>
-                        <%= calculate_items(goal: goal, user: current_user).to_s + '%' %>
+                        <%= calculate_tasks(goal: goal, user: current_user).to_s + '%' %>
                       </span>
                     </div>
                   </div>
 
                   <div class="progress-bar goal-bar">
-                    <div class="progress" style="width: <%= calculate_items(goal: goal, user: current_user) %>%;"></div>
+                    <div class="progress" style="width: <%= calculate_tasks(goal: goal, user: current_user) %>%;"></div>
                   </div>
                 </div>
               </li>
@@ -74,7 +74,7 @@
       <div class="completed-wrapper">
 
         <div class="progress-bar">
-          <div class="progress" style="width: <%= calculate_items(goal: @goal, user: current_user) %>%;"></div>
+          <div class="progress" style="width: <%= calculate_tasks(goal: @goal, user: current_user) %>%;"></div>
         </div>
 
         <div class="completed-info">

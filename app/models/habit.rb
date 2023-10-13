@@ -19,7 +19,9 @@
 class Habit < ApplicationRecord
   include Searchable
   include Streakable
-  include Notifiable
+  include Notifiable::Base
+  include Notifiable::Create
+  include Notifiable::AlmostStreak
   include ValidationConstants
 
   belongs_to :user
@@ -61,6 +63,15 @@ class Habit < ApplicationRecord
       .distinct
   }
 
+  # For Streakable concern
+  def completed_count
+    goal.habits.completed_today.count
+  end
+
+  def completion_condition
+    completion_dates.created_today.count.zero?
+  end
+
   def completed_today?
     completion_dates.created_today.exists?
   end
@@ -84,20 +95,7 @@ class Habit < ApplicationRecord
     end
   end
 
-  # for Streakable concern
-  def completed_count
-    goal.habits.completed_today.count
-  end
-
-  def completion_condition
-    completion_dates.created_today.count.zero?
-  end
-
   private
-
-  def almost_streak?(range = [2, 4])
-    super
-  end
 
   def notification_params
     { habit: self, goal: goal }
@@ -110,9 +108,5 @@ class Habit < ApplicationRecord
 
   def delete_completion_date
     completion_dates.created_today.delete_all
-  end
-
-  def cleanup_notifications
-    notifications_as_habit.destroy_all
   end
 end

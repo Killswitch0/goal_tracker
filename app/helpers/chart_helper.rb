@@ -1,14 +1,9 @@
 module ChartHelper
   def set_chart(tasks = nil, habits = nil)
-    period = if params[:period] == 'day'
-               :day
-             elsif params[:period] == 'week'
-               :week
-             elsif params[:period] == 'month'
-               :month
-             else
-               :day
-             end
+    period = { 'day' => :day,
+               'week' => :week,
+               'month' => :month
+    }.fetch(params[:period], :day)
 
     if current_page?(controller: 'charts', action: 'task')
 

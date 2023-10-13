@@ -16,7 +16,8 @@
 
 
 class ChallengeUser < ApplicationRecord
-  include Notifiable
+  include Notifiable::Base
+  include Notifiable::Create
 
   belongs_to :user
   belongs_to :challenge
@@ -28,7 +29,7 @@ class ChallengeUser < ApplicationRecord
 
   after_create_commit :notify_create, if: :check_creator
 
-  before_destroy :clean_up_notifications
+  before_destroy :cleanup_notifications
 
   has_noticed_notifications model_name: 'Notification'
 
@@ -45,9 +46,5 @@ class ChallengeUser < ApplicationRecord
 
   def notification_params
     { challenge_user: self, challenge: self.challenge }
-  end
-
-  def clean_up_notifications
-    notifications_as_challenge_user.destroy_all
   end
 end

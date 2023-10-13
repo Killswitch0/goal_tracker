@@ -2,20 +2,12 @@ module ChallangeHelper
   include DashboardHelper
 
   def load_level_color(tasks)
-    if tasks.is_a? Integer
-      tasks
-    elsif tasks.nil?
-      tasks = 0
-    else
-      tasks = tasks.count
-    end
-
-    case
-    when tasks <= 3
+    case tasks
+    when 0..3
       '#797773'
-    when tasks <= 6
+    when 4..6
       '#2060E0'
-    when tasks > 6
+    else
       '#EBA031'
     end
   end
