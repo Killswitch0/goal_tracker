@@ -30,11 +30,11 @@ class Habit < ApplicationRecord
   has_many :completion_dates, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { scope: :user_id },
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            },
-            length: { minimum: 5, maximum: 45 }
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: { minimum: 5, maximum: 45 }
   validates :description, presence: true
 
   after_create_commit :notify_create

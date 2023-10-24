@@ -43,18 +43,18 @@ class Goal < ApplicationRecord
   accepts_nested_attributes_for :category, reject_if: proc { |attributes| attributes['name'].blank? }
 
   validates :name, presence: true, uniqueness: { scope: :user_id },
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            },
-            length: { minimum: 5, maximum: 50 }
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: { minimum: 5, maximum: 50 }
 
   validates :description, presence: true,
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            },
-            length: { minimum: 7, maximum: 200 }
+                          format: {
+                            with: BASE_VALIDATION,
+                            message: :text_input
+                          },
+                          length: { minimum: 7, maximum: 200 }
 
   validates :category_id, presence: false
   validates :color, presence: true, uniqueness: { scope: :user_id }
@@ -75,13 +75,13 @@ class Goal < ApplicationRecord
   end
 
   def tasks_streak?
-    return if (self.tasks.completed.count).zero?
+    return if self.tasks.completed.count.zero?
 
     self.tasks.completed.count == self.tasks.count
   end
 
   def habits_streak?
-    return if (self.habits.completed_today.count).zero?
+    return if self.habits.completed_today.count.zero?
 
     self.habits.completed_today.count == self.habits.count
   end

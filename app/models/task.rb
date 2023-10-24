@@ -33,10 +33,10 @@ class Task < ApplicationRecord
   after_update_commit :check_goal_completion
 
   validates :name, presence: true,
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            }
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   }
   validates :deadline, presence: true
 
   after_create_commit :notify_create
@@ -52,7 +52,7 @@ class Task < ApplicationRecord
   private
 
   def check_goal_completion
-    if goal.tasks.all? { |task| task.complete? }
+    if goal.tasks.all?(&:complete?)
       goal.update(complete: true)
     else
       goal.update(complete: false)

@@ -1,6 +1,5 @@
 class TaskDeadlineJob
   include Sidekiq::Job
-  include Sidekiq::Worker
 
   include ApplicationHelper
 

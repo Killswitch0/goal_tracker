@@ -5,21 +5,21 @@ class ChartsController < ApplicationController
   # GET /chart/habit
   #----------------------------------------------------------------------------
   def habit
-    if @goal
-      @habits = current_user.habits.where(goal_id: @goal)
-    else
-      @habits = current_user.habits
-    end
+    @habits = if @goal
+                current_user.habits.where(goal_id: @goal)
+              else
+                current_user.habits
+              end
   end
 
   # GET /chart/task
   #----------------------------------------------------------------------------
   def task
-    if @goal
-      @tasks = current_user.tasks.where(goal_id: @goal)
-    else
-      @tasks = current_user.tasks
-    end
+    @tasks = if @goal
+               current_user.tasks.where(goal_id: @goal)
+             else
+               current_user.tasks
+             end
   end
 
   private

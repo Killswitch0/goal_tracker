@@ -6,11 +6,11 @@ class GoalTrackingController < ApplicationController
   # GET /goal_tracking
   #----------------------------------------------------------------------------
   def show
-    if params[:search]
-      @goals = Goal.search(params[:search], current_user, Goal.table_name)
-    else
-      @goals = current_user.goals.order("#{sort_column} #{sort_direction}")
-    end
+    @goals = if params[:search]
+               Goal.search(params[:search], current_user, Goal.table_name)
+             else
+               current_user.goals.order("#{sort_column} #{sort_direction}")
+             end
   end
 
   private
