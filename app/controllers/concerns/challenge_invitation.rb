@@ -11,10 +11,10 @@ module ChallengeInvitation
 
       invitation = ChallengeUser.find_by(challenge: @challenge, user: current_user, confirm: true)
 
-      unless invitation
-        flash[:noticed] = t('.create_invitation.need_confirm')
-        redirect_to challenges_path
-      end
+      return if invitation
+
+      flash[:noticed] = t('.create_invitation.need_confirm')
+      redirect_to challenges_path
     end
 
     def set_invitation

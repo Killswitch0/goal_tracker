@@ -9,9 +9,7 @@ class GoalDeadlineJob
     @goals = Goal.where('deadline > ?', Time.now)
 
     @goals.each do |goal|
-      if days_left(goal).between?(1, 10)
-        goal.notify_deadline
-      end
+      goal.notify_deadline if days_left(goal).between?(1, 10)
     end
   end
 end

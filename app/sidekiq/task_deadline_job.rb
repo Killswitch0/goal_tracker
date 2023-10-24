@@ -9,9 +9,7 @@ class TaskDeadlineJob
     @tasks = Task.where('deadline > ?', Time.now)
 
     @tasks.each do |task|
-      if days_left(task).between?(1, 10)
-        task.notify_deadline
-      end
+      task.notify_deadline if days_left(task).between?(1, 10)
     end
   end
 end
