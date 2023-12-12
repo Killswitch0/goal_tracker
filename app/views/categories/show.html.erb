@@ -12,7 +12,7 @@
   <div class="col-sm-12 col-md-12 box">
     <h2>Goals</h2>
 
-    <ul class="">
+    <ul>
       <% if @category.goals.present? %>
         <% @category.goals.each_with_index do |goal, index| %>
           <li class=""><span><%= index + 1 %></span><%= link_to goal.name,
@@ -25,7 +25,7 @@
     </ul>
   </div>
 
-  <div class="list-buttons mt-3">
+  <div class="buttons-list mt-3">
     <%= link_to 'Back to Categories', categories_path, class: 'btn btn-secondary' %>
     <%= link_to 'Add Goal', new_category_goal_path(@category), class: 'btn btn-primary' %>
   </div>

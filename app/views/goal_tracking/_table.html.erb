@@ -15,7 +15,7 @@
   <% items.each_with_index do |item, index| %>
     <tr>
       <th scope="row"><%= index + 1 %></th>
-      <td><%= link_to item.name, item %></td>
+      <td><%= link_to item.name, item.class != Goal ? item.goal : item %></td>
       <td><%= item.class.name %></td>
       <td>
         <% if item.complete? %>

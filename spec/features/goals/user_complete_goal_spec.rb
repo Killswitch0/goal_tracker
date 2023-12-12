@@ -5,11 +5,11 @@ RSpec.feature "UserCompleteGoals" do
   given(:category) { create(:category, user: user) }
   given(:goal) { create(:goal, user: user, category: category, name: 'Exercise regularly') }
 
-  feature 'Complete goal', '%q{
+  feature 'Complete goal', %q{
     In order to finish my goal
     i need to be able update
     status to complete
-  }' do
+  } do
 
     scenario 'Authenticated user try to complete Goal' do
       log_in(user)

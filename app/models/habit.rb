@@ -19,7 +19,9 @@
 class Habit < ApplicationRecord
   include Searchable
   include Streakable
-  include Notifyable
+  include Notifiable::Base
+  include Notifiable::Create
+  include Notifiable::AlmostStreak
   include ValidationConstants
 
   belongs_to :user
@@ -27,12 +29,12 @@ class Habit < ApplicationRecord
 
   has_many :completion_dates, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true,
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            },
-            length: { minimum: 5, maximum: 45 }
+  validates :name, presence: true, uniqueness: { scope: :user_id },
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: { minimum: 5, maximum: 45 }
   validates :description, presence: true
 
   after_create_commit :notify_create
@@ -50,6 +52,7 @@ class Habit < ApplicationRecord
 
   scope :not_completed_today, -> {
     today = Date.today
+
     left_joins(:completion_dates)
       .where('completion_dates.created_at IS NULL')
       .where.not(
@@ -57,9 +60,18 @@ class Habit < ApplicationRecord
          SELECT 1
          FROM completion_dates
          WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
-    )
+      )
       .distinct
   }
+
+  # For Streakable concern
+  def completed_count
+    goal.habits.completed_today.count
+  end
+
+  def completion_condition
+    completion_dates.created_today.count.zero?
+  end
 
   def completed_today?
     completion_dates.created_today.exists?
@@ -84,20 +96,7 @@ class Habit < ApplicationRecord
     end
   end
 
-  # for Streakable concern
-  def completed_count
-    goal.habits.completed_today.count
-  end
-
-  def completed_condition
-    completion_dates.created_today.count.zero?
-  end
-
   private
-
-  def almost_streak?(range = [2, 4])
-    super
-  end
 
   def notification_params
     { habit: self, goal: goal }
@@ -110,9 +109,5 @@ class Habit < ApplicationRecord
 
   def delete_completion_date
     completion_dates.created_today.delete_all
-  end
-
-  def cleanup_notifications
-    notifications_as_habit.destroy_all
   end
 end

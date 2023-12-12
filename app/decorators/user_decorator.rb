@@ -10,6 +10,6 @@ class UserDecorator < ApplicationDecorator
   def gravatar(size: 30, css_class: '', style: '')
     # In decorators h means i want to use RoR helper
     h.image_tag "https://www.gravatar.com/avatar/#{gravatar_hash}.jpg?s=#{size}",
-                class: "rounded #{css_class}", style: style,alt: name_or_email
+                class: "rounded #{css_class}", style: style, alt: name_or_email
   end
 end

@@ -21,7 +21,7 @@ class TaskNotification < ApplicationNotifications
     @goal = Goal.find(params[:task][:goal_id])
     @task = Task.find(params[:task][:id])
     @user = User.find(params[:task][:user_id])
-    "#{@user.name} created #{@task.name.truncate(10)} tasks in #{@goal.name.truncate(10)}"
+    I18n.t('notifications.common.created', user_name: @user.name, child_target: @task.name.truncate(15), parent_target: @goal.name.truncate(10))
   end
 
   def url

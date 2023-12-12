@@ -62,6 +62,7 @@ class GoalsController < ApplicationController
   end
 
   # GET /goals/1/edit
+  #----------------------------------------------------------------------------
   def edit; end
 
   # PUT /goals/1
@@ -117,6 +118,6 @@ class GoalsController < ApplicationController
   end
 
   def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "complete"
+    Task.column_names.include?(params[:sort]) ? params[:sort] : 'complete'
   end
 end

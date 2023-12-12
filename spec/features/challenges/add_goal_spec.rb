@@ -8,7 +8,7 @@ RSpec.feature "AddGoals" do
 
   feature 'Add Goal to Challenge', %q{
     In order users may share own progress
-    to each other in challenge,
+    to each other in challenges,
     wee need to be able to add Goal to Challenge.
   } do
 
@@ -20,7 +20,7 @@ RSpec.feature "AddGoals" do
       select goal.name, from: 'Goal'
       click_on 'Create'
 
-      expect(page).to have_content 'Goal successfully added to the challenge.'
+      expect(page).to have_content I18n.t('challenges.add_goal.success')
     end
   end
 end

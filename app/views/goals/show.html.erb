@@ -34,8 +34,7 @@
 
     <div class="col-md-12 text-center">
       <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
-      <%= link_to t('delete_goal'), @goal, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                  class: "btn btn-sm btn-danger" %>
+      <%= confirmation_dialog_button('delete_goal', @goal.id) %>
     </div>
   </div>
 
@@ -79,7 +78,7 @@
           </table>
         </section>
 
-        <div class="links d-flex justify-content-around mb-3">
+        <div class="buttons-list mb-3">
           <%= link_to t('new_habit'), new_goal_habit_path(@goal),
                       class: "mt-2 btn btn-primary" %>
           <%= link_to t('all_habits'), goal_habits_path(@goal),
@@ -118,13 +117,8 @@
                 <% unless task.name.nil? %>
                   <th scope="row"><%= index + 1 %></th>
                   <td>
-                    <% if task.complete? %>
-                      <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                  style: "text-decoration: line-through" %>
-                    <% else %>
-                      <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                  style: "text-decoration: none" %>
-                    <% end %>
+                    <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
+                                style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}" %>
                   </td>
                 <% end %>
                 <td>
@@ -136,7 +130,7 @@
           </table>
         </section>
 
-        <div class="links d-flex justify-content-around mb-3">
+        <div class="buttons-list mb-3">
           <%= link_to t('new_task'), new_goal_task_path(@goal),
                       class: "mt-2 btn btn-primary" %>
           <%= link_to t('all_tasks'), goal_tasks_path(@goal),
@@ -148,4 +142,7 @@
     </div>
   </div>
 </div>
+
+<%= render 'layouts/confirmation_dialog', item: @goal, action_name: t('delete') %>
+
 

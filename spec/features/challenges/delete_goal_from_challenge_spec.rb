@@ -16,7 +16,8 @@ RSpec.feature "DeleteGoalFromChallenges" do
       visit challenge_path(challenge)
       expect(page).to have_css('[@id="challenges-show"]/div[2]/ul/li', text: user.name)
 
-      find('[@id="challenges-show"]/div[2]/ul/li/form/button').click
+      find('[@id="challenges-show"]/div[2]/ul/li/a').click
+      find("[@id='exampleModal#{goal.id}']/div/div/div[3]/a").click
 
       expect(page).not_to have_css('[@id="challenges-show"]/div[2]/ul/li/div[2]', text: user.name)
     end

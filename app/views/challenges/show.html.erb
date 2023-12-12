@@ -1,11 +1,12 @@
 <section id="challenges-show">
-  <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 challenge-header text-center mt-3">
-      <h2 class="text-center mt-2">
+  <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 text-center mt-3 challenge-header">
+    <div class="table-header">
+      <h2 class="text-center">
         <%= @challenge.name %>
       </h2>
-    <div class="divider"></div>
+    </div>
 
-    <div class="text-center fs-4">
+    <div class="text-center fs-4 mt-2">
       <%= @challenge.created_at.strftime('%d-%m-%Y') %> /
       <%= @challenge.deadline.strftime('%d-%m-%Y') %>
       <% if days_left(@challenge) == 0 %>
@@ -15,7 +16,7 @@
       <% end %>
     </div>
 
-    <div class="mt-1 d-flex justify-content-around">
+    <div class="buttons-list mt-2">
       <div>
         <%= link_to t('invite_user'), create_invitation_challenge_path(@challenge),
                     class: 'btn btn-sm btn-primary' if @challenge.check_creator(current_user) %>
@@ -24,9 +25,7 @@
       </div>
 
       <div>
-        <%= link_to t('leave'), leave_challenge_path(@challenge),
-                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                    class: 'btn btn-sm btn-warning' %>
+        <%= confirmation_dialog_button('leave', @challenge.id, klass: 'btn btn-sm btn-warning') %>
       </div>
     </div>
 
@@ -38,10 +37,10 @@
           </div>
 
           <% winners = winners_of(@challenge) %>
-          <div class="winner-board__user d-flex justify-content-between">
+          <div class="winner-board__user">
             <% if winners.present? %>
               <% winners.each do |winner, tasks| %>
-                <div class="mx-2 mt-2">
+                <div class="mt-2" id="avatar-wrapper">
                   <%= user_avatar(winner, size: 60, style: "border: 5px solid #{load_level_color(tasks)};") %>
                   <span class="fw-medium d-block"><%= winner.name %></span>
                 </div>
@@ -72,13 +71,17 @@
     <ul class="goal-items">
 
       <% if @challenge_goals.present? %>
-        <% @challenge_goals.each_with_index do |goal, index| %>
+        <% @challenge_goals.each_with_index do |goal| %>
 
-          <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>">
-            <% percentage = calculate_items(goal: goal, user: goal.user) %>
-            <%= button_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
-                          method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } },
+          <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
+            <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
+
+            <%= link_to '', '#', 'data-bs-toggle' => 'modal', 'data-bs-target' => "#exampleModal#{goal.id}",
                           class: 'btn-close position-absolute' if goal.user == current_user %>
+
+            <%= render 'layouts/confirmation_dialog', item: goal,
+                       path: destroy_goal_challenge_path(@challenge, goal_id: goal.id),
+                       action_name: t('delete') %>
 
             <div class="goal-item__progress fw-bold fs-4" style="background:
               radial-gradient(closest-side, white 79%, transparent 80%),
@@ -103,7 +106,6 @@
             </div>
           </li>
         <% end %>
-
       <% else %>
         <div class="text-center fs-2">No goals</div>
       <% end %>
@@ -112,6 +114,7 @@
 </section>
 
 <%= render 'members_canvas', members: @members, challenge: @challenge %>
+<%= render 'layouts/confirmation_dialog', item: @challenge, path: leave_challenge_path(@challenge), action_name: t('leave_challenge') %>
 
 
 

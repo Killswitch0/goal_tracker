@@ -1,10 +1,9 @@
 module DashboardHelper
-  def calculate_items(goal: nil, user:)
-    completed_tasks = if goal
-                        user.tasks.where(complete: true, goal:).count
-                      else
-                        user.tasks.where(complete: true).count
-                      end
+  def calculate_tasks(goal: nil, user:)
+    completed_tasks = user.tasks.where(complete: true)
+    completed_tasks = completed_tasks.where(goal:) if goal
+    completed_tasks = completed_tasks.count
+
     calculate_percentage(completed_tasks, 'tasks', goal:, user:)
   end
 
@@ -15,11 +14,9 @@ module DashboardHelper
 
 
   def calculate_percentage(completed_items, items, goal: nil, user: nil)
-    total_items ||= if goal
-                      user.send(items.to_sym).where(goal:).count
-                    else
-                      user.send(items.to_sym).count
-                    end
+    user_items = user.send(items.to_sym)
+    user_items = user_items.where(goal:) if goal
+    total_items = user_items.count
 
     return 0 if total_items.zero?
 

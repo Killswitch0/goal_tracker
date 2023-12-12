@@ -8,10 +8,10 @@ RSpec.feature "ViewGoals" do
   let!(:goal2) { create(:goal, user: user, category: category, name: "Name 2") }
   let!(:goal3) { create(:goal, user: user, color: 'Gold', category: category, name: "Name 3") }
 
-  feature 'View goal', '%q{
+  feature 'View goal', %q{
     In order to visit to the Goal
     i need to be able to choose it
-  }' do
+  } do
     scenario 'Authenticated user try to view Goal' do
       log_in(user)
 

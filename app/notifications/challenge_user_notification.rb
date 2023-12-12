@@ -21,7 +21,7 @@ class ChallengeUserNotification < ApplicationNotifications
     @challenge = Challenge.find(params[:challenge_user][:challenge_id])
     @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
     @user = User.find(params[:challenge_user][:user_id])
-    "You've been invited to the #{@challenge.name} challenge"
+    I18n.t('notifications.challenge.invited', challenge: @challenge.name)
   end
 
   def url

@@ -20,7 +20,10 @@
 
 class Task < ApplicationRecord
   include Streakable
-  include Notifyable
+  include Notifiable::Base
+  include Notifiable::Create
+  include Notifiable::Deadline
+  include Notifiable::AlmostStreak
   include Searchable
   include ValidationConstants
 
@@ -30,10 +33,11 @@ class Task < ApplicationRecord
   after_update_commit :check_goal_completion
 
   validates :name, presence: true,
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            }
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   }
+  validates :deadline, presence: true
 
   after_create_commit :notify_create
   after_update_commit :notify_almost_streak, if: :almost_streak?
@@ -48,7 +52,7 @@ class Task < ApplicationRecord
   private
 
   def check_goal_completion
-    if goal.tasks.all? { |task| task.complete? }
+    if goal.tasks.all?(&:complete?)
       goal.update(complete: true)
     else
       goal.update(complete: false)
@@ -57,18 +61,16 @@ class Task < ApplicationRecord
 
   # for Streakable concern
   def completed_count
-    goal.tasks.where(complete: true).size
+    goal.tasks.where(complete: true).count
   end
 
-  def completed_condition
+  def completion_condition
     complete?
   end
 
+  private
+
   def notification_params
     { task: self, goal: goal }
-  end
-
-  def cleanup_notifications
-    notifications_as_task.destroy_all
   end
 end

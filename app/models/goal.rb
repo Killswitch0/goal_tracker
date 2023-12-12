@@ -21,6 +21,8 @@
 #
 
 class Goal < ApplicationRecord
+  include Notifiable::Base
+  include Notifiable::Create
   include Searchable
   include ValidationConstants
 
@@ -34,23 +36,25 @@ class Goal < ApplicationRecord
   # noticed gem association
   has_many :notifications, through: :users
 
+  before_destroy :cleanup_notifications
+
   has_noticed_notifications model_name: 'Notification'
 
   accepts_nested_attributes_for :category, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  validates :name, presence: true, uniqueness: true,
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            },
-            length: { minimum: 5, maximum: 50 }
+  validates :name, presence: true, uniqueness: { scope: :user_id },
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: { minimum: 5, maximum: 50 }
 
   validates :description, presence: true,
-            format: {
-              with: BASE_VALIDATION,
-              message: :text_input
-            },
-            length: { minimum: 7, maximum: 200 }
+                          format: {
+                            with: BASE_VALIDATION,
+                            message: :text_input
+                          },
+                          length: { minimum: 7, maximum: 200 }
 
   validates :category_id, presence: false
   validates :color, presence: true, uniqueness: { scope: :user_id }
@@ -71,14 +75,20 @@ class Goal < ApplicationRecord
   end
 
   def tasks_streak?
-    return if self.tasks.completed.count == 0
+    return if self.tasks.completed.count.zero?
 
     self.tasks.completed.count == self.tasks.count
   end
 
   def habits_streak?
-    return if self.habits.completed_today.count == 0
+    return if self.habits.completed_today.count.zero?
 
     self.habits.completed_today.count == self.habits.count
+  end
+
+  private
+
+  def notification_params
+    { goal: self }
   end
 end

@@ -27,17 +27,16 @@
                     </div>
                     <div>
                       <span>
-                        <%= calculate_items(goal: goal, user: current_user).to_s + '%' %>
+                        <%= calculate_tasks(goal: goal, user: current_user).to_s + '%' %>
                       </span>
                     </div>
                   </div>
 
                   <div class="progress-bar goal-bar">
-                    <div class="progress" style="width: <%= calculate_items(goal: goal, user: current_user) %>%;"></div>
+                    <div class="progress" style="width: <%= calculate_tasks(goal: goal, user: current_user) %>%;"></div>
                   </div>
                 </div>
               </li>
-
             <% end %>
           <% else %>
             <span class="text-center fs-3">No Goals have yet</span>
@@ -64,7 +63,7 @@
           <% @all_tasks.each do |task| %>
             <li class="action-item">
               <%= task_complete_link(task, complete_dashboard_task_path(task)) %>
-              <%= task.name %>
+              <span><%= task.name %></span>
               <i class="<%= 'bi bi-check-lg' if task.complete? %>"></i>
             </li>
           <% end %>
@@ -74,7 +73,7 @@
       <div class="completed-wrapper">
 
         <div class="progress-bar">
-          <div class="progress" style="width: <%= calculate_items(goal: @goal, user: current_user) %>%;"></div>
+          <div class="progress" style="width: <%= calculate_tasks(goal: @goal, user: current_user) %>%;"></div>
         </div>
 
         <div class="completed-info">
@@ -116,7 +115,7 @@
           <% @all_habits.each do |habit| %>
             <li class="action-item">
               <%= habit_complete_link(habit, complete_dashboard_habit_path(habit)) %>
-              <%= habit.name %>
+              <span><%= habit.name %></span>
               <i class="<%= 'bi bi-check-lg' if habit.completed_today? %>"></i>
             </li>
           <% end %>

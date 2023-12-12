@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   include SessionsHelper
   include Sorting
   include Internationalization

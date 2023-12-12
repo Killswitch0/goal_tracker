@@ -3,6 +3,10 @@
 @import "views/**/*";
 @import "mobile";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
   background: #03dfff;
@@ -11,7 +15,6 @@ body {
 
 .home {
   background: $third-color;
-  height: 43vh;
   width: 60vh;
   border-radius: 2rem;
   display: flex;

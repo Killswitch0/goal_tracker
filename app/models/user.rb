@@ -50,21 +50,22 @@ class User < ApplicationRecord
   has_secure_password validations: false
 
   validates :name, presence: true,
-            format: {
-              with: /\A[A-Za-z]+\z/,
-              message: :name_format
-            }
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
-            uniqueness: { case_sensitive: false }
+                   format: {
+                     with: /\A[A-Za-z]+\z/,
+                     message: :name_format
+                   }
+  validates :email, presence: true,
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
   validates :password, confirmation: true,
-            allow_blank: true,
-            presence: true,
-            format: {
-              with: /\A(?=.*[A-Za-z])(?=.*\d).+\z/,
-              message: :password_format
-            },
-            length: { minimum: 6, maximum: 10,
-                      message: :password_length
+                       allow_blank: true,
+                       presence: true,
+                       format: {
+                         with: /\A(?=.*[A-Za-z])(?=.*\d).+\z/,
+                         message: :password_format
+                       },
+                       length: { minimum: 6, maximum: 10,
+                                 message: :password_length
             }
 
   validate :password_presence
@@ -82,7 +83,7 @@ class User < ApplicationRecord
   end
 
   def admin_role?
-    true if self.role == 1
+    self.role == 1
   end
 
   # returns user goal in challenge or nil

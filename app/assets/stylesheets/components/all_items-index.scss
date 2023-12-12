@@ -1,4 +1,4 @@
-#all_items-index {
+.all_items-index {
   display: flex;
   justify-content: space-around;
 
@@ -7,11 +7,12 @@
   }
 
   .table-wrapper {
-    width: 40vh;
+    width: 61vh;
     height: 55vh;
     background-color: $third-color;
     border-radius: 1rem;
     padding: 10px;
+    margin: 10px;
   }
 
   .table-body {

@@ -6,13 +6,13 @@ RSpec.feature "CreateDashboardHabits" do
   given!(:goal) { create(:goal, user: user, category: category) }
   given(:habit) { create(:habit, user: user, goal: goal) }
 
-  feature 'Create Habit', '%q{
+  feature 'Create Habit', %q{
     In order to see habits,
-    wich belongs to Goal,
+    which belongs to Goal,
     complete them
     and see habits in calendar
     wee need to be able to create Habit
-  }' do
+  } do
 
     scenario 'Authenticated user try to create Habit' do
       log_in(user)

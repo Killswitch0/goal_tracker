@@ -12,7 +12,6 @@ class PasswordResetsController < ApplicationController
       flash[:noticed] = t('.fail')
       redirect_to new_password_reset_path
     end
-
   end
 
   # GET /password_resets/1/edit

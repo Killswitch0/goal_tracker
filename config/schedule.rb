@@ -23,6 +23,6 @@ env :PATH, ENV['PATH']
 
 set :output, './log/cron.log'
 
-every 1.day do
-  rake "habit_complete_updater:habit_updater"
+every 1.minute do
+  rake "goal_deadline_notification:deadline_notify"
 end

@@ -56,10 +56,16 @@ git --version
 ```
 ruby --version && irb
 ```
-To install rails, in the terminal kindly run this command:
+To install Rails, in the terminal kindly run this command:
 
 ```
 gem install rails
+```
+
+To install Redis server, run this command in the terminal:
+
+```
+sudo apt-get update && sudo apt-get install redis
 ```
 
 ### Setup
@@ -93,10 +99,27 @@ rails db:migrate
 rails db:seed
 ```
 
+To precompile assets, run:
+```
+rails assets:precompile
+```
+
+Run Redis server in a separate terminal window:
+
+```
+cd /goal_tracker && redis-server
+```
+
+Same for run Sidekiq:
+
+```
+cd /goal_tracker && bundle exec sidekiq
+```
+
 Then run it in your browser with this command:
 
 ```
-rails server
+cd /goal_tracker && rails server
 ```
 
 ---

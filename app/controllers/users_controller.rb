@@ -4,14 +4,22 @@ class UsersController < ApplicationController
 
   helper_method :user
 
-  def show; end
-
+  # GET /users/new
+  #----------------------------------------------------------------------------
   def new
     @user = User.new
   end
 
+  # GET /users/1
+  #----------------------------------------------------------------------------
+  def show; end
+
+  # GET /users/1/edit
+  #----------------------------------------------------------------------------
   def edit; end
 
+  # POST /signup
+  #----------------------------------------------------------------------------
   def create
     @user = User.new(user_params)
 
@@ -25,6 +33,8 @@ class UsersController < ApplicationController
     end
   end
 
+  # PUT /users/1
+  #----------------------------------------------------------------------------
   def update
     if @user.update(user_params)
       redirect_to @user
@@ -33,6 +43,8 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/:id/confirm_email
+  #----------------------------------------------------------------------------
   def confirm_email
     user = User.find_by_confirm_token(params[:id])
 
@@ -46,6 +58,8 @@ class UsersController < ApplicationController
     end
   end
 
+  # DELETE /users/1/delete_image_attachment
+  #----------------------------------------------------------------------------
   def delete_image_attachment
     @user.avatar.purge
     redirect_to edit_user_path(@user)

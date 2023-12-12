@@ -6,10 +6,10 @@ RSpec.feature "CreateTasks" do
   given(:goal) { create(:goal, user: user, category: category) }
   given!(:task) { create(:task, user: user, name: 'My String', goal: goal) }
 
-  feature 'Create Task and complete', '%q{
+  feature 'Create Task and complete', %q{
     In order to see completed/uncompleted tasks,
     manage them, wee need to be able to create Task
-  }' do
+  } do
 
     scenario 'Authenticated user try to create Task and complete' do
       log_in(user)

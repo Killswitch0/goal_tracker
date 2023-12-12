@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require "rake"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -37,6 +38,12 @@ module GoalTracker
     # path for noticed gem folders
     config.autoload_paths += Dir[Rails.root.join('app', 'notifications', '*')]
 
-    # config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :sidekiq
+
+    config.after_initialize do
+      GoalTracker::Application.load_tasks
+      Rake::Task["deadline_notifications:goal_deadline_notify"].invoke
+      Rake::Task["deadline_notifications:task_deadline_notify"].invoke
+    end
   end
 end
