@@ -118,6 +118,6 @@ class GoalsController < ApplicationController
   end
 
   def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "complete"
+    Task.column_names.include?(params[:sort]) ? params[:sort] : 'complete'
   end
 end

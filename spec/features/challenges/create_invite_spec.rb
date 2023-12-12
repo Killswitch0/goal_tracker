@@ -19,7 +19,7 @@ RSpec.feature "Create Invite to Challenge", type: :feature do
       fill_in 'Email', with: user2.email
       click_on 'Create'
 
-      expect(page).to have_content "Invitation sent successfully to user #{user2.email}."
+      expect(page).to have_content I18n.t('challenges.create_invitation.success', invited_user: user2.email)
     end
   end
 end

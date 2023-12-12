@@ -8,10 +8,10 @@ RSpec.feature "SearchGoals" do
   let!(:goal2) { create(:goal, user: user, color: 'Pink', category: category, name: "Name 2") }
   let!(:goal3) { create(:goal, user: user, color: 'Gold', category: category, name: "Name 3") }
 
-  feature 'Search Goal', '%q{
+  feature 'Search Goal', %q{
     In order to use my goal
     i want to be able to search fast
-  }' do
+  } do
 
     scenario 'Authenticated user try to search Goal' do
       log_in(user)

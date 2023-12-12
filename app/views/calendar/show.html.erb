@@ -69,13 +69,11 @@
         <tbody class="overflow-y-auto">
         <% @goals.each_with_index do |goal, index| %>
           <tr>
-          <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= goal.name %></td>
             <td style="background-color: <%= goal.color %>;"></td>
           </tr>
         <% end %>
-        </tr>
         </tbody>
       </table>
     </div>

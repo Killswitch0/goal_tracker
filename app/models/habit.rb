@@ -52,6 +52,7 @@ class Habit < ApplicationRecord
 
   scope :not_completed_today, -> {
     today = Date.today
+
     left_joins(:completion_dates)
       .where('completion_dates.created_at IS NULL')
       .where.not(
@@ -59,7 +60,7 @@ class Habit < ApplicationRecord
          SELECT 1
          FROM completion_dates
          WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
-    )
+      )
       .distinct
   }
 

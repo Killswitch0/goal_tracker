@@ -76,7 +76,7 @@ class ChallengesController < ApplicationController
   def destroy
     @challenge = Challenge.find(params[:id])
     @challenge.destroy
-    flash[:noticed] = t('success')
+    flash[:noticed] = t('.success')
     redirect_to challenges_path
   end
 
@@ -87,8 +87,9 @@ class ChallengesController < ApplicationController
     @challenge_goal = ChallengeGoal.new
     @challenge_user = current_user.challenge_users.find_by(challenge: @challenge)
 
-    if request.post?
-      @challenge_goal = current_user
+    return unless request.post?
+
+    @challenge_goal = current_user
                           .challenge_goals
                           .build(
                             goal_id: params[:goal_id],
@@ -96,13 +97,12 @@ class ChallengesController < ApplicationController
                             challenge_user: @challenge_user
                           )
 
-      if @challenge_goal.save
-        flash[:noticed] = t('.success')
-        redirect_to @challenge
-      else
-        flash[:danger] = t('.fail')
-        render :add_goal
-      end
+    if @challenge_goal.save
+      flash[:noticed] = t('.success')
+      redirect_to @challenge
+    else
+      flash[:danger] = t('.fail')
+      render :add_goal
     end
   end
 
@@ -111,25 +111,25 @@ class ChallengesController < ApplicationController
   def create_invitation
     @challenge = Challenge.find(params[:id])
 
-    if request.post?
-      invited_user = User.find_by(email: params[:email])
+    return unless request.post?
+    
+    invited_user = User.find_by(email: params[:email])
 
-      if invited_user
-        @invitation = ChallengeUser.new(challenge: @challenge, user: invited_user)
+    if invited_user
+      @invitation = ChallengeUser.new(challenge: @challenge, user: invited_user)
 
-        if @invitation.save
-          flash[:noticed] = t('.success', invited_user: invited_user.email)
-        elsif @invitation.present?
-          flash[:danger] = t('.already')
-        else
-          flash[:danger] = t('.fail')
-        end
+      if @invitation.save
+        flash[:noticed] = t('.success', invited_user: invited_user.email)
+      elsif @invitation.present?
+        flash[:danger] = t('.already')
       else
-        flash[:danger] = t('.not_found')
+        flash[:danger] = t('.fail')
       end
-
-      redirect_to @challenge
+    else
+      flash[:danger] = t('.not_found')
     end
+
+    redirect_to @challenge
   end
 
   # PUT /challenge/1/confirm_invitation

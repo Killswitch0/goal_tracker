@@ -6,9 +6,9 @@ RSpec.feature "CreateChallenges" do
   given(:challenge_user) { create :challenge_user, challenge: challenge, user: user }
 
 
-  feature 'Create challenge', %q{
-    In order to invite users to challenge,
-    confirm invite, add goals to challenge
+  feature 'Create challenges', %q{
+    In order to invite users to challenges,
+    confirm invite, add goals to challenges
     we need to be able to create Challenge.
   } do
 
@@ -24,7 +24,7 @@ RSpec.feature "CreateChallenges" do
 
       click_button 'Create'
 
-      expect(page).to have_content 'Challenge created successfully.'
+      expect(page).to have_content I18n.t('challenges.create.success')
       expect(page).to have_content challenge.name
     end
   end

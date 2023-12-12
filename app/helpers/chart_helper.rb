@@ -7,26 +7,26 @@ module ChartHelper
 
     if current_page?(controller: 'charts', action: 'task')
 
-      if tasks.pluck(:complete_date).all? { |d| d.nil? }
-        line_chart tasks.map { |t|
+      if tasks.pluck(:complete_date).all?(&:nil?)
+        line_chart(tasks.map do |t|
           {
             name: t.name,
             data: Array.new(tasks.length, {})
           }
-        }
+        end)
       else
         line_chart tasks.group(:name).group_by_period(period, :complete_date).count
       end
     else
-      line_chart habits.map { |goal|
-        completion_data = goal.completion_dates.presence || {}
+      line_chart(habits.map do |habit|
+        completion_data = habit.completion_dates.presence || {}
         empty_data = Array.new(habits.length, {})
 
         {
-          name: goal.name,
+          name: habit.name,
           data: completion_data.empty? ? empty_data : completion_data.group_by_period(period, :date).count
         }
-      }
+      end)
     end
   end
 

@@ -277,6 +277,8 @@ en:
   #----------------------------------------------------------------------------
   challenge: 'Challenge'
   new_challenge: 'New Challenge'
+  leave_challenge: 'Leave challenge'
+  delete_challenge: 'Delete challenge'
   challenge_end: 'Challenge end'
   target:
     one: '1 target'
@@ -323,6 +325,9 @@ en:
     create:
       success: 'Challenge created successfully.'
       fail: 'Challenge was not created.'
+    destroy:
+      success: 'Challenge has been deleted successfully.'
+      fail: 'Challenge was not deleted.'
     create_invitation:
       success: 'Invitation sent successfully to user %{invited_user}.'
       already: 'User has already received an invitation.'

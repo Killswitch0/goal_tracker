@@ -1,0 +1,25 @@
+<% action_id ||= '' %>
+
+<div class="modal fade" id="exampleModal<%= action_id.capitalize %><%= item.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"><%= action_name %> "<%= item.name %>"</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= t('sure') %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= t('close') %></button>
+        <% path ||= nil %>
+
+        <% if path %>
+          <%= link_to action_name, path, data: { turbo_method: :delete }, class: 'btn btn-outline-danger' %>
+        <% else %>
+          <%= link_to action_name, item, data: { turbo_method: :delete }, class: 'btn btn-outline-danger' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

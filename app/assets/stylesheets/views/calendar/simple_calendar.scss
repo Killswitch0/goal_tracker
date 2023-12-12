@@ -31,6 +31,10 @@
   .table {
     width: 95%;
     margin-inline: auto;
+
+    td > div {
+      padding-inline: 10px;
+    }
   }
 
 

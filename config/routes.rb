@@ -19,7 +19,7 @@ Rails.application.routes.draw do
                {}
              end
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/, defaults: defaults do
+  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/, defaults: defaults do
 
     resource :calendar, only: :show, controller: :calendar
 
@@ -43,7 +43,6 @@ Rails.application.routes.draw do
 
     # Goals
     resources :goals do
-
       get '/habit_chart', to: 'charts#habit', as: 'habit_chart'
       get '/task_chart', to: 'charts#task', as: 'task_chart'
     end
@@ -75,25 +74,25 @@ Rails.application.routes.draw do
     end
 
     # Sign up
-    get "signup", to: "users#new"
-    post "signup", to: "users#create"
+    get 'signup', to: 'users#new'
+    post 'signup', to: 'users#create'
 
     # Log in
-    get "login", to: "sessions#new"
-    post "login", to: "sessions#create"
+    get 'login', to: 'sessions#new'
+    post 'login', to: 'sessions#create'
 
     # Log out
-    get "logout", to: "sessions#destroy"
+    get 'logout', to: 'sessions#destroy'
 
     # Password reset
     resources :password_resets, only: %i[new create edit update]
 
     # Pages
-    get "home", to: "pages#home"
-    get "about", to: "pages#about"
+    get 'home', to: 'pages#home'
+    get 'about', to: 'pages#about'
 
     # Dashboard
-    get "dashboard", to: "dashboard#show"
+    get 'dashboard', to: 'dashboard#show'
 
     resources :dashboard_tasks, only: %i[new create] do
       member do
@@ -115,6 +114,6 @@ Rails.application.routes.draw do
       end
     end
 
-    root "goals#index"
+    root 'goals#index'
   end
 end

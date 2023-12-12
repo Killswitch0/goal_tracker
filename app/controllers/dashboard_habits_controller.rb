@@ -27,12 +27,12 @@ class DashboardHabitsController < ApplicationController
     @goal = @habit.goal
 
     if @habit.completed_today?
-      @habit.complete_habit_today
       flash[:noticed] = t('habits.complete.uncompleted')
     else
-      @habit.complete_habit_today
       flash[:noticed] = t('habits.complete.completed')
     end
+
+    @habit.complete_habit_today
 
     redirect_to dashboard_path
   end

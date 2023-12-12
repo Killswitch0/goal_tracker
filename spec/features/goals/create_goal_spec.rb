@@ -5,11 +5,11 @@ RSpec.feature "CreateGoals" do
   given!(:category) { create(:category, user: user) }
   given(:goal) { create(:goal, user: user, category: category) }
 
-  feature 'Create goal', '%q{
+  feature 'Create goal', %q{
     In order to create habits, tasks
     wich belongs to Goal
     wee need be able to create Goal
-  }' do
+  } do
 
     scenario 'Authenticated user try to create, complete and delete Goal' do
       log_in(user)

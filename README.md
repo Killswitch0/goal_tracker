@@ -99,6 +99,11 @@ rails db:migrate
 rails db:seed
 ```
 
+To precompile assets, run:
+```
+rails assets:precompile
+```
+
 Run Redis server in a separate terminal window:
 
 ```

@@ -189,6 +189,7 @@ uk:
   show: 'Показати'
   hide: 'Сховати'
   back: 'Назад'
+  close: 'Закрити'
   delete: 'Видалити'
   edit: 'Редагувати'
   completed: 'Виконані'
@@ -296,6 +297,7 @@ uk:
   challenge: 'Челлендж'
   new_challenge: 'Новый челлендж'
   leave_challenge: 'Вийти з челленджу'
+  delete_challenge: 'Видалити челлендж'
   rating: 'Рейтинг'
   winners: 'Переможці'
   load: 'Завантаження'
@@ -350,6 +352,9 @@ uk:
     create:
       success: 'Челлендж успішно створен.'
       fail: 'Челлендж не був створений.'
+    destroy:
+      success: 'Челлендж успішно видалено.'
+      fail: 'Челлендж не було видалено.'
     create_invitation:
       success: 'Запрошення успішно відправлено користувачу %{invited_user}.'
       already: 'Користувач вже отримав запрошення.'

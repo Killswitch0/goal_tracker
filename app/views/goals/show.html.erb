@@ -34,8 +34,7 @@
 
     <div class="col-md-12 text-center">
       <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
-      <%= link_to t('delete_goal'), @goal, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                  class: "btn btn-sm btn-danger" %>
+      <%= confirmation_dialog_button('delete_goal', @goal.id) %>
     </div>
   </div>
 
@@ -118,13 +117,8 @@
                 <% unless task.name.nil? %>
                   <th scope="row"><%= index + 1 %></th>
                   <td>
-                    <% if task.complete? %>
-                      <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                  style: "text-decoration: line-through" %>
-                    <% else %>
-                      <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                  style: "text-decoration: none" %>
-                    <% end %>
+                    <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
+                                style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}" %>
                   </td>
                 <% end %>
                 <td>
@@ -148,4 +142,7 @@
     </div>
   </div>
 </div>
+
+<%= render 'layouts/confirmation_dialog', item: @goal, action_name: t('delete') %>
+
 

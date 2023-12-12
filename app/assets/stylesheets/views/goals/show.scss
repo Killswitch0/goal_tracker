@@ -15,7 +15,7 @@
 
   .table-main {
     background-color: $third-color;
-    height: 50vh;
+    height: 51vh;
   }
 
   /// goals, habits, tasks: goals/show
@@ -30,6 +30,13 @@
 
     .table-wrapper {
       height: 88%;
+
+
+      .btn-primary,
+      .btn-primary:focus,
+      .btn-primary:active {
+        font-size: 13px;
+      }
     }
   }
 }

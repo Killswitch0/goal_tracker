@@ -25,9 +25,7 @@
       </div>
 
       <div>
-        <%= link_to t('leave'), leave_challenge_path(@challenge),
-                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                    class: 'btn btn-sm btn-warning' %>
+        <%= confirmation_dialog_button('leave', @challenge.id, klass: 'btn btn-sm btn-warning') %>
       </div>
     </div>
 
@@ -73,13 +71,17 @@
     <ul class="goal-items">
 
       <% if @challenge_goals.present? %>
-        <% @challenge_goals.each_with_index do |goal, index| %>
+        <% @challenge_goals.each_with_index do |goal| %>
 
-          <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks) %>">
+          <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
             <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
-            <%= button_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
-                          method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } },
+
+            <%= link_to '', '#', 'data-bs-toggle' => 'modal', 'data-bs-target' => "#exampleModal#{goal.id}",
                           class: 'btn-close position-absolute' if goal.user == current_user %>
+
+            <%= render 'layouts/confirmation_dialog', item: goal,
+                       path: destroy_goal_challenge_path(@challenge, goal_id: goal.id),
+                       action_name: t('delete') %>
 
             <div class="goal-item__progress fw-bold fs-4" style="background:
               radial-gradient(closest-side, white 79%, transparent 80%),
@@ -104,7 +106,6 @@
             </div>
           </li>
         <% end %>
-
       <% else %>
         <div class="text-center fs-2">No goals</div>
       <% end %>
@@ -113,6 +114,7 @@
 </section>
 
 <%= render 'members_canvas', members: @members, challenge: @challenge %>
+<%= render 'layouts/confirmation_dialog', item: @challenge, path: leave_challenge_path(@challenge), action_name: t('leave_challenge') %>
 
 
 

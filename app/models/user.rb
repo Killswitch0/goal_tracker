@@ -83,7 +83,7 @@ class User < ApplicationRecord
   end
 
   def admin_role?
-    true if self.role == 1
+    self.role == 1
   end
 
   # returns user goal in challenge or nil
