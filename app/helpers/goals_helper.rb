@@ -78,12 +78,9 @@ module GoalsHelper
   def available_colors
     used_colors = current_user.goals.pluck(:color)
 
-    AVAILABLE_COLORS.map do |color|
-      if used_colors.include?(color[1])
-        color[0]
-      else
-        [color[0], color[1], { style: "background-color: #{color[1]}; color: white;" }]
-      end
+    AVAILABLE_COLORS.filter_map do |(label, color)|
+      color_data = { style: "background-color: #{color}; color: white;" }
+      [label, color, color_data] unless used_colors.include?(color)
     end
   end
 
