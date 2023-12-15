@@ -29,6 +29,9 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
+# Ignore Redis server files
+dump.rdb
+
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
@@ -46,9 +49,6 @@
 .yardoc
 doc
 docs
-
-# Ignore Redis server files
-dump.rdb
 
 # Ignore somplecov gem folder
 /coverage/
