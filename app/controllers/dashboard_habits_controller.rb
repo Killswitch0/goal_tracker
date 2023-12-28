@@ -40,10 +40,6 @@ class DashboardHabitsController < ApplicationController
   private
 
   def task_params
-    params.require(:habit).permit(
-        :name,
-        :goal_id,
-        :description
-      )
+    params.require(:habit).permit(:name, :goal_id, :description)
   end
 end

@@ -7,15 +7,16 @@ class GoalsController < ApplicationController
   # GET /goals
   #----------------------------------------------------------------------------
   def index
-    @goals = if params[:search]
-               Goal.search(params[:search], current_user, Goal.table_name)
-             elsif params[:filter]
-               Goal.where(category_id: params[:filter], user: current_user)
-             elsif params[:sort]
-               Goal.all.order("#{sort_column} #{sort_direction}")
-             else
-               current_user.goals.order(complete: :asc)
-             end
+    @goals = 
+      if params[:search]
+        Goal.search(params[:search], current_user, Goal.table_name)
+      elsif params[:filter]
+        Goal.where(category_id: params[:filter], user: current_user)
+      elsif params[:sort]
+        Goal.all.order("#{sort_column} #{sort_direction}")
+      else
+        current_user.goals.order(complete: :asc)
+      end
 
     @user_goals = Goal.where(user_id: current_user)
   end
@@ -29,11 +30,12 @@ class GoalsController < ApplicationController
   # GET /goals/1
   #----------------------------------------------------------------------------
   def show
-    @tasks = if params[:sort]
-               @goal.tasks.order(sort_column + ' ' + sort_direction)
-             else
-               @goal.tasks.order(complete: :asc)
-             end
+    @tasks = 
+      if params[:sort]
+        @goal.tasks.order(sort_column + ' ' + sort_direction)
+      else
+        @goal.tasks.order(complete: :asc)
+      end
 
     @habits = @goal.habits.not_completed_today
 

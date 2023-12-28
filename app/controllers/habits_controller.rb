@@ -10,10 +10,16 @@ class HabitsController < ApplicationController
   def index
     @goal = Goal.find(params[:goal_id])
     @habits = current_user.habits
-    @completed_habits = @habits.joins(:completion_dates)
-                               .where(completion_dates: { created_at: Date.today.beginning_of_day.. }, goal_id: @goal.id).distinct
-    @uncompleted_habits = @habits.left_joins(:completion_dates)
-                                 .where(completion_dates: { id: nil }, goal_id: @goal.id).distinct
+    
+    @completed_habits =
+      @habits.joins(:completion_dates)
+      .where(completion_dates: {
+        created_at: Date.today.beginning_of_day..
+      }, goal_id: @goal.id).distinct
+    
+      @uncompleted_habits = 
+        @habits.left_joins(:completion_dates)
+        .where(completion_dates: { id: nil }, goal_id: @goal.id).distinct
   end
 
   # GET /goals/1/habits/new

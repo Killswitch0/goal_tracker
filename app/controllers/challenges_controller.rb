@@ -10,19 +10,21 @@ class ChallengesController < ApplicationController
   # GET /challenges
   #----------------------------------------------------------------------------
   def index
-    accepted_challenges = Challenge.includes(:challenge_users)
-                                   .where(
-                                     challenge_users: {
-                                       user: current_user, confirm: true
-                                     }
-                                   ).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
+    accepted_challenges = Challenge
+      .includes(:challenge_users)
+      .where(
+        challenge_users: {
+        user: current_user,
+        confirm: true
+    }).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
 
-    @challenges = if params[:search]
-                    accepted_challenges.search(params[:search], current_user, Challenge.table_name)
-                  else
-                    accepted_challenges
-                  end
-  end
+    @challenges =
+      if params[:search]
+        accepted_challenges.search(params[:search], current_user, Challenge.table_name)
+      else
+        accepted_challenges
+      end
+  end  
 
   # GET /challenges/new
   #----------------------------------------------------------------------------
@@ -39,18 +41,20 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
 
     if @challenge
-      @members = User.joins(:challenge_users)
-                     .where(
-                       challenge_users: {
-                         confirm: true
-                       }).distinct
+      @members = User
+        .joins(:challenge_users)
+        .where(
+          challenge_users: {
+            confirm: true
+        }).distinct
     end
 
-    @challenge_goals = if params[:filter]
-                         @challenge.goals.where(user: current_user)
-                       else
-                         @challenge.goals.sort_by_completed_tasks
-                       end
+    @challenge_goals =
+      if params[:filter]
+        @challenge.goals.where(user: current_user)
+      else
+        @challenge.goals.sort_by_completed_tasks
+      end
 
     mark_notifications_as_read if params[:mark_as_read] == 'true'
   end
@@ -85,17 +89,20 @@ class ChallengesController < ApplicationController
   def add_goal
     @challenge = Challenge.find(params[:id])
     @challenge_goal = ChallengeGoal.new
-    @challenge_user = current_user.challenge_users.find_by(challenge: @challenge)
+    
+    @challenge_user = current_user
+      .challenge_users
+      .find_by(challenge: @challenge)
 
     return unless request.post?
 
     @challenge_goal = current_user
-                          .challenge_goals
-                          .build(
-                            goal_id: params[:goal_id],
-                            challenge: @challenge,
-                            challenge_user: @challenge_user
-                          )
+      .challenge_goals
+      .build(
+        goal_id: params[:goal_id],
+        challenge: @challenge,
+        challenge_user: @challenge_user
+      )
 
     if @challenge_goal.save
       flash[:noticed] = t('.success')
@@ -175,7 +182,12 @@ class ChallengesController < ApplicationController
   def destroy_goal
     @challenge = Challenge.find(params[:id])
     @goal = Goal.find(params[:goal_id])
-    @challenge_goal = ChallengeGoal.where(challenge_id: @challenge, user: current_user, goal_id: @goal).first
+    @challenge_goal = ChallengeGoal
+      .where(
+        challenge_id: @challenge,
+        user: current_user,
+        goal_id: @goal
+      ).first
 
     if @challenge_goal
       @challenge_goal.destroy

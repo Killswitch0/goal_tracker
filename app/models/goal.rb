@@ -42,33 +42,42 @@ class Goal < ApplicationRecord
 
   accepts_nested_attributes_for :category, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  validates :name, presence: true, uniqueness: { scope: :user_id },
-                   format: {
-                     with: BASE_VALIDATION,
-                     message: :text_input
-                   },
-                   length: { minimum: 5, maximum: 50 }
-
-  validates :description, presence: true,
-                          format: {
-                            with: BASE_VALIDATION,
-                            message: :text_input
-                          },
-                          length: { minimum: 7, maximum: 200 }
-
   validates :category_id, presence: false
   validates :color, presence: true, uniqueness: { scope: :user_id }
   validates :deadline, presence: true
   validates :color, presence: true
 
+  validates :name, presence: true, 
+    uniqueness: { scope: :user_id },
+    format: {
+      with: BASE_VALIDATION,
+      message: :text_input
+    },
+    length: {
+      minimum: 5,
+      maximum: 50 
+    }
+
+  validates :description, presence: true,
+    format: {
+      with: BASE_VALIDATION,
+      message: :text_input
+    },
+    length: { 
+      minimum: 7,
+      maximum: 200 
+    }
+
   scope :sort_by_completed_tasks, -> {
     left_joins(:tasks)
-      .group('goals.id, challenge_goals.id')
-      .select(
-        'goals.*, COUNT(
-                    CASE WHEN tasks.complete = true THEN 1 ELSE NULL END
-                  ) completed_tasks_count')
-      .order('completed_tasks_count DESC') }
+    .group('goals.id, challenge_goals.id')
+    .select(
+      'goals.*, COUNT(
+        CASE WHEN tasks.complete = true THEN 1 ELSE NULL END
+      ) completed_tasks_count'
+    )
+    .order('completed_tasks_count DESC')
+  }
 
   def goal_in_challenge
     challenge_goals.where(goal: self).first&.challenge

@@ -20,11 +20,14 @@ class Category < ApplicationRecord
 
   has_many :goals
 
-  validates :name, presence: true, uniqueness: { scope: :user_id },
-                   format: {
-                     with: /\A\p{L}+\z/u,
-                     message: :only_letters
-                   },
-                   length: { minimum: 2, maximum: 20 }
-
+  validates :name, presence: true, 
+    uniqueness: { scope: :user_id },
+    format: {
+      with: /\A\p{L}+\z/u,
+      message: :only_letters
+    },
+    length: {
+      minimum: 2,
+      maximum: 20 
+    }
 end

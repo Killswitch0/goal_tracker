@@ -29,12 +29,17 @@ class Habit < ApplicationRecord
 
   has_many :completion_dates, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: { scope: :user_id },
-                   format: {
-                     with: BASE_VALIDATION,
-                     message: :text_input
-                   },
-                   length: { minimum: 5, maximum: 45 }
+  validates :name, presence: true,
+    uniqueness: { scope: :user_id },
+    format: {
+      with: BASE_VALIDATION,
+      message: :text_input
+    },
+    length: { 
+      minimum: 5,
+      maximum: 45 
+    }
+  
   validates :description, presence: true
 
   after_create_commit :notify_create
@@ -46,22 +51,21 @@ class Habit < ApplicationRecord
 
   scope :completed_today, -> {
     joins(:completion_dates)
-      .where('completion_dates.created_at >= ?',
-             Date.today.beginning_of_day)
+    .where('completion_dates.created_at >= ?', Date.today.beginning_of_day)
   }
 
   scope :not_completed_today, -> {
     today = Date.today
 
     left_joins(:completion_dates)
-      .where('completion_dates.created_at IS NULL')
-      .where.not(
-        'EXISTS (
-         SELECT 1
-         FROM completion_dates
-         WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
-      )
-      .distinct
+    .where('completion_dates.created_at IS NULL')
+    .where.not(
+      'EXISTS (
+        SELECT 1
+        FROM completion_dates
+        WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
+    )
+    .distinct
   }
 
   # For Streakable concern
