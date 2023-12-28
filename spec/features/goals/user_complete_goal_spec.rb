@@ -4,6 +4,7 @@ RSpec.feature "UserCompleteGoals" do
   given(:user) { create(:user) }
   given(:category) { create(:category, user: user) }
   given(:goal) { create(:goal, user: user, category: category, name: 'Exercise regularly') }
+  given!(:task) { create(:task, user: user, goal: goal) }
 
   feature 'Complete goal', %q{
     In order to finish my goal
@@ -19,11 +20,11 @@ RSpec.feature "UserCompleteGoals" do
 
       expect(page).to have_current_path goal_path goal
 
-      check 'Complete'
-      click_on 'Complete'
+      find('.action').click
+      expect(page).to have_content I18n.t('tasks.complete.completed')
 
       expect(current_path).to eq goal_path(goal)
-      expect(page).to have_checked_field('goal_complete')
+      expect(page).to have_css('div.goal-info.completed')
     end
   end
 end
