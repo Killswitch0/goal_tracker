@@ -66,7 +66,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Time zone
-  config.time_zone = "Kyiv"
+  config.time_zone = "Europe/Kyiv"
   # config.active_record.default_timezone = :utc
 
   # Raises error for missing translations.
