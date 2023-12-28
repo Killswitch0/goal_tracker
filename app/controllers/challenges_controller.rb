@@ -14,9 +14,11 @@ class ChallengesController < ApplicationController
       .includes(:challenge_users)
       .where(
         challenge_users: {
-        user: current_user,
-        confirm: true
-    }).order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
+          user: current_user,
+          confirm: true
+        }
+      )
+      .order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
 
     @challenges =
       if params[:search]
@@ -46,7 +48,8 @@ class ChallengesController < ApplicationController
         .where(
           challenge_users: {
             confirm: true
-        }).distinct
+          }
+        ).distinct
     end
 
     @challenge_goals =

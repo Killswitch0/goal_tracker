@@ -148,7 +148,6 @@ completion_dates_data.each do |completion_date_params|
 end
 
 
-
 # Create Tasks with complete_date
 tasks_data = [
   { name: "Buy protein GNC", deadline_offset: 5.weeks, complete_offset: 4.weeks },

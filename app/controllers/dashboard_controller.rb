@@ -4,9 +4,10 @@ class DashboardController < ApplicationController
   # GET /dashboard
   #----------------------------------------------------------------------------
   def show
-    @all_goals = Goal.includes(:user)
-                     .where(user: current_user)
-                     .order(complete: :asc)
+    @all_goals = 
+      Goal.includes(:user)
+          .where(user: current_user)
+          .order(complete: :asc)
     @all_tasks = filter_tasks
     @all_habits = filter_habits
   end
@@ -34,10 +35,14 @@ class DashboardController < ApplicationController
       Habit.includes(:user)
            .left_joins(:completion_dates)
            .where(user: current_user)
-           .order(Arel.sql("CASE WHEN completion_dates.date IS NULL THEN 1
-                         WHEN completion_dates.date = '#{Date.today}' THEN 3
-                         ELSE 2 END"))
-           .uniq
+           .order(
+              Arel.sql(
+                "CASE WHEN completion_dates.date IS NULL THEN 1
+                  WHEN completion_dates.date = '#{Date.today}' THEN 3
+                  ELSE 2 
+                END"
+              )
+            ).uniq
     elsif params.has_key?(:open_habits)
       current_user.habits.not_completed_today
     else

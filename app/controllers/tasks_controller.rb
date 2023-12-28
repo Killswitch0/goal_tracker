@@ -64,6 +64,7 @@ class TasksController < ApplicationController
   #----------------------------------------------------------------------------
   def complete
     @goal = @task.goal
+    
     if @task.complete?
       flash[:noticed] = t('.uncompleted')
       @task.update(complete: false, complete_date: nil)

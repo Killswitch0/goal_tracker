@@ -13,9 +13,12 @@ class HabitsController < ApplicationController
     
     @completed_habits =
       @habits.joins(:completion_dates)
-      .where(completion_dates: {
-        created_at: Date.today.beginning_of_day..
-      }, goal_id: @goal.id).distinct
+      .where(
+        completion_dates: {
+          created_at: Date.today.beginning_of_day..
+        },
+        goal_id: @goal.id
+      ).distinct
     
       @uncompleted_habits = 
         @habits.left_joins(:completion_dates)
