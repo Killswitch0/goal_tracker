@@ -13,7 +13,7 @@ class GoalsController < ApplicationController
       elsif params[:filter]
         Goal.where(category_id: params[:filter], user: current_user)
       elsif params[:sort]
-        Goal.all.order("#{sort_column} #{sort_direction}")
+        Goal.where(user_id: current_user).order("#{sort_column} #{sort_direction}")
       else
         current_user.goals.order(complete: :asc)
       end

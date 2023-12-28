@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :goal do
     name { "Exercise regularly" }
     description { "MyString" }
-    deadline { "2023-06-29 18:02:50" }
+    deadline { Date.today + 3.days }
     color { "Red" }
     user
     category

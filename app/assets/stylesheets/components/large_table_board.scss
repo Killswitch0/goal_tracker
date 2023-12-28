@@ -1,12 +1,12 @@
 .large_table_board {
   background-color: $third-color;
   border-radius: 2rem;
-  padding: 0 20px 20px 20px;
+  padding-bottom: 20px;
   box-shadow: 0 .4rem .8rem #0005;
   min-height: 70vh;
 
   .table-body {
-    width: 100%;
+    // width: 100%;
     height: 55vh;
   }
 }

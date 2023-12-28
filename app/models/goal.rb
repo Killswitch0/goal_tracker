@@ -44,7 +44,7 @@ class Goal < ApplicationRecord
 
   validates :category_id, presence: false
   validates :color, presence: true, uniqueness: { scope: :user_id }
-  validates :deadline, presence: true
+  validates :deadline, presence: true, comparison: { greater_than: Date.today }
   validates :color, presence: true
 
   validates :name, presence: true, 

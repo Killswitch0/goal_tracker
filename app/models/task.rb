@@ -38,7 +38,7 @@ class Task < ApplicationRecord
       message: :text_input
     }
   
-  validates :deadline, presence: true
+  validates :deadline, presence: true, comparison: { greater_than: Date.today }
 
   after_create_commit :notify_create
   after_update_commit :notify_almost_streak, if: :almost_streak?
