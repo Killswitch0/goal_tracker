@@ -91,7 +91,6 @@ end
 end
 
 # Complete 4 habits and tasks
-user.habits.last(4).each { |habit| habit.complete_habit_today }
 user.tasks.last(4).each { |task| task.update(complete: true) }
 
 

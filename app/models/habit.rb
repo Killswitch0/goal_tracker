@@ -54,11 +54,11 @@ class Habit < ApplicationRecord
     .where('completion_dates.created_at >= ?', Date.today.beginning_of_day)
   }
 
-  scope :not_completed_today, -> {
+  scope :not_completed_today, -> (user) {
     today = Date.today
 
-    left_joins(:completion_dates)
-    .where('completion_dates.created_at IS NULL')
+    includes(:completion_dates)
+    .where('habits.user_id = ?', user.id)
     .where.not(
       'EXISTS (
         SELECT 1

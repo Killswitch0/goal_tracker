@@ -37,7 +37,7 @@ class GoalsController < ApplicationController
         @goal.tasks.order(complete: :asc)
       end
 
-    @habits = @goal.habits.not_completed_today
+    @habits = @goal.habits.not_completed_today(current_user)
 
     mark_notifications_as_read if params[:mark_as_read] == 'true'
   end
