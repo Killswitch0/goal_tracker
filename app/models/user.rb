@@ -39,7 +39,10 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :challenge_users, dependent: :destroy
-  has_many :challenges, through: :challenge_users, dependent: :destroy
+  has_many :joined_challenges, -> { where(challenge_users: { confirm: true }) }, 
+    through: :challenge_users, source: :challenge, dependent: :destroy
+  has_many :created_challenges, -> { where(user: self) },
+    class_name: 'Challenge', foreign_key: 'user_id', dependent: :destroy
   has_many :challenge_goals, dependent: :destroy
 
   # noticed gem association
@@ -91,8 +94,10 @@ class User < ApplicationRecord
   end
 
   # returns user goal in challenge or nil
-  def user_goal_in(challenge)
-    challenge_goals.where(challenge: challenge, user: self).first&.goal
+  def tasks_in_challenge(challenge)
+    #challenge_goals.where(challenge: challenge, user: self).first&.goal
+    goal_in_challenge = challenge_goals.where(challenge: challenge).first&.goal
+    goal_in_challenge&.tasks
   end
 
   private

@@ -50,8 +50,9 @@ class Habit < ApplicationRecord
   has_noticed_notifications model_name: 'Notification'
 
   scope :completed_today, -> {
-    joins(:completion_dates)
+    includes(:completion_dates)
     .where('completion_dates.created_at >= ?', Date.today.beginning_of_day)
+    .references(:completion_dates)
   }
 
   scope :not_completed_today, -> (user) {
@@ -66,6 +67,21 @@ class Habit < ApplicationRecord
         WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
     )
     .distinct
+  }
+
+  scope :sorted_by_completion, -> (user) {
+    includes(:completion_dates)
+    .where(user: user)
+    .order(
+      Arel.sql(
+        "CASE WHEN completion_dates.date = '#{Date.today}' THEN 1
+          WHEN completion_dates.date IS NULL THEN 3
+          ELSE 2 
+        END"
+      )
+    )
+    .references(:completion_dates)
+    .uniq
   }
 
   # For Streakable concern

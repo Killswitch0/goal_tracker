@@ -35,17 +35,7 @@ class DashboardController < ApplicationController
       Habit.not_completed_today(current_user)
 
     if params.has_key?(:all_habits)
-      Habit.includes(:user)
-           .left_joins(:completion_dates)
-           .where(user: current_user)
-           .order(
-              Arel.sql(
-                "CASE WHEN completion_dates.date = '#{Date.today}' THEN 1
-                  WHEN completion_dates.date IS NULL THEN 3
-                  ELSE 2 
-                END"
-              )
-            ).uniq
+      Habit.sorted_by_completion(current_user)
     elsif params.has_key?(:open_habits)
       not_completed
     else

@@ -10,14 +10,9 @@ class ChallengesController < ApplicationController
   # GET /challenges
   #----------------------------------------------------------------------------
   def index
-    accepted_challenges = Challenge
-      .includes(:challenge_users)
-      .where(
-        challenge_users: {
-          user: current_user,
-          confirm: true
-        }
-      )
+    accepted_challenges = 
+      current_user
+      .joined_challenges
       .order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
 
     @challenges =
@@ -42,15 +37,7 @@ class ChallengesController < ApplicationController
 
     @challenge = Challenge.find(params[:id])
 
-    if @challenge
-      @members = User
-        .joins(:challenge_users)
-        .where(
-          challenge_users: {
-            confirm: true
-          }
-        ).distinct
-    end
+    @members = @challenge.users if @challenge
 
     @challenge_goals =
       if params[:filter]
@@ -92,10 +79,12 @@ class ChallengesController < ApplicationController
   def add_goal
     @challenge = Challenge.find(params[:id])
     @challenge_goal = ChallengeGoal.new
-    
-    @challenge_user = current_user
-      .challenge_users
-      .find_by(challenge: @challenge)
+
+    @challenge_user = ChallengeUser
+      .find_by(
+        challenge: @challenge,
+        user: current_user
+      )
 
     return unless request.post?
 
@@ -186,11 +175,11 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @goal = Goal.find(params[:goal_id])
     @challenge_goal = ChallengeGoal
-      .where(
+      .find_by(
         challenge_id: @challenge,
         user: current_user,
         goal_id: @goal
-      ).first
+      )
 
     if @challenge_goal
       @challenge_goal.destroy

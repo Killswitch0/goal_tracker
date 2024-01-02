@@ -18,15 +18,15 @@
         </thead>
         <tbody class="overflow-y-auto">
         <% members.each_with_index do |user, index| %>
-          <% user_goal = user.user_goal_in(challenge)&.tasks&.count %>
+          <% user_tasks = user.tasks_in_challenge(challenge)&.count %>
 
           <tr>
             <th scope="row"><%= index + 1 %></th>
             <td><%= user_avatar(user, size: 25) %></td>
             <td><%= user.name %></td>
-            <td><%= user_goal.present? ? user_goal : 0 %></td>
+            <td><%= user_tasks || 0 %></td>
             <td class="fs-4">
-              <%= icon 'minecart-loaded', style: "color: #{load_level_color(user_goal)}" %>
+              <%= icon 'minecart-loaded', style: "color: #{load_level_color(user_tasks)}" %>
             </td>
           </tr>
         <% end %>
