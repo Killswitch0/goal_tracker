@@ -1,1 +1,4 @@
-<%= link_to notification.to_notification.message, notification.to_notification.url %>
+<%= link_to notification.to_notification.url, class: 'dropdown-item' do %>
+  <%= icon("#{klass}") %>
+  <%= notification.to_notification.message %>
+<% end %>

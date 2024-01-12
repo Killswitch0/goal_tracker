@@ -30,15 +30,6 @@ body {
   }
 }
 
-
-//navbar right dropdown
-#navbarSupportedContent {
-  .bi-caret-down-fill::before {
-    padding-left: 3px;
-  }
-}
-
-
 // content for mobile screen
 .mobile-show {
   display: none;
@@ -57,6 +48,15 @@ th a {
  }
 
       /// Bootstrap navbar ///
+
+
+//navbar right dropdown
+#navbarSupportedContent {
+  .bi-caret-down-fill::before {
+    padding-left: 3px;
+  }
+}
+
 .navbar-collapse {
   font-size: 18px;
 }

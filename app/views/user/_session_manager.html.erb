@@ -3,24 +3,48 @@
     <span class="dropdown-toggle-icon"></span>
     <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <%= user_avatar(current_user) %>
-      <%= t('hello') %>, <%= current_user.name_or_email %>
-      <%= icon 'caret-down-fill' %>
+      <span class="user-name">
+        <%= t('hello') %>, <%= current_user.name_or_email %>
+        <%= icon 'caret-down-fill' %>
+      </span>
     </a>
 
     <!--dropdown-menu-lg-end значит выравнивание выпадающего списка по левому краю-->
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-      <li><%= link_to t('new_category'), new_category_path, class: "dropdown-item" %></li>
-      <li><%= link_to t('edit_account'), edit_user_path(current_user), class: "dropdown-item" %></li>
-      <li><hr class="dropdown-divider"></li>
-      <%= link_to t('log_out'), logout_path, method: :delete, class: "dropdown-item" %>
+      <li>
+        <%= link_to new_category_path, class: "dropdown-item" do %>
+          <%= icon('journal-plus') %>
+          <%= t('new_category') %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
+          <%= icon('pencil-square') %> 
+          <%= t('edit_account') %>
+        <% end %>
+      </li>
+      <li>
+        <hr class="dropdown-divider">
+        <%= link_to logout_path, method: :delete, class: "dropdown-item" do %>
+          <%= icon('box-arrow-right') %>
+          <%= t('log_out') %>
+        <% end %>
+      </li>
+      
     </ul>
   </li>
 <% else %>
   <li class="nav-item">
-    <%= link_to t('authenticate.signup'), signup_path, class: "nav-link" %>
+    <%= link_to signup_path, class: "nav-link" do %>
+      <%= icon('person-add') %>
+      <%= t('authenticate.signup') %>
+    <% end %>
   </li>
   <li class="nav-item">
-    <%= link_to t('authenticate.login'), login_path, class: "nav-link" %>
+    <%= link_to login_path, class: "nav-link" do %>
+      <%= icon('box-arrow-in-right') %>
+      <%= t('authenticate.login') %>
+    <% end %>
   </li>
 <% end %>
 

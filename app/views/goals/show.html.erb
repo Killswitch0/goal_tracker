@@ -32,9 +32,14 @@
       <% end %>
     </div> -->
 
-    <div class="col-md-12 text-center">
+    <div class="col-md-8 offset-md-2 text-center d-flex justify-content-evenly">
       <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
-      <%= confirmation_dialog_button('delete_goal', @goal.id) %>
+      
+      <%= link_to @goal, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?',
+       bs_toggle: "modal", bs_target: "#exampleModal#{@goal.id}" }, class: 'btn btn-danger btn-sm' do %>
+        <%= icon('trash3') %>
+      <% end %>
+      
     </div>
   </div>
 
@@ -78,13 +83,23 @@
           </table>
         </section>
 
-        <div class="buttons-list mb-3">
-          <%= link_to t('new_habit'), new_goal_habit_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('all_habits'), goal_habits_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('navigation.chart'), goal_habit_chart_path(@goal, period: 'day'),
-                      class: "mt-2 btn btn-primary" %>
+        <div class="buttons-list">
+          <%= link_to new_goal_habit_path(@goal),
+                      class: "mt-2 btn btn-primary link-icon" do %>
+            <%= icon('plus-circle-fill') %>
+            <span><%= t('new_habit') %></span>
+          <% end %>
+          <%= link_to goal_habits_path(@goal),
+                      class: "mt-2 btn btn-primary" do %>
+            <%= icon('list') %>
+            <span><%= t('all_habits') %></span>
+          <% end %>
+          <%= link_to goal_habit_chart_path(@goal, period: 'day'),
+                      class: "mt-2 btn btn-primary" do %>
+
+            <%= icon('graph-up') %>
+            <span><%= t('navigation.chart') %></span>
+          <% end %>
         </div>
       </div>
     </div>
@@ -131,12 +146,21 @@
         </section>
 
         <div class="buttons-list mb-3">
-          <%= link_to t('new_task'), new_goal_task_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('all_tasks'), goal_tasks_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('navigation.chart'), goal_task_chart_path(@goal, period: 'day'),
-                      class: "mt-2 btn btn-primary" %>
+          <%= link_to new_goal_task_path(@goal),
+                      class: "mt-2 btn btn-primary" do %>
+            <%= icon('plus-circle-fill') %>
+            <span><%= t('new_task') %></span>
+          <% end %>
+          <%= link_to goal_tasks_path(@goal),
+                      class: "mt-2 btn btn-primary" do %>
+            <%= icon('list') %>
+            <span><%= t('all_tasks') %></span>
+          <% end %>
+          <%= link_to goal_task_chart_path(@goal, period: 'day'),
+                      class: "mt-2 btn btn-primary" do %>
+            <%= icon('graph-up') %>
+            <span><%= t('navigation.chart') %></span>
+          <% end %>
         </div>
       </div>
     </div>
@@ -144,5 +168,6 @@
 </div>
 
 <%= render 'layouts/confirmation_dialog', item: @goal, action_name: t('delete') %>
+
 
 

@@ -18,14 +18,25 @@
 
     <div class="buttons-list mt-2">
       <div>
-        <%= link_to t('invite_user'), create_invitation_challenge_path(@challenge),
-                    class: 'btn btn-sm btn-primary' if @challenge.check_creator(current_user) %>
-        <%= link_to t('add_goal'), add_goal_challenge_path(@challenge),
-                    class: 'btn btn-sm btn-primary mx-3' %>
+        <%= link_to create_invitation_challenge_path(@challenge),
+                    class: 'mt-2 btn btn-sm mx-3 btn-primary link-icon' do %>
+          <%= icon('person-fill-add') %>
+          <span><%= t('invite_user') %></span>
+        <% end if @challenge.check_creator(current_user) %>
+        
+        <%= link_to add_goal_challenge_path(@challenge),
+                    class: 'mt-2 btn btn-sm btn-primary mx-3 link-icon' do %>
+          <%= icon('plus-circle-fill') %>
+          <span><%= t('add_goal') %></span>
+        <% end %>
       </div>
 
       <div>
-        <%= confirmation_dialog_button('leave', @challenge.id, klass: 'btn btn-sm btn-warning') %>
+        <%= link_to '', data: { bs_toggle: "modal", bs_target: "#exampleModal#{@challenge.id}" },
+                         class: 'mt-2 btn btn-sm btn-warning link-icon' do %>
+          <%= icon('box-arrow-right') %>
+          <%= t('leave') %>
+        <% end %>
       </div>
     </div>
 
@@ -53,17 +64,24 @@
       </div>
     </div>
 
-    <div>
-      <%= link_to t('my_goals'), challenge_path(@challenge, filter: "#{current_user.id}"),
-                  class: "#{params[:filter] == "#{current_user.id}" ?
+    <div class="d-flex justify-content-center">
+      <%= link_to challenge_path(@challenge, filter: "#{current_user.id}"),
+                  class: "link-icon #{params[:filter] == "#{current_user.id}" ?
                               'btn btn-primary btn-sm' :
-                              'btn btn-outline-primary btn-sm'}" %>
-      <%= link_to t('all_goals'), challenge_path(@challenge),
-                  class: "#{params[:filter].nil? ?
+                              'btn btn-outline-primary btn-sm'}" do %>
+        <%= icon('person-circle') %>
+        <%= t('my_goals') %>
+      <% end %>
+      
+      <%= link_to challenge_path(@challenge),
+                  class: "link-icon mx-3 #{params[:filter].nil? ?
                               'btn btn-primary btn-sm' :
-                              'btn btn-outline-primary btn-sm'}" %>
+                              'btn btn-outline-primary btn-sm'}" do %>
+        <%= icon('list') %>
+        <%= t('all_goals')%>
+      <% end %>
 
-      <%= canvas_button 'rating', klass: 'btn btn-sm btn-primary'%>
+      <%= canvas_button 'rating', icon: 'bar-chart-fill', klass: 'link-icon btn-sm' %>
     </div>
   </div>
 

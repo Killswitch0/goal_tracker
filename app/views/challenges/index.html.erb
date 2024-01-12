@@ -40,8 +40,13 @@
         </section>
 
         <div class="buttons-list">
-          <%= link_to t('new_challenge'), new_challenge_path, class: 'btn btn-primary' %>
-          <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <%= link_to new_challenge_path, class: 'btn btn-primary link-icon' do %>
+            <%= icon('plus-circle-fill') %>
+            <%= t('new_challenge') %>
+          <% end %>
+          
+          <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" }, class: 'btn btn-primary link-icon' do %>
+            <%= icon('list') %>
             <%= t('invites') %>
             <% if @invites.present? %>
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -49,7 +54,7 @@
               <span class="visually-hidden">New alerts</span>
               </span>
             <% end %>
-          </button>
+          <% end %>
         </div>
       </div>
     </div>

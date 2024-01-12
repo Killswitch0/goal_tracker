@@ -56,3 +56,15 @@ a.action:hover, input.action:hover {
   background-position: right;
   transition: 0.5s all;
 }
+
+// for for icons inside links
+.link-icon {
+  display: flex;
+  align-items: center;
+
+  i {
+    display: flex;
+    align-items: center;
+    margin-right: 3px;
+  }
+}
