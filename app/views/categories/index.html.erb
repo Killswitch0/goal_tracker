@@ -1,7 +1,7 @@
-<div class="categories-index-wrapper mt-3">
+<div class="categories-wrapper mt-3">
   <div class="actions-items">
-    <div class="actions-header">
-      <div class="items-title"><%= t('all_categories') %></div>
+    <div class="actions-items__header">
+      <div class="actions-items__header__title"><%= t('all_categories') %></div>
       <%= link_to t('new_category'), new_category_path,
                   class: 'btn btn-primary btn-sm new-task' %>
     </div>
@@ -11,7 +11,7 @@
     <ul class="action-list">
       <% if @categories.present? %>
         <% @categories.each do |category| %>
-          <li class="action-item">
+          <li class="action-list__item">
             <span class="fw-bold"><%= category.name %></span>
             <div class="">
               <%= link_to t('edit'), edit_category_path(category),

@@ -1,19 +1,20 @@
 /// Actions (Habits, Tasks) ///
-.actions-items {
+.action-items {
   height: 600px;
   width: 450px;
   background-color: $third-color;
   box-shadow: 0 .4rem .8rem #0005;
-  .items-title {
-    font-size: 19px;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-
-  .actions-header {
+  
+  &__header {
     display: flex;
     justify-content: space-between;
     padding: 7px 20px;
+  }
+
+  &__title {
+    font-size: 19px;
+    text-transform: uppercase;
+    font-weight: bold;
   }
 
   .action-list {
@@ -21,19 +22,20 @@
     height: 492px;
     overflow-y: auto;
     list-style-type: none;
-    .action-item {
+    
+    &__item {
       display: flex;
       justify-content: space-between;
-      background: #a3b0c9;
+      background:#DBE2E6;
       padding: 5px;
       border-radius: 5px;
       align-items: center;
       margin-bottom: 7px;
+      
       .bi-check-lg::before {
         color: #2da31d;
         font-size: 30px;
       }
     }
   }
-
 }

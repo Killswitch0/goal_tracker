@@ -7,8 +7,8 @@
           <% if @all_goals.present? %>
             <% @all_goals.each do |goal| %>
 
-              <li class="goal-item" style="border: solid 5px <%= goal.color %>">
-                <div class="goal-title">
+              <li class="goals-list__item" style="border: solid 5px <%= goal.color %>">
+                <div class="goals-list__title">
                   <%= goal.name.truncate(20) %>
                 </div>
                 <div class="divider"></div>
@@ -19,7 +19,7 @@
                   <% end %>
 
                   <div class="progress-info">
-                    <div>
+                    <div class="progress-info__text">
                       <%= t('done') %>
                       <span><%= completed_for(goal).first %></span>
                       <%= t('of') %>
@@ -33,7 +33,7 @@
                   </div>
 
                   <div class="progress-bar goal-bar">
-                    <div class="progress" style="width: <%= calculate_tasks(goal: goal, user: current_user) %>%;"></div>
+                    <div class="progress-bar__progress" style="width: <%= calculate_tasks(goal: goal, user: current_user) %>%;"></div>
                   </div>
                 </div>
               </li>
@@ -49,10 +49,10 @@
       </div>
     </div>
 
-    <div class="actions-items">
 
-      <div class="actions-header">
-        <div class="items-title"><%= t('all_tasks') %></div>
+    <div class="action-items">
+      <div class="action-items__header">
+        <div class="action-items__title"><%= t('all_tasks') %></div>
         <%= link_to t('new_task'), new_dashboard_task_path, class: 'btn btn-primary btn-sm new-task' %>
       </div>
 
@@ -61,7 +61,7 @@
       <ul class="action-list">
         <% if @all_tasks.present? %>
           <% @all_tasks.each do |task| %>
-            <li class="action-item">
+            <li class="action-list__item">
               <%= task_complete_link(task, complete_dashboard_task_path(task)) %>
               <span><%= task.name %></span>
               <i class="<%= 'bi bi-check-lg' if task.complete? %>"></i>
@@ -71,13 +71,12 @@
       </ul>
 
       <div class="completed-wrapper">
-
         <div class="progress-bar">
-          <div class="progress" style="width: <%= calculate_tasks(goal: @goal, user: current_user) %>%;"></div>
+          <div class="progress-bar__progress" style="width: <%= calculate_tasks(goal: @goal, user: current_user) %>%;"></div>
         </div>
 
         <div class="completed-info">
-          <div>
+          <div class="completed-info__text">
             <%= t('done') %>
             <span><%= completed_for(current_user).first %></span>
             <%= t('of') %>
@@ -87,12 +86,12 @@
 
         <div class="completed-show">
           <% unless params[:all_tasks].present? %>
-            <%= link_to dashboard_path(all_tasks: 'all'), class: 'show-all' do %>
+            <%= link_to dashboard_path(all_tasks: 'all'), class: 'completed-show__all' do %>
               <%= icon 'check-square' %>
               <%= t('show') %>
             <% end %>
           <% else %>
-            <%= link_to dashboard_path(open_tasks: 'open'), class: 'show-all' do %>
+            <%= link_to dashboard_path(open_tasks: 'open'), class: 'completed-show__all' do %>
               <%= icon 'check-square' %>
               <%= t('hide') %>
             <% end %>
@@ -101,10 +100,9 @@
       </div>
     </div>
 
-    <div class="actions-items">
-
-      <div class="actions-header">
-        <div class="items-title"><%= t('all_habits') %></div>
+    <div class="action-items">
+      <div class="action-items__header">
+        <div class="action-items__title"><%= t('all_habits') %></div>
         <%= link_to t('new_habit'), new_dashboard_habit_path, class: 'btn btn-primary btn-sm new-task' %>
       </div>
 
@@ -113,7 +111,7 @@
       <ul class="action-list">
         <% if @all_habits.present? %>
           <% @all_habits.each do |habit| %>
-            <li class="action-item">
+            <li class="action-list__item">
               <%= habit_complete_link(habit, complete_dashboard_habit_path(habit)) %>
               <span><%= habit.name %></span>
               <i class="<%= 'bi bi-check-lg' if habit.completed_today? %>"></i>
@@ -124,11 +122,11 @@
 
       <div class="completed-wrapper">
         <div class="progress-bar">
-          <div class="progress" style="width: <%= calculate_habits %>%;"></div>
+          <div class="progress-bar__progress" style="width: <%= calculate_habits %>%;"></div>
         </div>
 
         <div class="completed-info">
-          <div>
+          <div class="completed-info__text">
             <%= t('done') %>
             <span><%= habits_completed_for(current_user).first %></span>
             <%= t('of') %>
@@ -138,12 +136,12 @@
 
         <div class="completed-show">
           <% if params[:all_habits].present? %>
-            <%= link_to dashboard_path(open_habits: 'open'), class: 'show-all d-block' do %>
+            <%= link_to dashboard_path(open_habits: 'open'), class: 'completed-show__all d-block' do %>
               <%= icon 'check-square' %>
               <%= t('hide') %>
             <% end %>
           <% else %>
-            <%= link_to dashboard_path(all_habits: 'all'), class: 'show-all d-block' do %>
+            <%= link_to dashboard_path(all_habits: 'all'), class: 'completed-show__all d-block' do %>
               <%= icon 'check-square' %>
               <%= t('show') %>
             <% end %>
@@ -152,6 +150,5 @@
 
       </div>
     </div>
-
   </div>
 </section>
