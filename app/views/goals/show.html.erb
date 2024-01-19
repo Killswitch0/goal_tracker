@@ -17,7 +17,7 @@
       <% challenge = @goal.goal_in_challenge&.name.present? %>
       <% if challenge %>
         <dt class="col-sm-4"><%= t('in_challenge') %>:</dt>
-        <dd class="col-sm-8 px-5"><%= link_to "#{@goal.goal_in_challenge&.name}", @goal.goal_in_challenge %></dd>
+        <dd class="col-sm-8 px-5"><%= link_to "#{@goal.goal_in_challenge&.name}", @goal.goal_in_challenge, class: 'hover-link underline' %></dd>
       <% end %>
     </dl>
 
@@ -71,7 +71,7 @@
                 <% unless habit.name.nil? %>
                   <th scope="row"><%= index + 1 %></th>
                   <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit),
-                                  style: "text-decoration: none" %></td>
+                                  style: "text-decoration: none", class: 'hover-link' %></td>
                   <td><%= habit.description.truncate(15) %></td>
                   <td>
                     <%= habit_complete_link(habit, complete_goal_habit_path(@goal, habit)) %>
@@ -133,7 +133,8 @@
                   <th scope="row"><%= index + 1 %></th>
                   <td>
                     <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}" %>
+                                style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}",
+                                class: 'hover-link' %>
                   </td>
                 <% end %>
                 <td>

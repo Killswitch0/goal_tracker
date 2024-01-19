@@ -1,4 +1,6 @@
-/// Actions (Habits, Tasks) ///
+/// Dashboard (Habits, Tasks) ///
+.actions-wrapper { margin-top: 20px; }
+
 .action-items {
   height: 600px;
   width: 450px;
@@ -9,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     padding: 7px 20px;
+    align-items: center;
   }
 
   &__title {

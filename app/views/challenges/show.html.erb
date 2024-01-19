@@ -51,9 +51,9 @@
           <div class="winner-board__user">
             <% if winners.present? %>
               <% winners.each do |winner, tasks| %>
-                <div class="mt-2" id="avatar-wrapper">
+                <div class="winner-board__avatar mt-2" id="avatar-wrapper">
                   <%= user_avatar(winner, size: 60, style: "border: 5px solid #{load_level_color(tasks)};") %>
-                  <span class="fw-medium d-block"><%= winner.name %></span>
+                  <span class="winner-board__user-name fw-medium d-block"><%= winner.name %></span>
                 </div>
               <% end %>
             <% else %>
@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-center">
+    <div class="buttons-list center">
       <%= link_to challenge_path(@challenge, filter: "#{current_user.id}"),
                   class: "link-icon #{params[:filter] == "#{current_user.id}" ?
                               'btn btn-primary btn-sm' :
@@ -91,7 +91,7 @@
       <% if @challenge_goals.present? %>
         <% @challenge_goals.each_with_index do |goal| %>
 
-          <li class="goal-item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
+          <li class="goal-items__item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
             <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
 
             <%= link_to '', '#', 'data-bs-toggle' => 'modal', 'data-bs-target' => "#exampleModal#{goal.id}",
@@ -101,15 +101,15 @@
                        path: destroy_goal_challenge_path(@challenge, goal_id: goal.id),
                        action_name: t('delete') %>
 
-            <div class="goal-item__progress fw-bold fs-4" style="background:
+            <div class="goal-items__progress fw-bold fs-4" style="background:
               radial-gradient(closest-side, white 79%, transparent 80%),
                 conic-gradient(rgba(9, 194, 30, 1) <%= percentage %>%, rgba(39, 245, 63, 0.21) 0%);">
               <span><%= percentage %>%</span></div>
-            <div class="goal-item__user text-center mt-1 fw-medium"><%= goal.user.name %></div>
+            <div class="goal-items__user text-center mt-1 fw-medium"><%= goal.user.name %></div>
 
-            <div class="goal-item__tasks text-center mt-1">
+            <div class="goal-items__tasks text-center mt-1">
               <% if goal.user == current_user %>
-                <%= link_to t('target', count: goal.tasks.count), goal, class: 'link-offset-2 link-underline' %>
+                <%= link_to t('target', count: goal.tasks.count), goal, class: 'link-offset-2 hover-link underline' %>
               <% else %>
                 <%= t('target', count: goal.tasks.count) %>
               <% end %>

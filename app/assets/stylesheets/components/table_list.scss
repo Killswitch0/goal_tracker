@@ -42,25 +42,10 @@ table, th, td {
   overflow: auto;
   box-shadow: 0 .4rem .8rem #0005;
 
-  td > a {
-    text-decoration: none;
+  thead {
+    position: relative;
+    z-index: 100;
   }
-}
-
-
-.table-body::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.table-body::-webkit-scrollbar-thumb {
-  border-radius: .5rem;
-  background-color: #0004;
-  visibility: hidden;
-}
-
-.table-body:hover::-webkit-scrollbar-thumb {
-  visibility: visible;
 }
 
 thead th {
@@ -85,4 +70,20 @@ tbody tr:nth-child(even) {
   .links {
     padding-inline: 11px;
   }
+}
+
+
+.table-body::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.table-body::-webkit-scrollbar-thumb {
+  border-radius: .5rem;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+.table-body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
 }

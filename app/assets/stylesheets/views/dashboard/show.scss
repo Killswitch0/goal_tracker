@@ -34,13 +34,9 @@
         padding-inline: 10px;
         text-align: right;
 
-        i {
-          color: $primary;
-        }
+        i { color: $primary; }
 
-        i:hover {
-          color: $primary-hover;
-        }
+        i:hover { color: $primary-hover; }
       }
     }
 
@@ -86,7 +82,6 @@
     i.bi {
       font-size: 26px;
       margin-top: 10px;
-      color: #0d6efd;
     }
 
     .completed-info {

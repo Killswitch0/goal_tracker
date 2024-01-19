@@ -1,6 +1,11 @@
 .categories-wrapper {
-  // display: flex;
-  // justify-content: center;
+  &__item > a { color: inherit; }
+
+  .categories-list {
+    &__item {
+      a { color: inherit; }
+    } 
+  }
 
   .actions-items {
     li.action-item {

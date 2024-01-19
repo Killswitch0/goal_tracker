@@ -1,0 +1,19 @@
+.offcanvas.offcanvas-start {
+  width: 500px;
+}
+
+th a {
+  text-decoration: none;
+  color: inherit;
+}:hover {
+  text-decoration: none;
+ }
+
+// canvas
+.offcanvas {
+  background-color: $third-color;
+
+  .offcanvas-title {
+    font-size: 25px;
+  }
+}
