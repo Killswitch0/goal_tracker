@@ -49,7 +49,11 @@
 }
 
 //dropdown hover background color
-ul.dropdown-menu > li a:hover{
+ul.dropdown-menu > li a:hover, li.dropdown-item:hover {
+  background-color: #DBE2E6;
+}
+
+ul.dropdown-menu > li a:active, li.dropdown-item:active {
   background-color: $fourth-color;
   color: white;
 }

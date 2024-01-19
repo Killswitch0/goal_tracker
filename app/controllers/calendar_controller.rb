@@ -12,5 +12,10 @@ class CalendarController < ApplicationController
       end
 
     @goals = current_user.goals.includes(:habits)
+
+    if params[:goal_ids].present?
+      @goals = @goals.where(id: params[:goal_ids])
+      @habits = @habits.where(goal_id: params[:goal_ids])
+    end
   end
 end

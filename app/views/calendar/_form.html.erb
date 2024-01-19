@@ -1,0 +1,32 @@
+<%= form_with url: calendar_path, method: :get, class: 'input-group__form' do |f| %>
+  <div class="m-2">
+    <%= f.text_field :search,
+            placeholder: t('search').concat('...'),
+            class: 'input-group-text' %>
+  </div>
+
+  <div class="m-2">
+    <%= f.date_field :start_date, value: "#{params[:start_date].present? ? params[:start_date] : Date.today}",
+                    class: 'form-control' %>
+  </div>
+
+  <div class="btn-group d-flex m-2">
+    <button type="button" class="btn btn-primary btn-sm dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= icon('funnel') %>
+      <span>Goals filter</span>
+    </button>
+
+    <ul class="dropdown-menu m-2">
+      <%= f.collection_check_boxes :goal_ids, current_user.goals, :id, :name, {} do |checkbox| %>
+        <li class="dropdown-item">
+          <%= checkbox.check_box(checked: true) %>
+          <%= checkbox.label %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  
+  <div class="m-2">
+    <%= f.submit t('search'), default: 'Go', class: 'btn btn-primary action mx-1' %>
+  </div>
+<% end %>

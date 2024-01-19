@@ -11,18 +11,16 @@
       </h2>
     </div>
 
-    <div class="input-group d-flex justify-content-around">
-      <%= render 'layouts/search', path: calendar_path %>
-      <%= canvas_button 'goal_markers', klass: 'mt-3 mx-1' %>
+    <div class="input-group mt-3">
+      <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" }, 
+                      class: 'btn btn-primary btn-sm link-icon mx-2' do %>
+        <%= inline_svg_tag("icons/bootstrap/highlighter", options = {class: 'me-1'}) %>
+        <%= t('goal_markers') %>
+      <% end %>
 
-      <div class="date_select d-flex justify-content-around">
-        <%= form_with url: calendar_path, method: :get, class: 'd-flex mt-3' do |f| %>
-          <%= f.date_field :start_date, value: "#{params[:start_date].present? ? params[:start_date] : Date.today}",
-                           class: 'form-control' %>
-          <%= f.submit t('search'), default: 'Go', class: 'btn btn-primary btn-sm action mx-1' %>
-        <% end %>
+      <div class="filters">
+        <%= render 'form' %>
       </div>
-    </div>
   </div>
 
 
@@ -50,34 +48,5 @@
   <% end %>
 </div>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExample"><%= t('goal_markers') %></h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-
-  <div class="offcanvas-body">
-    <div class="table-body">
-      <table class="table table-hover">
-        <thead class="table-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col"><%= t('activerecord.attributes.goal.name') %></th>
-          <th scope="col"><%= t('activerecord.attributes.goal.color') %></th>
-        </tr>
-        </thead>
-        <tbody class="overflow-y-auto">
-        <% @goals.each_with_index do |goal, index| %>
-          <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td><%= goal.name %></td>
-            <td style="background-color: <%= goal.color %>;"></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-</div>
+<%= render 'markers_canvas', goals: @goals %>
 

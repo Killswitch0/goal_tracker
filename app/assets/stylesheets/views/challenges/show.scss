@@ -5,6 +5,13 @@ section#challenges-show {
     padding: 10px;
     border: 2px solid #fff5;
     box-shadow: 0 0.4rem 0.8rem #0005;
+
+    .buttons-list {
+      &__left {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
   }
 
   .challenge-wrapper {

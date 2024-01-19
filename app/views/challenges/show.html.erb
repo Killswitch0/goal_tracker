@@ -17,7 +17,7 @@
     </div>
 
     <div class="buttons-list mt-2">
-      <div>
+      <div class="buttons-list__left">
         <%= link_to create_invitation_challenge_path(@challenge),
                     class: 'mt-2 btn btn-sm mx-3 btn-primary link-icon' do %>
           <%= icon('person-fill-add') %>
@@ -26,12 +26,12 @@
         
         <%= link_to add_goal_challenge_path(@challenge),
                     class: 'mt-2 btn btn-sm btn-primary mx-3 link-icon' do %>
-          <%= icon('plus-circle-fill') %>
+          <%= icon('plus-lg') %>
           <span><%= t('add_goal') %></span>
         <% end %>
       </div>
 
-      <div>
+      <div class= "buttons-list__right">
         <%= link_to '', data: { bs_toggle: "modal", bs_target: "#exampleModal#{@challenge.id}" },
                          class: 'mt-2 btn btn-sm btn-warning link-icon' do %>
           <%= icon('box-arrow-right') %>

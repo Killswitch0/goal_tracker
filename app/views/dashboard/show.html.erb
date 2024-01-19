@@ -53,7 +53,10 @@
     <div class="action-items">
       <div class="action-items__header">
         <div class="action-items__title"><%= t('all_tasks') %></div>
-        <%= link_to t('new_task'), new_dashboard_task_path, class: 'btn btn-primary btn-sm new-task' %>
+        <%= link_to new_dashboard_task_path, class: 'btn btn-primary btn-sm new-task link-icon' do %>
+          <%= icon('plus-lg') %>
+          <%= t('new_task') %>
+        <% end %>
       </div>
 
       <div class="divider"></div>
@@ -103,7 +106,10 @@
     <div class="action-items">
       <div class="action-items__header">
         <div class="action-items__title"><%= t('all_habits') %></div>
-        <%= link_to t('new_habit'), new_dashboard_habit_path, class: 'btn btn-primary btn-sm new-task' %>
+        <%= link_to new_dashboard_habit_path, class: 'btn btn-primary btn-sm new-task link-icon' do %>
+          <%= icon('plus-lg') %>
+          <%= t('new_habit') %>
+        <% end %>
       </div>
 
       <div class="divider"></div>
