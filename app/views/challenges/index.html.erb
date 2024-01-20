@@ -46,7 +46,7 @@
             <%= t('new_challenge') %>
           <% end %>
           
-          <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" }, class: 'btn btn-primary link-icon' do %>
+          <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" }, class: 'btn btn-primary position-relative link-icon' do %>
             <%= icon('list') %>
             <%= t('invites') %>
             <% if @invites.present? %>

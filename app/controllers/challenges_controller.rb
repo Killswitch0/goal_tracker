@@ -4,6 +4,7 @@ class ChallengesController < ApplicationController
   before_action :redirect_user
   before_action :set_invite, only: %i[index show new]
   before_action :set_invitation, only: %i[confirm_invitation decline_invitation leave show]
+  before_action :set_challenge, only: %i[destroy destroy_user add_goal create_invitation destroy_goal]
 
   helper_method :sort_column, :sort_direction
 
@@ -68,16 +69,23 @@ class ChallengesController < ApplicationController
   # DELETE /challenges/1
   #----------------------------------------------------------------------------
   def destroy
-    @challenge = Challenge.find(params[:id])
     @challenge.destroy
     flash[:noticed] = t('.success')
     redirect_to challenges_path
   end
 
+  # DELETE /challenge_users/1
+  #----------------------------------------------------------------------------
+  def destroy_user
+    @challenge_user = @challenge.challenge_users.find_by(user_id: params[:user_id])
+    @challenge_user.destroy
+    flash[:noticed] = t('.success')
+    redirect_to @challenge
+  end
+
   # POST /challenges/1/add_goal
   #----------------------------------------------------------------------------
   def add_goal
-    @challenge = Challenge.find(params[:id])
     @challenge_goal = ChallengeGoal.new
 
     @challenge_user = ChallengeUser
@@ -108,8 +116,6 @@ class ChallengesController < ApplicationController
   # POST /challenges/1/create_invitation
   #----------------------------------------------------------------------------
   def create_invitation
-    @challenge = Challenge.find(params[:id])
-
     return unless request.post?
     
     invited_user = User.find_by(email: params[:email])
@@ -172,7 +178,6 @@ class ChallengesController < ApplicationController
   # DELETE /challenges/:id/destroy_goal
   #----------------------------------------------------------------------------
   def destroy_goal
-    @challenge = Challenge.find(params[:id])
     @goal = Goal.find(params[:goal_id])
     @challenge_goal = ChallengeGoal
       .find_by(
@@ -195,5 +200,9 @@ class ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(:name, :description, :deadline)
+  end
+
+  def set_challenge
+    @challenge = Challenge.find(params[:id])
   end
 end

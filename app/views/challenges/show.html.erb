@@ -20,7 +20,7 @@
       <div class="buttons-list__left">
         <%= link_to create_invitation_challenge_path(@challenge),
                     class: 'mt-2 btn btn-sm mx-3 btn-primary link-icon' do %>
-          <%= icon('person-fill-add') %>
+          <%= icon('person-plus-fill') %>
           <span><%= t('invite_user') %></span>
         <% end if @challenge.check_creator(current_user) %>
         
@@ -94,8 +94,8 @@
           <li class="goal-items__item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
             <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
 
-            <%= link_to '', '#', 'data-bs-toggle' => 'modal', 'data-bs-target' => "#exampleModal#{goal.id}",
-                          class: 'btn-close position-absolute' if goal.user == current_user %>
+            <%= link_to '', '#', data: { bs_toggle: 'modal', bs_target: "#exampleModal#{goal.id}"},
+                                class: 'btn-close position-absolute' if goal.user == current_user %>
 
             <%= render 'layouts/confirmation_dialog', item: goal,
                        path: destroy_goal_challenge_path(@challenge, goal_id: goal.id),
@@ -104,8 +104,13 @@
             <div class="goal-items__progress fw-bold fs-4" style="background:
               radial-gradient(closest-side, white 79%, transparent 80%),
                 conic-gradient(rgba(9, 194, 30, 1) <%= percentage %>%, rgba(39, 245, 63, 0.21) 0%);">
-              <span><%= percentage %>%</span></div>
-            <div class="goal-items__user text-center mt-1 fw-medium"><%= goal.user.name %></div>
+              <span><%= percentage %>%</span>
+            </div>
+            
+            <div class="goal-items__user text-center mt-1 fw-medium">
+              <%= icon('star-fill', style: 'color: coral;') if @challenge.check_creator(goal.user) %>
+              <%= goal.user.name %>
+            </div>
 
             <div class="goal-items__tasks text-center mt-1">
               <% if goal.user == current_user %>

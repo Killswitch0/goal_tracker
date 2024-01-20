@@ -328,6 +328,9 @@ en:
     destroy:
       success: 'Challenge has been deleted successfully.'
       fail: 'Challenge was not deleted.'
+    destroy_user:
+      success: 'User has been deleted from challenge successfully.'
+      fail: 'User was not deleted.'
     create_invitation:
       success: 'Invitation sent successfully to user %{invited_user}.'
       already: 'User has already received an invitation.'
