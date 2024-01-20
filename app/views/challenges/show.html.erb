@@ -32,7 +32,8 @@
       </div>
 
       <div class= "buttons-list__right">
-        <%= link_to '', data: { bs_toggle: "modal", bs_target: "#exampleModal#{@challenge.id}" },
+        <%= link_to leave_challenge_path(@challenge),
+                         data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('leave_challenge') },
                          class: 'mt-2 btn btn-sm btn-warning link-icon' do %>
           <%= icon('box-arrow-right') %>
           <%= t('leave') %>
@@ -94,12 +95,9 @@
           <li class="goal-items__item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
             <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
 
-            <%= link_to '', '#', data: { bs_toggle: 'modal', bs_target: "#exampleModal#{goal.id}"},
-                                class: 'btn-close position-absolute' if goal.user == current_user %>
-
-            <%= render 'layouts/confirmation_dialog', item: goal,
-                       path: destroy_goal_challenge_path(@challenge, goal_id: goal.id),
-                       action_name: t('delete') %>
+            <%= link_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
+                            data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_goal_name', name: goal.name)},
+                            class: 'btn-close position-absolute' if goal.user == current_user %>
 
             <div class="goal-items__progress fw-bold fs-4" style="background:
               radial-gradient(closest-side, white 79%, transparent 80%),
@@ -137,7 +135,8 @@
 </section>
 
 <%= render 'members_canvas', members: @members, challenge: @challenge %>
-<%= render 'layouts/confirmation_dialog', item: @challenge, path: leave_challenge_path(@challenge), action_name: t('leave_challenge') %>
+
+
 
 
 

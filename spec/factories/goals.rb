@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :goal do
-    name { "Exercise regularly" }
+    name { 'My goal is the best' }
     description { "MyString" }
     deadline { Date.today + 3.days }
     color { "Red" }

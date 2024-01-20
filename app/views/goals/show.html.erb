@@ -35,8 +35,8 @@
     <div class="col-md-8 offset-md-2 text-center d-flex justify-content-evenly">
       <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
       
-      <%= link_to @goal, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?',
-       bs_toggle: "modal", bs_target: "#exampleModal#{@goal.id}" }, class: 'btn btn-danger btn-sm' do %>
+      <%= link_to @goal, data: { turbo_method: :delete, turbo_confirm: t('sure'),
+       modal_title: t('delete_goal') }, class: 'btn btn-danger btn-sm', id: "Goal_#{@goal.id}" do %>
         <%= icon('trash3') %>
       <% end %>
       
@@ -167,8 +167,6 @@
     </div>
   </div>
 </div>
-
-<%= render 'layouts/confirmation_dialog', item: @goal, action_name: t('delete') %>
 
 
 

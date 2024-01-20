@@ -230,6 +230,7 @@ en:
   create_goal: 'Create Goal'
   add_goal: 'Add Goal'
   delete_goal: 'Delete Goal'
+  delete_goal_name: 'Delete goal «%{name}»'
   back_to_goal: 'Back to Goal'
   back_to_goals: 'Back to Goals'
   complete_goal: 'Complete'
@@ -279,6 +280,7 @@ en:
   new_challenge: 'New Challenge'
   leave_challenge: 'Leave challenge'
   delete_challenge: 'Delete challenge'
+  delete_user_challenge: 'Delete %{name} from Challenge'
   challenge_end: 'Challenge end'
   target:
     one: '1 target'

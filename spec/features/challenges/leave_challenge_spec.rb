@@ -13,7 +13,7 @@ RSpec.feature "LeaveChallenges" do
       scenario 'Authenticated user try to leave challenges' do
         visit challenge_path(challenge)
         find('[@id="challenges-show"]/div[1]/div[3]/div[2]/a').click
-        find("[@id='exampleModal#{challenge.id}']/div/div/div[3]/a").click
+        find("[@id='confirmButton']").click
 
         expect(page).to have_content I18n.t('challenges.leave.success')
       end
