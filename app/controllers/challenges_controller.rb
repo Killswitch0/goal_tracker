@@ -56,13 +56,15 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.new(challenge_params)
     @challenge.user_id = current_user.id
 
-    if @challenge.save
-      ChallengeUser.create(user: current_user, challenge: @challenge, confirm: true)
-      flash[:noticed] = t('.success')
-      redirect_to challenge_path(@challenge)
-    else
-      flash[:danger] = t('.fail')
-      render :new
+    respond_to do |format|
+      if @challenge.save
+        ChallengeUser.create(user: current_user, challenge: @challenge, confirm: true)
+        flash[:noticed] = t('.success')
+        format.html { redirect_to challenge_path(@challenge) }
+      else
+        flash[:danger] = t('.fail')
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -88,28 +90,27 @@ class ChallengesController < ApplicationController
   def add_goal
     @challenge_goal = ChallengeGoal.new
 
-    @challenge_user = ChallengeUser
-      .find_by(
-        challenge: @challenge,
-        user: current_user
-      )
+    @challenge_user = ChallengeUser.find_by(
+      challenge: @challenge,
+      user: current_user
+    )
 
     return unless request.post?
 
-    @challenge_goal = current_user
-      .challenge_goals
-      .build(
-        goal_id: params[:goal_id],
-        challenge: @challenge,
-        challenge_user: @challenge_user
-      )
+    @challenge_goal = current_user.challenge_goals.build(
+      goal_id: params[:goal_id],
+      challenge: @challenge,
+      challenge_user: @challenge_user
+    )
 
-    if @challenge_goal.save
-      flash[:noticed] = t('.success')
-      redirect_to @challenge
-    else
-      flash[:danger] = t('.fail')
-      render :add_goal
+    respond_to do |format|
+      if @challenge_goal.save
+        flash[:noticed] = t('.success')
+        format.html { redirect_to @challenge }
+      else
+        flash[:danger] = t('.fail')
+        format.html { render :add_goal, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -179,12 +180,11 @@ class ChallengesController < ApplicationController
   #----------------------------------------------------------------------------
   def destroy_goal
     @goal = Goal.find(params[:goal_id])
-    @challenge_goal = ChallengeGoal
-      .find_by(
-        challenge_id: @challenge,
-        user: current_user,
-        goal_id: @goal
-      )
+    @challenge_goal = ChallengeGoal.find_by(
+      challenge_id: @challenge,
+      user: current_user,
+      goal_id: @goal
+    )
 
     if @challenge_goal
       @challenge_goal.destroy

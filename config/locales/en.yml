@@ -45,6 +45,7 @@ en:
           min_period: 'period should be at least 1 day.'
         challenge_goal:
           one_goal: 'can add only one goal.'
+          challenge_ended: "can't add to completed challenge"
         user:
           blank: "can't be blank"
           taken: 'has already been taken'
