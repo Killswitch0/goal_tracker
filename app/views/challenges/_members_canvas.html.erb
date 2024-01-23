@@ -35,8 +35,8 @@
 
             <td class="text-center fs-4 <%= challenge.check_creator(current_user) ? '' : 'hide'%>">
               <%= link_to destroy_user_challenge_path(challenge, user_id: user),
-               data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_user_challenge', name: user.name) }, 
-               class: 'icon-link', id: 'icon-link' do %>
+                          data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_user_challenge', name: user.name) }, 
+                          class: 'icon-link', id: 'icon-link' do %>
                 <%= icon('person-dash-fill danger-icon') %>
               <% end unless challenge.check_creator(user) %>
             </td>

@@ -28,7 +28,7 @@
     <%= date %>
     <% habits_for.each do |habit| %>
       <% if habit.completion_dates.any? { |cd| cd.date == date.to_date } %>
-        <div class="completed border border-dark"
+        <div class="completed"
              style="background: linear-gradient(
                to right,
                  <%= habit.goal.color %> 7%,
@@ -36,7 +36,7 @@
           <%= habit.name %>
         </div>
       <% else %>
-        <div class="uncompleted border border-dark"
+        <div class="uncompleted"
              style="background: linear-gradient(
                90deg,
                  <%= habit.goal.color %> 7%,

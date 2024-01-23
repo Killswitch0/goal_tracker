@@ -27,3 +27,14 @@ a.hover-link:hover::before {
 
 .underline:hover { text-decoration: none !important; }
 
+
+/// Bold hover
+a.bold-hover:hover {
+  font-weight: 700;
+}
+
+a.bold-active {
+  font-weight: 700;
+}
+
+

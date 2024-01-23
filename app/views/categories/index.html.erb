@@ -1,32 +1,40 @@
-<div class="categories-wrapper mt-3">
-  <div class="actions-items">
-    <div class="actions-items__header">
-      <div class="actions-items__header__title"><%= t('all_categories') %></div>
-      <%= link_to t('new_category'), new_category_path,
-                  class: 'btn btn-primary btn-sm new-task' %>
-    </div>
-
-    <div class="divider"></div>
-
-    <ul class="action-list">
-      <% if @categories.present? %>
-        <% @categories.each do |category| %>
-          <li class="action-list__item">
-            <span class="fw-bold"><%= category.name %></span>
-            <div class="">
-              <%= link_to t('edit'), edit_category_path(category),
-                          class: 'btn btn-primary btn-sm' %>
-              <%= link_to t('delete'), category,
-                          data: { turbo_method: :delete, turbo_confirm: t('sure') },
-                          class: 'btn btn-danger btn-sm' %>
-            </div>
-          </li>
+<div id="categories-index">
+  <div class="categories-wrapper mt-3">
+    <div class="action-items">
+      <div class="action-items__header">
+        <div class="action-items__title"><%= t('all_categories') %></div>
+        <%= link_to new_category_path,
+                    class: 'btn btn-primary btn-sm new-task link-icon' do %>
+          <%= icon('plus-lg') %>
+          <%= t('new_category') %>
         <% end %>
-      <% end %>
-    </ul>
-  </div>
-</div>
+      </div>
 
-<div class="buttons-list mt-3">
-  <%= link_to t('back_to_goals'), goals_path, class: 'btn btn-secondary' %>
+      <div class="divider"></div>
+
+      <ul class="action-list">
+        <% if @categories.present? %>
+          <% @categories.each do |category| %>
+            <li class="action-list__item">
+              <span class="fw-bold"><%= category.name %></span>
+              <div class="action-list__links">
+                <%= link_to edit_category_path(category),
+                            class: 'icon-link' do %>
+                  <%= icon('pencil-square primary-icon') %>
+                <% end %>
+                <%= link_to category,
+                            data: { turbo_method: :delete, turbo_confirm: t('sure') } do %>
+                  <%= icon('trash danger-icon') %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="buttons-list mt-3">
+    <%= link_to t('back_to_goals'), goals_path, class: 'btn btn-secondary' %>
+  </div>
 </div>

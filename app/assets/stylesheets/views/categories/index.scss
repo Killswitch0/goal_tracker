@@ -1,15 +1,14 @@
-.categories-wrapper {
-  &__item > a { color: inherit; }
+#categories-index {
+  .categories-wrapper {
+    display: flex;
+    justify-content: center;
 
-  .categories-list {
-    &__item {
-      a { color: inherit; }
-    } 
-  }
-
-  .actions-items {
-    li.action-item {
-      padding: 5px 10px;
+    .action-items { border-radius: 1rem; }
+  
+    .action-list {
+      &__item {
+        padding-inline: 10px;
+      }
     }
   }
 }

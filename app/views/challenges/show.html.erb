@@ -68,16 +68,16 @@
     <div class="buttons-list center">
       <%= link_to challenge_path(@challenge, filter: "#{current_user.id}"),
                   class: "link-icon #{params[:filter] == "#{current_user.id}" ?
-                              'btn btn-primary btn-sm' :
-                              'btn btn-outline-primary btn-sm'}" do %>
+                            'btn btn-primary btn-sm' :
+                            'btn btn-outline-primary btn-sm'}" do %>
         <%= icon('person-circle') %>
         <%= t('my_goals') %>
       <% end %>
       
       <%= link_to challenge_path(@challenge),
                   class: "link-icon mx-3 #{params[:filter].nil? ?
-                              'btn btn-primary btn-sm' :
-                              'btn btn-outline-primary btn-sm'}" do %>
+                            'btn btn-primary btn-sm' :
+                            'btn btn-outline-primary btn-sm'}" do %>
         <%= icon('list') %>
         <%= t('all_goals')%>
       <% end %>

@@ -45,7 +45,10 @@
       </div>
 
       <div class="new_goal">
-        <%= link_to t('new_goal'), new_goal_path, class: 'btn btn-primary btn-lg' %>
+        <%= link_to new_goal_path, class: 'btn btn-primary btn-lg link-icon' do %>
+          <%= icon('plus-lg') %>
+          <%= t('new_goal') %>
+        <% end %>
       </div>
     </div>
 

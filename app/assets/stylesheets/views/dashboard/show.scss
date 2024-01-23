@@ -2,6 +2,7 @@
   .actions-wrapper {
     display: flex;
     justify-content: space-between;
+
   }
 
   /// Goals ///
@@ -121,25 +122,25 @@
       i.bi { font-size: 17px; }
     }
   }
-}
 
-
-.action-items {
-  border-radius: 1rem;
-  height: 650px;
-
-  .action-list {
-    &__item {
-      background-color: #DBE2E6;
-      font-weight: 500;
-
-      span {
-        text-align: center;
-        padding-left: 15px;
+  .action-items {
+    border-radius: 1rem;
+    height: 650px;
+  
+    .action-list {
+      &__item {
+        background-color: #DBE2E6;
+        font-weight: 500;
+  
+        span { text-align: center; }
       }
     }
   }
 }
+
+
+
+
 
 
 /// Scrollbar ///

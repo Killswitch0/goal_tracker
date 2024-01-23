@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_action :redirect_user
-  before_action :set_goal, only: %i[create_invitation confirm_invitation decline_invitation show update destroy]
+  before_action :set_goal, only: %i[create_invitation confirm_invitation decline_invitation show edit update destroy]
 
   helper_method :sort_column, :sort_direction
 
