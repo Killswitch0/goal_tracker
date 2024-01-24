@@ -99,11 +99,10 @@
                             data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_goal_name', name: goal.name)},
                             class: 'btn-close position-absolute' if goal.user == current_user %>
 
-            <div class="goal-items__progress fw-bold fs-4" style="background:
-              radial-gradient(closest-side, white 79%, transparent 80%),
-                conic-gradient(rgba(9, 194, 30, 1) <%= percentage %>%, rgba(39, 245, 63, 0.21) 0%);">
+            <%= tag.div data: { controller: 'challenges', percentage: percentage },
+                        class: 'goal-items__progress fw-bold fs-4' do %>
               <span><%= percentage %>%</span>
-            </div>
+            <% end %>
             
             <div class="goal-items__user text-center mt-1 fw-medium">
               <%= icon('star-fill', style: 'color: coral;') if @challenge.check_creator(goal.user) %>
