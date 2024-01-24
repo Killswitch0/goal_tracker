@@ -280,7 +280,9 @@ en:
   challenge: 'Challenge'
   new_challenge: 'New Challenge'
   leave_challenge: 'Leave challenge'
+  leave_challenge_name: 'Leave challenge «%{name}»'
   delete_challenge: 'Delete challenge'
+  delete_challenge_name: 'Delete challenge «%{name}»'
   delete_user_challenge: 'Delete %{name} from Challenge'
   challenge_end: 'Challenge end'
   target:

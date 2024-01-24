@@ -28,11 +28,14 @@
                   <td><%= user_avatar(challenge.user) %></td>
                   <td><%= challenge.user.name %></td>
                   <td><%= link_to challenge.name.truncate(17), challenge, style: "text-decoration: none", class: 'hover-link' %></td>
-                  <td><%= confirmation_dialog_button('leave', challenge.id, action_id: 'Leave', klass: 'btn btn-sm btn-warning') %></td>
-                  <td><%= confirmation_dialog_button('delete', challenge.id, action_id: 'Delete', klass: 'btn btn-sm btn-danger') %></td>
-
-                  <%= render 'layouts/confirmation_dialog', item: challenge, path: leave_challenge_path(challenge), action_id: 'Leave', action_name: t('leave_challenge') %>
-                  <%= render 'layouts/confirmation_dialog', item: challenge, action_id: 'Delete', action_name: t('delete_challenge') %>
+                  <td><%= link_to t('leave'), leave_challenge_path(challenge), 
+                                              data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('leave_challenge_name', name: challenge.name) },
+                                              id: "leave-challenge_#{challenge.id}",
+                                              class: 'btn btn-sm btn-warning' %></td>
+                  <td><%= link_to t('delete'), challenge, 
+                                              data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_challenge_name', name: challenge.name) },
+                                              id: "destroy-challenge_#{challenge.id}",
+                                              class: 'btn btn-sm btn-danger' %></td>
               <% end %>
               </tr>
             <% end %>
@@ -46,7 +49,8 @@
             <%= t('new_challenge') %>
           <% end %>
           
-          <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" }, class: 'btn btn-primary position-relative link-icon' do %>
+          <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" },
+                          class: 'btn btn-primary position-relative link-icon' do %>
             <%= icon('list') %>
             <%= t('invites') %>
             <% if @invites.present? %>
