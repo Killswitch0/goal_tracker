@@ -8,7 +8,7 @@ import "chartkick/chart.js"
 Turbo.setConfirmMethod(() => {
   return new Promise((resolve, reject) => {
     let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    let elementData =  document.activeElement.dataset
+    let elementData = document.activeElement.dataset
 
     document.querySelector('.turbo-confirm #exampleModalLabel').innerText = elementData.modalTitle;
     document.querySelector('.turbo-confirm .modal-body').innerText = elementData.turboConfirm;

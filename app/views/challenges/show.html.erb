@@ -33,7 +33,7 @@
 
       <div class= "buttons-list__right">
         <%= link_to leave_challenge_path(@challenge),
-                    data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('leave_challenge') },
+                    data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('leave_challenge_name', name: @challenge.name) },
                     class: 'mt-2 btn btn-sm btn-warning link-icon' do %>
           <%= icon('box-arrow-right') %>
           <%= t('leave') %>
