@@ -32,7 +32,7 @@ RSpec.feature "CreateGoals" do
       ### delete ###
       visit goal_path(goal)
 
-      find('[@id="Goal_19"]').click
+      find("[@id='goal_#{goal.id}']").click
       find('[@id="confirmButton"]').click
 
       expect(page).to have_content I18n.t('goals.destroy.success')

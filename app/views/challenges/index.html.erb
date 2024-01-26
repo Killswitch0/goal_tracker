@@ -28,16 +28,19 @@
                   <td><%= user_avatar(challenge.user) %></td>
                   <td><%= challenge.user.name %></td>
                   <td><%= link_to challenge.name.truncate(17), challenge, style: "text-decoration: none", class: 'hover-link' %></td>
-                  <td><%= link_to t('leave'), leave_challenge_path(challenge), 
-                                              data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('leave_challenge_name', name: challenge.name) },
-                                              id: "leave-challenge_#{challenge.id}",
-                                              class: 'btn btn-sm btn-warning' %></td>
-                  <td><%= link_to t('delete'), challenge, 
-                                              data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_challenge_name', name: challenge.name) },
-                                              id: "destroy-challenge_#{challenge.id}",
-                                              class: 'btn btn-sm btn-danger' %></td>
+                  <td><%= delete_link_to t('leave'), leave_challenge_path(challenge), 
+                                                     title: 'leave_challenge_name',
+                                                     name: challenge.name,
+                                                     id: "leave-#{dom_id(challenge)}",
+                                                     class: 'btn btn-sm btn-warning' %></td>
+
+                  <td><%= delete_link_to t('delete'), challenge,
+                                                      title: 'delete_challenge_name',
+                                                      name: challenge.name,
+                                                      id: "destroy-#{dom_id(challenge)}",
+                                                      class: 'btn btn-sm btn-danger' %></td>
+                </tr>
               <% end %>
-              </tr>
             <% end %>
             </tbody>
           </table>

@@ -30,7 +30,7 @@
       <% completion_date = habit.completion_dates.find { |cd| cd.date == date.to_date } %>
       <% completed = !completion_date.nil? %>
 
-      <%= tag.div habit.name, data: { complete: completed, goal_marker: habit.goal.color } %>
+      <%= tag.div tag.span(habit.name), data: { complete: completed, goal_marker: habit.goal.color } %>
     <% end %>
   <% end %>
 </div>

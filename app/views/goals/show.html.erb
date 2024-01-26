@@ -31,8 +31,9 @@
           <%= icon('pencil') %>
         <% end %>
 
-        <%= link_to @goal, data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_goal') },
-                           class: 'btn btn-danger btn-sm', id: "Goal_#{@goal.id}" do %>
+        <%= delete_link_to @goal, title: 'delete_goal',
+                                  id: dom_id(@goal),
+                                  class: 'btn btn-danger btn-sm' do %>
           <%= icon('trash3') %>
         <% end %>
       </div>
