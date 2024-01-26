@@ -32,9 +32,10 @@
       </div>
 
       <div class= "buttons-list__right">
-        <%= link_to leave_challenge_path(@challenge),
-                    data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('leave_challenge_name', name: @challenge.name) },
-                    class: 'mt-2 btn btn-sm btn-warning link-icon' do %>
+        <%= delete_link_to leave_challenge_path(@challenge),
+                           title: 'leave_challenge_name',
+                           name: @challenge.name,
+                           class: 'mt-2 btn btn-sm btn-warning link-icon' do %>
           <%= icon('box-arrow-right') %>
           <%= t('leave') %>
         <% end %>
@@ -66,18 +67,12 @@
     </div>
 
     <div class="buttons-list center">
-      <%= link_to challenge_path(@challenge, filter: "#{current_user.id}"),
-                  class: "link-icon #{params[:filter] == "#{current_user.id}" ?
-                            'btn btn-primary btn-sm' :
-                            'btn btn-outline-primary btn-sm'}" do %>
+      <%= active_link_to challenge_path(@challenge, filter: "#{current_user.id}") do %>
         <%= icon('person-circle') %>
         <%= t('my_goals') %>
       <% end %>
-      
-      <%= link_to challenge_path(@challenge),
-                  class: "link-icon mx-3 #{params[:filter].nil? ?
-                            'btn btn-primary btn-sm' :
-                            'btn btn-outline-primary btn-sm'}" do %>
+
+      <%= active_link_to challenge_path(@challenge), class: 'mx-3' do %>
         <%= icon('list') %>
         <%= t('all_goals')%>
       <% end %>
@@ -94,10 +89,11 @@
 
           <li class="goal-items__item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
             <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
-
-            <%= link_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
-                            data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_goal_name', name: goal.name)},
-                            class: 'btn-close position-absolute' if goal.user == current_user %>
+                          
+            <%= delete_link_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
+                                   title: 'delete_goal_name',
+                                   name: goal.name,
+                                   class: 'btn-close position-absolute' if goal.user == current_user %>
 
             <%= tag.div data: { controller: 'challenges', percentage: percentage },
                         class: 'goal-items__progress fw-bold fs-4' do %>

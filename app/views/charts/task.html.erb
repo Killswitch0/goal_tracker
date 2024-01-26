@@ -7,17 +7,17 @@
       </h2>
     </div>
 
-    <div class="chart-buttons text-center mt-3">
+    <div class="buttons-list center mt-3">
       <% if @goal %>
-        <%= chart_link_to t('date.day'), goal_task_chart_path(@goal, period: 'day'), 'day' %>
-        <%= chart_link_to t('date.week'), goal_task_chart_path(@goal, period: 'week'), 'week' %>
-        <%= chart_link_to t('date.month'), goal_task_chart_path(@goal, period: 'month'), 'month' %>
+        <%= active_link_to t('date.day'), goal_task_chart_path(@goal, period: 'day') %>
+        <%= active_link_to t('date.week'), goal_task_chart_path(@goal, period: 'week'), class: 'mx-1' %>
+        <%= active_link_to t('date.month'), goal_task_chart_path(@goal, period: 'month') %>
 
         <%= link_to t('switch_to_habits'), goal_habit_chart_path(@goal, period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
       <% else %>
-        <%= chart_link_to t('date.day'), task_chart_path(period: 'day'), 'day' %>
-        <%= chart_link_to t('date.week'), task_chart_path(period: 'week'), 'week' %>
-        <%= chart_link_to t('date.month'), task_chart_path(period: 'month'), 'month' %>
+        <%= active_link_to t('date.day'), task_chart_path(period: 'day') %>
+        <%= active_link_to t('date.week'), task_chart_path(period: 'week'), class: 'mx-1' %>
+        <%= active_link_to t('date.month'), task_chart_path(period: 'month') %>
 
         <%= link_to t('show_habits'), habit_chart_path(period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
       <% end %>
