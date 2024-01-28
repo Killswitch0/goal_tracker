@@ -42,13 +42,19 @@
 
   <div class="completion-wrapper">
     <div class="col-sm-12 mb-5 table-main <%= 'completed' if @goal.habits_streak? %>">
-      <div class="table-header">
-        <h2 class="text-center">
+      <div class="table-header list">
+        <h2>
           <%= t('all_habits').split.last.capitalize %>
-          <%= habits_completed_for(@goal).first %>
-          <%= t('of') %>
-          <%= habits_completed_for(@goal).last %>
         </h2>
+
+        <div class="table-header__info">
+          <div class="vr"></div>
+
+          <%= t('done') %>
+          <span><%= habits_completed_for(@goal).first %></span>
+          /
+          <%= habits_completed_for(@goal).last %>
+        </div>
       </div>
 
       <div class="table-wrapper">
@@ -102,13 +108,19 @@
     </div>
 
     <div class="col-sm-12 table-main <%= 'completed' if @goal.tasks_streak? %>">
-      <div class="table-header">
-        <h2 class="text-center">
+      <div class="table-header list">
+        <h2>
           <%= t('all_tasks').split.last.capitalize %>
-          <%= completed_for(@goal).first %>
-          <%= t('of') %>
-          <%= completed_for(@goal).second %>
         </h2>
+
+        <div class="table-header__info">
+          <div class="vr"></div>
+
+          <%= t('done') %>
+          <span><%= completed_for(@goal).first %></span>
+          /
+          <%= completed_for(@goal).last %>
+        </div>
       </div>
 
       <div class="table-wrapper">
@@ -143,7 +155,7 @@
           </table>
         </section>
 
-        <div class="buttons-list mb-3">
+        <div class="buttons-list">
           <%= link_to new_goal_task_path(@goal),
                       class: "mt-2 btn btn-primary" do %>
             <%= icon('plus-lg') %>

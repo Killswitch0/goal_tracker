@@ -66,6 +66,7 @@ tbody tr:nth-child(even) {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   .links {
     padding-inline: 11px;
