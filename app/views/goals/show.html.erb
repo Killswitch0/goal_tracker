@@ -14,12 +14,21 @@
       <dd class="col-sm-8 px-5"><%= l(@goal.deadline, format: :long).split(',').first %> </dd>
       <dt class="col-sm-4"><%= t('days_left.base') %>:</dt>
       <dd class="col-sm-8 px-5"><%= days_left(@goal).zero? ? 'Overdue' : days_left(@goal) %></dd>
+      <dt class="col-sm-4"><%= t('progress')%>:</dt>
+      <dd class="col-sm-8 px-5">
+        <div class="completed-info">
+          <% percentage = calculate_tasks(goal: @goal, user: @goal.user) %>
+          <%= tag.div tag.span("#{percentage}%"), data: { controller: 'goals', percentage: percentage },
+                        class: 'completed-info__progress' %>
+        </div>
+      </dd>
       <% challenge = @goal.goal_in_challenge&.name.present? %>
       <% if challenge %>
         <dt class="col-sm-4"><%= t('in_challenge') %>:</dt>
         <dd class="col-sm-8 px-5"><%= link_to "#{@goal.goal_in_challenge&.name}", @goal.goal_in_challenge, class: 'hover-link underline' %></dd>
       <% end %>
     </dl>
+
 
     <div class="buttons-list evenly">
       <div class="buttons-list__left">

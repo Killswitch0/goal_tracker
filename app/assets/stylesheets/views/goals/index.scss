@@ -71,6 +71,11 @@
     margin-inline: auto;
     width: unset;
     background-color: $third-color;
+
+    
+    .table-header.list {
+      @include table-list-header;
+    }
   }
 }
 

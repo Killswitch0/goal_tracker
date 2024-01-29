@@ -7,12 +7,15 @@
     <div class="goals-wrapper col-sm-12 col-md-12 col-lg-8 col-xxl-8">
       <div class="table-main">
         <div class="table-wrapper">
-          <div class="table-header">
-            <h2 class="text-center">
+          <div class="table-header list">
+            <h2>
               <%= t('all_goals') %>
-              (<%= goals_complete(@goals) %>
-              <%= t('done').downcase %>)
             </h2>
+
+            <div class="table-header__info">
+              <div class="vr"></div>
+              <%= goals_completed(@goals) %>   
+            </div>
           </div>
 
           <%= render 'layouts/search', path: goals_path %>
