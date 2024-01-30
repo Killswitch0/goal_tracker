@@ -1,6 +1,4 @@
 module ApplicationHelper
-  include BootstrapHelper
-
   def link_with_icon(icon_class = nil, path = nil, text = nil, **options, &)
     link_to "#{icon(icon_class)}#{t(text).capitalize if text}".html_safe, path, options, &
   end
