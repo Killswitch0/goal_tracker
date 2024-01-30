@@ -8,6 +8,6 @@ module HabitsHelper
   def habits_completed_for(target)
     completed = target.habits.completed_today.count
     all = target.habits.count
-    [completed, all]
+    "#{t('done')} #{content_tag(:span, completed, class: 'completed-count')} / #{all}".html_safe
   end
 end

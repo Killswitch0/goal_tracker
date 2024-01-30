@@ -47,10 +47,7 @@
         </section>
 
         <div class="buttons-list">
-          <%= link_to new_challenge_path, class: 'btn btn-primary link-icon' do %>
-            <%= icon('plus-lg') %>
-            <%= t('new_challenge') %>
-          <% end %>
+          <%= link_with_icon 'plus-lg', new_challenge_path, 'new_challenge', class: 'btn btn-primary link-icon' %>
           
           <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" },
                           class: 'btn btn-primary position-relative link-icon' do %>
@@ -89,7 +86,7 @@
           <% @invites.each_with_index do |invite, index| %>
             <tr>
               <% if invite.confirm? %>
-                No notifications yet
+                No notifications yet 
               <% else %>
               <tr>
                 <th scope="row"><%= index + 1 %></th>
@@ -105,7 +102,6 @@
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
 </div>

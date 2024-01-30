@@ -58,11 +58,7 @@
 
         <div class="table-header__info">
           <div class="vr"></div>
-
-          <%= t('done') %>
-          <span><%= habits_completed_for(@goal).first %></span>
-          /
-          <%= habits_completed_for(@goal).last %>
+          <%= habits_completed_for(@goal) %>
         </div>
       </div>
 
@@ -124,11 +120,7 @@
 
         <div class="table-header__info">
           <div class="vr"></div>
-
-          <%= t('done') %>
-          <span><%= completed_for(@goal).first %></span>
-          /
-          <%= completed_for(@goal).last %>
+          <%= tasks_completed_for(@goal) %>
         </div>
       </div>
 

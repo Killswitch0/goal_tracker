@@ -1,7 +1,11 @@
 module ApplicationHelper
   include BootstrapHelper
 
-  def delete_link_to(text = nil, path = nil, **options, &)
+  def link_with_icon(icon_class = nil, path = nil, text = nil, **options, &)
+    link_to "#{icon(icon_class)}#{t(text).capitalize if text}".html_safe, path, options, &
+  end
+
+  def delete_link_to(text = nil, path = nil, icon_class = nil, **options, &)
     link = block_given? ? text : path
 
     data = { data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t("#{options[:title]}", name: options[:name]) } }
@@ -10,7 +14,7 @@ module ApplicationHelper
     if block_given?
       link_to(link, options, &)
     else
-      link_to text, path, options
+      link_to "#{icon(icon_class) if icon_class}#{t(text) unless text.empty?}".html_safe, link, options
     end
   end
 

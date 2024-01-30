@@ -1,13 +1,7 @@
 <div class="categories-wrapper">
   <div class="categories-wrapper__new">
-    <%= link_to new_category_path, class: 'btn btn-primary btn-sm link-icon' do %>
-      <%= icon('plus-lg') %>
-      <%= t('new') %>
-    <% end %>
-    <%= link_to categories_path, class: 'btn btn-primary btn-sm link-icon' do %>
-      <%= icon('list') %>
-      <%= t('all').capitalize %>
-    <% end %>
+    <%= link_with_icon 'plus-lg', new_category_path, 'new', class: 'btn btn-primary btn-sm link-icon' %>
+    <%= link_with_icon 'list', categories_path, 'all', class: 'btn btn-primary btn-sm link-icon' %>
   </div>
   <div class="divider"></div>
 

@@ -50,11 +50,7 @@
           </section>
 
           <div class="buttons-list">
-            <%= link_to new_goal_path, class: 'btn btn-primary link-icon' do %>
-              <%= icon('plus-lg') %>
-              <span><%= t('add_goal') %></span>
-            <% end %>
-            
+            <%= link_with_icon 'plus-lg', new_goal_path, 'add_goal', class: 'btn btn-primary link-icon' %>
             <%= canvas_button 'all_categories', icon: 'list', klass: 'mobile-show link-icon' %>
           </div>
         </div>

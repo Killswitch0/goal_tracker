@@ -22,6 +22,7 @@
                             class: 'icon-link' do %>
                   <%= icon('pencil-square primary-icon') %>
                 <% end %>
+
                 <%= link_to category,
                             data: { turbo_method: :delete, turbo_confirm: t('sure') } do %>
                   <%= icon('trash danger-icon') %>
