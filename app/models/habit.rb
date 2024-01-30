@@ -84,6 +84,16 @@ class Habit < ApplicationRecord
     .uniq
   }
 
+  scope :top_habits_by_completions, -> (user) {
+    joins(:completion_dates)
+    .where(
+      'habits.user_id = ? AND EXTRACT(month FROM completion_dates.date) = ?',
+       user, Date.today.month
+    )
+    .order(completion_dates: :desc)
+    .uniq   
+  }
+
   # For Streakable concern
   def completed_count
     goal.habits.completed_today.count
