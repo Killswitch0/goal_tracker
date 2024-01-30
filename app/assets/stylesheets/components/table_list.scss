@@ -1,5 +1,5 @@
 div.table-main {
-  width: 50vh;
+  width: 67vh;
   height: 70vh;
   background-color: #fff5;
   box-shadow: 0 .4rem .8rem #0005;
@@ -26,6 +26,10 @@ table, th, td {
   padding: .4rem 1rem;
   border-radius: 6rem;
   align-items: center;
+}
+
+.table-header.list {
+  @include table-list-header;
 }
 
 .table-header h2 {

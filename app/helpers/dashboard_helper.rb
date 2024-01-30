@@ -7,6 +7,14 @@ module DashboardHelper
     calculate_percentage(completed_tasks, 'tasks', goal:, user:)
   end
 
+  def calculate_goals
+    goals = current_user.goals
+    completed = goals.where(complete: true).count
+    all = goals.count
+
+    calculate_percentage(completed, 'goals', user: current_user)
+  end
+
   def calculate_habits
     completed_habits = current_user.habits.completed_today.count
     calculate_percentage(completed_habits, 'habits', user: current_user)

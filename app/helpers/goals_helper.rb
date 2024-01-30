@@ -84,9 +84,15 @@ module GoalsHelper
     end
   end
 
-  def goals_completed(goals)
-    completed = goals.where(complete: true).count
-    all = goals.count
+  def goals_completed(goals = nil, user: nil)
+    unless goals.nil?
+      completed = goals.where(complete: true).count
+      all = goals.count
+    else
+      completed = user.goals.where(complete: true).count
+      all = user.goals.count
+    end
+    
     "#{t('done')} #{content_tag(:span, completed, class: 'completed-count')} / #{all}".html_safe
   end
 end

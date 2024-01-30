@@ -14,7 +14,7 @@ module ApplicationHelper
     if block_given?
       link_to(link, options, &)
     else
-      link_to "#{icon(icon_class) if icon_class}#{t(text) unless text.empty?}".html_safe, link, options
+      link_to "#{icon(icon_class)}#{t(text) unless text.empty?}".html_safe, link, options
     end
   end
 

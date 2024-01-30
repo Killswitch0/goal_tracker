@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-medium">
         <li><%= link_to t('navigation.dashboard').upcase, dashboard_path,
-                        class: "nav-link #{'active' if current_page?(dashboard_path)}" %></li>
+                        class: "nav-link #{'active' if current_page?(dashboard_path)}" %></li>  
         <li><%= link_to t('navigation.goals').upcase, goals_path,
                         class: "nav-link #{'active' if current_page?(goals_path)}" %></li>
         <li><%= link_to t('navigation.challenges').upcase, challenges_path,

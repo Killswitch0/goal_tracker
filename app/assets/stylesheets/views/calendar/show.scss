@@ -1,8 +1,13 @@
-#calendar-show {
+#calendar_show {
   background-color: $third-color;
   border-radius: 2rem;
   height: 100%;
   box-shadow: 0 .4rem .8rem #0005;
+  padding-inline: 0;
+
+  .calendar__body {
+    padding-inline: 12px;
+  }
 
   .table-body {
     background-color: #fff;

@@ -1,12 +1,12 @@
 <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 mt-5">
     <div class="card">
-      <div class="table-header">
-        <h2 class="text-center">
-          <%= t('new_challenge') %>
-        </h2>
-      </div>
-
       <div class="card-body">
+        <div class="table-header">
+          <h2 class="text-center">
+            <%= t('new_challenge') %>
+          </h2>
+        </div>
+
         <%= form_with(model: @challenge) do |f| %>
           <%= render 'shared/error_messages', resource: @challenge %>
 
