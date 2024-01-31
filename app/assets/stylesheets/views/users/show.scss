@@ -2,11 +2,14 @@
   display: flex;
   justify-content: center;
 
-  .user-wrapper {
+  .wrapper {
     background-color: $third-color;
-    height: 60vh;
+    border-radius: 2rem;
+  }
+
+  .user-wrapper {
+    height: fit-content;
     display: flex;
-    border-radius: 1rem;
 
     .user-profile {
       padding: 20px;
@@ -23,6 +26,8 @@
       &__email {
         font-size: 20px;
       }
+
+      &__edit { margin-top: 15px; }
     }
   }
 
@@ -36,12 +41,13 @@
     .goals-info, .tasks-info, .habits-info {
       padding: 10px;
       border: $header-color solid 2px;
-      width: 30vh;
-      height: 15vh;
+      width: 25vh;
+      height: fit-content;
       border-radius: 0.5rem;
 
       .goals-info__title, .tasks-info__title, .habits-info__title {
         font-weight: 500;
+        font-size: 20px;
       }
 
       .goals-statistics, .tasks-statistics {
@@ -62,9 +68,18 @@
     }
 
     .habits-info { 
-      height: 30vh;
+      height: fit-content;
       width: 60vh;
-      margin: auto;
+      margin: 20px auto 0;
+
+      &__title {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .habits-statistics {
+        &__chart { margin-top: 10px; }
+      }
      }
   }
 }

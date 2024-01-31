@@ -12,39 +12,24 @@
     <!--dropdown-menu-lg-end значит выравнивание выпадающего списка по левому краю-->
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
       <li>
-        <%= link_to new_category_path, class: "dropdown-item" do %>
-          <%= icon('journal-plus') %>
-          <%= t('new_category') %>
-        <% end %>
+        <%= link_with_icon 'person-vcard-fill', user_path(current_user), 'profile', class: "dropdown-item" %>
       </li>
       <li>
-        <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
-          <%= icon('pencil-square') %> 
-          <%= t('edit_account') %>
-        <% end %>
+        <%= link_with_icon 'pencil-square', edit_user_path(current_user), 'edit_account', class: "dropdown-item" %>
       </li>
       <li>
         <hr class="dropdown-divider">
-        <%= link_to logout_path, method: :delete, class: "dropdown-item" do %>
-          <%= icon('box-arrow-right') %>
-          <%= t('log_out') %>
-        <% end %>
+        <%= link_with_icon 'box-arrow-right', logout_path, 'log_out', method: :delete, class: "dropdown-item" %>
       </li>
       
     </ul>
   </li>
 <% else %>
   <li class="nav-item">
-    <%= link_to signup_path, class: "nav-link" do %>
-      <%= icon('person-add') %>
-      <%= t('authenticate.signup') %>
-    <% end %>
+    <%= link_with_icon 'person-add', signup_path, 'authenticate.signup', class: "nav-link" %>
   </li>
   <li class="nav-item">
-    <%= link_to login_path, class: "nav-link" do %>
-      <%= icon('box-arrow-in-right') %>
-      <%= t('authenticate.login') %>
-    <% end %>
+    <%= link_with_icon 'box-arrow-in-right', login_path, 'authenticate.login', class: "nav-link" %>
   </li>
 <% end %>
 

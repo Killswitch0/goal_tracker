@@ -220,6 +220,7 @@ en:
   edit_user: 'Edit User'
   new_user: 'New User'
   hello: 'Hello'
+  profile: 'Profile'
 
   # Views -> Form.
   #----------------------------------------------------------------------------

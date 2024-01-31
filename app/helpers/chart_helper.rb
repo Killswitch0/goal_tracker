@@ -1,5 +1,5 @@
 module ChartHelper
-  def set_chart(tasks = nil, habits = nil)
+  def set_chart(tasks = nil, habits = nil, height: '400px')
     period = { 
       'day' => :day,
       'week' => :week,
@@ -19,7 +19,7 @@ module ChartHelper
           }
         end
 
-        line_chart(tasks)
+        line_chart(tasks, height:, locale: I18n.locale)
       else
         line_chart tasks.group(:name).group_by_period(period, :complete_date).count
       end
@@ -34,7 +34,7 @@ module ChartHelper
         }
       end
 
-      line_chart(habits)
+      line_chart(habits, height:, locale: I18n.locale)
     end
   end
 

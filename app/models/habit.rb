@@ -88,10 +88,11 @@ class Habit < ApplicationRecord
     joins(:completion_dates)
     .where(
       'habits.user_id = ? AND EXTRACT(month FROM completion_dates.date) = ?',
-       user, Date.today.month
+      user, Date.today.month
     )
-    .order(completion_dates: :desc)
-    .uniq   
+    .group('habits.id')
+    .order('COUNT(completion_dates.id) DESC')
+    .uniq
   }
 
   # For Streakable concern
