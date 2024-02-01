@@ -1,4 +1,4 @@
-module ChartHelper
+module ChartHelper # TODO - check destiny for this helper (is he need for me or not)
   def set_chart(tasks = nil, habits = nil, height: '400px')
     period = { 
       'day' => :day,
@@ -21,7 +21,8 @@ module ChartHelper
 
         line_chart(tasks, height:, locale: I18n.locale)
       else
-        line_chart tasks.group(:name).group_by_period(period, :complete_date).count
+        #column_chart tasks.group(:name).group_by_period(period, :complete_date).count, xtitle: "Time", ytitle: "Complete"
+        column_chart completed_tasks_path(period: params[:period])
       end
     else
       habits = habits.map do |habit|
@@ -38,4 +39,6 @@ module ChartHelper
     end
   end
 
+  def habits_chart(path)
+  end
 end

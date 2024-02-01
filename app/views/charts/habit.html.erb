@@ -5,28 +5,40 @@
     </h2>
   </div>
 
+
   <div class="chart__body col-md-12">
     <div class="buttons-list center mt-3">
-      <% if @goal %>
+      <% if @goal %> // TODO - create helper for links group
         <%= active_link_to t('date.day'), goal_habit_chart_path(@goal, period: 'day') %>
         <%= active_link_to t('date.week'), goal_habit_chart_path(@goal, period: 'week'), class: 'mx-1' %>
         <%= active_link_to t('date.month'), goal_habit_chart_path(@goal, period: 'month') %>
 
         <%= link_to t('switch_to_tasks'), goal_task_chart_path(@goal, period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
       <% else %>
-        <%= active_link_to t('date.day'), habit_chart_path(period: 'day') %>
-        <%= active_link_to t('date.week'), habit_chart_path(period: 'week'), class: 'mx-1' %>
-        <%= active_link_to t('date.month'), habit_chart_path(period: 'month') %>
+        <% if params[:chart_type] == 'column' %>
+          <%= active_link_to t('date.day'), habit_chart_path(period: 'day', chart_type: 'column') %>
+          <%= active_link_to t('date.week'), habit_chart_path(period: 'week', chart_type: 'column'), class: 'mx-1' %>
+          <%= active_link_to t('date.month'), habit_chart_path(period: 'month', chart_type: 'column') %>
+
+          <%= active_link_to 'Line chart', habit_chart_path(period: 'day') %>
+        <% else %>
+          <%= active_link_to t('date.day'), habit_chart_path(period: 'day') %>
+          <%= active_link_to t('date.week'), habit_chart_path(period: 'week'), class: 'mx-1' %>
+          <%= active_link_to t('date.month'), habit_chart_path(period: 'month') %>
+
+          <%= active_link_to 'Column chart', habit_chart_path(chart_type: 'column') %>
+        <% end %>
+
 
         <%= link_to t('show_tasks'), task_chart_path(period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
       <% end %>
     </div>
 
 
-    <% if @habits.present? %>
-      <div class="mt-5"><%= set_chart(nil, @habits) %></div>
+    <% if params[:chart_type] == 'column' %>
+      <div class="mt-5"> <%= column_chart habits_completions_path(period: params[:period]) %> </div>
     <% else %>
-      <div class="empty-chart text-center mt-5 display-5">No habits</div>
+      <div class="mt-5"> <%= line_chart habits_chart_path(period: params[:period]) %> </div>
     <% end %>
 
     <% if @goal %>

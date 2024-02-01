@@ -1,4 +1,4 @@
-<div class="user" id="user_show">
+<div class="user mt-3" id="user_show">
   <div class="wrapper">
     <div class="table-header list">
       <h2>
@@ -75,7 +75,9 @@
               </ul>
             </div>
             <div class="divider"></div>
-            <div class="habits-statistics__chart"><%= set_chart(tasks = nil, @top_three_habits, height: '180px') %></div>
+            <div class="habits-statistics__chart">
+              <%= column_chart(habits_by_completions_path, height: '180px', ytitle: 'Completions') %>
+            </div>
           </div>
         </div>
       </div>

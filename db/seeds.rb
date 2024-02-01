@@ -91,7 +91,7 @@ end
 end
 
 # Complete 4 habits and tasks
-user.tasks.last(4).each { |task| task.update(complete: true) }
+user.tasks.last(4).each { |task| task.update(complete: true, complete_date: Date.today) }
 
 
 # Create habits completions
@@ -162,6 +162,7 @@ tasks_data.each do |task_params|
     name: task_params[:name],
     user_id: user.id,
     goal_id: goal.id,
+    complete: true,
     deadline: Date.today + task_params[:deadline_offset],
     complete_date: Date.today - task_params[:complete_offset],
     created_at: Date.today - 5.weeks,

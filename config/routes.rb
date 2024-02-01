@@ -20,11 +20,29 @@ Rails.application.routes.draw do
              end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/, defaults: defaults do
+    
+    root 'goals#index'
 
     resource :calendar, only: :show, controller: :calendar
-
     resource :goal_tracking, controller: :goal_tracking
     resource :task_tracking, controller: :task_tracking
+
+    resources :charts, controller: :charts
+
+    #Chart
+    resource :chart do
+      member do
+        get 'habit'
+        get 'task'
+      end
+    end
+
+    get "/completed_tasks", to: "charts#completed_tasks"
+    get "/uncompleted_tasks", to: "charts#uncompleted_tasks"
+    get "/habits_by_completions", to: "charts#habits_by_completions"
+    get "/tasks_chart", to: "charts#tasks"
+    get "/habits_chart", to: "charts#habits"
+    get "/habits_completions", to: "charts#habits_completions"
 
     resources :challenges do
       member do
@@ -106,15 +124,5 @@ Rails.application.routes.draw do
         get 'complete'
       end
     end
-
-    # Chart
-    resource :chart do
-      member do
-        get 'habit'
-        get 'task'
-      end
-    end
-
-    root 'goals#index'
   end
 end

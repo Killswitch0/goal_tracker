@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   #----------------------------------------------------------------------------
-  def show
-    @top_three_habits = Habit.top_habits_by_completions(current_user).first(3)
+  def show 
+    @top_three_habits = Habit.habits_completions(current_user).first(3)
   end
 
   # GET /users/1/edit

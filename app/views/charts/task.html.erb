@@ -26,7 +26,7 @@
 
 
     <% if @tasks.present? %>
-      <div class="mt-5"><%= set_chart(@tasks, nil) %></div>
+      <div class="mt-5"><%= column_chart(tasks_chart_path(period: params[:period])) %></div>
     <% else %>
       <div class="empty-chart text-center mt-5 display-5">No tasks</div>
     <% end %>
