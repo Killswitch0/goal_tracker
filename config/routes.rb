@@ -27,9 +27,7 @@ Rails.application.routes.draw do
     resource :goal_tracking, controller: :goal_tracking
     resource :task_tracking, controller: :task_tracking
 
-    resources :charts, controller: :charts
-
-    #Chart
+    # Chart
     resource :chart do
       member do
         get 'habit'
@@ -37,12 +35,11 @@ Rails.application.routes.draw do
       end
     end
 
-    get "/completed_tasks", to: "charts#completed_tasks"
-    get "/uncompleted_tasks", to: "charts#uncompleted_tasks"
-    get "/habits_by_completions", to: "charts#habits_by_completions"
-    get "/tasks_chart", to: "charts#tasks"
-    get "/habits_chart", to: "charts#habits"
-    get "/habits_completions", to: "charts#habits_completions"
+    # Chart json data
+    get "/habits_current_month_completions", to: "charts#habits_current_month_completions_json"
+    get "/tasks_chart", to: "charts#tasks_json"
+    get "/habits_chart", to: "charts#habits_json"
+    get "/habits_completions", to: "charts#habits_completions_json"
 
     resources :challenges do
       member do
