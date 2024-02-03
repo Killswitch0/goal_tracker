@@ -38,6 +38,4 @@ module ChartHelper # TODO - check destiny for this helper (is he need for me or 
       line_chart(habits, height:, locale: I18n.locale)
     end
   end
-
-  
 end

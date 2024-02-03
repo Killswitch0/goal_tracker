@@ -2,20 +2,20 @@
   <div class="table-header list">
     <h2 class="text-center">
       <%= t('habits_chart').upcase %>
-      <%= @goal.try(:name)&.truncate(30) %>
+      <%= @goal.try(:name)&.truncate(30) %> <!-- TODO - add style -->
     </h2>
   </div>
 
   <div class="chart__body col-md-12">
     <div class="buttons-list center mt-3">
       <% if @goal %> 
-        <%= render 'habit_period_links', goal: @goal %>
+        <%= render 'habit_period_links' %>
         <div class="vr mx-3"></div>
-        <%= render 'chart_for_links', goal: @goal %>
+        <%= render 'chart_for_links' %>
       <% else %>
-        <%= render 'habit_period_links', goal: nil %>
+        <%= render 'habit_period_links' %>
         <div class="vr mx-3"></div>
-        <%= render 'chart_for_links', goal: nil %>
+        <%= render 'chart_for_links' %>
       <% end %>
 
       <div class="dropdown">
