@@ -118,10 +118,10 @@
         </div>
 
         <div class="completed-show">
-          <% if params[:all_habits].present? %>
-            <%= link_with_icon 'check-square', dashboard_path(all_habits: 'open'), 'hide', class: 'completed-show__all' %>
-          <% else %>
+          <% unless params[:all_habits].present? %>
             <%= link_with_icon 'check-square', dashboard_path(all_habits: 'all'), 'show', class: 'completed-show__all' %>
+          <% else %>
+            <%= link_with_icon 'check-square', dashboard_path(open_habits: 'open'), 'hide', class: 'completed-show__all' %>
           <% end %>
         </div>
       </div>

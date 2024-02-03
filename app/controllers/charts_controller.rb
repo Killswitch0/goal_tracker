@@ -1,15 +1,20 @@
 class ChartsController < ApplicationController
   before_action :redirect_user
-  before_action :set_goal, only: %i[habit habits_json]
+  before_action :set_goal, only: %i[habit task]
   before_action :set_period
+  before_action :default_params, only: :habit
 
   # GET /chart/habit
   #----------------------------------------------------------------------------
-  def habit; end
+  def habit
+    @chart_for = chart_params[:chart_for] = 'Habits'
+  end
 
   # GET /chart/task
   #----------------------------------------------------------------------------
-  def task; end
+  def task
+    @chart_for = chart_params[:chart_for] = 'Tasks'
+  end
 
   #----------------------------------------------------------------------------
   def tasks_json
@@ -51,5 +56,13 @@ class ChartsController < ApplicationController
         params[:period],
         :day
     )
+  end
+
+  def default_params   
+     @chart_type = chart_params[:chart_type] ||= 'line'
+  end
+
+  def chart_params
+    params.permit(:chart_type, :period, :chart_for)
   end
 end

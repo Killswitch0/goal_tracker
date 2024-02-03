@@ -10,5 +10,8 @@ application.register("calendar", CalendarController)
 import ChallengesController from "./challenges_controller"
 application.register("challenges", ChallengesController)
 
+import ChartsController from "./charts_controller"
+application.register("charts", ChartsController)
+
 import GoalsController from "./goals_controller"
 application.register("goals", GoalsController)

@@ -1,36 +1,32 @@
-<div class="chart mt-3" id="chart">
+<div class="chart mt-3" id="chart" data-controller="charts">
   <div class="col-md-12">
     <div class="table-header list">
       <h2 class="text-center">
-        <%= @goal.try(:name)&.truncate(30) %>
         <%= t('tasks_chart').upcase %>
+        <%= @goal.try(:name)&.truncate(30) %>
       </h2>
     </div>
 
     <div class="chart__body">
       <div class="buttons-list center mt-3">
+        <% if @goal %>
+          <%= render 'task_period_links', goal: @goal %>
+          <div class="vr mx-3"></div>
+          <%= render 'chart_for_links', goal: @goal %>
+        <% else %>
+          <%= render 'task_period_links', goal: nil %>
+          <div class="vr mx-3"></div>
+          <%= render 'chart_for_links', goal: nil %>
+        <% end %>
+      </div>
+
+      <div class="mt-5"><%= column_chart(tasks_chart_path(period: params[:period])) %></div>
+      
       <% if @goal %>
-        <%= active_link_to t('date.day'), goal_task_chart_path(@goal, period: 'day') %>
-        <%= active_link_to t('date.week'), goal_task_chart_path(@goal, period: 'week'), class: 'mx-1' %>
-        <%= active_link_to t('date.month'), goal_task_chart_path(@goal, period: 'month') %>
-
-        <%= link_to t('switch_to_habits'), goal_habit_chart_path(@goal, period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
+        <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
       <% else %>
-        <%= active_link_to t('date.day'), task_chart_path(period: 'day') %>
-        <%= active_link_to t('date.week'), task_chart_path(period: 'week'), class: 'mx-1' %>
-        <%= active_link_to t('date.month'), task_chart_path(period: 'month') %>
-
-        <%= link_to t('show_habits'), habit_chart_path(period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
+        <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
       <% end %>
-    </div>
-
-    <div class="mt-5"><%= column_chart(tasks_chart_path(period: params[:period])) %></div>
-    
-    <% if @goal %>
-      <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
-    <% else %>
-      <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
-    <% end %>
     </div>
   </div>
 </div>

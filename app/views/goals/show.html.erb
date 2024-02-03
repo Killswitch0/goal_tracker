@@ -102,7 +102,7 @@
             <%= icon('list') %>
             <span><%= t('all_habits') %></span>
           <% end %>
-          <%= link_to goal_habit_chart_path(@goal, period: 'day'),
+          <%= link_to goal_habit_chart_path(@goal, period: 'day', chart_type: 'line'),
                       class: "mt-2 btn btn-primary" do %>
 
             <%= icon('graph-up') %>

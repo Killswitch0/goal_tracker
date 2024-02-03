@@ -1,6 +1,9 @@
 .buttons-list {
   display: flex;
   justify-content: space-around;
+  align-items: baseline;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .buttons-list.center { justify-content: center; }

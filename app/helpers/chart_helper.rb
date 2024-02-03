@@ -39,6 +39,5 @@ module ChartHelper # TODO - check destiny for this helper (is he need for me or 
     end
   end
 
-  def habits_chart(path)
-  end
+  
 end

@@ -1,0 +1,6 @@
+<% %w(day week month).each do |period| %>
+  <%= active_link_to t("date.#{period}"),
+    goal ? goal_task_chart_path(goal, period: period) :
+      task_chart_path(period: period, chart_type: @chart_type), class: 'nav-btn' %>
+<% end %>
+

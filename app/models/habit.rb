@@ -112,17 +112,18 @@ class Habit < ApplicationRecord
   # TODO - create one flexible method
   def self.habits_with_completion_period_data(habits, period)
     habits.map do |habit|
-      completion_data = habit.completion_dates.presence || {}
-      empty_data = Array.new(habits.length, {})
-  
+      completion_data = habit.completion_dates
+          
       {
         name: habit.name,
-        data: completion_data.empty? ? empty_data : completion_data.group_by_period(period, :date).count
+        data: completion_data.presence ?
+         completion_data.group_by_period(period, :date).count :
+          0
       }
     end
   end
 
-  def self.habits_with_completion_month_data(habits)
+  def self.habits_with_completion_month_data(habits) # TODO - add logic like in method above
     habits.map do |habit|
       completion_data = habit.completion_dates.presence || {}
       empty_data = Array.new(habits.length, {})

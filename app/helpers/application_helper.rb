@@ -60,10 +60,6 @@ module ApplicationHelper
   def days_left(target)
     days = (target.deadline.to_date - Date.today).to_i
 
-    if days.negative? || days.zero?
-      0
-    else
-      days
-    end
+    (days.negative? || days.zero?) ? 0 : days
   end
 end

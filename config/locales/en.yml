@@ -256,7 +256,7 @@ en:
   new_task: 'New Task'
   complete_task: 'Complete'
   uncomplete_task: 'Uncomplete'
-  show_tasks: 'Show tasks'
+  show_tasks: 'Show Tasks'
   switch_to_tasks: 'Switch to Tasks'
   tasks_tracker: 'Tasks Tracker'
 
