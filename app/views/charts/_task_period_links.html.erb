@@ -1,4 +1,4 @@
-<%= goal = goal || nil %>
+<% goal = goal || nil %>
 
 <% %w(day week month).each do |period| %>
   <%= active_link_to t("date.#{period}"),

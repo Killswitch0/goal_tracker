@@ -9,9 +9,9 @@
   <div class="chart__body col-md-12">
     <div class="buttons-list center mt-3">
       <% if @goal %> 
-        <%= render 'habit_period_links' %>
+        <%= render 'habit_period_links', goal: @goal %>
         <div class="vr mx-3"></div>
-        <%= render 'chart_for_links' %>
+        <%= render 'chart_for_links', goal: @goal %>
       <% else %>
         <%= render 'habit_period_links' %>
         <div class="vr mx-3"></div>
