@@ -2,8 +2,15 @@
   <div class="table-header list">
     <h2 class="text-center">
       <%= t('habits_chart').upcase %>
-      <%= @goal.try(:name)&.truncate(30) %> <!-- TODO - add style -->
     </h2>
+    
+    <% if @goal %>
+      <div>
+        <div class="vr"></div>
+          <span class="goal-name"><%= @goal.try(:name)&.truncate(30) %></span>
+          <%= inline_svg_tag("icons/bootstrap/bullseye", options = {size: '25px', class: 'ms-1'}) %>
+      </div>
+    <% end %>
   </div>
 
   <div class="chart__body col-md-12">
