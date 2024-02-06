@@ -249,6 +249,7 @@ en:
   new_category: 'New category'
   all_categories: 'Categories'
   filter_or_manage: 'Category filter / Management'
+  delete_category_name: 'Delete category «%{name}»'
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------

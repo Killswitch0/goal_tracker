@@ -18,7 +18,7 @@
       <div class="buttons-list center mt-3">
         <% if @goal %>
           <%= render 'task_period_links', goal: @goal %>
-          <div class="vr mx-3"></div>
+          <div class="vr mx-3"></div> <!-- Add margin inline style in scss -->
           <%= render 'chart_for_links', goal: @goal %>
         <% else %>
           <%= render 'task_period_links', goal: nil %>

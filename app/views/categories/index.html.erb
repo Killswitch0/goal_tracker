@@ -18,15 +18,9 @@
             <li class="action-list__item">
               <span class="fw-bold"><%= category.name %></span>
               <div class="action-list__links">
-                <%= link_to edit_category_path(category),
-                            class: 'icon-link' do %>
-                  <%= icon('pencil-square primary-icon') %>
-                <% end %>
+                <%= link_with_icon 'pencil-square primary-icon', edit_category_path(category), class: 'icon-link' %>
 
-                <%= link_to category,
-                            data: { turbo_method: :delete, turbo_confirm: t('sure') } do %>
-                  <%= icon('trash danger-icon') %>
-                <% end %>
+                <%= delete_link_to '', category, 'trash danger-icon', title: 'delete_category_name', name: category.name %> <!-- TODO - fix showing name for delete modal -->
               </div>
             </li>
           <% end %>
