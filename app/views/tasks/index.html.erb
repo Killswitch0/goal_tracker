@@ -19,8 +19,12 @@
             <% @completed_tasks.each_with_index do |task, index| %>
               <tr>
                 <th scope="row"><%= index + 1 %></th>
-                <td><%= link_to task.name.truncate(15), goal_task_path(@goal, task) %></td>
-                <td class="text-center"><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+                <td><%= link_to task.name.truncate(30), '#', class: 'hover-link' %></td>
+                <td class="text-center">
+                  <%= link_with_icon 'pencil', edit_goal_task_path(@goal, task), class: 'btn btn-primary btn-sm' %>
+                  <%= link_with_icon 'trash', goal_task_path(@goal, task),
+                    data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %>
+                </td>
               </tr>
             <% end %>
           </table>
@@ -48,8 +52,12 @@
             <% @uncompleted_tasks.each_with_index do |task, index| %>
               <tr>
                 <th scope="row"><%= index + 1 %></th>
-                <td><%= link_to task.name.truncate(35), goal_task_path(@goal, task) %></td>
-                <td class="text-center"><%= link_to t('delete'), goal_task_path(@goal, task), data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %></td>
+                <td><%= link_to task.name.truncate(30), '#', class: 'hover-link' %></td>
+                <td class="text-center">
+                  <%= link_with_icon 'pencil', edit_goal_task_path(@goal, task), class: 'btn btn-primary btn-sm' %>
+                  <%= link_with_icon 'trash', goal_task_path(@goal, task),
+                    data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %>
+                </td>
               </tr>
             <% end %>
             </tbody>

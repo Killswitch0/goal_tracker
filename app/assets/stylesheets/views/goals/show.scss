@@ -18,6 +18,14 @@
         span { color: rgba(9, 194, 30, 1) }
       }
     }
+
+    .completed {
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #09c21e;
+    }
+
+    .buttons-list { margin: 0; }
   }
 
   .table-header {
@@ -26,11 +34,7 @@
 
   .table-main {
     background-color: $third-color;
-    height: 500px;
-
-    .table-header.list {
-      @include table-list-header;
-    }
+    width: 61vh;
   }
 
   /// goals, habits, tasks: goals/show
@@ -44,9 +48,7 @@
     margin-top: 30px;
 
     .table-wrapper {
-      height:100%;
       justify-content: start;
-
 
       .btn-primary,
       .btn-primary:focus,

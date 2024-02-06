@@ -1,6 +1,6 @@
 div.table-main {
   width: 67vh;
-  height: 70vh;
+  //height: 70vh;
   background-color: #fff5;
   box-shadow: 0 .4rem .8rem #0005;
   border-radius: 2rem;
@@ -38,7 +38,7 @@ table, th, td {
 
 .table-body {
   width: 95%;
-  height: 75%;
+  height: 42vh;
   max-height: calc(89% - 1.6rem);
   background-color: #fff4;
   margin: .8rem auto;

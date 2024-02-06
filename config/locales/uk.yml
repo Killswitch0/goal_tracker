@@ -300,6 +300,7 @@ uk:
   challenge: 'Челлендж'
   new_challenge: 'Новый челлендж'
   leave_challenge: 'Вийти з челленджу'
+  leave_challenge_name: 'Вийти з челленджу «%{name}»'
   delete_challenge: 'Видалити челлендж'
   rating: 'Рейтинг'
   winners: 'Переможці'

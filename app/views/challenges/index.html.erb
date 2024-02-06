@@ -5,6 +5,11 @@
       <div class="table-wrapper">
         <div class="table-header list">
           <h2 class="text-center"><%= t('navigation.challenges') %></h2>
+
+          <div class="table-header__info">
+            <div class="vr"></div>
+            <span class="count"><%= @challenges.count %></span>
+          </div>
         </div>
 
         <%= render 'layouts/search', path: challenges_path %>

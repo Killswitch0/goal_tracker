@@ -7,6 +7,8 @@
     </a>
 
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+      <h5 class="px-3 mt-1">Notifications</h5> <!-- TODO - Add view all button (also create notifications index page) -->
+
       <% @unread.each do |notification| %>
         <li>
           <%= render 'layouts/notification', notification: notification, klass: 'bookmark' %>
@@ -18,7 +20,7 @@
         </li>
       <% elsif @read.count + @unread.count == 0 %>
         <li class="dropdown-item">
-          No notifications yet.
+          No notifications yet. <!-- TODO - translate-->
         </li>
       <% end %>
       <% @read.each do |notification| %>

@@ -3,13 +3,20 @@
     <h2 class="text-center">
       <%= t('tasks_tracker').upcase %>
     </h2>
+
+    <div class="table-header__info">
+      <div class="vr"></div>
+      <%= tasks_completed_for(current_user) %>
+    </div>
   </div>
 
   <div class="large-table-board__body">
-    <%= render 'layouts/search', path: task_tracking_path %>
+    <div class="buttons-list evenly">
+      <div class="text-center my-3">
+        <%= link_to t('switch_to_goals'), goal_tracking_path, class: 'btn btn-sm btn-primary' %>
+      </div>
 
-    <div class="text-center my-3">
-      <%= link_to t('switch_to_goals'), goal_tracking_path, class: 'btn btn-sm btn-primary' %>
+      <%= render 'layouts/search', path: task_tracking_path %>
     </div>
 
     <div class="tracking-wrapper table-body">
