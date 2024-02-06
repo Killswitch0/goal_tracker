@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "CreateGoals" do
   given(:user) { create(:user) }
   given!(:category) { create(:category, user: user) }
-  given(:goal) { create(:goal, user: user, category: category) }
+  given!(:goal) { create(:goal, user: user, category: category) }
 
   feature 'Create goal', %q{
     In order to create habits, tasks
@@ -17,7 +17,7 @@ RSpec.feature "CreateGoals" do
       ### create ###
       visit new_goal_path
 
-      fill_in 'Name', with: goal.name
+      fill_in 'Name', with: 'Buy the best protein in store!'
       fill_in 'Description', with: goal.description
       select category.name, from: 'Category'
       select goal.color, from: 'Color'
@@ -27,12 +27,13 @@ RSpec.feature "CreateGoals" do
 
       click_button 'Create'
 
-      expect(current_path).to eq goals_path
+      expect(page).to have_content I18n.t('goals.create.success')
 
       ### delete ###
       visit goal_path(goal)
 
-      click_on 'Delete'
+      find("[@id='goal_#{goal.id}']").click
+      find('[@id="confirmButton"]').click
 
       expect(page).to have_content I18n.t('goals.destroy.success')
 

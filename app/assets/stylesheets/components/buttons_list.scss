@@ -1,4 +1,12 @@
 .buttons-list {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin: 5px 0 10px;
 }
+
+.buttons-list.center { justify-content: center; }
+
+.buttons-list.evenly { justify-content: space-evenly; }

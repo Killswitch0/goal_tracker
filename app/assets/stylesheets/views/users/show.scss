@@ -1,0 +1,85 @@
+#user_show {
+  display: flex;
+  justify-content: center;
+
+  .wrapper {
+    background-color: $third-color;
+    border-radius: 2rem;
+  }
+
+  .user-wrapper {
+    height: fit-content;
+    display: flex;
+
+    .user-profile {
+      padding: 20px;
+      text-align: center;
+      border-right: $header-color solid 1px;
+
+      &__photo { margin-top: 30px; }
+
+      &__name {
+        font-size: 25px;
+        font-weight: 600;
+      }
+
+      &__email {
+        font-size: 20px;
+      }
+
+      &__edit { margin-top: 15px; }
+    }
+  }
+
+  .user-info {
+    width: 70vh;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+
+    .goals-info, .tasks-info, .habits-info {
+      padding: 10px;
+      border: $header-color solid 2px;
+      width: 25vh;
+      height: fit-content;
+      border-radius: 0.5rem;
+
+      .goals-info__title, .tasks-info__title, .habits-info__title {
+        font-weight: 500;
+        font-size: 20px;
+      }
+
+      .goals-statistics, .tasks-statistics {
+        margin-top: 10px;
+
+        &__info {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        span { font-weight: bold; }
+
+        .progress-bar {
+          @include line-progress;
+          width: 100%;
+        }
+      }
+    }
+
+    .habits-info { 
+      height: fit-content;
+      width: 60vh;
+      margin: 20px auto 0;
+
+      &__title {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .habits-statistics {
+        &__chart { margin-top: 10px; }
+      }
+     }
+  }
+}

@@ -20,11 +20,26 @@ Rails.application.routes.draw do
              end
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/, defaults: defaults do
+    
+    root 'goals#index'
 
     resource :calendar, only: :show, controller: :calendar
-
     resource :goal_tracking, controller: :goal_tracking
     resource :task_tracking, controller: :task_tracking
+
+    # Chart
+    resource :chart do
+      member do
+        get 'habit'
+        get 'task'
+      end
+    end
+
+    # Chart json data
+    get "/habits_current_month_completions", to: "charts#habits_current_month_completions_json"
+    get "/tasks_chart", to: "charts#tasks_json"
+    get "/habits_chart", to: "charts#habits_json"
+    get "/habits_completions", to: "charts#habits_completions_json"
 
     resources :challenges do
       member do
@@ -38,6 +53,7 @@ Rails.application.routes.draw do
         patch 'decline_invitation'
         delete 'leave'
         delete 'destroy_goal'
+        delete 'destroy_user'
       end
     end
 
@@ -105,15 +121,5 @@ Rails.application.routes.draw do
         get 'complete'
       end
     end
-
-    # Chart
-    resource :chart do
-      member do
-        get 'habit'
-        get 'task'
-      end
-    end
-
-    root 'goals#index'
   end
 end

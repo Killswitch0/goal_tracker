@@ -1,4 +1,5 @@
 @import "variables/*";
+@import "mixins/*";
 @import "components/*";
 @import "views/**/*";
 @import "mobile";
@@ -30,90 +31,9 @@ body {
   }
 }
 
-
-//navbar right dropdown
-#navbarSupportedContent {
-  .bi-caret-down-fill::before {
-    padding-left: 3px;
-  }
-}
-
-
-// content for mobile screen
-.mobile-show {
+// hide content
+.hide {
   display: none;
-}
-
-
-.offcanvas.offcanvas-start {
-  width: 500px;
-}
-
-th a {
-  text-decoration: none;
-  color: inherit;
-}:hover {
-  text-decoration: none;
- }
-
-      /// Bootstrap navbar ///
-.navbar-collapse {
-  font-size: 18px;
-}
-
-.navbar-brand {
-  font-size: 31px;
-}
-
-.nav-link {
-  position: relative;
-}
-
-.nav-link:after {
-  opacity: 0;
-  transition: all 0.2s;
-  height: 2px;
-  width: 100%;
-  background-color: #fff5;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.nav-link-dropdown:after {
-  all: unset;
-}
-
-.nav-link:hover:after {
-  content: '' ;
-  opacity: 1;
-}
-
-.active:after {
-  opacity: 1;
-}
-
-// canvas
-.offcanvas {
-  background-color: $third-color;
-
-  .offcanvas-title {
-    font-size: 25px;
-  }
-}
-
-// dropdown-background color
-.dropdown-menu {
-  background-color: $third-color;
-}
-
-// user/_session_manager
-#navbarDropdown {
-  display: flex;
-
-  svg, img {
-    margin-right: 5px;
-  }
 }
 
 

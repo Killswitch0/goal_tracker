@@ -21,10 +21,10 @@ RSpec.feature "UserCompleteGoals" do
       expect(page).to have_current_path goal_path goal
 
       find('.action').click
-      expect(page).to have_content I18n.t('tasks.complete.completed')
+      expect(page).to have_content I18n.t('tasks.complete.completed') 
 
       expect(current_path).to eq goal_path(goal)
-      expect(page).to have_css('div.goal-info.completed')
+      expect(page).to have_css('.goal-info > dl > dd.completed') 
     end
   end
 end

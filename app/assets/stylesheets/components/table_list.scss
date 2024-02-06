@@ -1,6 +1,6 @@
 div.table-main {
-  width: 50vh;
-  height: 70vh;
+  width: 67vh;
+  //height: 70vh;
   background-color: #fff5;
   box-shadow: 0 .4rem .8rem #0005;
   border-radius: 2rem;
@@ -21,11 +21,15 @@ table, th, td {
 
 .table-header {
   margin: 15px auto 0;
-  width: 95%;
+  width: 100%;
   background-color: #DBE2E6;
   padding: .4rem 1rem;
   border-radius: 6rem;
   align-items: center;
+}
+
+.table-header.list {
+  @include table-list-header;
 }
 
 .table-header h2 {
@@ -34,7 +38,7 @@ table, th, td {
 
 .table-body {
   width: 95%;
-  height: 75%;
+  height: 42vh;
   max-height: calc(89% - 1.6rem);
   background-color: #fff4;
   margin: .8rem auto;
@@ -42,25 +46,10 @@ table, th, td {
   overflow: auto;
   box-shadow: 0 .4rem .8rem #0005;
 
-  td > a {
-    text-decoration: none;
+  thead {
+    position: relative;
+    z-index: 100;
   }
-}
-
-
-.table-body::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.table-body::-webkit-scrollbar-thumb {
-  border-radius: .5rem;
-  background-color: #0004;
-  visibility: hidden;
-}
-
-.table-body:hover::-webkit-scrollbar-thumb {
-  visibility: visible;
 }
 
 thead th {
@@ -81,8 +70,25 @@ tbody tr:nth-child(even) {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   .links {
     padding-inline: 11px;
   }
+}
+
+
+.table-body::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.table-body::-webkit-scrollbar-thumb {
+  border-radius: .5rem;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+.table-body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
 }

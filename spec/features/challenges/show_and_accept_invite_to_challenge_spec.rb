@@ -19,7 +19,7 @@ RSpec.feature "ShowAndAcceptInviteToChallenges" do
     end
 
     scenario 'Authenticated user try to see invite to Challenge' do
-      find(:xpath, '/html/body/main/div[2]/div/div/div[1]/div/div/div[2]/button').click
+      find(:xpath, '/html/body/main/div[2]/div/div/div[1]/div/div/div[2]/a[2]').click
       expect(page).to have_css('[@id="offcanvasExample"]/div[2]/div/table/tbody/tr', text: challenge.user.name)
     end
 

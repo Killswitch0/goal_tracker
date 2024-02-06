@@ -1,5 +1,38 @@
 module ApplicationHelper
-  include BootstrapHelper
+  def link_with_icon(icon_class = nil, path = nil, text = nil, **options, &)
+    link_to "#{icon(icon_class)}#{t(text).capitalize if text}".html_safe, path, options, &
+  end
+
+  def delete_link_to(text = nil, path = nil, icon_class = nil, **options, &)
+    link = block_given? ? text : path
+
+    data = { data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t("#{options[:title]}", name: options[:name]) } }
+    options = options.merge(data)
+
+    if block_given?
+      link_to(link, options, &)
+    else
+      link_to "#{icon(icon_class)}#{t(text) unless text.empty?}".html_safe, link, options
+    end
+  end
+
+  def active_link_to(text = nil, path = nil, **options, &)
+    link = block_given? ? text : path
+
+    if current_page?(link, check_parameters: true)
+      classes = 'link-icon btn btn-primary btn-sm'
+    else
+      classes = 'link-icon btn btn-outline-primary btn-sm'
+    end
+
+    options[:class] = class_names(options[:class], classes)
+
+    if block_given?
+      link_to(link, options, &)
+    else
+      link_to text, path, options
+    end
+  end
 
   def sortable(column, title = nil)
     title ||= t("#{column}")
@@ -24,15 +57,9 @@ module ApplicationHelper
     end
   end
 
-
-
   def days_left(target)
     days = (target.deadline.to_date - Date.today).to_i
 
-    if days.negative? || days.zero?
-      0
-    else
-      days
-    end
+    (days.negative? || days.zero?) ? 0 : days
   end
 end

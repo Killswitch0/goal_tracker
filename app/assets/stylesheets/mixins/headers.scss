@@ -1,0 +1,17 @@
+@mixin table-list-header {
+  border-radius: 2rem 2rem 0 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+
+  .table-header__info { 
+    margin-left: 5px;
+
+    .vr { margin-right: 5px; }
+
+    span.completed-count, span.count { font-weight: bold; }
+  }
+
+  h2 { margin: 0; }
+}

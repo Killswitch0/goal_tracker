@@ -12,7 +12,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   #----------------------------------------------------------------------------
-  def show; end
+  def show 
+    @top_three_habits = Habit.top_this_month(current_user).first(3)
+  end
 
   # GET /users/1/edit
   #----------------------------------------------------------------------------

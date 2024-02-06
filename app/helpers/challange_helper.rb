@@ -1,6 +1,4 @@
 module ChallangeHelper
-  include DashboardHelper
-
   def load_level_color(tasks)
     case tasks
     when 0..3

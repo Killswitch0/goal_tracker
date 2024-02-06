@@ -36,7 +36,10 @@
     &__item.all {
       padding: 10px 0 5px 14px;
 
-      a { text-decoration: none; }
+      a { 
+        text-decoration: none;
+        color: inherit;
+       }
     }
 
     .categories-list {
@@ -50,7 +53,10 @@
         display: flex;
         justify-content: space-between;
 
-        a { text-decoration: none; }
+        a { 
+          text-decoration: none;
+          color: inherit;
+         }
 
         span { font-weight: 500; }
       }
@@ -65,7 +71,6 @@
     margin-inline: auto;
     width: unset;
     background-color: $third-color;
-
   }
 }
 

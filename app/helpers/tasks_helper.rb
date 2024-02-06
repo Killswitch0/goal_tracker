@@ -5,9 +5,9 @@ module TasksHelper
             class: "btn btn-primary btn-sm action"
   end
 
-  def completed_for(target)
+  def tasks_completed_for(target)
     completed = target.tasks.where(complete: true).count
     all = target.tasks.count
-    [completed, all]
+    "#{t('done')} #{content_tag(:span, completed, class: 'completed-count')} / #{all}".html_safe
   end
 end

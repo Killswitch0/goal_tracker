@@ -8,14 +8,33 @@
     width: 43%;
     margin: 0 auto;
 
-    .table-header {
-      margin: 0 auto;
+    .completed-info {
+      &__progress {
+        @include rounded-progress;
+        width: 50px;
+        height: 50px;
+        margin: 0;
+
+        span { color: rgba(9, 194, 30, 1) }
+      }
     }
+
+    .completed {
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #09c21e;
+    }
+
+    .buttons-list { margin: 0; }
+  }
+
+  .table-header {
+    margin: 0 auto;
   }
 
   .table-main {
     background-color: $third-color;
-    height: 51vh;
+    width: 61vh;
   }
 
   /// goals, habits, tasks: goals/show
@@ -25,12 +44,11 @@
 
   .completion-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-top: 30px;
 
     .table-wrapper {
-      height: 88%;
-
+      justify-content: start;
 
       .btn-primary,
       .btn-primary:focus,

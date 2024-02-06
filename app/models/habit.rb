@@ -84,6 +84,58 @@ class Habit < ApplicationRecord
     .uniq
   }
 
+  # Top habits by completions count this month
+  scope :top_this_month, -> (user) {
+    joins(:completion_dates)
+    .where(
+      'habits.user_id = ? AND EXTRACT(month FROM completion_dates.date) = ?',
+      user, Date.today.month
+    )
+    .group('habits.id')
+    .order('COUNT(completion_dates.id) DESC')
+    .uniq
+  }
+
+  # => [{"name":"Morning exercise 0","data":{"2024-02-01":1}}]
+  # def self.habits_with_completion_period_data(habits, period = nil)
+  #   habits.map do |habit|
+  #     completion_data = habit.completion_dates.presence || {}
+  #     empty_data = Array.new(habits.length, {})
+
+  #     {
+  #       name: habit.name,
+  #       data: completion_data.empty? ? empty_data : completion_data.group_by_period(period, :date).count
+  #     }
+  #   end
+  # end
+
+  # TODO - create one flexible method
+  def self.habits_with_completion_period_data(habits, period)
+    habits.map do |habit|
+      completion_data = habit.completion_dates
+          
+      {
+        name: habit.name,
+        data: completion_data.presence ?
+         completion_data.group_by_period(period, :date).count :
+          0
+      }
+    end
+  end
+
+  def self.habits_with_completion_month_data(habits) # TODO - add logic like in method above
+    habits.map do |habit|
+      completion_data = habit.completion_dates.presence || {}
+      empty_data = Array.new(habits.length, {})
+  
+      {
+        name: habit.name,
+        data: completion_data.empty? ? empty_data : completion_data.group_by_month(:date).count
+      }
+    end
+  end
+  
+
   # For Streakable concern
   def completed_count
     goal.habits.completed_today.count

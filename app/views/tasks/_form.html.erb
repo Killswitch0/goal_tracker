@@ -7,9 +7,9 @@
     <%= f.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="mb-3">
-    <%= f.label :complete %>
-    <%= f.check_box :complete, {} %>
+  <div class="mb-3 form-check form-switch">
+    <%= f.label :complete, {class: 'form-check-label', for: "flexSwitchCheckDefault"} %>
+    <%= f.check_box :complete, {role: 'switch', class: "form-check-input", id: "flexSwitchCheckDefault"} %>
   </div>
 
   <div class="mb-3">

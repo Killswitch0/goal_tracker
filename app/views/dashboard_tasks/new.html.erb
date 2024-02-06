@@ -1,23 +1,22 @@
 <div class="container">
   <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 mt-5">
-    <%= form_with(model: @task, url: dashboard_tasks_path) do |f| %>
-      <%= render "shared/error_messages", resource: @task %>
-
-      <div class="card">
+    <div class="card">
+      <div class="card-body">
         <div class="table-header">
           <h2 class="text-center"><%= t('new_task') %></h2>
         </div>
 
-        <div class="card-body">
+        <%= form_with(model: @task, url: dashboard_tasks_path) do |f| %>
+          <%= render "shared/error_messages", resource: @task %>
 
           <div class="mb-3">
             <%= f.label :name %>
             <%= f.text_field :name, class: "form-control" %>
           </div>
 
-          <div class="mb-3">
-            <%= f.label :complete %>
-            <%= f.check_box :complete, {}, class: "form-control" %>
+          <div class="mb-3 form-check form-switch">
+            <%= f.label :complete, {class: 'form-check-label', for: "flexSwitchCheckDefault"} %>
+            <%= f.check_box :complete, {role: 'switch', class: "form-check-input", id: "flexSwitchCheckDefault"} %>
           </div>
 
           <div class="mb-3">
@@ -39,9 +38,9 @@
             <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary' %>
             <%= f.submit t('create'), class: "btn btn-primary action" %>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>
 

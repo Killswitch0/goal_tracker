@@ -1,9 +1,15 @@
 <div id="challenges-index">
   <div class="challenges-wrapper col-sm-12 col-md-12 col-lg-8 offset-lg-2 mt-3">
     <div class="table-main challenge">
+
       <div class="table-wrapper">
-        <div class="table-header">
+        <div class="table-header list">
           <h2 class="text-center"><%= t('navigation.challenges') %></h2>
+
+          <div class="table-header__info">
+            <div class="vr"></div>
+            <span class="count"><%= @challenges.count %></span>
+          </div>
         </div>
 
         <%= render 'layouts/search', path: challenges_path %>
@@ -26,22 +32,31 @@
                   <th scope="row"><%= index + 1 %></th>
                   <td><%= user_avatar(challenge.user) %></td>
                   <td><%= challenge.user.name %></td>
-                  <td><%= link_to challenge.name.truncate(17), challenge, style: "text-decoration: none" %></td>
-                  <td><%= confirmation_dialog_button('leave', challenge.id, action_id: 'Leave', klass: 'btn btn-sm btn-warning') %></td>
-                  <td><%= confirmation_dialog_button('delete', challenge.id, action_id: 'Delete', klass: 'btn btn-sm btn-danger') %></td>
+                  <td><%= link_to challenge.name.truncate(17), challenge, style: "text-decoration: none", class: 'hover-link' %></td>
+                  <td><%= delete_link_to 'leave', leave_challenge_path(challenge), 
+                                                  title: 'leave_challenge_name',
+                                                  name: challenge.name,
+                                                  id: "leave-#{dom_id(challenge)}",
+                                                  class: 'btn btn-sm btn-warning' %></td>
 
-                  <%= render 'layouts/confirmation_dialog', item: challenge, path: leave_challenge_path(challenge), action_id: 'Leave', action_name: t('leave_challenge') %>
-                  <%= render 'layouts/confirmation_dialog', item: challenge, action_id: 'Delete', action_name: t('delete_challenge') %>
+                  <td><%= delete_link_to 'delete', challenge,
+                                                   title: 'delete_challenge_name',
+                                                   name: challenge.name,
+                                                   id: "destroy-#{dom_id(challenge)}",
+                                                   class: 'btn btn-sm btn-danger' %></td>
+                </tr>
               <% end %>
-              </tr>
             <% end %>
             </tbody>
           </table>
         </section>
 
         <div class="buttons-list">
-          <%= link_to t('new_challenge'), new_challenge_path, class: 'btn btn-primary' %>
-          <button class="btn btn-primary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <%= link_with_icon 'plus-lg', new_challenge_path, 'new_challenge', class: 'btn btn-primary link-icon' %>
+          
+          <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" },
+                          class: 'btn btn-primary position-relative link-icon' do %>
+            <%= icon('list') %>
             <%= t('invites') %>
             <% if @invites.present? %>
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -49,7 +64,7 @@
               <span class="visually-hidden">New alerts</span>
               </span>
             <% end %>
-          </button>
+          <% end %>
         </div>
       </div>
     </div>
@@ -76,7 +91,7 @@
           <% @invites.each_with_index do |invite, index| %>
             <tr>
               <% if invite.confirm? %>
-                No notifications yet
+                No notifications yet 
               <% else %>
               <tr>
                 <th scope="row"><%= index + 1 %></th>
@@ -92,7 +107,6 @@
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
 </div>

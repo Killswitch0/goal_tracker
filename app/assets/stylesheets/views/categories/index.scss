@@ -1,10 +1,14 @@
-.categories-wrapper {
-  // display: flex;
-  // justify-content: center;
+#categories-index {
+  .categories-wrapper {
+    display: flex;
+    justify-content: center;
 
-  .actions-items {
-    li.action-item {
-      padding: 5px 10px;
+    .action-items { border-radius: 1rem; }
+  
+    .action-list {
+      &__item {
+        padding-inline: 10px;
+      }
     }
   }
 }

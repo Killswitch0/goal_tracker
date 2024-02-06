@@ -3,24 +3,33 @@
     <span class="dropdown-toggle-icon"></span>
     <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
       <%= user_avatar(current_user) %>
-      <%= t('hello') %>, <%= current_user.name_or_email %>
-      <%= icon 'caret-down-fill' %>
+      <span class="user-name">
+        <%= t('hello') %>, <%= current_user.name_or_email %>
+        <%= icon 'caret-down-fill' %>
+      </span>
     </a>
 
     <!--dropdown-menu-lg-end значит выравнивание выпадающего списка по левому краю-->
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-      <li><%= link_to t('new_category'), new_category_path, class: "dropdown-item" %></li>
-      <li><%= link_to t('edit_account'), edit_user_path(current_user), class: "dropdown-item" %></li>
-      <li><hr class="dropdown-divider"></li>
-      <%= link_to t('log_out'), logout_path, method: :delete, class: "dropdown-item" %>
+      <li>
+        <%= link_with_icon 'person-vcard-fill', user_path(current_user), 'profile', class: "dropdown-item" %>
+      </li>
+      <li>
+        <%= link_with_icon 'pencil-square', edit_user_path(current_user), 'edit_account', class: "dropdown-item" %>
+      </li>
+      <li>
+        <hr class="dropdown-divider">
+        <%= link_with_icon 'box-arrow-right', logout_path, 'log_out', method: :delete, class: "dropdown-item" %>
+      </li>
+      
     </ul>
   </li>
 <% else %>
   <li class="nav-item">
-    <%= link_to t('authenticate.signup'), signup_path, class: "nav-link" %>
+    <%= link_with_icon 'person-add', signup_path, 'authenticate.signup', class: "nav-link" %>
   </li>
   <li class="nav-item">
-    <%= link_to t('authenticate.login'), login_path, class: "nav-link" %>
+    <%= link_with_icon 'box-arrow-in-right', login_path, 'authenticate.login', class: "nav-link" %>
   </li>
 <% end %>
 

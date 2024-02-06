@@ -1,10 +1,8 @@
-.all_items-index {
+.all-items {
   display: flex;
   justify-content: space-around;
 
-  .table-header {
-    margin-top: 0;
-  }
+  .table-header { margin-top: 0; }
 
   .table-wrapper {
     width: 61vh;

@@ -1,19 +1,88 @@
-<div class="col-sm-12 col-md-6 offset-md-3 mt-3">
-  <div class="card">
-    <div class="table-header">
-      <h2 class="text-center mb-0"><%= t('user_info') %></h2>
+<div class="user mt-3" id="user_show">
+  <div class="wrapper">
+    <div class="table-header list">
+      <h2>
+        <%= t('user') %>
+      </h2>
     </div>
 
-    <div class="card-body">
-      <dl class="row">
-        <dt class="col-sm-5"><%= t('activerecord.attributes.user.name') %></dt>
-        <dd class="col-sm-7"><%= user.name %></dd>
+    <div class="user-wrapper">
+      <div class="user-profile">
+        <% if current_user %>
+          <div class="user-profile__photo">
+            <%= current_user.gravatar size: 100, css_class: 'rounded-circle' %>
+          </div>
 
-        <dt class="col-sm-5"><%= t('activerecord.attributes.user.email') %></dt>
-        <dd class="col-sm-7"><%= user.email %></dd>
-      </dl>
+          <div class="user-profile__name">
+            <%= current_user.name %>
+          </div>
+
+          <div class="user-profile__email">
+            <%= current_user.email %>
+          </div>
+
+          <div class="user-profile__edit">
+            <%= link_with_icon 'pencil', edit_user_path(current_user), 'edit', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="user-info">
+        <div class="goals-info">
+          <div class="goals-info__title"><%= t('all_goals') %></div>
+          <div class="goals-statistics">
+            <div class="goals-statistics__info">
+              <div><%= goals_completed(user: current_user) %></div>
+              <span><%= calculate_goals %>%</span>
+            </div>
+
+            <div class="progress-bar">
+              <div class="progress-bar__progress" style="width: <%= calculate_goals %>%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tasks-info">
+          <div class="tasks-info__title"><%= t('all_tasks') %></div>
+          <div class="tasks-statistics">
+            <div class="tasks-statistics__info">
+              <div><%= tasks_completed_for(current_user) %></div>
+              <span><%= calculate_tasks(user: current_user).to_s + '%' %></span>
+            </div>
+
+            <div class="progress-bar">
+              <div class="progress-bar__progress" style="width: <%= calculate_tasks(user: current_user) %>%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="habits-info">
+          <div class="habits-info__title">
+            <%= t('all_habits') %> <!--  TODO - change title to top 3 habits and ability to change amount of habits to show -->
+            <span><%= I18n.localize(Date.today, format: :long) %></span>
+          </div>
+          <div class="habits-statistics">
+            <div class="habits-statistics__title">
+            <span>3 best habits by completions this month:</span>
+            </div>
+            <div class="habits-statistics__info">
+              <ul>
+                <% if @top_three_habits.present? %>
+                  <% @top_three_habits.each do |habit| %>
+                    <li><%= habit.name%> - <%= habit.completion_dates.count %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+            <div class="divider"></div>
+            <div class="habits-statistics__chart">
+              <%= column_chart(habits_current_month_completions_path, height: '180px', ytitle: 'Completions') %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
+
 

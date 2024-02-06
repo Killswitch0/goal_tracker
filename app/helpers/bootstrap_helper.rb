@@ -5,11 +5,12 @@ module BootstrapHelper
     }.html_safe
   end
 
-  def canvas_button(name, klass: '', style: '')
+  def canvas_button(name, icon: '', klass: '', style: '')
     %Q{
       <button class="btn btn-primary #{klass}" style="#{style}" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            #{t(name)}
-          </button>
+        #{icon("#{icon}") if icon}
+        <span>#{t(name)}</span>
+      </button>
     }.html_safe
   end
 

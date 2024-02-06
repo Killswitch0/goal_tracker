@@ -1,9 +1,9 @@
 <div id="goals-show">
-  <div class="col-sm-12 mb-3 p-3 goal-info <%= @goal.complete? ? 'completed' : 'uncompleted' %>">
+  <div class="col-sm-12 mb-3 p-3 goal-info">
     <div class="table-header">
       <h2 class="text-center"><%= t('goal_info') %></h2>
     </div>
-    <dl class="row mt-3">
+    <dl class="row mt-3"> 
       <dt class="col-sm-4"><%= t('activerecord.models.category') %>:</dt>
       <dd class="col-sm-8 px-5"><%= @goal.category.name %></dd>
       <dt class="col-sm-4"><%= t('activerecord.attributes.goal.name') %>:</dt>
@@ -14,135 +14,145 @@
       <dd class="col-sm-8 px-5"><%= l(@goal.deadline, format: :long).split(',').first %> </dd>
       <dt class="col-sm-4"><%= t('days_left.base') %>:</dt>
       <dd class="col-sm-8 px-5"><%= days_left(@goal).zero? ? 'Overdue' : days_left(@goal) %></dd>
+      <dt class="col-sm-4"><%= t('progress')%>:</dt>
+      <dd class="col-sm-8 px-5">
+        <div class="completed-info">
+          <% percentage = calculate_tasks(goal: @goal, user: @goal.user) %>
+          <%= tag.div tag.span("#{percentage}%"), data: { controller: 'goals', percentage: percentage },
+                        class: 'completed-info__progress' %>
+        </div>
+      </dd>
+      <dt class="col-sm-4"><%= t('status') %>:</dt>
+      <dd class="col-sm-8 px-5 <%= 'completed' if @goal.complete? %>">
+        <%= @goal.complete? ? t('complete') : t('in_process') %>
+      </dd>
       <% challenge = @goal.goal_in_challenge&.name.present? %>
       <% if challenge %>
         <dt class="col-sm-4"><%= t('in_challenge') %>:</dt>
-        <dd class="col-sm-8 px-5"><%= link_to "#{@goal.goal_in_challenge&.name}", @goal.goal_in_challenge %></dd>
+        <dd class="col-sm-8 px-5"><%= link_to "#{@goal.goal_in_challenge&.name}", @goal.goal_in_challenge, class: 'hover-link underline' %></dd>
       <% end %>
     </dl>
 
-    <!-- <div class="text-center">
-      <%= form_with model: @goal do |f| %>
-        <div class="mt-3">
-          <%= f.label :complete %>
-          <%= f.check_box :complete, {}, true %>
-          <%= f.submit "#{@goal.complete? ? t('uncomplete_goal') : t('complete_goal')}",
-                       class: "mb-2 btn btn-primary btn-sm" %>
-        </div>
-      <% end %>
-    </div> -->
 
-    <div class="col-md-12 text-center">
-      <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
-      <%= confirmation_dialog_button('delete_goal', @goal.id) %>
+    <div class="buttons-list evenly">
+      <div class="buttons-list__left">
+        <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
+      </div>
+      
+      <div class="buttons-list__right">
+        <%= link_with_icon 'pencil', edit_goal_path(@goal), class: 'btn btn-primary btn-sm' %>
+
+        <%= delete_link_to '', @goal, 'trash', title: 'delete_goal', id: dom_id(@goal), class: 'btn btn-danger btn-sm' %>
+      </div>
     </div>
   </div>
 
   <div class="completion-wrapper">
-    <div class="col-sm-12 mb-5 table-main <%= 'completed' if @goal.habits_streak? %>">
-      <div class="table-header">
-        <h2 class="text-center">
-          <%= t('all_habits').split.last.capitalize %>
-          <%= habits_completed_for(@goal).first %>
-          <%= t('of') %>
-          <%= habits_completed_for(@goal).last %>
-        </h2>
-      </div>
+    <div class="completion-wrapper__item">
+      <div class="col-sm-12 table-main <%= 'completed' if @goal.habits_streak? %>">
+        <div class="table-wrapper">
+          <div class="table-header list">
+            <h2>
+              <%= t('all_habits').split.last.capitalize %>
+            </h2>
 
-      <div class="table-wrapper">
-        <section class="table-body">
-          <table>
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col"><%= t('activerecord.attributes.habit.name') %></th>
-              <th scope="col"><%= t('activerecord.attributes.habit.description') %></th>
-              <th scope="col"><%= t('complete') %></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @habits.each_with_index do |habit, index| %>
+            <div class="table-header__info">
+              <div class="vr"></div>
+              <%= habits_completed_for(@goal) %>
+            </div>
+          </div>
+
+          <section class="table-body">
+            <table>
+              <thead>
               <tr>
-                <% unless habit.name.nil? %>
-                  <th scope="row"><%= index + 1 %></th>
-                  <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit),
-                                  style: "text-decoration: none" %></td>
-                  <td><%= habit.description.truncate(15) %></td>
-                  <td>
-                    <%= habit_complete_link(habit, complete_goal_habit_path(@goal, habit)) %>
-                  </td>
-                <% end %>
+                <th scope="col">#</th>
+                <th scope="col"><%= t('activerecord.attributes.habit.name') %></th>
+                <th scope="col"><%= t('activerecord.attributes.habit.description') %></th>
+                <th scope="col"><%= t('complete') %></th>
               </tr>
-            <% end %>
-            </tbody>
-          </table>
-        </section>
+              </thead>
+              <tbody>
+              <% @habits.each_with_index do |habit, index| %>
+                <tr>
+                  <% unless habit.name.nil? %>
+                    <th scope="row"><%= index + 1 %></th>
+                    <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit),
+                                    style: "text-decoration: none", class: 'hover-link' %></td>
+                    <td><%= habit.description.truncate(15) %></td>
+                    <td>
+                      <%= habit_complete_link(habit, complete_goal_habit_path(@goal, habit)) %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </section>
 
-        <div class="buttons-list mb-3">
-          <%= link_to t('new_habit'), new_goal_habit_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('all_habits'), goal_habits_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('navigation.chart'), goal_habit_chart_path(@goal, period: 'day'),
-                      class: "mt-2 btn btn-primary" %>
+          <div class="buttons-list">
+            <%= link_with_icon 'plus-lg', new_goal_habit_path(@goal), 'new_habit', class: "btn btn-primary" %>
+            <%= link_with_icon 'list', goal_habits_path(@goal), 'all_habits', class: "btn btn-primary" %>
+            <%= link_with_icon 'graph-up', goal_habit_chart_path(@goal, period: 'day', chart_type: 'line'),
+            'navigation.chart', class: 'btn btn-primary' %>
+          </div>
         </div>
       </div>
     </div>
+    
+    <div class="completion-wrapper__item">
+      <div class="col-sm-12 table-main">
+        <div class="table-wrapper">
+          <div class="table-header list">
+            <h2>
+              <%= t('all_tasks').split.last.capitalize %>
+            </h2>
 
-    <div class="col-sm-12 table-main <%= 'completed' if @goal.tasks_streak? %>">
-      <div class="table-header">
-        <h2 class="text-center">
-          <%= t('all_tasks').split.last.capitalize %>
-          <%= completed_for(@goal).first %>
-          <%= t('of') %>
-          <%= completed_for(@goal).second %>
-        </h2>
-      </div>
+            <div class="table-header__info">
+              <div class="vr"></div>
+              <%= tasks_completed_for(@goal) %>
+            </div>
+          </div>
 
-      <div class="table-wrapper">
-        <section class="table-body">
-          <table>
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col"><%= t('activerecord.attributes.task.name') %></th>
-              <th scope="col">
-                <%= sortable 'complete' %>
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @tasks.each_with_index do |task, index| %>
+          <section class="table-body">
+            <table>
+              <thead>
               <tr>
-                <% unless task.name.nil? %>
-                  <th scope="row"><%= index + 1 %></th>
-                  <td>
-                    <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}" %>
-                  </td>
-                <% end %>
-                <td>
-                  <%= task_complete_link(task, complete_goal_task_path(@goal, task)) %>
-                </td>
+                <th scope="col">#</th>
+                <th scope="col"><%= t('activerecord.attributes.task.name') %></th>
+                <th scope="col">
+                  <%= sortable 'complete' %>
+                </th>
               </tr>
-            <% end %>
-            </tbody>
-          </table>
-        </section>
+              </thead>
+              <tbody>
+              <% @tasks.each_with_index do |task, index| %>
+                <tr>
+                  <% unless task.name.nil? %>
+                    <th scope="row"><%= index + 1 %></th>
+                    <td>
+                      <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
+                                  style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}",
+                                  class: 'hover-link' %>
+                    </td>
+                  <% end %>
+                  <td><%= task_complete_link(task, complete_goal_task_path(@goal, task)) %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </section>
 
-        <div class="buttons-list mb-3">
-          <%= link_to t('new_task'), new_goal_task_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('all_tasks'), goal_tasks_path(@goal),
-                      class: "mt-2 btn btn-primary" %>
-          <%= link_to t('navigation.chart'), goal_task_chart_path(@goal, period: 'day'),
-                      class: "mt-2 btn btn-primary" %>
+          <div class="buttons-list">
+            <%= link_with_icon 'plus-lg', new_goal_task_path(@goal), 'new_task', class: 'btn btn-primary' %>
+            <%= link_with_icon 'list', goal_tasks_path(@goal), 'all_tasks', class: 'btn btn-primary' %>
+            <%= link_with_icon 'graph-up', goal_task_chart_path(@goal), 'navigation.chart', class: 'btn btn-primary' %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<%= render 'layouts/confirmation_dialog', item: @goal, action_name: t('delete') %>
 
 

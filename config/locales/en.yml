@@ -45,6 +45,7 @@ en:
           min_period: 'period should be at least 1 day.'
         challenge_goal:
           one_goal: 'can add only one goal.'
+          challenge_ended: "can't add to completed challenge"
         user:
           blank: "can't be blank"
           taken: 'has already been taken'
@@ -187,6 +188,7 @@ en:
   edit: 'Edit'
   completed: 'Completed'
   uncompleted: 'Uncompleted'
+  progress: 'Progress'
   complete: 'complete'
   done: 'Done'
   manage: 'Manage'
@@ -218,6 +220,8 @@ en:
   edit_user: 'Edit User'
   new_user: 'New User'
   hello: 'Hello'
+  profile: 'Profile'
+  edit_account: 'Edit account'
 
   # Views -> Form.
   #----------------------------------------------------------------------------
@@ -230,6 +234,7 @@ en:
   create_goal: 'Create Goal'
   add_goal: 'Add Goal'
   delete_goal: 'Delete Goal'
+  delete_goal_name: 'Delete goal «%{name}»'
   back_to_goal: 'Back to Goal'
   back_to_goals: 'Back to Goals'
   complete_goal: 'Complete'
@@ -251,7 +256,7 @@ en:
   new_task: 'New Task'
   complete_task: 'Complete'
   uncomplete_task: 'Uncomplete'
-  show_tasks: 'Show tasks'
+  show_tasks: 'Show Tasks'
   switch_to_tasks: 'Switch to Tasks'
   tasks_tracker: 'Tasks Tracker'
 
@@ -278,7 +283,10 @@ en:
   challenge: 'Challenge'
   new_challenge: 'New Challenge'
   leave_challenge: 'Leave challenge'
+  leave_challenge_name: 'Leave challenge «%{name}»'
   delete_challenge: 'Delete challenge'
+  delete_challenge_name: 'Delete challenge «%{name}»'
+  delete_user_challenge: 'Delete %{name} from Challenge'
   challenge_end: 'Challenge end'
   target:
     one: '1 target'
@@ -328,6 +336,9 @@ en:
     destroy:
       success: 'Challenge has been deleted successfully.'
       fail: 'Challenge was not deleted.'
+    destroy_user:
+      success: 'User has been deleted from challenge successfully.'
+      fail: 'User was not deleted.'
     create_invitation:
       success: 'Invitation sent successfully to user %{invited_user}.'
       already: 'User has already received an invitation.'
@@ -377,8 +388,8 @@ en:
   #----------------------------------------------------------------------------
   notifications:
     common:
-      almost: "You almost made habits streak in «%{target_name}»! Let's GO!"
-      created: "%{user_name} created «%{child_target}» tasks in «%{parent_target}»."
+      almost: "You almost made habits streak in «%{target_name}»! Let's GO!" # TODO add notification structure from noticed documentation
+      created: "%{user_name} created «%{child_target}» task in «%{parent_target}»."
       left_for_complete: "You remain %{days} days to complete Goal «%{target_name}»."
     challenge:
       invited: "You've been invited to the «%{challenge}» challenge"

@@ -1,17 +1,26 @@
-<div class="large_table_board mt-3" id="task_tracking-show">
-  <div class="table-header">
+<div class="large-table-board mt-3" id="task-tracking_show">
+  <div class="table-header list">
     <h2 class="text-center">
       <%= t('tasks_tracker').upcase %>
     </h2>
+
+    <div class="table-header__info">
+      <div class="vr"></div>
+      <%= tasks_completed_for(current_user) %>
+    </div>
   </div>
 
-  <%= render 'layouts/search', path: task_tracking_path %>
+  <div class="large-table-board__body">
+    <div class="buttons-list evenly">
+      <div class="text-center my-3">
+        <%= link_to t('switch_to_goals'), goal_tracking_path, class: 'btn btn-sm btn-primary' %>
+      </div>
 
-  <div class="text-center my-3">
-    <%= link_to t('switch_to_goals'), goal_tracking_path, class: 'btn btn-sm btn-primary' %>
-  </div>
+      <%= render 'layouts/search', path: task_tracking_path %>
+    </div>
 
-  <div class="tracking-wrapper table-body">
-    <%= render 'goal_tracking/table', items: @tasks %>
+    <div class="tracking-wrapper table-body">
+      <%= render 'goal_tracking/table', items: @tasks %>
+    </div>
   </div>
 </div>

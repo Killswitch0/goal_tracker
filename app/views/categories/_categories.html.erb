@@ -1,19 +1,20 @@
 <div class="categories-wrapper">
   <div class="categories-wrapper__new">
-    <%= link_to t('new'), new_category_path, class: 'btn btn-primary btn-sm' %>
-    <%= link_to t('manage'), categories_path, class: 'btn btn-primary btn-sm' %>
+    <%= link_with_icon 'plus-lg', new_category_path, 'new', class: 'btn btn-primary btn-sm link-icon' %>
+    <%= link_with_icon 'list', categories_path, 'all', class: 'btn btn-primary btn-sm link-icon' %>
   </div>
   <div class="divider"></div>
 
   <div class="categories-wrapper__title"><%= t('all_categories') %></div>
   <div class="categories-wrapper__item all">
-    <%= link_to t('all').capitalize, goals_path %>
+    <%= link_to t('all').capitalize, goals_path, class: "bold-hover" %>
   </div>
 
   <ul class="categories-list">
     <% current_user.categories.each do |category| %>
       <li class="categories-list__item">
-        <%= link_to category.name, goals_path(filter: "#{category.id}") %>
+        <%= link_to category.name, goals_path(filter: "#{category.id}"), 
+                                   class: "bold-hover #{'bold-active' if params[:filter].to_i == category.id.to_i}" %>
         <span><%= category.goals.count %></span>
       </li>
       <div class="divider"></div>

@@ -1,39 +1,39 @@
-<div class="mt-3" id="chart">
+<div class="chart mt-3" id="chart" data-controller="charts">
   <div class="col-md-12">
-    <div class="table-header">
+    <div class="table-header list">
       <h2 class="text-center">
-        <%= @goal.try(:name)&.truncate(30) %>
         <%= t('tasks_chart').upcase %>
       </h2>
-    </div>
 
-    <div class="chart-buttons text-center mt-3">
       <% if @goal %>
-        <%= chart_link_to t('date.day'), goal_task_chart_path(@goal, period: 'day'), 'day' %>
-        <%= chart_link_to t('date.week'), goal_task_chart_path(@goal, period: 'week'), 'week' %>
-        <%= chart_link_to t('date.month'), goal_task_chart_path(@goal, period: 'month'), 'month' %>
-
-        <%= link_to t('switch_to_habits'), goal_habit_chart_path(@goal, period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
-      <% else %>
-        <%= chart_link_to t('date.day'), task_chart_path(period: 'day'), 'day' %>
-        <%= chart_link_to t('date.week'), task_chart_path(period: 'week'), 'week' %>
-        <%= chart_link_to t('date.month'), task_chart_path(period: 'month'), 'month' %>
-
-        <%= link_to t('show_habits'), habit_chart_path(period: 'day'), class: 'btn btn-primary btn-sm mx-5' %>
+        <div>
+          <div class="vr"></div>
+            <span class="goal-name"><%= @goal.try(:name)&.truncate(30) %></span>
+            <%= inline_svg_tag("icons/bootstrap/bullseye", options = {size: '25px', class: 'ms-1'}) %>
+        </div>
       <% end %>
     </div>
 
+    <div class="chart__body">
+      <div class="buttons-list center mt-3">
+        <% if @goal %>
+          <%= render 'task_period_links', goal: @goal %>
+          <div class="vr mx-3"></div>
+          <%= render 'chart_for_links', goal: @goal %>
+        <% else %>
+          <%= render 'task_period_links', goal: nil %>
+          <div class="vr mx-3"></div>
+          <%= render 'chart_for_links', goal: nil %>
+        <% end %>
+      </div>
 
-    <% if @tasks.present? %>
-      <div class="mt-5"><%= set_chart(@tasks, nil) %></div>
-    <% else %>
-      <div class="empty-chart text-center mt-5 display-5">No tasks</div>
-    <% end %>
-
-    <% if @goal %>
-      <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary mt-2' %>
-    <% else %>
-      <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary mt-2' %>
-    <% end %>
+      <div class="mt-5"><%= column_chart(tasks_chart_path(period: params[:period])) %></div>
+      
+      <% if @goal %>
+        <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+      <% else %>
+        <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
+      <% end %>
+    </div>
   </div>
 </div>

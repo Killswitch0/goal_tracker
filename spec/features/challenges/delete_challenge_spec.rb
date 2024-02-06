@@ -13,8 +13,9 @@ RSpec.feature "DeleteChallenges" do
       log_in(user)
 
       visit challenges_path
-      click_on 'Delete'
-      find("[@id='exampleModalDelete#{challenge.id}']/div/div/div[3]/a").click
+
+      find("[@id='destroy-challenge_#{challenge.id}']").click
+      find('[@id="confirmButton"]').click
 
       expect(page).to have_content I18n.t('challenges.destroy.success')
     end

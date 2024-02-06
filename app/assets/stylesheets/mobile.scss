@@ -1,6 +1,11 @@
+// content for mobile screen
+.mobile-show {
+  display: none;
+}
+
 @media (max-width: 1400px) {
   #dashboard-show {
-    .actions-items {
+    .action-items {
       width: 380px;
     }
   }
@@ -21,28 +26,30 @@
         width: 270px;
       }
 
-      .actions-items {
+      .action-items {
         width: 300px;
 
-        .items-title {
+        &__title {
           font-size: 18px;
-        }
-
-        .show-all {
-          font-size: 14px;
-
-          i:before {
-            font-size: 14px;
-          }
         }
       }
     }
   }
 
 
-  .all_items-index {
+  .all-items {
     .table-wrapper {
       width: 50vh;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  #navbar__right {
+    align-items: center;
+  
+    a > span.user-name {
+      margin: auto;
     }
   }
 }
@@ -58,6 +65,7 @@
         width: 36px;
       }
     }
+
 
     .dropdown-menu {
       font-size: 25px;
@@ -86,7 +94,7 @@
   }
 
   .mobile-show {
-    display: unset !important;
+    display: flex !important;
   }
 
   .table-header {
@@ -127,19 +135,19 @@
           width: 1800px;
           background-color: #DBE2E6;
 
-          .goal-item {
+          &__item {
             width: 500px;
             height: 215px;
             margin-inline: 20px;
-
-            .goal-title {
-              font-size: 21px;
-            }
 
             i:before {
               font-size: 45px;
               margin-top: 15px;
             }
+          }
+
+          &__title {
+            font-size: 21px;
           }
         }
 
@@ -151,30 +159,30 @@
       }
 
 
-      .actions-items {
+      .action-items {
         width: 100%;
         height: 100%;
         margin: 30px auto;
 
-        .items-title {
-          font-size: 25px;
+        &__title {
+          font-size: 20px;
         }
 
-        .show-all {
-          font-size: 25px;
+        .completed-show__all {
+          font-size: 20px;
 
           i:before {
-            font-size: 25px;
+            font-size: 18px;
           }
         }
 
-        .action-item {
+        &__item {
           margin-bottom: 25px;
           font-size: 25px;
         }
 
         .completed-info {
-          font-size: 24px;
+          font-size: 20px;
         }
       }
     }
@@ -221,7 +229,7 @@
   }
 
   // All items
-    .all_items-index {
+    .all-items {
       flex-direction: column;
 
       .table-wrapper {
@@ -287,22 +295,15 @@
     }
 
     .actions-items {
-      .actions-header > div.items-title {
+      &__title {
         font-size: 20px;
       }
 
-      .action-list > li.action-item {
-        font-size: 19px;
-      }
-
-      a.show-all {
-        font-size: 15px !important;
-
-        i:before {
-          font-size: 15px !important;
+      .action-list {
+        &__item {
+          font-size: 19px;
         }
       }
-
     }
   }
 

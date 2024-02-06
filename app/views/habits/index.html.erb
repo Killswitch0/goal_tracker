@@ -1,5 +1,5 @@
 <div id="habits-index">
-  <div class="all_items-index mt-3">
+  <div class="all-items mt-3">
     <div class="row">
       <div class="table-wrapper col-sm-12 col-md-12 col-lg-12">
         <div class="table-header">
@@ -21,10 +21,11 @@
                 <tr>
                   <th scope="row"><%= index + 1 %></th>
                   <td>
-                    <%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %>
+                    <%= link_to habit.name.truncate(30), '#', class: 'hover-link' %>
                   </td>
                   <td class="text-center">
-                    <%= link_to t('delete'), goal_habit_path(@goal, habit),
+                    <%= link_with_icon 'pencil', edit_goal_habit_path(@goal, habit), class: 'btn btn-primary btn-sm' %>
+                    <%= link_with_icon 'trash', goal_habit_path(@goal, habit),
                                 data: { turbo_method: :delete },
                                 class: "btn btn-danger btn-sm" %></td>
                 </tr>
@@ -57,10 +58,12 @@
               <% @uncompleted_habits.each_with_index do |habit, index| %>
                 <tr>
                   <th scope="row"><%= index + 1 %></th>
-                  <td><%= link_to habit.name.truncate(15), goal_habit_path(@goal, habit) %></td>
-                  <td class="text-center"><%= link_to t('delete'), goal_habit_path(@goal, habit),
-                                                      data: { turbo_method: :delete },
-                                                      class: "btn btn-danger btn-sm" %></td>
+                  <td><%= link_to habit.name.truncate(30), '#', class: 'hover-link' %></td>
+                  <td class="text-center">
+                    <%= link_with_icon 'pencil', edit_goal_habit_path(@goal, habit), class: 'btn btn-primary btn-sm' %>
+                    <%= link_with_icon 'trash', goal_habit_path(@goal, habit),
+                                                 data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %>
+                  </td>
                 </tr>
               <% end %>
             <% end %>
