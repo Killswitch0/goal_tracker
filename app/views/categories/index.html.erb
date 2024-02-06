@@ -3,11 +3,8 @@
     <div class="action-items">
       <div class="action-items__header">
         <div class="action-items__title"><%= t('all_categories') %></div>
-        <%= link_to new_category_path,
-                    class: 'btn btn-primary btn-sm new-task link-icon' do %>
-          <%= icon('plus-lg') %>
-          <%= t('new_category') %>
-        <% end %>
+        
+        <%= link_with_icon 'plus-lg', new_category_path, 'new_category', class: 'btn btn-primary btn-sm new-task link-icon' %>
       </div>
 
       <div class="divider"></div>
@@ -20,7 +17,7 @@
               <div class="action-list__links">
                 <%= link_with_icon 'pencil-square primary-icon', edit_category_path(category), class: 'icon-link' %>
 
-                <%= delete_link_to '', category, 'trash danger-icon', title: 'delete_category_name', name: category.name %> <!-- TODO - fix showing name for delete modal -->
+                <%= delete_link_to '', category, 'trash danger-icon', title: 'delete_category_name', name: category.name %>
               </div>
             </li>
           <% end %>
