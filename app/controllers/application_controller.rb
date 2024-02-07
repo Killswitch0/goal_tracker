@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
 
   def mark_all_notifications_as_read
     notifications = Notification.where(recipient: current_user)
-    notifications.update_all(read_at: Time.zone.now)
+    unread = notifications.unread
+    unread.update_all(read_at: Time.zone.now)
     redirect_to request.referrer
   end
 
