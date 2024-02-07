@@ -7,7 +7,10 @@
     </a>
 
     <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-      <h5 class="px-3 mt-1">Notifications</h5> <!-- TODO - Add view all button (also create notifications index page) -->
+      <div class="d-flex justify-content-between">
+        <h5 class="px-3 mt-1">Notifications</h5> <!-- TODO - add style -->
+        <span class="px-3 mt-1 "><%= link_to 'Mark all as read', mark_notifications_as_read_path %> </span>
+      </div>                                        <!-- TODO - Add view all button (also create notifications index page) -->
 
       <% @unread.each do |notification| %>
         <li>

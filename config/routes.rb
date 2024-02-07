@@ -121,5 +121,8 @@ Rails.application.routes.draw do
         get 'complete'
       end
     end
+
+    # Notifications
+    get 'mark_notifications_as_read', to: 'application#mark_all_notifications_as_read'
   end
 end

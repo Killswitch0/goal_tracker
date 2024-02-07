@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
 
   before_action :set_notifications, if: :current_user
 
+  def mark_all_notifications_as_read
+    notifications = Notification.where(recipient: current_user)
+    notifications.update_all(read_at: Time.zone.now)
+    redirect_to request.referrer
+  end
+
   private
 
   # Sets notification for current user
