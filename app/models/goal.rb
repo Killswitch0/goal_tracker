@@ -48,25 +48,25 @@ class Goal < ApplicationRecord
   validates :color, presence: true
 
   validates :name, presence: true, 
-    uniqueness: { scope: :user_id },
-    format: {
-      with: BASE_VALIDATION,
-      message: :text_input
-    },
-    length: {
-      minimum: 5,
-      maximum: 50 
-    }
+                   uniqueness: { scope: :user_id },
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: {
+                     minimum: 5,
+                     maximum: 50 
+                   }
 
   validates :description, presence: true,
-    format: {
-      with: BASE_VALIDATION,
-      message: :text_input
-    },
-    length: { 
-      minimum: 7,
-      maximum: 200 
-    }
+                          format: {
+                            with: BASE_VALIDATION,
+                            message: :text_input
+                          },
+                          length: { 
+                            minimum: 7,
+                            maximum: 200 
+                          }
 
   scope :sort_by_completed_tasks, -> {
     left_joins(:tasks)

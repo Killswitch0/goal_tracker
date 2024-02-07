@@ -30,15 +30,15 @@ class Habit < ApplicationRecord
   has_many :completion_dates, dependent: :destroy
 
   validates :name, presence: true,
-    uniqueness: { scope: :user_id },
-    format: {
-      with: BASE_VALIDATION,
-      message: :text_input
-    },
-    length: { 
-      minimum: 5,
-      maximum: 45 
-    }
+                   uniqueness: { scope: :user_id },
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: { 
+                     minimum: 5,
+                     maximum: 45 
+                   }
   
   validates :description, presence: true
 
@@ -64,7 +64,8 @@ class Habit < ApplicationRecord
       'EXISTS (
         SELECT 1
         FROM completion_dates
-        WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
+        WHERE habit_id = habits.id AND DATE(created_at) = ?
+      )', today
     )
     .distinct
   }
@@ -97,19 +98,6 @@ class Habit < ApplicationRecord
   }
 
   # => [{"name":"Morning exercise 0","data":{"2024-02-01":1}}]
-  # def self.habits_with_completion_period_data(habits, period = nil)
-  #   habits.map do |habit|
-  #     completion_data = habit.completion_dates.presence || {}
-  #     empty_data = Array.new(habits.length, {})
-
-  #     {
-  #       name: habit.name,
-  #       data: completion_data.empty? ? empty_data : completion_data.group_by_period(period, :date).count
-  #     }
-  #   end
-  # end
-
-  # TODO - create one flexible method
   def self.habits_with_completion_period_data(habits, period)
     habits.map do |habit|
       completion_data = habit.completion_dates
@@ -121,20 +109,7 @@ class Habit < ApplicationRecord
           0
       }
     end
-  end
-
-  def self.habits_with_completion_month_data(habits) # TODO - add logic like in method above
-    habits.map do |habit|
-      completion_data = habit.completion_dates.presence || {}
-      empty_data = Array.new(habits.length, {})
-  
-      {
-        name: habit.name,
-        data: completion_data.empty? ? empty_data : completion_data.group_by_month(:date).count
-      }
-    end
-  end
-  
+  end  
 
   # For Streakable concern
   def completed_count

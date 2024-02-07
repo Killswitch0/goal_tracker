@@ -93,8 +93,7 @@
           <div class="buttons-list">
             <%= link_with_icon 'plus-lg', new_goal_habit_path(@goal), 'new_habit', class: "btn btn-primary" %>
             <%= link_with_icon 'list', goal_habits_path(@goal), 'all_habits', class: "btn btn-primary" %>
-            <%= link_with_icon 'graph-up', goal_habit_chart_path(@goal, period: 'day', chart_type: 'line'),
-            'navigation.chart', class: 'btn btn-primary' %>
+            <%= link_to_chart @goal, icon_class: 'graph-up', class: 'btn btn-primary' %>
           </div>
         </div>
       </div>
@@ -146,7 +145,7 @@
           <div class="buttons-list">
             <%= link_with_icon 'plus-lg', new_goal_task_path(@goal), 'new_task', class: 'btn btn-primary' %>
             <%= link_with_icon 'list', goal_tasks_path(@goal), 'all_tasks', class: 'btn btn-primary' %>
-            <%= link_with_icon 'graph-up', goal_task_chart_path(@goal), 'navigation.chart', class: 'btn btn-primary' %>
+            <%= link_to_chart @goal, type: 'task', icon_class: 'graph-up', class: 'btn btn-primary' %>
           </div>
         </div>
       </div>

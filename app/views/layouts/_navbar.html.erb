@@ -17,8 +17,7 @@
                         class: "nav-link #{'active' if current_page?(goal_tracking_path) || current_page?(task_tracking_path)}" %></li>
         <li><%= link_to t('navigation.calendar').upcase, calendar_path,
                         class: "nav-link #{'active' if current_page?(calendar_path)}" %></li>
-        <li><%= link_to t('navigation.chart').upcase, habit_chart_path,
-                        class: "nav-link #{'active' if current_page?(habit_chart_path) || current_page?(task_chart_path)}" %></li>
+        <li><%= link_to_chart class: "nav-link #{'active' if current_page?(habit_chart_path) || current_page?(task_chart_path)}" %></li>
       </ul>
 
       <ul id="navbar__right" class="navbar-nav">
