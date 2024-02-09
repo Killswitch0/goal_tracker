@@ -17,11 +17,26 @@ class ChallengeUserNotification < ApplicationNotifications
 
   # Define helper methods to make rendering easier.
 
-  def message
+  def message    
     @challenge = Challenge.find(params[:challenge_user][:challenge_id])
     @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
     @user = User.find(params[:challenge_user][:user_id])
-    I18n.t('notifications.challenge.invited', challenge: @challenge.name)
+
+    %Q{
+      #{tag.strong @user.name} invited you to take part in Challenge #{tag.a @challenge.name, href: challenge_path(@challenge, mark_as_read: 'true'), class: 'strong'}
+
+      #{tag.div(
+          button_to(t('accept'), confirm_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-primary btn-sm') +
+          button_to(t('decline'), decline_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-danger btn-sm mx-1'),
+          class: 'buttons-list start'
+        )
+      }
+
+    }.html_safe
+  end
+
+  def notify_avatar
+    @user = User.find(params[:challenge_user][:user_id])
   end
 
   def url

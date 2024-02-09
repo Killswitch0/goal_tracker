@@ -19,7 +19,12 @@ class GoalDeadlineNotification < ApplicationNotifications
 
   def message
     @goal = Goal.find(params[:goal][:id])
-    I18n.t('notifications.common.left_for_complete', days: days_left(@goal), target_name: @goal.name)
+    I18n.t('notifications.common.left_for_complete', days: days_left(@goal), target_name: @goal.name) # TODO - finish helper methods to easy render html
+  end
+
+  def notify_avatar
+    @goal = Goal.find(params[:goal][:id])
+    @goal.user
   end
 
   def url

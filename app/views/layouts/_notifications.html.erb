@@ -20,13 +20,15 @@
 
       <div class="notifications-list">
         <% @notifications.each do |notification| %>
-          <div class="notif_card <%= notification.to_notification.read? ? '' : 'unread' %>">
-            <div class="avatar"><%= current_user.gravatar css_class: 'rounded-circle' %></div>
+          <% notification = notification.to_notification %>
+
+          <div class="notif_card <%= notification.read? ? '' : 'unread' %>">
+            <div class="avatar"><%= notification.notify_avatar.decorate.gravatar css_class: 'rounded-circle' %></div>
             <div class="description">
               <p class="user_activity">
-                <%= notification.to_notification.message %>
+                <%= notification.message %>
               </p>
-              <p class="time"><%= time_ago_in_words(notification.created_at) %></p>
+              <p class="time"><%= time_ago_in_words(notification.record.created_at) %></p>
             </div>
         </div>
         <% end %>

@@ -19,7 +19,14 @@ class TaskAlmostNotification < ApplicationNotifications
 
   def message
     @goal = Goal.find(params[:task][:goal_id])
-    "You almost made tasks streak in #{@goal.name.truncate(10)}"
+    %Q{
+      #{tag.strong 'You'} almost made Task streak in Goal #{tag.a @goal.name, href: goal_path(@goal, mark_as_read: 'true'), class: 'strong'}.
+  }.html_safe
+  end
+
+  def notify_avatar
+    @goal = Goal.find(params[:task][:goal_id])
+    @goal.user
   end
 
   def url

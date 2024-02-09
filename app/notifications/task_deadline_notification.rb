@@ -22,6 +22,11 @@ class TaskDeadlineNotification < ApplicationNotifications
     I18n.t('notifications.common.left_for_complete', days: days_left(@task), target_name: @task.name)
   end
 
+  def notify_avatar
+    @task = Task.find(params[:task][:id])
+    @task.user
+  end
+
   def url
     goal_path(Goal.find(params[:task][:goal_id]), mark_as_read: 'true')
   end

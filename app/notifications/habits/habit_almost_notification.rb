@@ -22,6 +22,11 @@ class HabitAlmostNotification < ApplicationNotifications
     I18n.t('notifications.common.almost', target_name: @goal.name.truncate(10)).truncate(45)
   end
 
+  def notify_avatar
+    @goal = Goal.find(params[:habit][:goal_id])
+    @goal.user
+  end
+
   def url
     goal_path(Goal.find(params[:habit][:goal_id]), mark_as_read: 'true')
   end

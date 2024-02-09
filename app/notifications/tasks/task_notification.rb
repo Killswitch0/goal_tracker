@@ -27,6 +27,10 @@ class TaskNotification < ApplicationNotifications
     }.html_safe
   end
 
+  def notify_avatar
+    @user = User.find(params[:task][:user_id])
+  end
+
   def url
     goal_path(Goal.find(params[:task][:goal_id]), mark_as_read: 'true')
   end

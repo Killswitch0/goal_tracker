@@ -202,6 +202,8 @@ en:
     few: '%{count} days left'
     many: '%{count} days left'
     other: '%{count} days left'
+  accept: 'Accept'
+  decline: 'Decline'
 
   # Views -> Authentication.
   #----------------------------------------------------------------------------

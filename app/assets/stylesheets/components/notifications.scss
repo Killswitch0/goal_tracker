@@ -60,15 +60,18 @@
   #mark_all {
     cursor: pointer;
     margin: 0;
+    color: var(--Very-dark-violet);
     
     a {
       text-decoration: none;
       color: inherit;
     }
   }
+
   #mark_all:hover {
     color: $second-color;
   }
+
   p {
     color: var(--Dark-grayish-blue);
   }
@@ -92,17 +95,20 @@
   img{
     width: 50px;
   }
+
   .description{
     margin-left: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+
   strong, .strong {
     color: var(--Very-dark-violet);
     text-decoration: none;
     font-weight: 800;
   }
+
   .strong:hover {
     color: $second-color;
   }
@@ -110,6 +116,7 @@
   .unread{
     background-color: var(--Light-grayish-blue-1) !important;
   }
+
   .unread p:first-of-type::after{
     content: " ";
     background-color: var(--Red);
@@ -118,11 +125,12 @@
     display: inline-block;
     border-radius: 50%;
   }
+
   .message_card{
     display: flex;
     align-items: center;
-  
   }
+
   .message{
     padding: 1rem;
     border: 1px solid var(--Light-grayish-blue-2);
@@ -130,9 +138,11 @@
     cursor: pointer;
     margin: 0 0 0 5rem;
   }
+
   .message:hover{
     background-color: var(--Light-grayish-blue-1);
   }
+
   .chess_img{
   margin-left: auto;
   }
