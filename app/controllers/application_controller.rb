@@ -18,9 +18,9 @@ class ApplicationController < ActionController::Base
 
   # Sets notification for current user
   def set_notifications
-    notifications = Notification.where(recipient: current_user).newest_first.limit(9)
-    @unread = notifications.unread
-    @read = notifications.read
+    @notifications = Notification.where(recipient: current_user).newest_first.limit(9)
+    @unread = @notifications.unread
+    @read = @notifications.read
   end
 
   def redirect_user

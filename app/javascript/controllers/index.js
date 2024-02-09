@@ -15,3 +15,6 @@ application.register("charts", ChartsController)
 
 import GoalsController from "./goals_controller"
 application.register("goals", GoalsController)
+
+import NavbarController from "./navbar_controller"
+application.register("navbar", NavbarController)

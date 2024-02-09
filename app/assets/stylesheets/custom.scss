@@ -1,3 +1,4 @@
+@import "fonts";
 @import "variables/*";
 @import "mixins/*";
 @import "components/*";
@@ -12,6 +13,7 @@ body {
   min-height: 100vh;
   background: #03dfff;
   background: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .home {
@@ -31,10 +33,17 @@ body {
   }
 }
 
+.title { font-weight: 600; }
+
 // hide content
 .hide {
   display: none;
 }
+
+
+
+
+
 
 
 

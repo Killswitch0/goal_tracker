@@ -20,7 +20,7 @@
         <li><%= link_to_chart class: "nav-link text-uppercase #{'active' if current_page?(habit_chart_path) || current_page?(task_chart_path)}" %></li>
       </ul>
 
-      <ul id="navbar__right" class="navbar-nav">
+      <ul id="navbar__right" class="navbar-nav" data-controller="navbar">
         <%= render 'layouts/locales' %>
         <%= render 'layouts/notifications' %>
         <%= render "user/session_manager" %>

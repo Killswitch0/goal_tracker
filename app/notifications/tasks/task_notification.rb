@@ -21,7 +21,10 @@ class TaskNotification < ApplicationNotifications
     @goal = Goal.find(params[:task][:goal_id])
     @task = Task.find(params[:task][:id])
     @user = User.find(params[:task][:user_id])
-    I18n.t('notifications.common.created', user_name: @user.name, child_target: @task.name.truncate(15), parent_target: @goal.name.truncate(10))
+
+    %Q{
+      #{tag.strong @user.name} #{I18n.t('notifications.common.created')} Task #{tag.a @task.name, href: goal_path(@goal, mark_as_read: 'true'), class: 'strong'}.
+    }.html_safe
   end
 
   def url

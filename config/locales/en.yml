@@ -390,7 +390,7 @@ en:
   notifications:
     common:
       almost: "You almost made habits streak in «%{target_name}»! Let's GO!" # TODO add notification structure from noticed documentation
-      created: "%{user_name} created «%{child_target}» task in «%{parent_target}»."
+      created: "created"
       left_for_complete: "You remain %{days} days to complete Goal «%{target_name}»."
     challenge:
       invited: "You've been invited to the «%{challenge}» challenge"
