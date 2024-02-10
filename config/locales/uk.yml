@@ -413,9 +413,11 @@ uk:
   #----------------------------------------------------------------------------
   notifications:
     common:
+      notifications: 'Сповіщення'
       almost: "Ви майже досягли серії звичок у «%{target_name}»! Давайте!"
       created: "Ви створили завдання «%{child_target}» у «%{parent_target}»."
       left_for_complete: "Вам залишилося %{days} днів для завершення мети «%{target_name}»."
+      mark_as_read: 'Позначити як прочитане'
     challenge:
       invited: 
         full_message: "Вас запросили до виклику «%{challenge}»"

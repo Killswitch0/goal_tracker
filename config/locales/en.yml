@@ -392,9 +392,11 @@ en:
   #----------------------------------------------------------------------------
   notifications:
     common:
+      notifications: 'Notifications'
       almost: "You almost made habits streak in «%{target_name}»! Let's GO!" # TODO add notification structure from noticed documentation
       created: "You created «%{child_target}» Task in «%{parent_target}»."
       left_for_complete: "You remain %{days} days to complete Goal «%{target_name}»."
+      mark_as_read: 'Mark all as read'
     challenge:
       invited: 
         full_message: "You've been invited to the «%{challenge}» challenge"
