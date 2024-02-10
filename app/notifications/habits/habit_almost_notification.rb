@@ -19,7 +19,17 @@ class HabitAlmostNotification < ApplicationNotifications
   #
   def message
     @goal = Goal.find(params[:habit][:goal_id])
-    I18n.t('notifications.common.almost', target_name: @goal.name.truncate(10)).truncate(45)
+    I18n.t('notifications.common.almost', target_name: @goal.name)
+  end
+
+  def to_parts
+    @habit = Habit.find(params[:habit][:id])
+
+    {
+      user: 'You',
+      message: I18n.t('notifications.habit.almost.parts.message'),
+      target: @habit.name
+    }
   end
 
   def notify_avatar

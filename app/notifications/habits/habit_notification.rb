@@ -21,9 +21,17 @@ class HabitNotification < ApplicationNotifications
     @habit = Habit.find(params[:habit][:id])
     @user = User.find(@habit.user_id)
 
-    %Q{
-      #{tag.strong @user.name} #{I18n.t('notifications.common.created')} Habit #{tag.a @habit.name, href: goal_path(@goal, mark_as_read: 'true'), class: 'strong'}.
-    }.html_safe
+    I18n.t('notifications.habit.created.full_message', target: @habit.name)
+  end
+
+  def to_parts
+    @habit = Habit.find(params[:habit][:id])
+
+    {
+      user: 'You',
+      message: I18n.t('notifications.habit.created.parts.message'),
+      target: @habit.name
+    }
   end
 
   def notify_avatar

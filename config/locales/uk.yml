@@ -412,9 +412,36 @@ uk:
   #----------------------------------------------------------------------------
   notifications:
     common:
-      almost: "Ви майже досягли рекорду в завданнях «%{target_name}»! Давайте!"
-      created: "%{user_name} створив завдання «%{child_target}» в «%{parent_target}»."
-      left_for_complete: "У вас залишилося %{days} днів, щоб завершити ціль «%{target_name}»."
+      almost: "Ви майже досягли серії звичок у «%{target_name}»! Давайте!"
+      created: "Ви створили завдання «%{child_target}» у «%{parent_target}»."
+      left_for_complete: "Вам залишилося %{days} днів для завершення мети «%{target_name}»."
     challenge:
-      invited: "Вас запросили до виклику «%{challenge}»."
+      invited: 
+        full_message: "Вас запросили до виклику «%{challenge}»"
+        parts:
+          message: 'запросив вас до виклику'
+    task:
+      created:
+        full_message: 'Ви створили завдання %{target}.'
+        parts:
+          message: 'створили завдання'
+      almost: 
+        full_message: "Ви майже досягли серії завдань у «%{target}»! Давайте!"
+        parts:
+          message: 'майже досягли серії завдань'
+    habit:
+      created:
+        full_message: 'Ви створили звичку %{target}.'
+        parts:
+          message: 'створили звичку'
+      almost: 
+        full_message: "Ви майже досягли серії звичок у «%{target}»! Давайте!"
+        parts:
+          message: 'майже досягли серії звичок'
+    goal:
+      created:
+        full_message: 'Ви створили ціль %{target}.'
+        parts:
+          message: 'створили ціль'
+
 

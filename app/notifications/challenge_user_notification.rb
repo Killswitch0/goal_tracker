@@ -22,17 +22,25 @@ class ChallengeUserNotification < ApplicationNotifications
     @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
     @user = User.find(params[:challenge_user][:user_id])
 
-    %Q{
-      #{tag.strong @user.name} invited you to take part in Challenge #{tag.a @challenge.name, href: challenge_path(@challenge, mark_as_read: 'true'), class: 'strong'}
+    I18n.t('notifications.challenge.invited.full_message', challenge: @challenge.name)
+  end
 
-      #{tag.div(
-          button_to(t('accept'), confirm_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-primary btn-sm') +
-          button_to(t('decline'), decline_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-danger btn-sm mx-1'),
-          class: 'buttons-list start'
-        )
-      }
+  def to_parts
+    @challenge = Challenge.find(params[:challenge_user][:challenge_id])
 
-    }.html_safe
+    {
+      user: @challenge.user.name,
+      message: I18n.t('notifications.challenge.invited.parts.message'),
+      target: @challenge.name
+    }
+  end
+
+  def action_links
+    "#{tag.div(
+        button_to(t('accept'), confirm_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-primary btn-sm') +
+        button_to(t('decline'), decline_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-danger btn-sm mx-1'),
+      class: 'buttons-list start'
+    )}".html_safe
   end
 
   def notify_avatar

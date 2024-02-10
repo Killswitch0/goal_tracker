@@ -19,9 +19,18 @@ class TaskAlmostNotification < ApplicationNotifications
 
   def message
     @goal = Goal.find(params[:task][:goal_id])
-    %Q{
-      #{tag.strong 'You'} almost made Task streak in Goal #{tag.a @goal.name, href: goal_path(@goal, mark_as_read: 'true'), class: 'strong'}.
-  }.html_safe
+    
+    I18n.t('notifications.task.almost.full_message', target: @goal.name)
+  end
+
+  def to_parts
+    @goal = Goal.find(params[:task][:goal_id])
+
+    {
+      user: 'You', # TODO add translation
+      message: I18n.t('notifications.task.almost.parts.message'),
+      target: @goal.name
+    }
   end
 
   def notify_avatar

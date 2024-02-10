@@ -26,7 +26,11 @@
             <div class="avatar"><%= notification.notify_avatar.decorate.gravatar css_class: 'rounded-circle' %></div>
             <div class="description">
               <p class="user_activity">
-                <%= notification.message %>
+                <strong><%= notification.to_parts[:user] %></strong>
+                <%= notification.to_parts[:message].truncate(30) %>
+                <%= link_to notification.to_parts[:target], notification.url, class: 'strong' %>
+
+                <%= notification.action_links if notification.respond_to? :action_links %>
               </p>
               <p class="time"><%= time_ago_in_words(notification.record.created_at) %></p>
             </div>

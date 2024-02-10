@@ -22,9 +22,17 @@ class TaskNotification < ApplicationNotifications
     @task = Task.find(params[:task][:id])
     @user = User.find(params[:task][:user_id])
 
-    %Q{
-      #{tag.strong @user.name} #{I18n.t('notifications.common.created')} Task #{tag.a @task.name, href: goal_path(@goal, mark_as_read: 'true'), class: 'strong'}.
-    }.html_safe
+    I18n.t('notifications.task.created.full_message', target: @task.name)
+  end
+
+  def to_parts  
+    @task = Task.find(params[:task][:id])
+
+    {
+      user: 'You',
+      message: I18n.t('notifications.task.created.parts.message'),
+      target: @task.name
+    }
   end
 
   def notify_avatar
