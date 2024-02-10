@@ -29,7 +29,7 @@ class TaskNotification < ApplicationNotifications
     @task = Task.find(params[:task][:id])
 
     {
-      user: 'You',
+      user: t('you'),
       message: I18n.t('notifications.task.created.parts.message'),
       target: @task.name
     }

@@ -28,7 +28,7 @@ class HabitNotification < ApplicationNotifications
     @habit = Habit.find(params[:habit][:id])
 
     {
-      user: 'You',
+      user: t('you'),
       message: I18n.t('notifications.habit.created.parts.message'),
       target: @habit.name
     }

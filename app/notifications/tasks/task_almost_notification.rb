@@ -27,7 +27,7 @@ class TaskAlmostNotification < ApplicationNotifications
     @goal = Goal.find(params[:task][:goal_id])
 
     {
-      user: 'You', # TODO add translation
+      user: t('you'),
       message: I18n.t('notifications.task.almost.parts.message'),
       target: @goal.name
     }
