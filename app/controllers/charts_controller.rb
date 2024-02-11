@@ -20,8 +20,8 @@ class ChartsController < ApplicationController
   def tasks_json
     tasks = current_user.tasks
     tasks = tasks.where(goal_id: @goal) if @goal
-
-    @tasks = tasks.group(:name).group_by_period(@period, :complete_date).count.reject! { |key, value| value.zero? }.chart_json
+    
+    @tasks = tasks.group(:name).group_by_period(@period, :complete_date).count.reject { |key, value| value.zero? }.chart_json
 
     render json: @tasks
   end

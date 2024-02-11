@@ -14,26 +14,31 @@
       <% end %>
     </div>
 
-    <div class="chart__body">
-      <div class="buttons-list center mt-3">
-        <% if @goal %>
-          <%= render 'task_period_links', goal: @goal %>
-          <div class="vr mx-3"></div> <!-- Add margin inline style in scss -->
-          <%= render 'chart_for_links', goal: @goal %>
-        <% else %>
-          <%= render 'task_period_links', goal: nil %>
-          <div class="vr mx-3"></div>
-          <%= render 'chart_for_links', goal: nil %>
-        <% end %>
-      </div>
-
-      <div class="mt-5"><%= line_chart(tasks_chart_path(period: params[:period]), dataset: {borderWidth: 5} ) %></div>
-      
+    <div class="buttons-list center mt-3">
       <% if @goal %>
-        <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+        <%= render 'task_period_links', goal: @goal %>
+        <div class="vr mx-3"></div> <!-- Add margin inline style in scss -->
+        <%= render 'chart_for_links', goal: @goal %>
       <% else %>
-        <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
+        <%= render 'task_period_links', goal: nil %>
+        <div class="vr mx-3"></div>
+        <%= render 'chart_for_links', goal: nil %>
       <% end %>
     </div>
+
+    <% if current_user.tasks.empty? %>
+      <%= render 'empty' %>
+    <% else %>
+      <div class="chart__body">
+        <!-- TODO - add translation for empty message -->
+        <div class="mt-5"><%= line_chart(tasks_chart_path(period: params[:period]), dataset: {borderWidth: 5}, empty: 'You dont have completion data for tasks.') %></div>
+        
+        <% if @goal %>
+          <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+        <% else %>
+          <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
