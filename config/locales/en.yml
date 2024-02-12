@@ -281,7 +281,13 @@ en:
   #----------------------------------------------------------------------------
   habits_chart: 'Habits Chart'
   tasks_chart: 'Tasks Chart'
-
+  completions: 'Completions'
+  chart:
+    tasks: 
+      empty: 'You dont have completion data for tasks.'
+    habits: 
+      empty: 'You dont have completion data for habits.'
+  
   # Views -> Challenges.
   #----------------------------------------------------------------------------
   challenge: 'Challenge'
@@ -304,7 +310,7 @@ en:
   #----------------------------------------------------------------------------
   buttons:
     goals:
-      to_goal: 'Go to goal'
+      to_goal: 'Go to goals'
 
   # Controllers.
   #----------------------------------------------------------------------------
@@ -405,6 +411,9 @@ en:
       calendar:
         title: "Your calendar doesn't have any data!"
         message: 'Create habits in your Goal to show calendar.'
+      dashboard: 
+        title: "Your dashboard doesn't have any data!"
+        message: 'Create Goal to show dashboard.'
       tracking:
         title: "Your tracking doesn't have any data!"
         goal_message: 'Create Goal to show tracking.'

@@ -12,7 +12,7 @@
       <dd class="col-sm-8 px-5"><%= @goal.description %></dd>
       <dt class="col-sm-4"><%= t('activerecord.attributes.goal.deadline') %>:</dt>
       <dd class="col-sm-8 px-5"><%= l(@goal.deadline, format: :long).split(',').first %> </dd>
-      <dt class="col-sm-4"><%= t('days_left.base') %>:</dt>
+      <dt class="col-sm-4"><%= t('days_left.base') %>:</dt> <!-- TODO - days left color helper -->
       <dd class="col-sm-8 px-5"><%= days_left(@goal).zero? ? 'Overdue' : days_left(@goal) %></dd>
       <dt class="col-sm-4"><%= t('progress')%>:</dt>
       <dd class="col-sm-8 px-5">
@@ -49,7 +49,7 @@
 
   <div class="completion-wrapper">
     <div class="completion-wrapper__item">
-      <div class="col-sm-12 table-main <%= 'completed' if @goal.habits_streak? %>">
+      <div class="col-sm-12 table-main">
         <div class="table-wrapper">
           <div class="table-header list">
             <h2>

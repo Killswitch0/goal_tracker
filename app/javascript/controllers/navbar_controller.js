@@ -14,7 +14,6 @@ export default class extends Controller {
       e.preventDefault();
 
       notifications.classList.toggle('show-block');
-      notifications.classList.toggle('');
     });
   }
 }

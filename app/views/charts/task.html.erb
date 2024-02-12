@@ -32,14 +32,15 @@
                                  icon_class: 'graph-up display-1' %>
     <% else %>
       <div class="chart__body">
-        <!-- TODO - add translation for empty message -->
-        <div class="mt-5"><%= line_chart(tasks_chart_path(period: params[:period]), dataset: {borderWidth: 5}, empty: 'You dont have completion data for tasks.') %></div>
+        <div class="mt-5"><%= line_chart(tasks_chart_path(period: params[:period]), dataset: {borderWidth: 5}, empty: t('chart.tasks.empty')) %></div>
         
-        <% if @goal %>
-          <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
-        <% else %>
-          <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
-        <% end %>
+        <div class="buttons-list start">
+          <% if @goal %>
+            <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+          <% else %>
+            <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

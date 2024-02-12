@@ -21,7 +21,7 @@
     <div class="chart__body col-md-12">
       <div class="buttons-list center mt-3">
         <% if @goal %> 
-          <%= render 'habit_period_links', goal: @goal %> <!-- TODO - is it really need to show on empty chart? -->
+          <%= render 'habit_period_links', goal: @goal %> 
           <div class="vr mx-3"></div>
           <%= render 'chart_for_links', goal: @goal %>
         <% else %>
@@ -51,16 +51,17 @@
     </div>  
 
     <% if params[:chart_type] == 'column' %>
-      <div class="mt-5"> <%= column_chart habits_chart_path(goal_id: @goal, period: @period, chart_type: @chart_type), ytitle: 'Completions' %> </div> <!-- TODO - translate ytitle-->
+      <div class="mt-5"> <%= column_chart habits_chart_path(goal_id: @goal, period: @period, chart_type: @chart_type), ytitle: t('completions') %> </div>
     <% else %>
       <div class="mt-5"> <%= line_chart habits_chart_path(goal_id: @goal, period: @period, chart_type: @chart_type) %> </div>
     <% end %>
 
-    <% if @goal %>
-      <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
-    <% else %>
-      <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %>
-    <% end %>
+    <div class="buttons-list start">
+      <% if @goal %>
+        <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+      <% else %>
+        <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %>
+      <% end %>
     </div>
   <% end %>
 </div>

@@ -1,6 +1,6 @@
 <% svg ||= false %>
 
-<div class="empty text-center"> <!-- TODO - add to all pages empty partials and render logic, also add redirect to other page with data if first page no any -->
+<div class="empty text-center">
   <div class="empty__wrapper">
     <p><%= svg ? inline_svg_tag(svg_path, size: '170', class: '') : icon(icon_class) %></p>
     <h3 class="title"><%= title %></h3>
