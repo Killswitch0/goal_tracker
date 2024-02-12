@@ -5,6 +5,6 @@
     <p><%= svg ? inline_svg_tag(svg_path, size: '170', class: '') : icon(icon_class) %></p>
     <h3 class="title"><%= title %></h3>
     <p><%= message %></p>
-    <p><%= link_to 'Go to goals', goals_path, class: 'btn btn-primary' %></p>
+    <p><%= link_to t('buttons.goals.to_goal'), goals_path, class: 'btn btn-primary' %></p>
   </div>
 </div>
