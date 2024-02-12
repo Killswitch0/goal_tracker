@@ -115,3 +115,4 @@ end
 gem "gravatar_image_tag", "~> 1.2"
 
 gem "sidekiq-cron", "~> 1.10"
+

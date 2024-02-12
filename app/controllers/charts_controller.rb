@@ -8,12 +8,14 @@ class ChartsController < ApplicationController
   #----------------------------------------------------------------------------
   def habit
     @chart_for = chart_params[:chart_for] = 'Habits'
+    @habits = current_user.habits
   end
 
   # GET /chart/task
   #----------------------------------------------------------------------------
   def task
     @chart_for = chart_params[:chart_for] = 'Tasks'
+    @tasks = current_user.tasks
   end
 
   #----------------------------------------------------------------------------
@@ -58,6 +60,10 @@ class ChartsController < ApplicationController
         params[:period],
         :day
     )
+  end
+
+  def redirect_if_no_data
+
   end
 
   def default_params   

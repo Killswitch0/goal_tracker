@@ -10,17 +10,24 @@
     </div>
   </div>
 
-  <div class="large-table-board__body">
-    <div class="buttons-list evenly">
-      <div class="text-center my-3">
-        <%= link_to t('switch_to_goals'), goal_tracking_path, class: 'btn btn-sm btn-primary' %>
+  <% if @tasks.empty? %>
+    <%= render 'shared/empty', title: t('partials.empty.tracking.title'),
+                               message: t('partials.empty.tracking.task_message'),
+                               svg: true,
+                               svg_path: 'icons/material/table_chart_view' %>
+  <% else %>
+    <div class="large-table-board__body">
+      <div class="buttons-list evenly">
+        <div class="text-center my-3">
+          <%= link_to t('switch_to_goals'), goal_tracking_path, class: 'btn btn-sm btn-primary' %>
+        </div>
+
+        <%= render 'layouts/search', path: task_tracking_path %>
       </div>
 
-      <%= render 'layouts/search', path: task_tracking_path %>
+      <div class="tracking-wrapper table-body">
+        <%= render 'goal_tracking/table', items: @tasks %>
+      </div>
     </div>
-
-    <div class="tracking-wrapper table-body">
-      <%= render 'goal_tracking/table', items: @tasks %>
-    </div>
-  </div>
+  <% end %>
 </div>

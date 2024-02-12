@@ -10,28 +10,35 @@
     </h2>
   </div>
 
-  <div class="calendar__body mt-3 text-center">
-    <div class="input-group mt-3">
-      <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" }, 
-                      class: 'btn btn-primary btn-sm link-icon mx-2' do %>
-        <%= inline_svg_tag("icons/bootstrap/highlighter", options = {class: 'me-1'}) %>
-        <%= t('goal_markers') %>
-      <% end %>
+  <% if habits_for.empty? %>
+    <%= render 'shared/empty', title: t('partials.empty.calendar.title'),
+                               message: t('partials.empty.calendar.message'),
+                               icon_class: 'calendar4-week display-1' %>
+  <% else %>
+    <div class="calendar__body mt-3 text-center">
+      <div class="input-group mt-3">
+        <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" }, 
+                        class: 'btn btn-primary btn-sm link-icon mx-2' do %>
+          <%= inline_svg_tag("icons/bootstrap/highlighter", options = {class: 'me-1'}) %>
+          <%= t('goal_markers') %>
+        <% end %>
 
-      <div class="filters">
-        <%= render 'form' %>
+        <div class="filters">
+          <%= render 'form' %>
+        </div>
       </div>
-  </div>
 
 
-  <%= month_calendar do |date| %>
-    <%= date %>
-    <% habits_for.each do |habit| %>
-      <% completion_date = habit.completion_dates.find { |cd| cd.date == date.to_date } %>
-      <% completed = !completion_date.nil? %>
+      <%= month_calendar do |date| %>
+        <%= date %>
+        <% habits_for.each do |habit| %>
+          <% completion_date = habit.completion_dates.find { |cd| cd.date == date.to_date } %>
+          <% completed = !completion_date.nil? %>
 
-      <%= tag.div tag.span(habit.name), data: { complete: completed, goal_marker: habit.goal.color } %>
-    <% end %>
+          <%= tag.div tag.span(habit.name), data: { complete: completed, goal_marker: habit.goal.color } %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 

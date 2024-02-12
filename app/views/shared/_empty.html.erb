@@ -1,8 +1,10 @@
+<% svg ||= false %>
+
 <div class="empty text-center"> <!-- TODO - add to all pages empty partials and render logic, also add redirect to other page with data if first page no any -->
   <div class="empty__wrapper">
-    <p><%= icon 'graph-up display-1' %></p>
-    <h3 class="title">Your chart does't have any data</h3>
-    <p>Create habits or tasks in your Goal to show chart</p>
+    <p><%= svg ? inline_svg_tag(svg_path, size: '170', class: '') : icon(icon_class) %></p>
+    <h3 class="title"><%= title %></h3>
+    <p><%= message %></p>
     <p><%= link_to 'Go to goals', goals_path, class: 'btn btn-primary' %></p>
   </div>
 </div>

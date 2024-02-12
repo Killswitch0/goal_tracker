@@ -27,7 +27,9 @@
     </div>
 
     <% if current_user.tasks.empty? %>
-      <%= render 'empty' %>
+      <%= render 'shared/empty', title: t('partials.empty.chart.title'),
+                                 message: t('partials.empty.chart.message'),
+                                 icon_class: 'graph-up display-1' %>
     <% else %>
       <div class="chart__body">
         <!-- TODO - add translation for empty message -->

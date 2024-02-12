@@ -388,6 +388,22 @@ en:
   messages:
     sign_or_log: 'Please sign up or login to use the application.'
 
+  
+  # Partials.
+  #----------------------------------------------------------------------------
+  partials:
+    empty:
+      chart:
+        title: "Your chart doesn't have any data!"
+        message: 'Create habits or tasks in your Goal to show chart'
+      calendar:
+        title: "Your calendar doesn't have any data!"
+        message: 'Create habits in your Goal to show calendar.'
+      tracking:
+        title: "Your tracking doesn't have any data!"
+        goal_message: 'Create Goal to show tracking.'
+        task_message: 'Create Task in your Goal to show tracking.'
+
   # Notifications.
   #----------------------------------------------------------------------------
   notifications:
