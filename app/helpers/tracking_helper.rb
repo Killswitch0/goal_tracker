@@ -1,7 +1,7 @@
 module TrackingHelper
   def link_to_tracking_with_data(**options)
-    return link_to t('navigation.tracking').upcase, goal_tracking_path, options if Rails.env.test?
-  
+    return unless current_user
+
     path = if current_user.goals.present?
       goal_tracking_path
     elsif current_user.tasks.present?

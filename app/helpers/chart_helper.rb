@@ -12,7 +12,7 @@ module ChartHelper
 end
 
 def link_to_chart_with_data(**options)
-  return link_to t('navigation.chart'), habit_chart_path(period: 'day', chart_type: 'line'), options if Rails.env.test?
+  return unless current_user
 
   path = if current_user.habits.present?
     habit_chart_path(period: 'day', chart_type: 'line')
