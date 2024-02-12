@@ -9,12 +9,12 @@
     <div class="notifications" id="notifications">
       <header>
         <div class="notif-box">
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center"> <!-- TODO - add style -->
             <h2 class="title"><%= t('notifications.common.notifications') %></h2>
             <span id="notifes"><%= @unread.count %></span>
           </div>
 
-          <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p>
+          <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p> <!-- TODO - check app colors for color matching -->
         </div>
       </header>
 
@@ -45,6 +45,8 @@
           </p>
         </div>
       </div>
+
+      <%= link_to t('show_all'), notifications_path(filter: 'all'), id: 'mark_all', class: 'mt-1' %> <!-- TODO - translate link -->
     </div>
   </li>
 <% end %>

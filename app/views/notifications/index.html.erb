@@ -1,0 +1,56 @@
+<div class="notifications-wrapper mt-3">
+  <div class="list-group-wrapper">
+    <div class="list-group">
+      <%= active_link_to notifications_path(filter: 'all'), class: 'list-group-item list-group-item-action' do %>
+        <%= 'All notifications' %>
+        <span class="badge rounded-pill text-bg-secondary"><%= @all_count %></span>
+      <% end %>
+      <%= active_link_to notifications_path(filter: 'unread'), class: 'list-group-item list-group-item-action' do %>
+        <%= 'Unread' %>
+        <span class="badge rounded-pill text-bg-secondary"><%= @unread_count %></span> <!-- TODO - add style justify-content-between -->
+      <% end %>
+      <%= active_link_to 'Read', notifications_path(filter: 'read'), class: "list-group-item list-group-item-action" %>
+    </div>
+  </div>
+
+
+  <div class="notifications" id="notifications_index">
+    <header>
+      <div class="notif-box">
+        <div class="d-flex align-items-center"> <!-- TODO - add style -->
+          <h2 class="title"><%= t('notifications.common.notifications') %></h2>
+        </div>
+
+        <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p>
+      </div>
+    </header>
+
+    <div class="notifications-list"> <!-- TODO - Add one partial to notifications -->
+      <% @notifications.each do |notification| %> <!-- TODO - create style to scrollbar -->
+        <% notification = notification.to_notification %>
+
+        <div class="notif_card <%= notification.read? ? '' : 'unread' %>">
+          <div class="avatar"><%= notification.notify_avatar.decorate.gravatar(size: 50, css_class: 'rounded-circle') %></div>
+          <div class="description">
+            <p class="user_activity">
+              <strong><%= notification.to_parts[:user] %></strong>
+              <%= notification.to_parts[:message].truncate(30) %>
+              <%= link_to notification.to_parts[:target], notification.url, class: 'strong' %>
+
+              <%= notification.action_links if notification.respond_to? :action_links %>
+            </p>
+            <p class="time"><%= time_ago_in_words(notification.record.created_at) %></p>
+          </div>
+        </div>
+      <% end %>
+      
+      <div class="message">
+        <p>
+          Hello, thanks for setting up the Chess Club. I've been a member
+          for a few weeks now and I'm already having lots of fun and
+          improving my game.
+        </p>
+      </div>  
+    </div>
+  </div>
+</div>

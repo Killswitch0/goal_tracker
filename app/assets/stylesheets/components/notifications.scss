@@ -42,20 +42,6 @@
       align-items: center;
     }
   }
-  
-  #notifes {
-    font-size: medium;
-    background-color: $second-color;
-    margin-left: 0.5rem;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 25px;
-    color: var(--White);
-    font-weight: 800;
-    border-radius: 0.5rem;
-  }
 
   #mark_all {
     cursor: pointer;
@@ -95,7 +81,7 @@
   }
 
   img{
-    width: 50px;
+    // width: 50px;
   }
 
   .description{
@@ -148,6 +134,20 @@
   .chess_img{
   margin-left: auto;
   }
+}
+
+#notifes {
+  font-size: medium;
+  background-color: $second-color;
+  margin-left: 0.5rem;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  color: var(--White);
+  font-weight: 800;
+  border-radius: 0.5rem;
 }
 
 .show-block {

@@ -10,7 +10,7 @@
 }
 
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary.active {
   background-color: $primary-hover !important;
   border-color: $primary-hover !important;
   transition: 0.30ms all;

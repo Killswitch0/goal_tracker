@@ -1,7 +1,9 @@
 <% goal = goal || nil %>
 
-<% %w(day week month).each do |period| %>
-  <%= active_link_to t("date.#{period}"), 
-    goal ? goal_habit_chart_path(period: period, chart_type: @chart_type) :
-     habit_chart_path(period: period, chart_type: @chart_type), class: 'nav-btn' %>
-<% end %>
+<div class="btn-group">
+  <% %w(day week month).each do |period| %>
+    <%= active_link_to t("date.#{period}"), 
+      goal ? goal_habit_chart_path(period: period, chart_type: @chart_type) :
+      habit_chart_path(period: period, chart_type: @chart_type), class: 'btn btn-primary btn-sm' %>
+  <% end %>
+</div>

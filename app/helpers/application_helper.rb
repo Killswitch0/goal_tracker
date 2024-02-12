@@ -20,9 +20,9 @@ module ApplicationHelper
     link = block_given? ? text : path
 
     if current_page?(link, check_parameters: true)
-      classes = 'link-icon btn btn-primary btn-sm'
+      classes = 'active'
     else
-      classes = 'link-icon btn btn-outline-primary btn-sm'
+      classes = ''
     end
 
     options[:class] = class_names(options[:class], classes)

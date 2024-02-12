@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     
     root 'goals#index'
 
+    get 'notifications/index', to: 'notifications#index', as: 'notifications'
+
     resource :calendar, only: :show, controller: :calendar
     resource :goal_tracking, controller: :goal_tracking
     resource :task_tracking, controller: :task_tracking

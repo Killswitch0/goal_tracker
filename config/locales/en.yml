@@ -406,16 +406,16 @@ en:
   partials:
     empty:
       chart:
-        title: "Your chart doesn't have any data!"
+        title: "Your Chart doesn't have any data!"
         message: 'Create habits or tasks in your Goal to show chart'
       calendar:
-        title: "Your calendar doesn't have any data!"
+        title: "Your Calendar doesn't have any data!"
         message: 'Create habits in your Goal to show calendar.'
       dashboard: 
-        title: "Your dashboard doesn't have any data!"
-        message: 'Create Goal to show dashboard.'
+        title: "Your Dashboard doesn't have any data!"
+        message: 'Create Goal to show Dashboard.'
       tracking:
-        title: "Your tracking doesn't have any data!"
+        title: "Your Tracking doesn't have any data!"
         goal_message: 'Create Goal to show tracking.'
         task_message: 'Create Task in your Goal to show tracking.'
 

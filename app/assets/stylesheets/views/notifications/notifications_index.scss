@@ -1,0 +1,17 @@
+.notifications-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+
+  .list-group-wrapper { min-width: 30vh; }
+}
+
+#notifications_index {
+  display: block;
+  position: relative;
+  width: 80vh;
+  height: 70vh;
+  right: 0;
+  z-index: 0;
+
+  .notifications-list { max-height: 55vh; }
+}

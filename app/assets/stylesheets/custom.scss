@@ -40,6 +40,17 @@ body {
   display: none;
 }
 
+.list-group-item.active {
+  color: #fff;
+  background-color: $primary;
+  border-color: $primary;
+  /* Другие стили */
+}
+
+/// notifications/index list-group-item
+.list-group-item { background-color: $third-color; }
+.list-group-item:hover { background-color: #DBE2E6; }
+.list-group-item.active:hover { background-color: $primary-hover; }
 
 
 
