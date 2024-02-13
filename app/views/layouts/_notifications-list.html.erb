@@ -1,5 +1,5 @@
 <div class="notifications-list">
-  <% notifications.each do |notification| %> <!-- TODO - create style to scrollbar -->
+  <% notifications.each do |notification| %> 
     <% notification = notification.to_notification %>
 
     <div class="notif_card <%= notification.read? ? '' : 'unread' %>">

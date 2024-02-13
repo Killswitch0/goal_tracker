@@ -3,31 +3,28 @@
     <div class="list-group">
       <%= active_link_to notifications_path(filter: 'all'), class: 'list-group-item list-group-item-action' do %>
         <%= 'All notifications' %>
-        <span class="badge rounded-pill text-bg-secondary"><%= @all_count %></span>
+        <%= tag.span @all_count, class: 'badge rounded-pill' unless @all_count.zero? %>
       <% end %>
+
       <%= active_link_to notifications_path(filter: 'unread'), class: 'list-group-item list-group-item-action' do %>
         <%= 'Unread' %>
-        <span class="badge rounded-pill text-bg-secondary"><%= @unread_count %></span> <!-- TODO - add style justify-content-between -->
+        <%= tag.span @unread_count, class: 'badge rounded-pill' unless @unread_count.zero? %> 
       <% end %>
+
       <%= active_link_to 'Read', notifications_path(filter: 'read'), class: "list-group-item list-group-item-action" %>
     </div>
-
 
     <div class="list-group mt-3">
       <%= tag.span 'Filter by type',  class: "list-group-item list-group-item-action disabled title" %>
       <%= active_link_to 'Challege invitations', notifications_path(filter: 'challenge_invite'), class: "list-group-item list-group-item-action" %>
     </div>
-
   </div>
-
 
   <div class="notifications" id="notifications_index">
     <header>
       <div class="notif-box">
-        <div class="d-flex align-items-center"> <!-- TODO - add style -->
-          <h2 class="title"><%= t('notifications.common.notifications') %></h2>
-        </div>
-
+        <h2 class="title"><%= t('notifications.common.notifications') %></h2>
+        
         <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p>
       </div>
     </header>

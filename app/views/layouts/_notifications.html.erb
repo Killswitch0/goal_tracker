@@ -8,20 +8,20 @@
 
     <div class="notifications" id="notifications">
       <header>
-        <div class="notif-box">
-          <div class="d-flex align-items-center"> <!-- TODO - add style -->
+        <div class="buttons-list between">
+          <div class="notif-box">
             <h2 class="title"><%= t('notifications.common.notifications') %></h2>
             <span id="notifes"><%= @unread.count %></span>
           </div>
 
-          <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p> <!-- TODO - check app colors for color matching -->
+          <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p>
         </div>
       </header>
 
       <%= render 'layouts/notifications-list', notifications: @notifications %>
     
-      <footer class="mt-4 text-center"> <!-- TODO - add style css -->
-        <%= link_with_icon 'chevron-right',  notifications_path(filter: 'all'), 'show-all', id: 'mark_all', class: 'text-decoration-none' %> <!-- TODO - translate link -->
+      <footer>
+        <%= link_with_icon 'chevron-right',  notifications_path(filter: 'all'), 'show_all', id: 'mark_all', class: 'text-decoration-none' %>
       </footer>
     </div>
   </li>
