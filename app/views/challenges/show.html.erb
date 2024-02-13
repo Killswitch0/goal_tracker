@@ -61,15 +61,17 @@
     </div>
 
     <div class="buttons-list center">
-      <%= active_link_to challenge_path(@challenge, filter: "#{current_user.id}") do %>
-        <%= icon('person-circle') %>
-        <%= t('my_goals') %>
-      <% end %>
+      <div class="btn-group">
+        <%= active_link_to challenge_path(@challenge, filter: "#{current_user.id}"), class: 'btn btn-primary btn-sm' do %>
+          <%= icon('person-circle') %>
+          <%= t('my_goals') %>
+        <% end %>
 
-      <%= active_link_to challenge_path(@challenge), class: 'mx-3' do %>
-        <%= icon('list') %>
-        <%= t('all_goals')%>
-      <% end %>
+        <%= active_link_to challenge_path(@challenge), class: 'btn btn-primary btn-sm me-3' do %>
+          <%= icon('list') %>
+          <%= t('all_goals')%>
+        <% end %>
+      </div>
 
       <%= canvas_button 'rating', icon: 'bar-chart-fill', klass: 'link-icon btn-sm' %>
     </div>

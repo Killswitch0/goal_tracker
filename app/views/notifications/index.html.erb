@@ -11,6 +11,13 @@
       <% end %>
       <%= active_link_to 'Read', notifications_path(filter: 'read'), class: "list-group-item list-group-item-action" %>
     </div>
+
+
+    <div class="list-group mt-3">
+      <%= tag.span 'Filter by type',  class: "list-group-item list-group-item-action disabled title" %>
+      <%= active_link_to 'Challege invitations', notifications_path(filter: 'challenge_invite'), class: "list-group-item list-group-item-action" %>
+    </div>
+
   </div>
 
 
@@ -25,32 +32,6 @@
       </div>
     </header>
 
-    <div class="notifications-list"> <!-- TODO - Add one partial to notifications -->
-      <% @notifications.each do |notification| %> <!-- TODO - create style to scrollbar -->
-        <% notification = notification.to_notification %>
-
-        <div class="notif_card <%= notification.read? ? '' : 'unread' %>">
-          <div class="avatar"><%= notification.notify_avatar.decorate.gravatar(size: 50, css_class: 'rounded-circle') %></div>
-          <div class="description">
-            <p class="user_activity">
-              <strong><%= notification.to_parts[:user] %></strong>
-              <%= notification.to_parts[:message].truncate(30) %>
-              <%= link_to notification.to_parts[:target], notification.url, class: 'strong' %>
-
-              <%= notification.action_links if notification.respond_to? :action_links %>
-            </p>
-            <p class="time"><%= time_ago_in_words(notification.record.created_at) %></p>
-          </div>
-        </div>
-      <% end %>
-      
-      <div class="message">
-        <p>
-          Hello, thanks for setting up the Chess Club. I've been a member
-          for a few weeks now and I'm already having lots of fun and
-          improving my game.
-        </p>
-      </div>  
-    </div>
+    <%= render 'layouts/notifications-list', notifications: @notifications %>
   </div>
 </div>

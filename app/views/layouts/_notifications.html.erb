@@ -18,35 +18,11 @@
         </div>
       </header>
 
-      <div class="notifications-list">
-        <% @notifications.each do |notification| %> <!-- TODO - create style to scrollbar -->
-          <% notification = notification.to_notification %>
-
-          <div class="notif_card <%= notification.read? ? '' : 'unread' %>">
-            <div class="avatar"><%= notification.notify_avatar.decorate.gravatar css_class: 'rounded-circle' %></div>
-            <div class="description">
-              <p class="user_activity">
-                <strong><%= notification.to_parts[:user] %></strong>
-                <%= notification.to_parts[:message].truncate(30) %>
-                <%= link_to notification.to_parts[:target], notification.url, class: 'strong' %>
-
-                <%= notification.action_links if notification.respond_to? :action_links %>
-              </p>
-              <p class="time"><%= time_ago_in_words(notification.record.created_at) %></p>
-            </div>
-        </div>
-        <% end %>
-        
-        <div class="message">
-          <p>
-            Hello, thanks for setting up the Chess Club. I've been a member
-            for a few weeks now and I'm already having lots of fun and
-            improving my game.
-          </p>
-        </div>
-      </div>
-
-      <%= link_to t('show_all'), notifications_path(filter: 'all'), id: 'mark_all', class: 'mt-1' %> <!-- TODO - translate link -->
+      <%= render 'layouts/notifications-list', notifications: @notifications %>
+    
+      <footer class="mt-4 text-center"> <!-- TODO - add style css -->
+        <%= link_with_icon 'chevron-right',  notifications_path(filter: 'all'), 'show-all', id: 'mark_all', class: 'text-decoration-none' %> <!-- TODO - translate link -->
+      </footer>
     </div>
   </li>
 <% end %>

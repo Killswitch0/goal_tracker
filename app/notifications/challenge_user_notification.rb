@@ -36,6 +36,9 @@ class ChallengeUserNotification < ApplicationNotifications
   end
 
   def action_links
+    @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
+    return if @challenge_user.confirm?
+
     "#{tag.div(
         button_to(t('accept'), confirm_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-primary btn-sm') +
         button_to(t('decline'), decline_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-danger btn-sm mx-1'),
