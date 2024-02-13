@@ -8,10 +8,10 @@ class CalendarController < ApplicationController
       if params[:search]
         Habit.search(params[:search], current_user, Habit.table_name)
       else
-        current_user.habits.includes(:completion_dates)
+        Habit.includes(:completion_dates).where(user: current_user)
       end
 
-    @goals = current_user.goals.includes(:habits)
+    @goals = current_user.goals
 
     return unless params[:goal_ids].present?
 
