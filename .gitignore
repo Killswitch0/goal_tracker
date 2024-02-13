@@ -45,6 +45,9 @@ dump.rdb
 # Rubymine IDE folder
 .idea
 
+# VScode folder
+.vscode
+
 # Ignore yardoc gem folders
 .yardoc
 doc
