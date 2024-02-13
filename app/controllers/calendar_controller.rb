@@ -4,7 +4,7 @@ class CalendarController < ApplicationController
   # GET /calendar
   #----------------------------------------------------------------------------
   def show
-    @habits = 
+    @habits =
       if params[:search]
         Habit.search(params[:search], current_user, Habit.table_name)
       else
@@ -13,9 +13,9 @@ class CalendarController < ApplicationController
 
     @goals = current_user.goals.includes(:habits)
 
-    if params[:goal_ids].present?
-      @goals = @goals.where(id: params[:goal_ids])
-      @habits = @habits.where(goal_id: params[:goal_ids])
-    end
+    return unless params[:goal_ids].present?
+
+    @goals = @goals.where(id: params[:goal_ids])
+    @habits = @habits.where(goal_id: params[:goal_ids])
   end
 end

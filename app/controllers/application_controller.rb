@@ -32,12 +32,12 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
+    return if logged_in?
 
-      redirect_to login_url
-    end
+    store_location
+    flash[:danger] = 'Please log in.'
+
+    redirect_to login_url
   end
 
   def date_today

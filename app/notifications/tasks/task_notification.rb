@@ -25,7 +25,7 @@ class TaskNotification < ApplicationNotifications
     I18n.t('notifications.task.created.full_message', target: @task.name)
   end
 
-  def to_parts  
+  def to_parts
     @task = Task.find(params[:task][:id])
 
     {

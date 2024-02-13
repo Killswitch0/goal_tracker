@@ -1,16 +1,15 @@
 require 'rails_helper'
 
-RSpec.feature "CreateGoals" do
+RSpec.feature 'CreateGoals' do
   given(:user) { create(:user) }
-  given!(:category) { create(:category, user: user) }
-  given!(:goal) { create(:goal, user: user, category: category) }
+  given!(:category) { create(:category, user:) }
+  given!(:goal) { create(:goal, user:, category:) }
 
-  feature 'Create goal', %q{
+  feature 'Create goal', '
     In order to create habits, tasks
     wich belongs to Goal
     wee need be able to create Goal
-  } do
-
+  ' do
     scenario 'Authenticated user try to create, complete and delete Goal' do
       log_in(user)
 

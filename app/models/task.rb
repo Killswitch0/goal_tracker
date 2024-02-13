@@ -37,7 +37,7 @@ class Task < ApplicationRecord
                      with: BASE_VALIDATION,
                      message: :text_input
                    }
-  
+
   validates :deadline, presence: true, comparison: { greater_than: Date.today }
 
   after_create_commit :notify_create
@@ -69,9 +69,7 @@ class Task < ApplicationRecord
     complete?
   end
 
-  private
-
   def notification_params
-    { task: self, goal: goal }
+    { task: self, goal: }
   end
 end

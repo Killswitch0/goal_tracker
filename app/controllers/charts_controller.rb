@@ -22,8 +22,10 @@ class ChartsController < ApplicationController
   def tasks_json
     tasks = current_user.tasks
     tasks = tasks.where(goal_id: @goal) if @goal
-    
-    @tasks = tasks.group(:name).group_by_period(@period, :complete_date).count.reject { |key, value| value.zero? }.chart_json
+
+    @tasks = tasks.group(:name).group_by_period(@period, :complete_date).count.reject do |_key, value|
+      value.zero?
+    end.chart_json
 
     render json: @tasks
   end
@@ -34,7 +36,7 @@ class ChartsController < ApplicationController
     habits = habits.where(goal_id: @goal) if @goal
     @habits = Habit.habits_with_completion_period_data(habits, @period).chart_json
 
-    render json: @habits 
+    render json: @habits
   end
 
   #----------------------------------------------------------------------------
@@ -52,22 +54,20 @@ class ChartsController < ApplicationController
   end
 
   def set_period
-    @period = { 
+    @period = {
       'day' => :day,
       'week' => :week,
       'month' => :month
     }.fetch(
-        params[:period],
-        :day
+      params[:period],
+      :day
     )
   end
 
-  def redirect_if_no_data
+  def redirect_if_no_data; end
 
-  end
-
-  def default_params   
-     @chart_type = chart_params[:chart_type] ||= 'line'
+  def default_params
+    @chart_type = chart_params[:chart_type] ||= 'line'
   end
 
   def chart_params

@@ -36,9 +36,9 @@ module SessionsHelper
   end
 
   def require_no_authentication
-    return if !user_signed_in?
+    return unless user_signed_in?
 
-    flash[:danger] = "You are already signed in."
+    flash[:danger] = 'You are already signed in.'
     redirect_to root_url
   end
 

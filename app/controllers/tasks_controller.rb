@@ -64,7 +64,7 @@ class TasksController < ApplicationController
   #----------------------------------------------------------------------------
   def complete
     @goal = @task.goal
-    
+
     if @task.complete?
       flash[:noticed] = t('.uncompleted')
       @task.update(complete: false, complete_date: nil)
@@ -96,6 +96,6 @@ class TasksController < ApplicationController
   end
 
   def sort_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : "complete"
+    Task.column_names.include?(params[:sort]) ? params[:sort] : 'complete'
   end
 end

@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-RSpec.feature "SortDashboardHabits" do
+RSpec.feature 'SortDashboardHabits' do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
-  given!(:goal) { create(:goal, user: user, category: category) }
+  given(:category) { create(:category, user:) }
+  given!(:goal) { create(:goal, user:, category:) }
 
-  given!(:habit1) { create(:habit, user: user, goal: goal, name: 'My string 1') }
-  given!(:habit2) { create(:habit, user: user, goal: goal, name: 'My string 2') }
-  given!(:habit3) { create(:habit, user: user, goal: goal, name: 'My string 3') }
-  given!(:habit4) { create(:habit, user: user, goal: goal, name: 'My string 4') }
+  given!(:habit1) { create(:habit, user:, goal:, name: 'My string 1') }
+  given!(:habit2) { create(:habit, user:, goal:, name: 'My string 2') }
+  given!(:habit3) { create(:habit, user:, goal:, name: 'My string 3') }
+  given!(:habit4) { create(:habit, user:, goal:, name: 'My string 4') }
   given!(:completion_date) { create :completion_date, habit: habit1, date: Date.today }
 
   feature 'Filter Habits' do
-
     before do
       log_in(user)
 

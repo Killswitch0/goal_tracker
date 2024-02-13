@@ -19,7 +19,7 @@ class TaskAlmostNotification < ApplicationNotifications
 
   def message
     @goal = Goal.find(params[:task][:goal_id])
-    
+
     I18n.t('notifications.task.almost.full_message', target: @goal.name)
   end
 

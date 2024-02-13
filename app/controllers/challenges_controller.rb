@@ -11,7 +11,7 @@ class ChallengesController < ApplicationController
   # GET /challenges
   #----------------------------------------------------------------------------
   def index
-    accepted_challenges = 
+    accepted_challenges =
       current_user
       .joined_challenges
       .order("#{Challenge.table_name}.#{sort_column} #{sort_direction}")
@@ -22,7 +22,7 @@ class ChallengesController < ApplicationController
       else
         accepted_challenges
       end
-  end  
+  end
 
   # GET /challenges/new
   #----------------------------------------------------------------------------
@@ -118,7 +118,7 @@ class ChallengesController < ApplicationController
   #----------------------------------------------------------------------------
   def create_invitation
     return unless request.post?
-    
+
     invited_user = User.find_by(email: params[:email])
 
     if invited_user
@@ -167,11 +167,11 @@ class ChallengesController < ApplicationController
   # DELETE /challenge/1/leave
   #----------------------------------------------------------------------------
   def leave
-    if @invitation.destroy
-      flash[:noticed] = t('challenges.leave.success')
-    else
-      flash[:noticed] = t('challenges.leave.fail')
-    end
+    flash[:noticed] = if @invitation.destroy
+                        t('challenges.leave.success')
+                      else
+                        t('challenges.leave.fail')
+                      end
 
     redirect_to challenges_path
   end

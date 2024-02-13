@@ -1,14 +1,13 @@
 require 'rails_helper'
 
-RSpec.feature "LeaveChallenges" do
+RSpec.feature 'LeaveChallenges' do
   given(:user) { create :user }
-  given(:challenge) { create :challenge, user: user }
-  given!(:challenge_user) { create :challenge_user, user: user, challenge: challenge }
+  given(:challenge) { create :challenge, user: }
+  given!(:challenge_user) { create :challenge_user, user:, challenge: }
 
   before { log_in(user) }
 
   feature 'Leave challenges' do
-
     context '/challenges/:id' do
       scenario 'Authenticated user try to leave challenges' do
         visit challenge_path(challenge)

@@ -17,7 +17,7 @@ class ChallengeUserNotification < ApplicationNotifications
 
   # Define helper methods to make rendering easier.
 
-  def message    
+  def message
     @challenge = Challenge.find(params[:challenge_user][:challenge_id])
     @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
     @user = User.find(params[:challenge_user][:user_id])
@@ -39,11 +39,13 @@ class ChallengeUserNotification < ApplicationNotifications
     @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
     return if @challenge_user.confirm?
 
-    "#{tag.div(
-        button_to(t('accept'), confirm_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-primary btn-sm') +
-        button_to(t('decline'), decline_invitation_challenge_path(@challenge), method: :patch, class: 'btn btn-danger btn-sm mx-1'),
+    tag.div(
+      button_to(t('accept'), confirm_invitation_challenge_path(@challenge), method: :patch,
+                                                                            class: 'btn btn-primary btn-sm') +
+      button_to(t('decline'), decline_invitation_challenge_path(@challenge), method: :patch,
+                                                                             class: 'btn btn-danger btn-sm mx-1'),
       class: 'buttons-list start'
-    )}".html_safe
+    ).to_s.html_safe
   end
 
   def notify_avatar

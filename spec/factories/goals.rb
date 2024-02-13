@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :goal do
     name { 'My goal is the best' }
-    description { "MyString" }
+    description { 'MyString' }
     deadline { Date.today + 3.days }
-    color { "Red" }
+    color { 'Red' }
     user
     category
   end

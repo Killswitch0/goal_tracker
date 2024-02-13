@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  layout "application", except: %i[new]
+  layout 'application', except: %i[new]
 
   before_action :require_no_authentication, only: %i[new create]
 

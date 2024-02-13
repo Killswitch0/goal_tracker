@@ -1,17 +1,16 @@
 require 'rails_helper'
 
-RSpec.feature "ShowAndAcceptInviteToChallenges" do
+RSpec.feature 'ShowAndAcceptInviteToChallenges' do
   given(:user) { create :user }
   given(:user2) { create :user }
 
-  given(:challenge) { create :challenge, user: user }
-  given!(:challenge_user2) { create :challenge_user, challenge: challenge, user: user2, confirm: false }
+  given(:challenge) { create :challenge, user: }
+  given!(:challenge_user2) { create :challenge_user, challenge:, user: user2, confirm: false }
 
-  feature 'Show invite', %q{
+  feature 'Show invite', '
     In order to accept invite to Challenge
     we need to be able to see him
-  } do
-
+  ' do
     before do
       log_in(user2)
 

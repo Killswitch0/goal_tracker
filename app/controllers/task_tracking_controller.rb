@@ -4,7 +4,7 @@ class TaskTrackingController < ApplicationController
   # GET /task_tracking
   #----------------------------------------------------------------------------
   def show
-    @tasks = 
+    @tasks =
       if params[:search]
         Task.search(params[:search], current_user, Task.table_name)
       else

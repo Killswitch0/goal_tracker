@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   # GET /dashboard
   #----------------------------------------------------------------------------
   def show
-    @all_goals = 
+    @all_goals =
       Goal.includes(:user)
           .where(user: current_user)
           .order(complete: :asc)
@@ -16,9 +16,9 @@ class DashboardController < ApplicationController
 
   def filter_tasks
     @task = Task.includes(:user)
-            .where(user: current_user)
+                .where(user: current_user)
 
-    not_completed = 
+    not_completed =
       @task.where(complete: false)
 
     if params.has_key?(:all_tasks)
@@ -31,7 +31,7 @@ class DashboardController < ApplicationController
   end
 
   def filter_habits
-    not_completed = 
+    not_completed =
       Habit.not_completed_today(current_user)
 
     if params.has_key?(:all_habits)

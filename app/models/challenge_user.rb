@@ -14,7 +14,6 @@
 #  index_challenge_users_on_challenge_id  (challenge_id)
 #  index_challenge_users_on_user_id      (user_id)
 
-
 class ChallengeUser < ApplicationRecord
   include Notifiable::Base
   include Notifiable::Create
@@ -35,16 +34,16 @@ class ChallengeUser < ApplicationRecord
 
   # ignore invite notify if creator
   def check_creator
-    self.user_id != self.challenge.user_id
+    user_id != challenge.user_id
   end
 
   def creator?
-    self.user_id == self.challenge.user_id
+    user_id == challenge.user_id
   end
 
   private
 
   def notification_params
-    { challenge_user: self, challenge: self.challenge }
+    { challenge_user: self, challenge: }
   end
 end

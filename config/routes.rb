@@ -4,7 +4,7 @@ require 'sidekiq/cron/web'
 class AdminConstraint
   def matches?(request)
     user_id = request.session[:user_id] ||
-      request.cookie_jar.encrypted[:user_id]
+              request.cookie_jar.encrypted[:user_id]
 
     User.find_by(id: user_id)&.admin_role?
   end
@@ -19,8 +19,7 @@ Rails.application.routes.draw do
                {}
              end
 
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/, defaults: defaults do
-    
+  scope('(:locale)', locale: /#{I18n.available_locales.join('|')}/, defaults:) do
     root 'goals#index'
 
     get 'notifications/index', to: 'notifications#index', as: 'notifications'
@@ -38,10 +37,10 @@ Rails.application.routes.draw do
     end
 
     # Chart json data
-    get "/habits_current_month_completions", to: "charts#habits_current_month_completions_json"
-    get "/tasks_chart", to: "charts#tasks_json"
-    get "/habits_chart", to: "charts#habits_json"
-    get "/habits_completions", to: "charts#habits_completions_json"
+    get '/habits_current_month_completions', to: 'charts#habits_current_month_completions_json'
+    get '/tasks_chart', to: 'charts#tasks_json'
+    get '/habits_chart', to: 'charts#habits_json'
+    get '/habits_completions', to: 'charts#habits_completions_json'
 
     resources :challenges do
       member do

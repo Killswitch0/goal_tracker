@@ -16,7 +16,8 @@ module Rememberable
 
     def remember_token_authenticated?(remember_token)
       return false if auth_token.blank?
-      BCrypt::Password.new(self.auth_token).is_password?(remember_token)
+
+      BCrypt::Password.new(auth_token).is_password?(remember_token)
     end
   end
 end

@@ -2,7 +2,7 @@ module HabitsHelper
   def habit_complete_link(habit, path)
     link_to "#{habit.completed_today? ? t('uncomplete_habit') : t('complete_habit')}",
             path,
-            class: "btn btn-sm btn-primary action"
+            class: 'btn btn-sm btn-primary action'
   end
 
   def habits_completed_for(target)

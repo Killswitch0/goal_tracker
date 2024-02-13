@@ -7,7 +7,7 @@ class NotificationsController < ApplicationController
     @all_count = @notifications.count
     @read_count = @read.count
     @unread_count = @unread.count
-    
+
     @type = TYPE_MAPPINGS[params[:filter]] || params[:filter]
 
     filter_notifications(params[:filter])

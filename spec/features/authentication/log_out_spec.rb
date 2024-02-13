@@ -1,14 +1,13 @@
 require 'rails_helper'
 
-RSpec.feature "LogOuts" do
+RSpec.feature 'LogOuts' do
   given(:user) { create(:user) }
 
-  feature 'User log out', %q{
+  feature 'User log out', '
     In order to change account, exit from
     current session,
     i want to be able to log out
-  } do
-
+  ' do
     scenario 'Authenticated user try to log out' do
       log_in(user)
 
@@ -23,6 +22,5 @@ RSpec.feature "LogOuts" do
 
       expect(current_path).to eq login_path
     end
-
   end
 end

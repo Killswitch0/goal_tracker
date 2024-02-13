@@ -35,11 +35,11 @@ class Habit < ApplicationRecord
                      with: BASE_VALIDATION,
                      message: :text_input
                    },
-                   length: { 
+                   length: {
                      minimum: 5,
-                     maximum: 45 
+                     maximum: 45
                    }
-  
+
   validates :description, presence: true
 
   after_create_commit :notify_create
@@ -49,67 +49,69 @@ class Habit < ApplicationRecord
 
   has_noticed_notifications model_name: 'Notification'
 
-  scope :completed_today, -> {
+  scope :completed_today, lambda {
     includes(:completion_dates)
-    .where('completion_dates.created_at >= ?', Date.today.beginning_of_day)
-    .references(:completion_dates)
+      .where('completion_dates.created_at >= ?', Date.today.beginning_of_day)
+      .references(:completion_dates)
   }
 
-  scope :not_completed_today, -> (user) {
+  scope :not_completed_today, lambda { |user|
     today = Date.today
 
     includes(:completion_dates)
-    .where('habits.user_id = ?', user.id)
-    .where.not(
-      'EXISTS (
+      .where('habits.user_id = ?', user.id)
+      .where.not(
+        'EXISTS (
         SELECT 1
         FROM completion_dates
         WHERE habit_id = habits.id AND DATE(created_at) = ?
       )', today
-    )
-    .distinct
+      )
+      .distinct
   }
 
-  scope :sorted_by_completion, -> (user) {
+  scope :sorted_by_completion, lambda { |user|
     includes(:completion_dates)
-    .where(user: user)
-    .order(
-      Arel.sql(
-        "CASE WHEN completion_dates.date = '#{Date.today}' THEN 1
+      .where(user:)
+      .order(
+        Arel.sql(
+          "CASE WHEN completion_dates.date = '#{Date.today}' THEN 1
           WHEN completion_dates.date IS NULL THEN 3
-          ELSE 2 
+          ELSE 2
         END"
+        )
       )
-    )
-    .references(:completion_dates)
-    .uniq
+      .references(:completion_dates)
+      .uniq
   }
 
   # Top habits by completions count this month
-  scope :top_this_month, -> (user) {
+  scope :top_this_month, lambda { |user|
     joins(:completion_dates)
-    .where(
-      'habits.user_id = ? AND EXTRACT(month FROM completion_dates.date) = ?',
-      user, Date.today.month
-    )
-    .group('habits.id')
-    .order('COUNT(completion_dates.id) DESC')
-    .uniq
+      .where(
+        'habits.user_id = ? AND EXTRACT(month FROM completion_dates.date) = ?',
+        user, Date.today.month
+      )
+      .group('habits.id')
+      .order('COUNT(completion_dates.id) DESC')
+      .uniq
   }
 
   # => [{"name":"Morning exercise 0","data":{"2024-02-01":1}}]
   def self.habits_with_completion_period_data(habits, period)
     habits.map do |habit|
       completion_data = habit.completion_dates
-          
+
       {
         name: habit.name,
-        data: completion_data.presence ?
-         completion_data.group_by_period(period, :date).count :
-          0
+        data: if completion_data.presence
+                completion_data.group_by_period(period, :date).count
+              else
+                0
+              end
       }
     end
-  end  
+  end
 
   # For Streakable concern
   def completed_count
@@ -146,7 +148,7 @@ class Habit < ApplicationRecord
   private
 
   def notification_params
-    { habit: self, goal: goal }
+    { habit: self, goal: }
   end
 
   def create_completion_date

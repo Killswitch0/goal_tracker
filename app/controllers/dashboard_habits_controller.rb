@@ -1,5 +1,4 @@
 class DashboardHabitsController < ApplicationController
-
   # GET /dashboard_habits/new
   #----------------------------------------------------------------------------
   def new
@@ -26,11 +25,11 @@ class DashboardHabitsController < ApplicationController
     @habit = Habit.find(params[:id])
     @goal = @habit.goal
 
-    if @habit.completed_today?
-      flash[:noticed] = t('habits.complete.uncompleted')
-    else
-      flash[:noticed] = t('habits.complete.completed')
-    end
+    flash[:noticed] = if @habit.completed_today?
+                        t('habits.complete.uncompleted')
+                      else
+                        t('habits.complete.completed')
+                      end
 
     @habit.complete_habit_today
 

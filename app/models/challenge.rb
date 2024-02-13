@@ -38,9 +38,7 @@ class Challenge < ApplicationRecord
       user = goal.user
       completed = user.tasks.completed.count == user.tasks.count
 
-      if completed || deadline < Date.today
-        user_tasks_count[user] = goal.tasks.count
-      end
+      user_tasks_count[user] = goal.tasks.count if completed || deadline < Date.today
     end
 
     user_tasks_count
