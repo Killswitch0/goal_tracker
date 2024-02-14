@@ -104,19 +104,13 @@ To precompile assets, run:
 rails assets:precompile
 ```
 
-Run Redis server in a separate terminal window:
-
-```
-cd /goal_tracker && redis-server
-```
-
-Same for run Sidekiq:
+To run Sidekiq:
 
 ```
 cd /goal_tracker && bundle exec sidekiq
 ```
 
-Then run it in your browser with this command:
+And run server:
 
 ```
 cd /goal_tracker && rails server

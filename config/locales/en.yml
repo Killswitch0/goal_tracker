@@ -433,7 +433,7 @@ en:
       invited: 
         full_message: "You've been invited to the «%{challenge}» challenge"
         parts:
-          message: 'have been invited to the Challenge'
+          message: 'invited you to take part in the challenge'
     task:
       created:
         full_message: 'You created Task %{target}.'
@@ -443,6 +443,9 @@ en:
         full_message: "You almost made tasks streak in «%{target}»! Let's GO!"
         parts:
           message: 'almost made tasks streak in'
+      deadline:
+        parts:
+          message: 'remain %{days} days to complete Task'
     habit:
       created:
         full_message: 'You created Habit %{target}.'
@@ -457,4 +460,10 @@ en:
         full_message: 'You created Goal %{target}.'
         parts:
           message: 'created Goal'
+      almost:
+        parts: 
+          message: 'almost made goal streak'
+      deadline: 
+        parts:
+          message: 'remain %{days} days to complete Goal'
 

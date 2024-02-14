@@ -43,7 +43,6 @@ module GoalTracker
     config.after_initialize do
       GoalTracker::Application.load_tasks
       Rake::Task['deadline_notifications:goal_deadline_notify'].invoke
-      Rake::Task['deadline_notifications:task_deadline_notify'].invoke
     end
   end
 end

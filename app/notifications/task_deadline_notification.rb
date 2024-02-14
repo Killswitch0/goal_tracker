@@ -19,7 +19,17 @@ class TaskDeadlineNotification < ApplicationNotifications
   #
   def message
     @task = Task.find(params[:task][:id])
-    I18n.t('notifications.common.left_for_complete', days: days_left(@task), target_name: @task.name)
+    t('notifications.common.left_for_complete', days: days_left(@task), target_name: @task.name)
+  end
+
+  def to_parts
+    @task = Task.find(params[:task][:id])
+
+    {
+      user: I18n.locale == :uk ? t('to_you') : t('you'),
+      message: t('notifications.task.deadline.parts.message', days: days_left(@task)),
+      target: @task.name
+    }
   end
 
   def notify_avatar

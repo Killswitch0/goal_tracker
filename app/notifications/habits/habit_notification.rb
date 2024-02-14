@@ -21,7 +21,7 @@ class HabitNotification < ApplicationNotifications
     @habit = Habit.find(params[:habit][:id])
     @user = User.find(@habit.user_id)
 
-    I18n.t('notifications.habit.created.full_message', target: @habit.name)
+    t('notifications.habit.created.full_message', target: @habit.name)
   end
 
   def to_parts
@@ -29,7 +29,7 @@ class HabitNotification < ApplicationNotifications
 
     {
       user: t('you'),
-      message: I18n.t('notifications.habit.created.parts.message'),
+      message: t('notifications.habit.created.parts.message'),
       target: @habit.name
     }
   end

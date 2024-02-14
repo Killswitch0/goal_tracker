@@ -22,7 +22,7 @@ class TaskNotification < ApplicationNotifications
     @task = Task.find(params[:task][:id])
     @user = User.find(params[:task][:user_id])
 
-    I18n.t('notifications.task.created.full_message', target: @task.name)
+    t('notifications.task.created.full_message', target: @task.name)
   end
 
   def to_parts
@@ -30,7 +30,7 @@ class TaskNotification < ApplicationNotifications
 
     {
       user: t('you'),
-      message: I18n.t('notifications.task.created.parts.message'),
+      message: t('notifications.task.created.parts.message'),
       target: @task.name
     }
   end

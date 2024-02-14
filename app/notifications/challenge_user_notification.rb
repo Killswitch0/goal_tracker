@@ -22,7 +22,7 @@ class ChallengeUserNotification < ApplicationNotifications
     @challenge_user = ChallengeUser.find(params[:challenge_user][:id])
     @user = User.find(params[:challenge_user][:user_id])
 
-    I18n.t('notifications.challenge.invited.full_message', challenge: @challenge.name)
+    t('notifications.challenge.invited.full_message', challenge: @challenge.name)
   end
 
   def to_parts
@@ -30,7 +30,7 @@ class ChallengeUserNotification < ApplicationNotifications
 
     {
       user: @challenge.user.name,
-      message: I18n.t('notifications.challenge.invited.parts.message'),
+      message: t('notifications.challenge.invited.parts.message'),
       target: @challenge.name
     }
   end
