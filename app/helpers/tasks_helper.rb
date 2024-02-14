@@ -7,7 +7,7 @@ module TasksHelper
 
   def tasks_completed_for(target)
     completed = target.tasks.where(complete: true).count
-    all = target.tasks.count
+    all = target.tasks_count
     "#{t('done')} #{content_tag(:span, completed, class: 'completed-count')} / #{all}".html_safe
   end
 end

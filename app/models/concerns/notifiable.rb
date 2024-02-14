@@ -16,10 +16,15 @@ module Notifiable
     def cleanup_notifications
       class_name = self.class.name.dup
 
-      class_name.chars.each_with_index do |l, i|
-        break if class_name[i + 1].nil?
+      class_name.chars.each_with_index do |letter, index|
+        class_name_increment = class_name[index + 1]
 
-        class_name.insert(i + 1, '_') if l == class_name[i].downcase && class_name[i + 1] == class_name[i + 1]&.upcase
+        break if class_name_increment.nil?
+
+        if letter == class_name[index].downcase && class_name_increment == class_name_increment&.upcase
+          class_name.insert(index + 1,
+                            '_')
+        end
       end
 
       method_name = "notifications_as_#{class_name.downcase}".to_sym

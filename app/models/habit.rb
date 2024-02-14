@@ -58,7 +58,7 @@ class Habit < ApplicationRecord
   scope :not_completed_today, lambda { |user|
     today = Date.today
 
-    includes(:completion_dates)
+    left_joins(:completion_dates)
       .where('habits.user_id = ?', user.id)
       .where.not(
         'EXISTS (
@@ -71,14 +71,14 @@ class Habit < ApplicationRecord
   }
 
   scope :sorted_by_completion, lambda { |user|
-    includes(:completion_dates)
+    joins(:completion_dates)
       .where(user:)
       .order(
         Arel.sql(
           "CASE WHEN completion_dates.date = '#{Date.today}' THEN 1
-          WHEN completion_dates.date IS NULL THEN 3
-          ELSE 2
-        END"
+        WHEN completion_dates.date IS NULL THEN 3
+        ELSE 2
+      END"
         )
       )
       .references(:completion_dates)
@@ -87,12 +87,14 @@ class Habit < ApplicationRecord
 
   # Top habits by completions count this month
   scope :top_this_month, lambda { |user|
-    joins(:completion_dates)
+    includes(:completion_dates)
       .where(
-        'habits.user_id = ? AND EXTRACT(month FROM completion_dates.date) = ?',
-        user, Date.today.month
+        habits: { user_id: user },
+        completion_dates: {
+          date: Date.current.beginning_of_month..Date.current.end_of_month
+        }
       )
-      .group('habits.id')
+      .group('habits.id, completion_dates.id')
       .order('COUNT(completion_dates.id) DESC')
       .uniq
   }

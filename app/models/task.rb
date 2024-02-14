@@ -27,8 +27,8 @@ class Task < ApplicationRecord
   include Searchable
   include ValidationConstants
 
-  belongs_to :goal
-  belongs_to :user
+  belongs_to :goal, counter_cache: true
+  belongs_to :user, counter_cache: true
 
   after_update_commit :check_goal_completion
 

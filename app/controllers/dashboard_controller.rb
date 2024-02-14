@@ -4,10 +4,8 @@ class DashboardController < ApplicationController
   # GET /dashboard
   #----------------------------------------------------------------------------
   def show
-    @all_goals =
-      Goal.includes(:user)
-          .where(user: current_user)
-          .order(complete: :asc)
+    @all_goals = current_user.goals
+                             .order(complete: :asc)
     @all_tasks = filter_tasks
     @all_habits = filter_habits
   end
@@ -15,14 +13,12 @@ class DashboardController < ApplicationController
   private
 
   def filter_tasks
-    @task = Task.includes(:user)
-                .where(user: current_user)
+    @tasks = current_user.tasks
 
-    not_completed =
-      @task.where(complete: false)
+    not_completed = @tasks.where(complete: false)
 
     if params.has_key?(:all_tasks)
-      @task.order(complete: :desc)
+      @tasks.order(complete: :desc)
     elsif params.has_key?(:open_tasks)
       not_completed
     else

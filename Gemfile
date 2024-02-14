@@ -84,8 +84,8 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem 'bullet', '~> 7.1'
   gem 'web-console'
-  gem "bullet", "~> 7.1"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -117,3 +117,4 @@ gem 'gravatar_image_tag', '~> 1.2'
 
 gem 'sidekiq-cron', '~> 1.10'
 
+gem 'reek', '~> 6.2'
