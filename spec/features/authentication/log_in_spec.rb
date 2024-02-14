@@ -1,14 +1,13 @@
 require 'rails_helper'
 
-RSpec.feature "LogIns" do
+RSpec.feature 'LogIns' do
   given(:user) { create(:user) }
 
-  feature 'User log in', %q{
+  feature 'User log in', '
     In order to be able to use
     application as an User
     i want to be able log in
-  } do
-
+  ' do
     scenario 'Registred user try to log in' do
       visit login_path
 

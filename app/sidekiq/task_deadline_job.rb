@@ -5,7 +5,7 @@ class TaskDeadlineJob
 
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     @tasks = Task.where('deadline > ?', Time.now)
 
     @tasks.each do |task|

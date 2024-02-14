@@ -1,7 +1,7 @@
 <div class="user mt-3" id="user_show">
   <div class="wrapper">
     <div class="table-header list">
-      <h2>
+      <h2 class="title">
         <%= t('user') %>
       </h2>
     </div>
@@ -76,7 +76,7 @@
             </div>
             <div class="divider"></div>
             <div class="habits-statistics__chart">
-              <%= column_chart(habits_current_month_completions_path, height: '180px', ytitle: 'Completions') %>
+              <%= column_chart(habits_current_month_completions_path, height: '180px', ytitle: t('completions'), empty: t('chart.habits.empty')) %>
             </div>
           </div>
         </div>

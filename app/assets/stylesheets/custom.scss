@@ -1,4 +1,5 @@
-@import "variables/*";
+@import "fonts";
+@import "variables";
 @import "mixins/*";
 @import "components/*";
 @import "views/**/*";
@@ -12,6 +13,7 @@ body {
   min-height: 100vh;
   background: #03dfff;
   background: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .home {
@@ -31,10 +33,28 @@ body {
   }
 }
 
+.title { font-weight: 600; }
+
 // hide content
 .hide {
   display: none;
 }
+
+.list-group-item.active {
+  color: #fff;
+  background-color: $primary;
+  border-color: $primary;
+}
+
+/// notifications/index list-group-item
+.list-group-item { background-color: $third-color; }
+.list-group-item:hover { background-color: #DBE2E6; }
+.list-group-item.active:hover { background-color: $primary-hover; }
+
+
+
+
+
 
 
 

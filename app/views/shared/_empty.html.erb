@@ -1,0 +1,10 @@
+<% svg ||= false %>
+
+<div class="empty text-center">
+  <div class="empty__wrapper">
+    <p><%= svg ? inline_svg_tag(svg_path, size: '170', class: '') : icon(icon_class) %></p>
+    <h3 class="title"><%= title %></h3>
+    <p><%= message %></p>
+    <p><%= link_to t('buttons.goals.to_goal'), goals_path, class: 'btn btn-primary' %></p>
+  </div>
+</div>

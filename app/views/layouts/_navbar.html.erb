@@ -13,15 +13,13 @@
                         class: "nav-link #{'active' if current_page?(goals_path)}" %></li>
         <li><%= link_to t('navigation.challenges').upcase, challenges_path,
                         class: "nav-link #{'active' if current_page?(challenges_path)}" %></li>
-        <li><%= link_to t('navigation.tracking').upcase, goal_tracking_path,
-                        class: "nav-link #{'active' if current_page?(goal_tracking_path) || current_page?(task_tracking_path)}" %></li>
+        <li><%= link_to_tracking_with_data class: "nav-link #{'active' if current_page?(goal_tracking_path) || current_page?(task_tracking_path)}" %></li>
         <li><%= link_to t('navigation.calendar').upcase, calendar_path,
                         class: "nav-link #{'active' if current_page?(calendar_path)}" %></li>
-        <li><%= link_to t('navigation.chart').upcase, habit_chart_path,
-                        class: "nav-link #{'active' if current_page?(habit_chart_path) || current_page?(task_chart_path)}" %></li>
+        <li><%= link_to_chart_with_data class: "nav-link text-uppercase #{'active' if current_page?(habit_chart_path) || current_page?(task_chart_path)}" %></li>
       </ul>
 
-      <ul id="navbar__right" class="navbar-nav">
+      <ul id="navbar__right" class="navbar-nav" data-controller="navbar">
         <%= render 'layouts/locales' %>
         <%= render 'layouts/notifications' %>
         <%= render "user/session_manager" %>

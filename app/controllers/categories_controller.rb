@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :redirect_user
-  before_action :set_category, only: %i[ show edit destroy]
+  before_action :set_category, only: %i[show edit destroy]
 
   # GET /categories
   #----------------------------------------------------------------------------

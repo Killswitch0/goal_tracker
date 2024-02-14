@@ -19,7 +19,23 @@ class TaskAlmostNotification < ApplicationNotifications
 
   def message
     @goal = Goal.find(params[:task][:goal_id])
-    "You almost made tasks streak in #{@goal.name.truncate(10)}"
+
+    t('notifications.task.almost.full_message', target: @goal.name)
+  end
+
+  def to_parts
+    @goal = Goal.find(params[:task][:goal_id])
+
+    {
+      user: t('you'),
+      message: t('notifications.task.almost.parts.message'),
+      target: @goal.name
+    }
+  end
+
+  def notify_avatar
+    @goal = Goal.find(params[:task][:goal_id])
+    @goal.user
   end
 
   def url

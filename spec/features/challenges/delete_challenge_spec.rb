@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.feature "DeleteChallenges" do
+RSpec.feature 'DeleteChallenges' do
   given(:user) { create :user }
-  given(:challenge) { create :challenge, user: user }
-  given!(:challenge_user) { create :challenge_user, user: user, challenge: challenge }
+  given(:challenge) { create :challenge, user: }
+  given!(:challenge_user) { create :challenge_user, user:, challenge: }
 
-  feature 'Delete challenges', %q{
+  feature 'Delete challenges', '
     In order to manipulate my challenges
     i want to be able delete them.
-  } do
+  ' do
     scenario 'Authenticated user try to delete Challenge' do
       log_in(user)
 

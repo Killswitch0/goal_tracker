@@ -1,0 +1,13 @@
+.empty {
+  &__wrapper { 
+    padding: 4rem 1rem;
+
+    p > i.bi { 
+      font-size: 130px;
+      -webkit-text-stroke: 2px; 
+      color: #6c757d;
+    }
+
+    p > svg { fill: #6c757d; }
+  }
+}

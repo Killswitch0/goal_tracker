@@ -1,7 +1,7 @@
 <div class="chart mt-3" id="chart" data-controller="charts">
   <div class="col-md-12">
     <div class="table-header list">
-      <h2 class="text-center">
+      <h2 class="text-center title">
         <%= t('tasks_chart').upcase %>
       </h2>
 
@@ -14,26 +14,34 @@
       <% end %>
     </div>
 
-    <div class="chart__body">
-      <div class="buttons-list center mt-3">
-        <% if @goal %>
-          <%= render 'task_period_links', goal: @goal %>
-          <div class="vr mx-3"></div>
-          <%= render 'chart_for_links', goal: @goal %>
-        <% else %>
-          <%= render 'task_period_links', goal: nil %>
-          <div class="vr mx-3"></div>
-          <%= render 'chart_for_links', goal: nil %>
-        <% end %>
-      </div>
-
-      <div class="mt-5"><%= column_chart(tasks_chart_path(period: params[:period])) %></div>
-      
+    <div class="buttons-list center mt-3">
       <% if @goal %>
-        <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+        <%= render 'task_period_links', goal: @goal %>
+        <div class="vr mx-3"></div> <!-- Add margin inline style in scss -->
+        <%= render 'chart_for_links', goal: @goal %>
       <% else %>
-        <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
+        <%= render 'task_period_links', goal: nil %>
+        <div class="vr mx-3"></div>
+        <%= render 'chart_for_links', goal: nil %>
       <% end %>
     </div>
+
+    <% if current_user.tasks.empty? %>
+      <%= render 'shared/empty', title: t('partials.empty.chart.title'),
+                                 message: t('partials.empty.chart.message'),
+                                 icon_class: 'graph-up display-1' %>
+    <% else %>
+      <div class="chart__body">
+        <div class="mt-5"><%= line_chart(tasks_chart_path(period: params[:period]), dataset: {borderWidth: 5}, empty: t('chart.tasks.empty')) %></div>
+        
+        <div class="buttons-list start">
+          <% if @goal %>
+            <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+          <% else %>
+            <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %> 
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

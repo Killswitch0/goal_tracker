@@ -12,9 +12,9 @@
 
 # Create user
 user = User.create(
-  name: "Walter",
-  email: "walt@mail.com",
-  password: "111111a",
+  name: 'Walter',
+  email: 'walt@mail.com',
+  password: '111111a',
   email_confirmed: true,
   role: 1
 )
@@ -27,12 +27,12 @@ user2 = User.create(
 )
 
 # Create category
-category = Category.create(name: "Health", user_id: user.id)
+category = Category.create(name: 'Health', user_id: user.id)
 
 # Create goal
 goal = Goal.create(
-  name: "Exercise regularly",
-  description: "Stay fit and healthy",
+  name: 'Exercise regularly',
+  description: 'Stay fit and healthy',
   color: 'Purple',
   deadline: Date.today + 2.weeks,
   user_id: user.id,
@@ -43,7 +43,7 @@ goal = Goal.create(
 challenge = Challenge.create(
   name: 'Who the best?',
   description: 'We need to know who the best',
-  user_id: user.id, 
+  user_id: user.id,
   deadline: Date.today + 3.days
 )
 
@@ -74,7 +74,7 @@ ChallengeUser.create(
 10.times do |i|
   Habit.create(
     name: "Morning exercise #{i}",
-    description: "Exercise for 30 minutes every morning.",
+    description: 'Exercise for 30 minutes every morning.',
     user_id: user.id,
     goal_id: goal.id
   )
@@ -93,22 +93,21 @@ end
 # Complete 4 habits and tasks
 user.tasks.last(4).each { |task| task.update(complete: true, complete_date: Date.today) }
 
-
 # Create habits completions
 habit = Habit.create(
   name: 'Drink morning water',
   description: 'Drink water 30 minutes after waking up',
   user_id: user.id,
   goal_id: goal.id,
-  created_at: Date.today - 6.weeks,
-  updated_at: Date.today - 6.weeks
+  created_at: Date.today - 8.weeks,
+  updated_at: Date.today - 8.weeks
 )
 
 completion_dates_data_habit = [
-  { date_offset: (2.weeks + 3.days) },
-  { date_offset: (2.weeks + 1.days) },
-  { date_offset: (1.week + 5.days) },
-  { date_offset: (1.week + 2.days) }
+  { date_offset: (5.weeks + 3.days) },
+  { date_offset: (4.weeks + 1.days) },
+  { date_offset: (1.week + 8.days) },
+  { date_offset: (1.week + 3.days) }
 ]
 
 completion_dates_data_habit.each do |completion_date_params|
@@ -120,19 +119,18 @@ completion_dates_data_habit.each do |completion_date_params|
   )
 end
 
-
 habit2 = Habit.create(
   name: 'Take vitamins after breakfast',
   description: 'GNC MAN COMPLEX',
   user_id: user.id,
   goal_id: goal.id,
-  created_at: Date.today - 7.weeks,
-  updated_at: Date.today - 7.weeks
+  created_at: Date.today - 8.weeks,
+  updated_at: Date.today - 8.weeks
 )
 
 completion_dates_data = [
-  { date_offset: (2.weeks + 3.days) },
-  { date_offset: (1.week + 4.days) },
+  { date_offset: (6.weeks + 3.days) },
+  { date_offset: (5.week + 4.days) },
   { date_offset: 1.week },
   { date_offset: 4.days }
 ]
@@ -141,20 +139,19 @@ completion_dates_data.each do |completion_date_params|
   CompletionDate.create(
     date: Date.today - completion_date_params[:date_offset],
     habit_id: habit2.id,
-    created_at: Date.today - completion_date_params[:date_offset] + 1.day, 
+    created_at: Date.today - completion_date_params[:date_offset] + 1.day,
     updated_at: Date.today - completion_date_params[:date_offset] + 1.day
   )
 end
 
-
 # Create Tasks with complete_date
 tasks_data = [
-  { name: "Buy protein GNC", deadline_offset: 5.weeks, complete_offset: 4.weeks },
-  { name: "Buy protein ON NUTRITION", deadline_offset: 7.weeks, complete_offset: (3.weeks + 5.days) },
-  { name: "Buy protein BSN", deadline_offset: 7.weeks, complete_offset: (3.weeks + 2.days) },
-  { name: "Buy protein WHEY SUPER", deadline_offset: 7.weeks, complete_offset: (3.weeks + 1.days) },
-  { name: "Buy protein HYPER MUSCLE", deadline_offset: 7.weeks, complete_offset: (2.weeks + 5.days) },
-  { name: "Buy protein MEGA MUSCLE", deadline_offset: 7.weeks, complete_offset: (2.weeks + 2.days) }
+  { name: 'Buy protein GNC', deadline_offset: 5.weeks, complete_offset: 4.weeks },
+  { name: 'Buy protein ON NUTRITION', deadline_offset: 7.weeks, complete_offset: (3.weeks + 5.days) },
+  { name: 'Buy protein BSN', deadline_offset: 7.weeks, complete_offset: (3.weeks + 2.days) },
+  { name: 'Buy protein WHEY SUPER', deadline_offset: 7.weeks, complete_offset: (3.weeks + 1.days) },
+  { name: 'Buy protein HYPER MUSCLE', deadline_offset: 7.weeks, complete_offset: (2.weeks + 5.days) },
+  { name: 'Buy protein MEGA MUSCLE', deadline_offset: 7.weeks, complete_offset: (2.weeks + 2.days) }
 ]
 
 tasks_data.each do |task_params|
@@ -169,14 +166,3 @@ tasks_data.each do |task_params|
     updated_at: Date.today - 5.weeks
   )
 end
-
-
-
-
-
-
-
-
-
-
-

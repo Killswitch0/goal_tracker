@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-RSpec.feature "CompleteDashboardHabits", type: :feature do
+RSpec.feature 'CompleteDashboardHabits', type: :feature do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
-  given(:goal) { create(:goal, user: user, category: category) }
-  given(:habit) { create(:habit, user: user, goal: goal) }
+  given(:category) { create(:category, user:) }
+  given(:goal) { create(:goal, user:, category:) }
+  given(:habit) { create(:habit, user:, goal:) }
 
   feature 'Complete Habit' do
-
     scenario 'Authenticated user try to complete Habit' do
       log_in(user)
 

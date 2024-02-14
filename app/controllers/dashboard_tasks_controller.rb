@@ -1,5 +1,4 @@
 class DashboardTasksController < ApplicationController
-
   # GET /dashboard_tasks/new
   #----------------------------------------------------------------------------
   def new

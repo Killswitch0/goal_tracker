@@ -1,17 +1,16 @@
 require 'rails_helper'
 
-RSpec.feature "SortDashboardTasks" do
+RSpec.feature 'SortDashboardTasks' do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
-  given!(:goal) { create(:goal, user: user, category: category) }
+  given(:category) { create(:category, user:) }
+  given!(:goal) { create(:goal, user:, category:) }
 
-  given!(:task1) { create(:task, user: user, goal: goal, complete: true) }
-  given!(:task2) { create(:task, user: user, goal: goal, complete: true) }
-  given!(:task3) { create(:task, user: user, goal: goal, complete: false) }
-  given!(:task4) { create(:task, user: user, goal: goal, complete: true) }
+  given!(:task1) { create(:task, user:, goal:, complete: true) }
+  given!(:task2) { create(:task, user:, goal:, complete: true) }
+  given!(:task3) { create(:task, user:, goal:, complete: false) }
+  given!(:task4) { create(:task, user:, goal:, complete: true) }
 
   feature 'Filter tasks' do
-
     before do
       log_in(user)
     end

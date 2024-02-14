@@ -1,33 +1,28 @@
 <% if current_user %>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle nav-link-dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <span class="badge rounded-pill bg-danger">
-        <%= @unread.count >= 9 ? '9+' : @unread.count %> <i class="bi bi-bell"></i>
+    <a class="nav-link nav-link-dropdown notifications-dropdown" href="#">
+      <span class="badge rounded-pill" id="notif-bell">
+        <%= @unread.count >= 9 ? '9+' : @unread.count %> <%= icon('bell') %>
       </span>
     </a>
 
-    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-      <h5 class="px-3 mt-1">Notifications</h5> <!-- TODO - Add view all button (also create notifications index page) -->
+    <div class="notifications" id="notifications">
+      <header>
+        <div class="buttons-list between">
+          <div class="notif-box">
+            <h2 class="title"><%= t('notifications.common.notifications') %></h2>
+            <span id="notifes"><%= @unread.count %></span>
+          </div>
 
-      <% @unread.each do |notification| %>
-        <li>
-          <%= render 'layouts/notification', notification: notification, klass: 'bookmark' %>
-        </li>
-      <% end %>
-      <% if @unread.count > 0 && @read.count > 0 %>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-      <% elsif @read.count + @unread.count == 0 %>
-        <li class="dropdown-item">
-          No notifications yet. <!-- TODO - translate-->
-        </li>
-      <% end %>
-      <% @read.each do |notification| %>
-        <li>
-          <%= render 'layouts/notification', notification: notification, klass: 'bookmark-check' %>
-        </li>
-      <% end %>
-    </ul>
+          <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p>
+        </div>
+      </header>
+
+      <%= render 'layouts/notifications-list', notifications: @notifications %>
+    
+      <footer>
+        <%= link_with_icon 'chevron-right',  notifications_path(filter: 'all'), 'show_all', id: 'mark_all', class: 'text-decoration-none' %>
+      </footer>
+    </div>
   </li>
 <% end %>

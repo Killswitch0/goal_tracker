@@ -27,17 +27,17 @@ class Task < ApplicationRecord
   include Searchable
   include ValidationConstants
 
-  belongs_to :goal
-  belongs_to :user
+  belongs_to :goal, counter_cache: true
+  belongs_to :user, counter_cache: true
 
   after_update_commit :check_goal_completion
 
   validates :name, presence: true,
-    format: {
-      with: BASE_VALIDATION,
-      message: :text_input
-    }
-  
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   }
+
   validates :deadline, presence: true, comparison: { greater_than: Date.today }
 
   after_create_commit :notify_create
@@ -69,9 +69,7 @@ class Task < ApplicationRecord
     complete?
   end
 
-  private
-
   def notification_params
-    { task: self, goal: goal }
+    { task: self, goal: }
   end
 end

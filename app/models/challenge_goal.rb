@@ -34,6 +34,9 @@ class ChallengeGoal < ApplicationRecord
   private
 
   def check_deadline
-    errors.add(:goal_id, I18n.t('activerecord.errors.models.challenge_goal.challenge_ended')) if Date.today >= challenge.deadline 
+    return unless Date.today >= challenge.deadline
+
+    errors.add(:goal_id,
+               I18n.t('activerecord.errors.models.challenge_goal.challenge_ended'))
   end
 end

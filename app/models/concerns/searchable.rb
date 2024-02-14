@@ -5,7 +5,7 @@ module Searchable
     def search(search, user, table)
       return unless search
 
-      where("lower(name) LIKE ? AND #{table}.user_id = ?", "%#{search.downcase}%", user.id)
+      where(["lower(name) LIKE ? AND #{table}.user_id = ?", "%#{search.downcase}%", user.id])
     end
   end
 end

@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-RSpec.feature "CompleteDashboardTasks" do
+RSpec.feature 'CompleteDashboardTasks' do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
-  given(:goal) { create(:goal, user: user, category: category) }
-  given(:task) { create(:task, user: user, goal: goal) }
+  given(:category) { create(:category, user:) }
+  given(:goal) { create(:goal, user:, category:) }
+  given(:task) { create(:task, user:, goal:) }
 
   feature 'Complete Task' do
-
     scenario 'Authenticated user try to complete Task' do
       log_in(user)
 

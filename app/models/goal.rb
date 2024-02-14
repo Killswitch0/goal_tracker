@@ -47,36 +47,36 @@ class Goal < ApplicationRecord
   validates :deadline, presence: true, comparison: { greater_than: Date.today }
   validates :color, presence: true
 
-  validates :name, presence: true, 
-    uniqueness: { scope: :user_id },
-    format: {
-      with: BASE_VALIDATION,
-      message: :text_input
-    },
-    length: {
-      minimum: 5,
-      maximum: 50 
-    }
+  validates :name, presence: true,
+                   uniqueness: { scope: :user_id },
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: {
+                     minimum: 5,
+                     maximum: 50
+                   }
 
   validates :description, presence: true,
-    format: {
-      with: BASE_VALIDATION,
-      message: :text_input
-    },
-    length: { 
-      minimum: 7,
-      maximum: 200 
-    }
+                          format: {
+                            with: BASE_VALIDATION,
+                            message: :text_input
+                          },
+                          length: {
+                            minimum: 7,
+                            maximum: 200
+                          }
 
-  scope :sort_by_completed_tasks, -> {
+  scope :sort_by_completed_tasks, lambda {
     left_joins(:tasks)
-    .group('goals.id, challenge_goals.id')
-    .select(
-      'goals.*, COUNT(
+      .group('goals.id, challenge_goals.id')
+      .select(
+        'goals.*, COUNT(
         CASE WHEN tasks.complete = true THEN 1 ELSE NULL END
       ) completed_tasks_count'
-    )
-    .order('completed_tasks_count DESC')
+      )
+      .order('completed_tasks_count DESC')
   }
 
   def goal_in_challenge
@@ -84,15 +84,15 @@ class Goal < ApplicationRecord
   end
 
   def tasks_streak?
-    return if self.tasks.completed.count.zero?
+    return if tasks.completed.count.zero?
 
-    self.tasks.completed.count == self.tasks.count
+    tasks.completed.count == tasks.count
   end
 
   def habits_streak?
-    return if self.habits.completed_today.count.zero?
+    return if habits.completed_today.count.zero?
 
-    self.habits.completed_today.count == self.habits.count
+    habits.completed_today.count == habits.count
   end
 
   private

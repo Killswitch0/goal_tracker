@@ -19,7 +19,22 @@ class GoalDeadlineNotification < ApplicationNotifications
 
   def message
     @goal = Goal.find(params[:goal][:id])
-    I18n.t('notifications.common.left_for_complete', days: days_left(@goal), target_name: @goal.name)
+    t('notifications.common.left_for_complete', days: days_left(@goal), target_name: @goal.name)
+  end
+
+  def to_parts
+    @goal = Goal.find(params[:goal][:id])
+
+    {
+      user: I18n.locale == :uk ? t('to_you') : t('you'),
+      message: t('notifications.goal.deadline.parts.message', days: days_left(@goal)),
+      target: @goal.name
+    }
+  end
+
+  def notify_avatar
+    @goal = Goal.find(params[:goal][:id])
+    @goal.user
   end
 
   def url

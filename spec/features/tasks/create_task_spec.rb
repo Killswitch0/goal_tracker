@@ -1,16 +1,15 @@
 require 'rails_helper'
 
-RSpec.feature "CreateTasks" do
+RSpec.feature 'CreateTasks' do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
-  given(:goal) { create(:goal, user: user, category: category) }
-  given!(:task) { create(:task, user: user, name: 'My String', goal: goal) }
+  given(:category) { create(:category, user:) }
+  given(:goal) { create(:goal, user:, category:) }
+  given!(:task) { create(:task, user:, name: 'My String', goal:) }
 
-  feature 'Create Task and complete', %q{
+  feature 'Create Task and complete', '
     In order to see completed/uncompleted tasks,
     manage them, wee need to be able to create Task
-  } do
-
+  ' do
     scenario 'Authenticated user try to create Task and complete' do
       log_in(user)
 
@@ -29,7 +28,6 @@ RSpec.feature "CreateTasks" do
       expect(page).to have_content I18n.t('tasks.create.success')
       expect(page).to have_content(task.name)
 
-
       ### complete ###
       visit complete_goal_task_path(goal, task)
       expect(page).to have_content I18n.t('tasks.complete.completed')
@@ -40,6 +38,5 @@ RSpec.feature "CreateTasks" do
 
       expect(current_path).to eq home_path
     end
-
   end
 end

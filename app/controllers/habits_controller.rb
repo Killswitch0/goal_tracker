@@ -10,10 +10,10 @@ class HabitsController < ApplicationController
   def index
     @goal = Goal.find(params[:goal_id])
     @habits = current_user.habits
-    
+
     @completed_habits = @habits.completed_today
 
-    @uncompleted_habits = 
+    @uncompleted_habits =
       @habits.not_completed_today(current_user)
   end
 

@@ -8,12 +8,14 @@ class ChartsController < ApplicationController
   #----------------------------------------------------------------------------
   def habit
     @chart_for = chart_params[:chart_for] = 'Habits'
+    @habits = current_user.habits
   end
 
   # GET /chart/task
   #----------------------------------------------------------------------------
   def task
     @chart_for = chart_params[:chart_for] = 'Tasks'
+    @tasks = current_user.tasks
   end
 
   #----------------------------------------------------------------------------
@@ -21,7 +23,11 @@ class ChartsController < ApplicationController
     tasks = current_user.tasks
     tasks = tasks.where(goal_id: @goal) if @goal
 
-    render json: tasks.group(:name).group_by_period(@period, :complete_date).count.chart_json
+    @tasks = tasks.group(:name).group_by_period(@period, :complete_date).count.reject do |_key, value|
+      value.zero?
+    end.chart_json
+
+    render json: @tasks
   end
 
   #----------------------------------------------------------------------------
@@ -30,13 +36,14 @@ class ChartsController < ApplicationController
     habits = habits.where(goal_id: @goal) if @goal
     @habits = Habit.habits_with_completion_period_data(habits, @period).chart_json
 
-    render json: @habits 
+    render json: @habits
   end
 
   #----------------------------------------------------------------------------
   def habits_current_month_completions_json
-    @top_three_habits = Habit.top_this_month(current_user)
-    habits = Habit.habits_with_completion_month_data(@top_three_habits).chart_json
+    @top_three_habits = Habit.top_this_month(current_user).take(3)
+    range = Date.current.beginning_of_month..Date.current.end_of_month
+    habits = Habit.habits_with_completion_period_data(@top_three_habits, :month, range:).chart_json
 
     render json: habits
   end
@@ -48,18 +55,20 @@ class ChartsController < ApplicationController
   end
 
   def set_period
-    @period = { 
+    @period = {
       'day' => :day,
       'week' => :week,
       'month' => :month
     }.fetch(
-        params[:period],
-        :day
+      params[:period],
+      :day
     )
   end
 
-  def default_params   
-     @chart_type = chart_params[:chart_type] ||= 'line'
+  def redirect_if_no_data; end
+
+  def default_params
+    @chart_type = chart_params[:chart_type] ||= 'line'
   end
 
   def chart_params

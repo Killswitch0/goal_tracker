@@ -7,7 +7,7 @@ class GoalsController < ApplicationController
   # GET /goals
   #----------------------------------------------------------------------------
   def index
-    @goals = 
+    @goals =
       if params[:search]
         Goal.search(params[:search], current_user, Goal.table_name)
       elsif params[:filter]
@@ -30,7 +30,7 @@ class GoalsController < ApplicationController
   # GET /goals/1
   #----------------------------------------------------------------------------
   def show
-    @tasks = 
+    @tasks =
       if params[:sort]
         @goal.tasks.order(sort_column + ' ' + sort_direction)
       else
@@ -100,7 +100,7 @@ class GoalsController < ApplicationController
       :deadline,
       :complete,
       :color,
-      category_attributes: [:name, :user_id]
+      category_attributes: %i[name user_id]
     )
   end
 

@@ -1,16 +1,15 @@
 require 'rails_helper'
 
-RSpec.feature "CreateDashboardTasks" do
+RSpec.feature 'CreateDashboardTasks' do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
-  given!(:goal) { create(:goal, user: user, category: category) }
-  given(:task) { create(:task, user: user, goal: goal) }
+  given(:category) { create(:category, user:) }
+  given!(:goal) { create(:goal, user:, category:) }
+  given(:task) { create(:task, user:, goal:) }
 
-  feature 'Create Task', %q{
+  feature 'Create Task', '
     In order to see completed/uncompleted tasks,
     manage them, wee need to be able to create Task
-  } do
-
+  ' do
     scenario 'Authenticated user try to create Task' do
       log_in(user)
 

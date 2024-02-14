@@ -36,11 +36,11 @@ class Challenge < ApplicationRecord
 
     goals.each do |goal|
       user = goal.user
-      completed = user.tasks.completed.count == user.tasks.count
+      user_tasks_count = user.tasks_count
 
-      if completed || deadline < Date.today
-        user_tasks_count[user] = goal.tasks.count
-      end
+      completed = tasks.completed.count == user_tasks_count
+
+      user_tasks_count[user] = goal.tasks_count if completed || deadline < Date.today
     end
 
     user_tasks_count

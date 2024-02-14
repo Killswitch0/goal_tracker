@@ -39,10 +39,12 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :challenge_users, dependent: :destroy
-  has_many :joined_challenges, -> { where(challenge_users: { confirm: true }) }, 
-    through: :challenge_users, source: :challenge, dependent: :destroy
-  has_many :created_challenges, -> { where(user: self) },
-    class_name: 'Challenge', foreign_key: 'user_id', dependent: :destroy
+  has_many :joined_challenges, lambda {
+                                 where(challenge_users: { confirm: true })
+                               }, through: :challenge_users, source: :challenge, dependent: :destroy
+  has_many :created_challenges, lambda {
+                                  where(user: self)
+                                }, class_name: 'Challenge', foreign_key: 'user_id', dependent: :destroy
   has_many :challenge_goals, dependent: :destroy
 
   # noticed gem association
@@ -53,27 +55,27 @@ class User < ApplicationRecord
   has_secure_password validations: false
 
   validates :name, presence: true,
-    format: {
-      with: /\A[A-Za-z]+\z/,
-      message: :name_format
-    }
-  
+                   format: {
+                     with: /\A[A-Za-z]+\z/,
+                     message: :name_format
+                   }
+
   validates :email, presence: true,
-    format: { with: VALID_EMAIL_REGEX },
-    uniqueness: { case_sensitive: false }
-  
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+
   validates :password, confirmation: true,
-    allow_blank: true,
-    presence: true,
-    format: {
-      with: /\A(?=.*[A-Za-z])(?=.*\d).+\z/,
-      message: :password_format
-    },
-    length: { 
-      minimum: 6,
-      maximum: 10,
-      message: :password_length
-    }
+                       allow_blank: true,
+                       presence: true,
+                       format: {
+                         with: /\A(?=.*[A-Za-z])(?=.*\d).+\z/,
+                         message: :password_format
+                       },
+                       length: {
+                         minimum: 6,
+                         maximum: 10,
+                         message: :password_length
+                       }
 
   validate :password_presence
   validate :correct_old_password, on: :update, if: -> { password.present? && !admin_edit }
@@ -90,13 +92,12 @@ class User < ApplicationRecord
   end
 
   def admin_role?
-    self.role == 1
+    role == 1
   end
 
   # returns user goal in challenge or nil
   def tasks_in_challenge(challenge)
-    #challenge_goals.where(challenge: challenge, user: self).first&.goal
-    goal_in_challenge = challenge_goals.where(challenge: challenge).first&.goal
+    goal_in_challenge = challenge_goals.where(challenge:).first&.goal
     goal_in_challenge&.tasks
   end
 
@@ -111,18 +112,18 @@ class User < ApplicationRecord
 
   def digest(string)
     cost = if ActiveModel::SecurePassword
-                .min_cost
+              .min_cost
              BCrypt::Engine::MIN_COST
            else
              BCrypt::Engine.cost
            end
-    BCrypt::Password.create(string, cost: cost)
+    BCrypt::Password.create(string, cost:)
   end
 
   def confirmation_token
-    if self.confirm_token.blank?
-      self.confirm_token = SecureRandom.urlsafe_base64.to_s
-    end
+    return unless confirm_token.blank?
+
+    self.confirm_token = SecureRandom.urlsafe_base64.to_s
   end
 
   def password_complexity
@@ -145,5 +146,4 @@ class User < ApplicationRecord
 
     errors.add :old_password, I18n.t('activerecord.errors.messages.incorrect')
   end
-
 end

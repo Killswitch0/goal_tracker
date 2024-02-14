@@ -6,7 +6,8 @@ module ApplicationHelper
   def delete_link_to(text = nil, path = nil, icon_class = nil, **options, &)
     link = block_given? ? text : path
 
-    data = { data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t("#{options[:title]}", name: options[:name]) } }
+    data = { data: { turbo_method: :delete, turbo_confirm: t('sure'),
+                     modal_title: t("#{options[:title]}", name: options[:name]) } }
     options = options.merge(data)
 
     if block_given?
@@ -19,11 +20,11 @@ module ApplicationHelper
   def active_link_to(text = nil, path = nil, **options, &)
     link = block_given? ? text : path
 
-    if current_page?(link, check_parameters: true)
-      classes = 'link-icon btn btn-primary btn-sm'
-    else
-      classes = 'link-icon btn btn-outline-primary btn-sm'
-    end
+    classes = if current_page?(link, check_parameters: true)
+                'active'
+              else
+                ''
+              end
 
     options[:class] = class_names(options[:class], classes)
 
@@ -37,9 +38,13 @@ module ApplicationHelper
   def sortable(column, title = nil)
     title ||= t("#{column}")
     css_class = column == sort_column ? "current-#{sort_direction}" : nil
-    icon_class = params[:sort] == column ? (params[:direction] == 'desc' ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill') : 'bi bi-caret-up-fill'
-    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-    link_to "#{title} <i class='#{icon_class}'></i>".html_safe, { sort: column, direction: direction }, class: css_class
+    icon_class = if params[:sort] == column
+                   params[:direction] == 'desc' ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'
+                 else
+                   'bi bi-caret-up-fill'
+                 end
+    direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'
+    link_to "#{title} <i class='#{icon_class}'></i>".html_safe, { sort: column, direction: }, class: css_class
   end
 
   def flash_class(level)
@@ -51,15 +56,15 @@ module ApplicationHelper
 
   def user_avatar(user, size: 30, css_class: 'rounded-circle', style: '')
     if user.avatar.attached?
-      image_tag user.avatar.variant(resize_to_fill: [size, nil]), class: css_class, style: style
+      image_tag(user.avatar.variant(resize_to_fill: [size, nil]), class: css_class, style:)
     else
-      user.decorate.gravatar(size: size, css_class: css_class, style: style)
+      user.decorate.gravatar(size:, css_class:, style:)
     end
   end
 
   def days_left(target)
     days = (target.deadline.to_date - Date.today).to_i
 
-    (days.negative? || days.zero?) ? 0 : days
+    days.negative? || days.zero? ? 0 : days
   end
 end

@@ -1,6 +1,6 @@
 <div class="chart mt-3" id="chart" data-controller="charts">
   <div class="table-header list">
-    <h2 class="text-center">
+    <h2 class="text-center title">
       <%= t('habits_chart').upcase %>
     </h2>
     
@@ -13,48 +13,55 @@
     <% end %>
   </div>
 
-  <div class="chart__body col-md-12">
-    <div class="buttons-list center mt-3">
-      <% if @goal %> 
-        <%= render 'habit_period_links', goal: @goal %>
-        <div class="vr mx-3"></div>
-        <%= render 'chart_for_links', goal: @goal %>
-      <% else %>
-        <%= render 'habit_period_links' %>
-        <div class="vr mx-3"></div>
-        <%= render 'chart_for_links' %>
-      <% end %>
+  <% if current_user.habits.empty? %>
+    <%= render 'shared/empty', title: t('partials.empty.chart.title'),
+                               message: t('partials.empty.chart.message'),
+                               icon_class: 'graph-up display-1' %>
+  <% else %>
+    <div class="chart__body col-md-12">
+      <div class="buttons-list center mt-3">
+        <% if @goal %> 
+          <%= render 'habit_period_links', goal: @goal %> 
+          <div class="vr mx-3"></div>
+          <%= render 'chart_for_links', goal: @goal %>
+        <% else %>
+          <%= render 'habit_period_links' %>
+          <div class="vr mx-3"></div>
+          <%= render 'chart_for_links' %>
+        <% end %>
 
-      <div class="dropdown">
-        <a class="nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= @chart_type&.capitalize %>
-          <%= icon 'chevron-down left' %>
-        </a>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= @chart_type&.capitalize %>
+            <%= icon 'chevron-down left' %>
+          </a>
 
-        <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-          <% %w(column line).each do |type| %>
-            <li>
-              <% if params[:chart_type] == type %>
-                <%= tag.span type.capitalize, class: 'dropdown-item' %>
-              <% else %>
-                <%= link_to type.capitalize, { chart_type: type, period: 'day' }, class: 'dropdown-item' %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+          <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+            <% %w(column line).each do |type| %>
+              <li>
+                <% if params[:chart_type] == type %>
+                  <%= tag.span type.capitalize, class: 'dropdown-item' %>
+                <% else %>
+                  <%= link_to type.capitalize, { chart_type: type, period: 'day' }, class: 'dropdown-item' %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+    </div>  
 
     <% if params[:chart_type] == 'column' %>
-      <div class="mt-5"> <%= column_chart habits_chart_path(goal_id: @goal, period: @period, chart_type: @chart_type), ytitle: 'Completions' %> </div> <!-- TODO - translate ytitle-->
+      <div class="mt-5"> <%= column_chart habits_chart_path(goal_id: @goal, period: @period, chart_type: @chart_type), ytitle: t('completions') %> </div>
     <% else %>
       <div class="mt-5"> <%= line_chart habits_chart_path(goal_id: @goal, period: @period, chart_type: @chart_type) %> </div>
     <% end %>
 
-    <% if @goal %>
-      <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
-    <% else %>
-      <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %>
-    <% end %>
-  </div>
+    <div class="buttons-list start">
+      <% if @goal %>
+        <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary btn-sm mt-2' %>
+      <% else %>
+        <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary btn-sm mt-2' %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

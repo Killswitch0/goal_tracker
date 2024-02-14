@@ -6,7 +6,7 @@ class GoalTrackingController < ApplicationController
   # GET /goal_tracking
   #----------------------------------------------------------------------------
   def show
-    @goals = 
+    @goals =
       if params[:search]
         Goal.search(params[:search], current_user, Goal.table_name)
       else
@@ -21,6 +21,6 @@ class GoalTrackingController < ApplicationController
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end

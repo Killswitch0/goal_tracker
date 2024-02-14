@@ -194,6 +194,7 @@ en:
   manage: 'Manage'
   search: 'Search'
   sure: 'Are you sure?'
+  show_all: 'Show all'
   next: 'Next'
   previous: 'Previous'
   days_left:
@@ -202,6 +203,8 @@ en:
     few: '%{count} days left'
     many: '%{count} days left'
     other: '%{count} days left'
+  accept: 'Accept'
+  decline: 'Decline'
 
   # Views -> Authentication.
   #----------------------------------------------------------------------------
@@ -217,6 +220,7 @@ en:
 
   # Views -> Users.
   #----------------------------------------------------------------------------
+  you: 'You'
   edit_user: 'Edit User'
   new_user: 'New User'
   hello: 'Hello'
@@ -249,6 +253,7 @@ en:
   new_category: 'New category'
   all_categories: 'Categories'
   filter_or_manage: 'Category filter / Management'
+  delete_category_name: 'Delete category «%{name}»'
 
   # Views -> Tasks.
   #----------------------------------------------------------------------------
@@ -277,7 +282,13 @@ en:
   #----------------------------------------------------------------------------
   habits_chart: 'Habits Chart'
   tasks_chart: 'Tasks Chart'
-
+  completions: 'Completions'
+  chart:
+    tasks: 
+      empty: 'You dont have completion data for tasks.'
+    habits: 
+      empty: 'You dont have completion data for habits.'
+  
   # Views -> Challenges.
   #----------------------------------------------------------------------------
   challenge: 'Challenge'
@@ -295,6 +306,12 @@ en:
   # Views -> Calendar.
   #----------------------------------------------------------------------------
   goal_markers: 'Goal markers'
+
+  # Buttons.
+  #----------------------------------------------------------------------------
+  buttons:
+    goals:
+      to_goal: 'Go to goals'
 
   # Controllers.
   #----------------------------------------------------------------------------
@@ -384,12 +401,69 @@ en:
   messages:
     sign_or_log: 'Please sign up or login to use the application.'
 
+  
+  # Partials.
+  #----------------------------------------------------------------------------
+  partials:
+    empty:
+      chart:
+        title: "Your Chart doesn't have any data!"
+        message: 'Create habits or tasks in your Goal to show chart'
+      calendar:
+        title: "Your Calendar doesn't have any data!"
+        message: 'Create habits in your Goal to show calendar.'
+      dashboard: 
+        title: "Your Dashboard doesn't have any data!"
+        message: 'Create Goal to show Dashboard.'
+      tracking:
+        title: "Your Tracking doesn't have any data!"
+        goal_message: 'Create Goal to show tracking.'
+        task_message: 'Create Task in your Goal to show tracking.'
+
   # Notifications.
   #----------------------------------------------------------------------------
   notifications:
     common:
-      almost: "You almost made habits streak in «%{target_name}»! Let's GO!" # TODO add notification structure from noticed documentation
-      created: "%{user_name} created «%{child_target}» task in «%{parent_target}»."
+      notifications: 'Notifications'
+      almost: "You almost made habits streak in «%{target_name}»! Let's GO!"
+      created: "You created «%{child_target}» Task in «%{parent_target}»."
       left_for_complete: "You remain %{days} days to complete Goal «%{target_name}»."
+      mark_as_read: 'Mark all as read'
     challenge:
-      invited: "You've been invited to the «%{challenge}» challenge"
+      invited: 
+        full_message: "You've been invited to the «%{challenge}» challenge"
+        parts:
+          message: 'invited you to take part in the challenge'
+    task:
+      created:
+        full_message: 'You created Task %{target}.'
+        parts:
+          message: 'created Task'
+      almost: 
+        full_message: "You almost made tasks streak in «%{target}»! Let's GO!"
+        parts:
+          message: 'almost made tasks streak in'
+      deadline:
+        parts:
+          message: 'remain %{days} days to complete Task'
+    habit:
+      created:
+        full_message: 'You created Habit %{target}.'
+        parts:
+          message: 'created Habit'
+      almost: 
+        full_message: "You almost made habits streak in «%{target}»! Let's GO!"
+        parts:
+          message: 'almost made habits streak in'
+    goal:
+      created:
+        full_message: 'You created Goal %{target}.'
+        parts:
+          message: 'created Goal'
+      almost:
+        parts: 
+          message: 'almost made goal streak'
+      deadline: 
+        parts:
+          message: 'remain %{days} days to complete Goal'
+

@@ -5,7 +5,7 @@ class GoalDeadlineJob
 
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     @goals = Goal.where('deadline > ?', Time.now)
 
     @goals.each do |goal|

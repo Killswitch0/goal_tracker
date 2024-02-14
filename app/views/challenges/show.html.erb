@@ -1,7 +1,7 @@
 <section id="challenges-show">
   <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 text-center mt-3 challenge-header">
     <div class="table-header">
-      <h2 class="text-center">
+      <h2 class="text-center title">
         <%= @challenge.name %>
       </h2>
     </div>
@@ -61,15 +61,17 @@
     </div>
 
     <div class="buttons-list center">
-      <%= active_link_to challenge_path(@challenge, filter: "#{current_user.id}") do %>
-        <%= icon('person-circle') %>
-        <%= t('my_goals') %>
-      <% end %>
+      <div class="btn-group">
+        <%= active_link_to challenge_path(@challenge, filter: "#{current_user.id}"), class: 'btn btn-primary btn-sm' do %>
+          <%= icon('person-circle') %>
+          <%= t('my_goals') %>
+        <% end %>
 
-      <%= active_link_to challenge_path(@challenge), class: 'mx-3' do %>
-        <%= icon('list') %>
-        <%= t('all_goals')%>
-      <% end %>
+        <%= active_link_to challenge_path(@challenge), class: 'btn btn-primary btn-sm me-3' do %>
+          <%= icon('list') %>
+          <%= t('all_goals')%>
+        <% end %>
+      </div>
 
       <%= canvas_button 'rating', icon: 'bar-chart-fill', klass: 'link-icon btn-sm' %>
     </div>

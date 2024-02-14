@@ -30,16 +30,16 @@ class Habit < ApplicationRecord
   has_many :completion_dates, dependent: :destroy
 
   validates :name, presence: true,
-    uniqueness: { scope: :user_id },
-    format: {
-      with: BASE_VALIDATION,
-      message: :text_input
-    },
-    length: { 
-      minimum: 5,
-      maximum: 45 
-    }
-  
+                   uniqueness: { scope: :user_id },
+                   format: {
+                     with: BASE_VALIDATION,
+                     message: :text_input
+                   },
+                   length: {
+                     minimum: 5,
+                     maximum: 45
+                   }
+
   validates :description, presence: true
 
   after_create_commit :notify_create
@@ -49,92 +49,78 @@ class Habit < ApplicationRecord
 
   has_noticed_notifications model_name: 'Notification'
 
-  scope :completed_today, -> {
-    includes(:completion_dates)
-    .where('completion_dates.created_at >= ?', Date.today.beginning_of_day)
-    .references(:completion_dates)
-  }
-
-  scope :not_completed_today, -> (user) {
+  scope :completed_today, lambda {
     today = Date.today
 
     includes(:completion_dates)
-    .where('habits.user_id = ?', user.id)
-    .where.not(
-      'EXISTS (
-        SELECT 1
-        FROM completion_dates
-        WHERE habit_id = habits.id AND DATE(created_at) = ?)', today
-    )
-    .distinct
+      .where('completion_dates.date >= ?', today)
+      .references(:completion_dates)
   }
 
-  scope :sorted_by_completion, -> (user) {
-    includes(:completion_dates)
-    .where(user: user)
-    .order(
-      Arel.sql(
-        "CASE WHEN completion_dates.date = '#{Date.today}' THEN 1
-          WHEN completion_dates.date IS NULL THEN 3
-          ELSE 2 
-        END"
+  scope :not_completed_today, lambda { |user|
+    today = Date.today
+
+    left_joins(:completion_dates)
+      .where('habits.user_id = ?', user.id)
+      .where.not(
+        'EXISTS (
+          SELECT 1
+          FROM completion_dates
+          WHERE habit_id = habits.id AND DATE(created_at) = ?
+        )', today
       )
-    )
-    .references(:completion_dates)
-    .uniq
+      .distinct
+  }
+
+  scope :sorted_by_completion, lambda { |user|
+    today = Date.today
+
+    joins(:completion_dates)
+      .where(
+        'habits.user_id = ? AND completion_dates.date = ?',
+        user.id, today
+      )
+      .order(
+        Arel.sql(
+          "CASE WHEN completion_dates.date = '#{today}' THEN 1
+            WHEN completion_dates.date IS NULL THEN 3
+          ELSE 2
+          END"
+        )
+      )
+      .references(:completion_dates)
+      .uniq
   }
 
   # Top habits by completions count this month
-  scope :top_this_month, -> (user) {
-    joins(:completion_dates)
-    .where(
-      'habits.user_id = ? AND EXTRACT(month FROM completion_dates.date) = ?',
-      user, Date.today.month
-    )
-    .group('habits.id')
-    .order('COUNT(completion_dates.id) DESC')
-    .uniq
+  scope :top_this_month, lambda { |user|
+    includes(:completion_dates)
+      .where(
+        habits: { user_id: user },
+        completion_dates: {
+          date: Date.current.beginning_of_month..Date.current.end_of_month
+        }
+      )
+      .group('habits.id, completion_dates.id')
+      .order('COUNT(completion_dates.id) DESC')
+      .uniq
   }
 
   # => [{"name":"Morning exercise 0","data":{"2024-02-01":1}}]
-  # def self.habits_with_completion_period_data(habits, period = nil)
-  #   habits.map do |habit|
-  #     completion_data = habit.completion_dates.presence || {}
-  #     empty_data = Array.new(habits.length, {})
-
-  #     {
-  #       name: habit.name,
-  #       data: completion_data.empty? ? empty_data : completion_data.group_by_period(period, :date).count
-  #     }
-  #   end
-  # end
-
-  # TODO - create one flexible method
-  def self.habits_with_completion_period_data(habits, period)
+  def self.habits_with_completion_period_data(habits, period, range: nil)
     habits.map do |habit|
       completion_data = habit.completion_dates
-          
-      {
-        name: habit.name,
-        data: completion_data.presence ?
-         completion_data.group_by_period(period, :date).count :
-          0
-      }
-    end
-  end
 
-  def self.habits_with_completion_month_data(habits) # TODO - add logic like in method above
-    habits.map do |habit|
-      completion_data = habit.completion_dates.presence || {}
-      empty_data = Array.new(habits.length, {})
-  
       {
         name: habit.name,
-        data: completion_data.empty? ? empty_data : completion_data.group_by_month(:date).count
+        data: if completion_data.presence
+                completion_data.group_by_period(period, :date, range:).count
+              else
+                0
+              end
       }
     end
   end
-  
 
   # For Streakable concern
   def completed_count
@@ -147,15 +133,6 @@ class Habit < ApplicationRecord
 
   def completed_today?
     completion_dates.created_today.exists?
-  end
-
-  # group_by_month is the method of groupdate gem
-  def completed_monthly
-    completion_dates.group_by_month(:date).count
-  end
-
-  def completed_by_day
-    completion_dates.group_by_period(:day, :date).count
   end
 
   def complete_habit_today
@@ -171,7 +148,7 @@ class Habit < ApplicationRecord
   private
 
   def notification_params
-    { habit: self, goal: goal }
+    { habit: self, goal: }
   end
 
   def create_completion_date

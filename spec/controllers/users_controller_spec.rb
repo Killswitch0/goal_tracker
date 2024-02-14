@@ -33,25 +33,24 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST #create' do
-
     context 'with valid attributes' do
       it 'saves the new user to the database' do
-        expect { post :create, params: { user: user } }
+        expect { post :create, params: { user: } }
           .to change(User, :count).by(1)
       end
 
       it 'sends a registration confirmation email' do
-        expect { post :create, params: { user: user } }
+        expect { post :create, params: { user: } }
           .to change(ActionMailer::Base.deliveries, :count).by(1)
       end
 
       it 'sets a flash notice message' do
-        post :create, params: { user: user }
-        expect(flash[:noticed]).to eq "Please confirm your email address to continue"
+        post :create, params: { user: }
+        expect(flash[:noticed]).to eq 'Please confirm your email address to continue'
       end
 
       it 'redirects to the login page' do
-        post :create, params: { user: user }
+        post :create, params: { user: }
         expect(response).to redirect_to(login_path)
       end
     end
@@ -66,7 +65,7 @@ RSpec.describe UsersController, type: :controller do
 
       it 'sets a flash danger message' do
         post :create, params: { user: invalid_params }
-        expect(flash[:danger]).to eq "Something went wrong..."
+        expect(flash[:danger]).to eq 'Something went wrong...'
       end
 
       it 'renders the new template with unprocessable_entity status' do

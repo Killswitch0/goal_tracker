@@ -1,19 +1,18 @@
 require 'rails_helper'
 
-RSpec.feature "CreateHabits" do
+RSpec.feature 'CreateHabits' do
   given(:user) { create(:user) }
-  given(:category) { create(:category, user: user) }
-  given(:goal) { create(:goal, user: user, category: category) }
-  given(:habit) { create(:habit, user: user, goal: goal) }
+  given(:category) { create(:category, user:) }
+  given(:goal) { create(:goal, user:, category:) }
+  given(:habit) { create(:habit, user:, goal:) }
 
-  feature 'Create Habit', %q{
+  feature 'Create Habit', '
     In order to see habits,
     wich belongs to Goal,
     complete them
     and see habits in calendar
     wee need to be able to create Habit
-  } do
-
+  ' do
     scenario 'Authenticated user try to create Habit and complete' do
       log_in(user)
 
@@ -39,6 +38,5 @@ RSpec.feature "CreateHabits" do
 
       expect(current_path).to eq home_path
     end
-
   end
 end

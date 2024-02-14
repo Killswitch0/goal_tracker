@@ -24,5 +24,5 @@ env :PATH, ENV['PATH']
 set :output, './log/cron.log'
 
 every 1.minute do
-  rake "goal_deadline_notification:deadline_notify"
+  rake 'goal_deadline_notification:deadline_notify'
 end

@@ -9,6 +9,6 @@ module CalendarHelper
   # helper for calendar
   # check in views/calendar/show
   def habits_for
-    @habits.includes(:completion_dates)
+    @habits
   end
 end

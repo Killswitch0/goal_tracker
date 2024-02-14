@@ -70,7 +70,8 @@ module GoalsHelper
     ['Aquamarine', 'rgb(127,255,212)'],
     ['Dark violet', 'rgb(148,0,211)'],
     ['Orange red', 'rgb(255,69,0)'],
-    ['Dark turquoise', 'rgb(0,206,209)']].freeze
+    ['Dark turquoise', 'rgb(0,206,209)']
+  ].freeze
 
   include TasksHelper
   include HabitsHelper
@@ -88,8 +89,8 @@ module GoalsHelper
     goals = goals.nil? ? user.goals : goals
 
     completed = goals.where(complete: true).count
-    all = goals.count  
-    
+    all = goals.count
+
     "#{t('done')} #{content_tag(:span, completed, class: 'completed-count')} / #{all}".html_safe
   end
 end

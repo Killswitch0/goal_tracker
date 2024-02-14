@@ -1,17 +1,15 @@
 require 'rails_helper'
 
-RSpec.feature "CreateChallenges" do
+RSpec.feature 'CreateChallenges' do
   given(:user) { create :user }
-  given(:challenge) { create :challenge, user: user }
-  given(:challenge_user) { create :challenge_user, challenge: challenge, user: user }
+  given(:challenge) { create :challenge, user: }
+  given(:challenge_user) { create :challenge_user, challenge:, user: }
 
-
-  feature 'Create challenges', %q{
+  feature 'Create challenges', '
     In order to invite users to challenges,
     confirm invite, add goals to challenges
     we need to be able to create Challenge.
-  } do
-
+  ' do
     scenario 'Authenticated user try to create Challenge' do
       log_in(user)
 

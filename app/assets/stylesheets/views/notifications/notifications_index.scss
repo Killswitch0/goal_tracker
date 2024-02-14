@@ -1,0 +1,44 @@
+.notifications-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+
+  .list-group-wrapper { min-width: 30vh; }
+
+  .list-group {
+    &-item {
+      display: flex;
+      justify-content: space-between;
+
+      span.badge {
+        display: flex;
+        align-items: center;
+        background-color: var(--Grayish-blue);
+      }
+
+      span.badge_unread { background-color: var(--Red); }
+    }
+
+    span.disabled {
+      color: inherit;
+      background: #DBE2E6;
+    }
+  }
+
+}
+
+#notifications_index {
+  display: block;
+  position: relative;
+  width: 80vh;
+  height: 70vh;
+  right: 0;
+  z-index: 0;
+
+  h2.title { font-size: 35px; }
+
+  .notifications-list { 
+    height: 100%;
+    max-height: 55vh;
+    scrollbar-width: inherit;
+   }
+}

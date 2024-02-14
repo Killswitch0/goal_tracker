@@ -1,13 +1,15 @@
 require 'rails_helper'
 
-RSpec.feature "DeleteGoalFromChallenges" do
+RSpec.feature 'DeleteGoalFromChallenges' do
   given(:user) { create :user }
 
-  given(:goal) { create :goal, user: user }
+  given(:goal) { create :goal, user: }
 
-  given(:challenge) { create :challenge, user: user }
-  given(:challenge_user) { create :challenge_user, challenge: challenge, user: user }
-  given!(:challenge_goal) { create :challenge_goal, challenge: challenge, challenge_user: challenge_user, goal: goal, user: user }
+  given(:challenge) { create :challenge, user: }
+  given(:challenge_user) { create :challenge_user, challenge:, user: }
+  given!(:challenge_goal) do
+    create :challenge_goal, challenge:, challenge_user:, goal:, user:
+  end
 
   describe 'Delete goal' do
     scenario 'Authenticated user try to delete goal from Challenge' do

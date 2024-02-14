@@ -7,13 +7,20 @@ class ApplicationController < ActionController::Base
 
   before_action :set_notifications, if: :current_user
 
+  def mark_all_notifications_as_read
+    notifications = Notification.where(recipient: current_user)
+    unread = notifications.unread
+    unread.update_all(read_at: Time.zone.now)
+    redirect_to request.referrer
+  end
+
   private
 
   # Sets notification for current user
   def set_notifications
-    notifications = Notification.where(recipient: current_user).newest_first.limit(9)
-    @unread = notifications.unread
-    @read = notifications.read
+    @notifications = Notification.includes(:recipient).where(recipient: current_user).newest_first.limit(20)
+    @unread = @notifications.unread
+    @read = @notifications.read
   end
 
   def redirect_user
@@ -25,12 +32,12 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
+    return if logged_in?
 
-      redirect_to login_url
-    end
+    store_location
+    flash[:danger] = 'Please log in.'
+
+    redirect_to login_url
   end
 
   def date_today
