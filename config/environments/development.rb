@@ -1,7 +1,7 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-  config.after_initialize do # TODO - enable to check DB perfomance
+  config.after_initialize do # TODO: - enable to check DB perfomance
     # Bullet.enable        = true
     # Bullet.alert         = true
     # Bullet.bullet_logger = true

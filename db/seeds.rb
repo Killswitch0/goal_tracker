@@ -99,15 +99,15 @@ habit = Habit.create(
   description: 'Drink water 30 minutes after waking up',
   user_id: user.id,
   goal_id: goal.id,
-  created_at: Date.today - 6.weeks,
-  updated_at: Date.today - 6.weeks
+  created_at: Date.today - 8.weeks,
+  updated_at: Date.today - 8.weeks
 )
 
 completion_dates_data_habit = [
-  { date_offset: (2.weeks + 3.days) },
-  { date_offset: (2.weeks + 1.days) },
-  { date_offset: (1.week + 5.days) },
-  { date_offset: (1.week + 2.days) }
+  { date_offset: (5.weeks + 3.days) },
+  { date_offset: (4.weeks + 1.days) },
+  { date_offset: (1.week + 8.days) },
+  { date_offset: (1.week + 3.days) }
 ]
 
 completion_dates_data_habit.each do |completion_date_params|
@@ -124,13 +124,13 @@ habit2 = Habit.create(
   description: 'GNC MAN COMPLEX',
   user_id: user.id,
   goal_id: goal.id,
-  created_at: Date.today - 7.weeks,
-  updated_at: Date.today - 7.weeks
+  created_at: Date.today - 8.weeks,
+  updated_at: Date.today - 8.weeks
 )
 
 completion_dates_data = [
-  { date_offset: (2.weeks + 3.days) },
-  { date_offset: (1.week + 4.days) },
+  { date_offset: (6.weeks + 3.days) },
+  { date_offset: (5.week + 4.days) },
   { date_offset: 1.week },
   { date_offset: 4.days }
 ]

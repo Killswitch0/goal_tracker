@@ -50,8 +50,10 @@ class Habit < ApplicationRecord
   has_noticed_notifications model_name: 'Notification'
 
   scope :completed_today, lambda {
+    today = Date.today
+
     includes(:completion_dates)
-      .where('completion_dates.created_at >= ?', Date.today.beginning_of_day)
+      .where('completion_dates.date >= ?', today)
       .references(:completion_dates)
   }
 
@@ -62,23 +64,28 @@ class Habit < ApplicationRecord
       .where('habits.user_id = ?', user.id)
       .where.not(
         'EXISTS (
-        SELECT 1
-        FROM completion_dates
-        WHERE habit_id = habits.id AND DATE(created_at) = ?
-      )', today
+          SELECT 1
+          FROM completion_dates
+          WHERE habit_id = habits.id AND DATE(created_at) = ?
+        )', today
       )
       .distinct
   }
 
   scope :sorted_by_completion, lambda { |user|
+    today = Date.today
+
     joins(:completion_dates)
-      .where(user:)
+      .where(
+        'habits.user_id = ? AND completion_dates.date = ?',
+        user.id, today
+      )
       .order(
         Arel.sql(
-          "CASE WHEN completion_dates.date = '#{Date.today}' THEN 1
-        WHEN completion_dates.date IS NULL THEN 3
-        ELSE 2
-      END"
+          "CASE WHEN completion_dates.date = '#{today}' THEN 1
+            WHEN completion_dates.date IS NULL THEN 3
+          ELSE 2
+          END"
         )
       )
       .references(:completion_dates)
@@ -100,14 +107,14 @@ class Habit < ApplicationRecord
   }
 
   # => [{"name":"Morning exercise 0","data":{"2024-02-01":1}}]
-  def self.habits_with_completion_period_data(habits, period)
+  def self.habits_with_completion_period_data(habits, period, range: nil)
     habits.map do |habit|
       completion_data = habit.completion_dates
 
       {
         name: habit.name,
         data: if completion_data.presence
-                completion_data.group_by_period(period, :date).count
+                completion_data.group_by_period(period, :date, range:).count
               else
                 0
               end
@@ -126,15 +133,6 @@ class Habit < ApplicationRecord
 
   def completed_today?
     completion_dates.created_today.exists?
-  end
-
-  # group_by_month is the method of groupdate gem
-  def completed_monthly
-    completion_dates.group_by_month(:date).count
-  end
-
-  def completed_by_day
-    completion_dates.group_by_period(:day, :date).count
   end
 
   def complete_habit_today

@@ -1,8 +1,8 @@
 <% if current_user %>
   <li class="nav-item dropdown">
     <a class="nav-link nav-link-dropdown notifications-dropdown" href="#">
-      <span class="badge rounded-pill bg-danger">
-        <%= @unread.count >= 9 ? '9+' : @unread.count %> <i class="bi bi-bell"></i>
+      <span class="badge rounded-pill" id="notif-bell">
+        <%= @unread.count >= 9 ? '9+' : @unread.count %> <%= icon('bell') %>
       </span>
     </a>
 

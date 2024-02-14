@@ -12,8 +12,10 @@
       span.badge {
         display: flex;
         align-items: center;
-        background-color: $second-color;
+        background-color: var(--Grayish-blue);
       }
+
+      span.badge_unread { background-color: var(--Red); }
     }
 
     span.disabled {
@@ -21,6 +23,7 @@
       background: #DBE2E6;
     }
   }
+
 }
 
 #notifications_index {

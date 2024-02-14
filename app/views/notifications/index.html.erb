@@ -3,12 +3,12 @@
     <div class="list-group">
       <%= active_link_to notifications_path(filter: 'all'), class: 'list-group-item list-group-item-action' do %>
         <%= 'All notifications' %>
-        <%= tag.span @all_count, class: 'badge rounded-pill' unless @all_count.zero? %>
+        <%= tag.span @all_count >= 0 ? @all_count : '99+', class: 'badge rounded-pill' unless @all_count.zero? %>
       <% end %>
 
       <%= active_link_to notifications_path(filter: 'unread'), class: 'list-group-item list-group-item-action' do %>
         <%= 'Unread' %>
-        <%= tag.span @unread_count, class: 'badge rounded-pill' unless @unread_count.zero? %> 
+        <%= tag.span @unread_count, class: 'badge rounded-pill badge_unread' unless @unread_count.zero? %> 
       <% end %>
 
       <%= active_link_to 'Read', notifications_path(filter: 'read'), class: "list-group-item list-group-item-action" %>
