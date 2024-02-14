@@ -107,10 +107,10 @@ rails assets:precompile
 To run Sidekiq:
 
 ```
-cd /goal_tracker && bundle exec sidekiq
+bundle exec sidekiq
 ```
 
-And run server:
+And run server in another terminal window:
 
 ```
 cd /goal_tracker && rails server
