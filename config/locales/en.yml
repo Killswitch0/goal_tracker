@@ -284,6 +284,9 @@ en:
   tasks_chart: 'Tasks Chart'
   completions: 'Completions'
   chart:
+    type:
+      line: 'Line'
+      column: 'Column'
     tasks: 
       empty: 'You dont have completion data for tasks.'
     habits: 

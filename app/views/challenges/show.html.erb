@@ -9,6 +9,7 @@
     <div class="text-center fs-4 mt-2">
       <%= @challenge.created_at.strftime('%d-%m-%Y') %> /
       <%= @challenge.deadline.strftime('%d-%m-%Y') %>
+
       <% if days_left(@challenge) == 0 %>
         (<%= t('challenge_end').downcase %>)
       <% else %>
@@ -118,8 +119,6 @@
             </div>
           </li>
         <% end %>
-      <% else %>
-        <div class="text-center fs-2">No goals</div>
       <% end %>
     </ul>
   </div>

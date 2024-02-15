@@ -32,7 +32,7 @@
 
         <div class="dropdown">
           <a class="nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= @chart_type&.capitalize %>
+            <%= t("chart.type.#{@chart_type}") %> 
             <%= icon 'chevron-down left' %>
           </a>
 
@@ -40,9 +40,9 @@
             <% %w(column line).each do |type| %>
               <li>
                 <% if params[:chart_type] == type %>
-                  <%= tag.span type.capitalize, class: 'dropdown-item' %>
+                  <%= tag.span t("chart.type.#{type}"), class: 'dropdown-item' %>
                 <% else %>
-                  <%= link_to type.capitalize, { chart_type: type, period: 'day' }, class: 'dropdown-item' %>
+                  <%= link_to t("chart.type.#{type}"), { chart_type: t("chart.type.#{type}"), period: 'day' }, class: 'dropdown-item' %>
                 <% end %>
               </li>
             <% end %>

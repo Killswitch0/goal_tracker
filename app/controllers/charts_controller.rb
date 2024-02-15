@@ -7,14 +7,14 @@ class ChartsController < ApplicationController
   # GET /chart/habit
   #----------------------------------------------------------------------------
   def habit
-    @chart_for = chart_params[:chart_for] = 'Habits'
+    @chart_for = chart_params[:chart_for] = t('all_habits')
     @habits = current_user.habits
   end
 
   # GET /chart/task
   #----------------------------------------------------------------------------
   def task
-    @chart_for = chart_params[:chart_for] = 'Tasks'
+    @chart_for = chart_params[:chart_for] = t('all_tasks')
     @tasks = current_user.tasks
   end
 

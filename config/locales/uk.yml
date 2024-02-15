@@ -300,6 +300,9 @@ uk:
   tasks_chart: 'Графік завдань'
   completions: 'Завершення'
   chart:
+    type: 
+      line: 'Ленійний'
+      column: 'Стовбчатий'
     tasks:
       empty: 'Ви не маєте даних про виконання завдань.'
     habits:

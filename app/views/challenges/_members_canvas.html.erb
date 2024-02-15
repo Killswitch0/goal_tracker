@@ -14,7 +14,7 @@
             <th scope="col"><%= t('name') %></th>
             <th scope="col"><%= t('targets') %></th>
             <th scope="col"><%= t('load') %></th>
-            <th scope="col" class="<%= challenge.check_creator(current_user) ? '' : 'hide'%>">Action</th> <!-- TODO - translate -->
+            <th scope="col" class="<%= challenge.check_creator(current_user) ? '' : 'hide'%>"><%= t('action') %></th>
           </tr>
         </thead>
         <tbody class="overflow-y-auto">

@@ -7,7 +7,7 @@
       <div class="description">
         <p class="user_activity">
           <strong><%= notification.to_parts[:user] %></strong>
-          <%= notification.to_parts[:message] %>
+          <%= notification.to_parts[:message].truncate(70) %>
           <%= link_to notification.to_parts[:target], notification.url, class: 'strong' %>
 
           <%= notification.action_links if notification.respond_to? :action_links %>
