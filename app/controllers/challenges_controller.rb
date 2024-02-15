@@ -47,7 +47,7 @@ class ChallengesController < ApplicationController
         @challenge.goals.sort_by_completed_tasks
       end
 
-    mark_notifications_as_read if params[:mark_as_read] == 'true'
+    mark_notifications_as_read
   end
 
   # POST /challenges

@@ -8,40 +8,40 @@
     <div class="table-body">
       <table class="table table-hover">
         <thead class="table-light">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col"><%= t('member') %></th>
-          <th scope="col"><%= t('name') %></th>
-          <th scope="col"><%= t('targets') %></th>
-          <th scope="col"><%= t('load') %></th>
-          <th scope="col" class="<%= challenge.check_creator(current_user) ? '' : 'hide'%>">Action</th>
-        </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"><%= t('member') %></th>
+            <th scope="col"><%= t('name') %></th>
+            <th scope="col"><%= t('targets') %></th>
+            <th scope="col"><%= t('load') %></th>
+            <th scope="col" class="<%= challenge.check_creator(current_user) ? '' : 'hide'%>">Action</th> <!-- TODO - translate -->
+          </tr>
         </thead>
         <tbody class="overflow-y-auto">
-        <% members.each_with_index do |user, index| %>
-          <% user_tasks = user.tasks_in_challenge(challenge)&.count %>
+          <% members.each_with_index do |user, index| %>
+            <% user_tasks = user.tasks_in_challenge(challenge)&.count %>
 
-          <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td><%= user_avatar(user, size: 25) %></td>
-            <td>
-              <%= icon('star-fill', style: 'color: coral;') if challenge.check_creator(user) %>
-              <%= user.name %>
-            </td>
-            <td><%= user_tasks || 0 %></td>
-            <td class="fs-4">
-              <%= icon 'minecart-loaded', style: "color: #{load_level_color(user_tasks)}" %>
-            </td>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= user_avatar(user, size: 25) %></td>
+              <td>
+                <%= icon('star-fill', style: 'color: coral;') if challenge.check_creator(user) %>
+                <%= user.name %>
+              </td>
+              <td><%= user_tasks || 0 %></td>
+              <td class="fs-4">
+                <%= icon 'minecart-loaded', style: "color: #{load_level_color(user_tasks)}" %>
+              </td>
 
-            <td class="text-center fs-4 <%= challenge.check_creator(current_user) ? '' : 'hide'%>">
-              <%= link_to destroy_user_challenge_path(challenge, user_id: user),
+              <td class="text-center fs-4 <%= challenge.check_creator(current_user) ? '' : 'hide'%>">
+                <%= link_to destroy_user_challenge_path(challenge, user_id: user),
                           data: { turbo_method: :delete, turbo_confirm: t('sure'), modal_title: t('delete_user_challenge', name: user.name) }, 
                           class: 'icon-link', id: 'icon-link' do %>
-                <%= icon('person-dash-fill danger-icon') %>
-              <% end unless challenge.check_creator(user) %>
-            </td>
-          </tr>
-        <% end %>
+                  <%= icon('person-dash-fill danger-icon') %>
+                <% end unless challenge.check_creator(user) %>
+              </td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

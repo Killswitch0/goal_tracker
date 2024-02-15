@@ -40,12 +40,12 @@ class CategoriesController < ApplicationController
   def destroy
     if @category.goals.any?
       flash[:danger] = t('.fail')
-      redirect_to categories_path
     else
       @category.destroy
       flash[:noticed] = t('.success')
-      redirect_to categories_path
     end
+
+    redirect_to categories_path
   end
 
   private
