@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'remote_modal' do %>
+  <%= render 'shared/remote_modal', title: @category.new_record? ? t('new_category') : t('edit_category') do %>
+    <%= render 'form', category: @category %>
+  <% end %>
+<% end %>

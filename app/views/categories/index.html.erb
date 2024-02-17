@@ -4,7 +4,7 @@
       <div class="action-items__header">
         <div class="action-items__title"><%= t('all_categories') %></div>
         
-        <%= link_with_icon 'plus-lg', new_category_path, 'new_category', class: 'btn btn-primary btn-sm new-task link-icon' %>
+        <%= link_with_icon 'plus-lg', new_category_path, 'new_category', data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary btn-sm new-task link-icon' %>
       </div>
 
       <div class="divider"></div>

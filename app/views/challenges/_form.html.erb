@@ -1,0 +1,22 @@
+<%= form_with(model: challenge) do |f| %>
+  <%= render 'shared/error_messages', resource: challenge %>
+  <div class="mb-3">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :deadline %>
+    <%= f.datetime_field :deadline, class: 'form-control' %>
+  </div>
+  <div class="form-buttons">
+    <%= link_to t('close'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary mt-3' %>
+
+    <div>
+      <%= f.submit t('create'), class: "btn btn-primary action mt-3" %>
+    </div>
+  </div>
+<% end %>

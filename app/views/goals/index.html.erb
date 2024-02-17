@@ -50,7 +50,7 @@
           </section>
 
           <div class="buttons-list">
-            <%= link_with_icon 'plus-lg', new_goal_path, 'add_goal', class: 'btn btn-primary link-icon' %> <!-- TODO - add modal window for form-->
+            <%= link_with_icon 'plus-lg', new_goal_path, 'add_goal', data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary link-icon' %> <!-- TODO - add modal window for form-->
             <%= canvas_button 'all_categories', icon: 'list', klass: 'mobile-show link-icon' %>
           </div>
         </div>

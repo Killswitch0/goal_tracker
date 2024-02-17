@@ -34,7 +34,7 @@ class HabitNotification < ApplicationNotifications
     }
   end
 
-  def notify_avatar
+  def notif_avatar
     @habit = Habit.find(params[:habit][:id])
     @user = User.find(@habit.user_id)
   end

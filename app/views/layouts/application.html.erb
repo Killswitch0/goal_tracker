@@ -21,7 +21,7 @@
   <div class="container">
     <div class="row">
       <%= yield %>
-
+      <%= turbo_frame_tag "remote_modal", target: "_top" %>
       <%= render 'layouts/confirmation_modal' %>
     </div>
   </div>

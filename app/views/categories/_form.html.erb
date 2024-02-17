@@ -6,7 +6,7 @@
   </div>
 
   <div class="form-buttons">
-    <%= link_to t('back'), 'javascript:history.back()', class: 'btn btn-secondary' %>
-    <%= f.submit "#{@category.new_record? ? t('create') : t('update')}", class: "btn btn-primary action" %>
+    <%= link_to t('close'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary' %>
+    <%= f.submit "#{category.new_record? ? t('create') : t('update')}", class: "btn btn-primary action" %>
   </div>
 <% end %>

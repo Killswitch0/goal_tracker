@@ -3,7 +3,7 @@
     <% notification = notification.to_notification %>
 
     <div class="notif_card <%= notification.read? ? '' : 'unread' %>">
-      <div class="avatar"><%= notification.notify_avatar.decorate.gravatar css_class: 'rounded-circle' %></div>
+      <div class="avatar"><%= user_avatar(notification.notif_avatar, size: 50) %></div>
       <div class="description">
         <p class="user_activity">
           <strong><%= notification.to_parts[:user] %></strong>

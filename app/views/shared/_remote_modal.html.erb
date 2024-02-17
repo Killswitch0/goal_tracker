@@ -1,0 +1,21 @@
+<%= turbo_frame_tag 'remote_modal' do %>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" data-controller="remote-modal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="">
+          <div class="card">
+            <div class="card-body">
+              <div class="table-header">
+                <h2 class="text-center title">
+                  <%= title %>
+                </h2>
+              </div>
+
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

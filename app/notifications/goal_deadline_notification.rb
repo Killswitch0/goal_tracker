@@ -32,7 +32,7 @@ class GoalDeadlineNotification < ApplicationNotifications
     }
   end
 
-  def notify_avatar
+  def notif_avatar
     @goal = Goal.find(params[:goal][:id])
     @goal.user
   end

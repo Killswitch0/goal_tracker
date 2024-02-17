@@ -37,6 +37,7 @@
                                                   title: 'leave_challenge_name',
                                                   name: challenge.name,
                                                   id: "leave-#{dom_id(challenge)}",
+                                                  confirm: 'leave',
                                                   class: 'btn btn-sm btn-warning' %></td>
 
                   <td><%= delete_link_to 'delete', challenge,
@@ -52,7 +53,7 @@
         </section>
 
         <div class="buttons-list">
-          <%= link_with_icon 'plus-lg', new_challenge_path, 'new_challenge', class: 'btn btn-primary link-icon' %>
+          <%= link_with_icon 'plus-lg', new_challenge_path, 'new_challenge', data: { turbo_frame: 'remote_modal' },  class: 'btn btn-primary link-icon' %>
           
           <%= link_to '', data: { bs_toggle: "offcanvas", bs_target: "#offcanvasExample", aria_controls: "offcanvasExample" },
                           class: 'btn btn-primary position-relative link-icon' do %>

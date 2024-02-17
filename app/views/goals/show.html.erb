@@ -41,7 +41,7 @@
       </div>
       
       <div class="buttons-list__right">
-        <%= link_with_icon 'pencil', edit_goal_path(@goal), class: 'btn btn-primary btn-sm' %>
+        <%= link_with_icon 'pencil', edit_goal_path(@goal), data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary btn-sm' %>
 
         <%= delete_link_to '', @goal, 'trash', title: 'delete_goal', id: dom_id(@goal), class: 'btn btn-danger btn-sm' %>
       </div>

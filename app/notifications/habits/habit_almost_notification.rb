@@ -32,7 +32,7 @@ class HabitAlmostNotification < ApplicationNotifications
     }
   end
 
-  def notify_avatar
+  def notif_avatar
     @goal = Goal.find(params[:habit][:goal_id])
     @goal.user
   end

@@ -15,7 +15,11 @@
         height: 50px;
         margin: 0;
 
-        span { color: rgba(9, 194, 30, 1) }
+        span { 
+          color: rgba(9, 194, 30, 1);
+          font-size: 13px;
+          font-weight: 800;
+        }
       }
     }
 

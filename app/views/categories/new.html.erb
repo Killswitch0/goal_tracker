@@ -1,13 +1,3 @@
-<div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 mt-5">
-  <div class="card">
-    <div class="card-body">
-      <div class="table-header">
-        <h2 class="text-center title">
-          <%= t('new_category') %>
-        </h2>
-      </div>
-
-      <%= render 'form', category: @category %>
-    </div>
-  </div>
-</div>
+<%= render 'shared/remote_modal', title: t('new_category'), fade_in: true do %>
+  <%= render 'form', category: @category %>
+<% end %>

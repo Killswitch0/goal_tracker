@@ -1,6 +1,6 @@
 <div class="categories-wrapper">
   <div class="categories-wrapper__new">
-    <%= link_with_icon 'plus-lg', new_category_path, 'new', class: 'btn btn-primary btn-sm link-icon' %>
+    <%= link_with_icon 'plus-lg', new_category_path, 'new', data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary btn-sm link-icon' %>
     <%= link_with_icon 'list', categories_path, 'all', class: 'btn btn-primary btn-sm link-icon' %>
   </div>
   <div class="divider"></div>

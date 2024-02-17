@@ -63,7 +63,7 @@ class ChallengesController < ApplicationController
         format.html { redirect_to challenge_path(@challenge) }
       else
         flash[:danger] = t('.fail')
-        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end

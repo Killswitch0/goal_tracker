@@ -35,7 +35,7 @@ class TaskNotification < ApplicationNotifications
     }
   end
 
-  def notify_avatar
+  def notif_avatar
     @user = User.find(params[:task][:user_id])
   end
 

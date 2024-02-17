@@ -1,0 +1,5 @@
+<%= turbo_stream.update "remote_modal" do %>
+  <%= render 'shared/remote_modal', title: @goal.new_record? ?  t('new_goal') : t('edit_goal'), fade_in: true do %>
+    <%= render 'form', challenge: @goal %>
+  <% end %>
+<% end %>

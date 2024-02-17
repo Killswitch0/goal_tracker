@@ -33,7 +33,7 @@ class TaskAlmostNotification < ApplicationNotifications
     }
   end
 
-  def notify_avatar
+  def notif_avatar
     @goal = Goal.find(params[:task][:goal_id])
     @goal.user
   end

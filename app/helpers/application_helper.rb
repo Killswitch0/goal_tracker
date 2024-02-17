@@ -8,6 +8,7 @@ module ApplicationHelper
 
     data = { data: { turbo_method: :delete, turbo_confirm: t('sure'),
                      modal_title: t("#{options[:title]}", name: options[:name]) } }
+    data[:data][:confirm_button] = t("#{options[:confirm]}") if options[:confirm]
     options = options.merge(data)
 
     if block_given?

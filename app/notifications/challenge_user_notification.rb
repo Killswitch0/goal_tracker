@@ -48,8 +48,9 @@ class ChallengeUserNotification < ApplicationNotifications
     ).to_s.html_safe
   end
 
-  def notify_avatar
-    @user = User.find(params[:challenge_user][:user_id])
+  def notif_avatar
+    @challenge = Challenge.find(params[:challenge_user][:challenge_id])
+    @challenge.user
   end
 
   def url

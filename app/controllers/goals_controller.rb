@@ -32,7 +32,7 @@ class GoalsController < ApplicationController
   def show
     @tasks =
       if params[:sort]
-        @goal.tasks.order(sort_column + ' ' + sort_direction)
+        @goal.tasks.order("#{sort_clumn} #{sort_direction}")
       else
         @goal.tasks.order(complete: :asc)
       end
@@ -52,13 +52,14 @@ class GoalsController < ApplicationController
       if params[:goal][:category_id].present? && params[:goal][:category_attributes][:name].present?
         flash[:danger] = t('.category_must_exist')
         format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       elsif @goal.save
         flash[:noticed] = t('.success')
-        redirect_to goal_path(@goal)
-        format.html
+        format.html { redirect_to goal_path(@goal) }
       else
         flash[:danger] = t('.fail')
         format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end
@@ -77,6 +78,7 @@ class GoalsController < ApplicationController
         format.html { redirect_to goal_path(@goal) }
       else
         format.html { render :edit }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end

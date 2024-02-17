@@ -32,7 +32,7 @@ class TaskDeadlineNotification < ApplicationNotifications
     }
   end
 
-  def notify_avatar
+  def notif_avatar
     @task = Task.find(params[:task][:id])
     @task.user
   end

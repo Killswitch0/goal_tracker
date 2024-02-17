@@ -27,11 +27,14 @@ class CategoriesController < ApplicationController
   def create
     @category = current_user.categories.build(category_params)
 
-    if @category.save
-      flash[:noticed] = t('.success')
-      redirect_to goals_path
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @category.save
+        flash[:noticed] = t('.success')
+        format.html { redirect_to goals_path }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
+      end
     end
   end
 
