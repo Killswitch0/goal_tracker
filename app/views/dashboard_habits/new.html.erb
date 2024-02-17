@@ -1,37 +1,6 @@
-<div class="container">
-  <div class="col-sm-12 col-md-8 offset-md-2 col-lg-4 offset-lg-4 mt-5">
-      <div class="card">
-        <div class="card-body">
-          <div class="table-header">
-            <h2 class="text-center title"><%= t('new_habit') %> </h2>
-          </div>
+<%= render 'shared/remote_modal', title: t('new_habit'), fade_in: true do %>
+  <%= render 'form', habit: @habit %>
+<% end %>
 
-          <%= form_with(model: @habit, url: dashboard_habits_path) do |f| %>
-            <%= render "shared/error_messages", resource: @habit %>
-
-            <div class="mb-3">
-              <%= f.label :name %>
-              <%= f.text_field :name, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :description %>
-              <%= f.text_area :description, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :goal_id %>
-              <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] }, {}, class: 'form-select' %>
-            </div>
-
-            <div class="form-buttons">
-              <%= link_to t('back_to_dashboard'), dashboard_path, class: 'btn btn-secondary' %>
-              <%= f.submit t('create'), class: "btn btn-primary action" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-  </div>
-</div>
 
 

@@ -13,7 +13,7 @@
     <%= f.datetime_field :deadline, class: 'form-control' %>
   </div>
   <div class="form-buttons">
-    <%= link_to t('close'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary mt-3' %>
+    <%= link_to t('close'), '#', data: { bs_dismiss: 'modal' }, id: 'buttonCancel', class: 'btn btn-secondary mt-3' %>
 
     <div>
       <%= f.submit t('create'), class: "btn btn-primary action mt-3" %>

@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'remote_modal' do %> <!-- TODO - create helper for this and optimize -->
+  <%= render 'shared/remote_modal', title: t('new_habit'), fade_in: true do %>
+    <%= render 'form', habit: @habit %>
+  <% end %>
+<% end %>

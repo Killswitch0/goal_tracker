@@ -46,7 +46,7 @@
         </div>
 
         <div class="new_goal">
-          <%= link_with_icon 'plus-lg', new_goal_path, 'new_goal', class: 'btn btn-primary btn-lg link-icon' %>
+          <%= link_with_icon 'plus-lg', new_goal_path, 'new_goal', data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary btn-lg link-icon' %>
         </div>
       </div>
 
@@ -95,7 +95,7 @@
       <div class="action-items">
         <div class="action-items__header">
           <div class="action-items__title"><%= t('all_habits') %></div>
-            <%= link_with_icon 'plus-lg', new_dashboard_habit_path, 'new_habit', class: 'btn btn-primary btn-sm new-task link-icon' %>
+            <%= link_with_icon 'plus-lg', new_dashboard_habit_path, 'new_habit', data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary btn-sm new-task link-icon' %>
         </div>
 
         <div class="divider"></div>
