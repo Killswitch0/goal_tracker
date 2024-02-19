@@ -55,6 +55,10 @@ module ApplicationHelper
     end
   end
 
+  def render_modal(title: '', body: '', footer: '') # TODO - add helper to views
+    render(partial: '/shared/remote_modal', locals: { title: title, body: body, footer: footer })
+  end
+
   def user_avatar(user, size: 30, css_class: 'rounded-circle', style: '')
     if user.avatar.attached?
       image_tag(user.avatar.variant(resize_to_fill: [size, nil]), class: css_class, style:)
