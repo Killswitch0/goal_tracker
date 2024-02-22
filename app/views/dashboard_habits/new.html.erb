@@ -1,5 +1,5 @@
 <%= render 'shared/remote_modal', title: t('new_habit'), fade_in: true do %>
-  <%= render 'form', habit: @habit %>
+  <%= render 'form', habit: @habit, path: dashboard_habits_path %>
 <% end %>
 
 

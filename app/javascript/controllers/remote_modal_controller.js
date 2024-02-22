@@ -31,6 +31,7 @@ export default class extends Controller {
   hideAfterRender() {
     this.element.addEventListener('hidden.bs.modal', () => {
       this.element.remove();
+      document.querySelector('body').style = ''
     });
   }
 }

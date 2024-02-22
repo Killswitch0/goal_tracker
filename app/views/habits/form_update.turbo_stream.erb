@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'remote_modal' do %>
+  <%= render 'shared/remote_modal', title: @habit.new_record? ? t('create') : t('update') do %>
+    <%= render 'form', goal: @goal, habit: @habit %>
+  <% end %>
+<% end %>

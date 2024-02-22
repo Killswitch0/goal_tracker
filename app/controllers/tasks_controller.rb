@@ -31,11 +31,14 @@ class TasksController < ApplicationController
     @task = @goal.tasks.build(task_params)
     @task.user = current_user
 
-    if @task.save
-      flash[:noticed] = t('.success')
-      redirect_to goal_path(@goal)
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @task.save
+        flash[:noticed] = t('.success')
+        format.html { redirect_to goal_path(@goal) }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
+      end
     end
   end
 

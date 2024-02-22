@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'remote_modal' do %> 
+  <%= render 'shared/remote_modal', title: t('new_task'), fade_in: true do %>
+    <%= render 'form', task: @task, path: dashboard_tasks_path %>
+  <% end %>
+<% end %>

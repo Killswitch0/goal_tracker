@@ -10,12 +10,15 @@ class DashboardTasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
 
-    if @task.save
-      flash[:noticed] = t('tasks.create.success')
-      redirect_to dashboard_path
-    else
-      flash[:noticed] = t('tasks.create.fail')
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @task.save
+        flash[:noticed] = t('tasks.create.success')
+        format.html { redirect_to dashboard_path }
+      else
+        flash[:noticed] = t('tasks.create.fail')
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
+      end
     end
   end
 

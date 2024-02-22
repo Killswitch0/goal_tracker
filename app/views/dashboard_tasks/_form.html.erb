@@ -1,0 +1,33 @@
+<%= form_with(model: task, url: path) do |f| %>
+  <%= render "shared/error_messages", resource: task %>
+
+  <div class="mb-3">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 form-check form-switch">
+    <%= f.label :complete, {class: 'form-check-label', for: "flexSwitchCheckDefault"} %>
+    <%= f.check_box :complete, {role: 'switch', class: "form-check-input", id: "flexSwitchCheckDefault"} %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :goal_id %>
+    <%= f.select :goal_id, current_user.goals.all.collect { |c| [c.name, c.id] }, {}, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :deadline %>
+    <%= f.date_select :deadline,
+                      {
+                        prompt: { day: :select_day, month: :select_month, year: :select_year },
+                        start_year: Date.current.year
+                      },
+                      class: "form-select mt-3" %>
+  </div>
+
+  <div class="form-buttons">
+    <%= link_to t('back_to_dashboard'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary' %>
+    <%= f.submit t('create'), class: "btn btn-primary action" %>
+  </div>
+<% end %>

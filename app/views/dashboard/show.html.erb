@@ -54,7 +54,7 @@
       <div class="action-items">
         <div class="action-items__header">
           <div class="action-items__title"><%= t('all_tasks') %></div>
-            <%= link_with_icon 'plus-lg', new_dashboard_task_path, 'new_task', class: 'btn btn-primary btn-sm new-task link-icon' %>
+            <%= link_with_icon 'plus-lg', new_dashboard_task_path, 'new_task', data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary btn-sm new-task link-icon' %>
         </div>
 
         <div class="divider"></div>

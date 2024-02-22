@@ -1,5 +1,5 @@
-<%= form_with(model: [@goal, @task]) do |f| %>
-  <%= render "shared/error_messages", resource: @task %>
+<%= form_with(model: [goal, task]) do |f| %>
+  <%= render "shared/error_messages", resource: task %>
 
 
   <div class="mb-3">
@@ -22,8 +22,8 @@
   </div>
 
   <div class="form-buttons">
-    <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary' %>
-    <%= f.submit "#{@task.new_record? ? t('create') : t('update')}", class: 'btn btn-primary action' %>
+    <%= link_to t('back_to_goal'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary' %>
+    <%= f.submit "#{task.new_record? ? t('create') : t('update')}", class: 'btn btn-primary action' %>
   </div>
 
 <% end %>
