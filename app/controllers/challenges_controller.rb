@@ -110,6 +110,7 @@ class ChallengesController < ApplicationController
       else
         flash[:danger] = t('.fail')
         format.html { render :add_goal, status: :unprocessable_entity }
+        format.turbo_stream { render :add_goal_update, status: :unprocessable_entity }
       end
     end
   end

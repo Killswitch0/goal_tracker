@@ -49,10 +49,13 @@ class TasksController < ApplicationController
   # PUT /goals/1/tasks/1
   #----------------------------------------------------------------------------
   def update
-    if @task.update(task_params)
-      redirect_to goal_path(@goal)
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @task.update(task_params)
+        format.html { redirect_to goal_path(@goal) }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
+      end
     end
   end
 

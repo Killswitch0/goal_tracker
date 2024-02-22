@@ -20,12 +20,14 @@
     <div class="buttons-list mt-2">
       <div class="buttons-list__left">
         <%= link_with_icon 'person-plus-fill', create_invitation_challenge_path(@challenge),
-                                              'invite_user',
+                                               'invite_user',
+                                               data: { turbo_frame: 'remote_modal' },
                                                class: 'mt-2 btn btn-sm mx-3 btn-primary link-icon' if @challenge.check_creator(current_user)  %>
 
         <%= link_with_icon 'plus-lg', add_goal_challenge_path(@challenge), 
                                       'add_goal',
-                                       class: 'mt-2 btn btn-sm btn-primary mx-3 link-icon' %>
+                                      data: { turbo_frame: 'remote_modal' },
+                                      class: 'mt-2 btn btn-sm btn-primary mx-3 link-icon' %>
       </div>
 
       <div class= "buttons-list__right">

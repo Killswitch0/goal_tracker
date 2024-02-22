@@ -79,7 +79,9 @@
                   <% unless habit.name.nil? %>
                     <th scope="row"><%= index + 1 %></th>
                     <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit),
-                                    style: "text-decoration: none", class: 'hover-link' %></td>
+                                                style: "text-decoration: none",
+                                                data: { turbo_frame: 'remote_modal' },
+                                                class: 'hover-link' %></td>
                     <td><%= habit.description.truncate(15) %></td>
                     <td>
                       <%= habit_complete_link(habit, complete_goal_habit_path(@goal, habit)) %>
@@ -132,8 +134,9 @@
                     <th scope="row"><%= index + 1 %></th>
                     <td>
                       <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                  style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}",
-                                  class: 'hover-link' %>
+                                                          style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}",
+                                                          data: { turbo_frame: 'remote_modal' },
+                                                          class: 'hover-link' %>
                     </td>
                   <% end %>
                   <td><%= task_complete_link(task, complete_goal_task_path(@goal, task)) %></td>

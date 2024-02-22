@@ -53,10 +53,11 @@ class HabitsController < ApplicationController
   def update
     respond_to do |format|
       if @habit.update(habit_params)
-        redirect_to goal_path(@goal)
         flash[:noticed] = t('.success')
+        format.html { redirect_to goal_path(@goal) }
       else
         format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
       end
     end
   end
