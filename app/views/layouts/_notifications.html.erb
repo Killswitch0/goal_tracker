@@ -18,7 +18,7 @@
         </div>
       </header>
 
-      <%= render 'layouts/notifications-list', notifications: @notifications %>
+      <%= render 'layouts/notifications-list', notifications: @notifications, user: current_user %>
     
       <footer>
         <%= link_with_icon 'chevron-right',  notifications_path(filter: 'all'), 'show_all', id: 'mark_all', class: 'text-decoration-none' %>

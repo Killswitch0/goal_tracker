@@ -52,6 +52,10 @@ class Task < ApplicationRecord
 
   private
 
+  def broadcast_notifications
+    TaskNotification.with(notification_params).deliver(user)
+  end
+
   def check_goal_completion
     if goal.tasks.all?(&:complete?)
       goal.update(complete: true)
