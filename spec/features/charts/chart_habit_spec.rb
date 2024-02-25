@@ -12,7 +12,7 @@ RSpec.feature 'ChartHabits', type: :feature do
     visit habit_chart_path(chart_type: 'line', period: 'day')
   end
 
-  feature 'User use a chart', '
+  feature 'User use Habit chart', '
     In order to see
     my progress on chart
     i want to use all chart
