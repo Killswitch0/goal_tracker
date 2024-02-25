@@ -3,6 +3,6 @@
 <div class="btn-group">
   <% %w[day week month].each do |period| %>
     <%= active_link_to t("date.#{period}"), 
-                       goal ? goal_habit_chart_path(period:, chart_type: @chart_type) : habit_chart_path(period:, chart_type: @chart_type), class: 'btn btn-primary btn-sm' %>
+                       goal ? goal_habit_chart_path(period:, chart_type: @chart_type) : habit_chart_path(period:, chart_type: @chart_type), class: "btn btn-primary btn-sm #{period}-link" %>
   <% end %>
 </div>
