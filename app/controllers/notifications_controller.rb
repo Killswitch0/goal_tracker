@@ -11,6 +11,8 @@ class NotificationsController < ApplicationController
     @type = TYPE_MAPPINGS[params[:filter]] || params[:filter]
 
     filter_notifications(params[:filter])
+
+    mark_all_notifications_as_read
   end
 
   private
@@ -26,5 +28,11 @@ class NotificationsController < ApplicationController
     when 'challenge_invite'
       @notifications = @notifications.where(type: @type)
     end
+  end
+
+  def mark_all_notifications_as_read
+    return if @unread.empty?
+
+    @unread.mark_as_read!
   end
 end
