@@ -55,8 +55,8 @@ module ApplicationHelper
     end
   end
 
-  def render_modal(title: '', body: '', footer: '') # TODO - add helper to views
-    render(partial: '/shared/remote_modal', locals: { title: title, body: body, footer: footer })
+  def render_modal(title: '', body: '', footer: '') # TODO: - add helper to views
+    render(partial: '/shared/remote_modal', locals: { title:, body:, footer: })
   end
 
   def user_avatar(user, size: 30, css_class: 'rounded-circle', style: '')

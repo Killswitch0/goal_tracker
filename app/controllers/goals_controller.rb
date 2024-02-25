@@ -21,12 +21,6 @@ class GoalsController < ApplicationController
     @user_goals = Goal.where(user_id: current_user)
   end
 
-  # GET /goals/new
-  #----------------------------------------------------------------------------
-  def new
-    @goal = Goal.new
-  end
-
   # GET /goals/1
   #----------------------------------------------------------------------------
   def show
@@ -41,6 +35,16 @@ class GoalsController < ApplicationController
 
     mark_notifications_as_read if params[:mark_as_read] == 'true'
   end
+
+  # GET /goals/new
+  #----------------------------------------------------------------------------
+  def new
+    @goal = Goal.new
+  end
+
+  # GET /goals/1/edit
+  #----------------------------------------------------------------------------
+  def edit; end
 
   # POST /goals
   #----------------------------------------------------------------------------
@@ -63,10 +67,6 @@ class GoalsController < ApplicationController
       end
     end
   end
-
-  # GET /goals/1/edit
-  #----------------------------------------------------------------------------
-  def edit; end
 
   # PUT /goals/1
   #----------------------------------------------------------------------------

@@ -1,4 +1,10 @@
 class PasswordResetsController < ApplicationController
+  # GET /password_resets/1/edit
+  #----------------------------------------------------------------------------
+  def edit
+    @user = User.find_by_password_reset_token!(params[:id])
+  end
+
   # POST /password_resets
   #----------------------------------------------------------------------------
   def create
@@ -12,12 +18,6 @@ class PasswordResetsController < ApplicationController
       flash[:noticed] = t('.fail')
       redirect_to new_password_reset_path
     end
-  end
-
-  # GET /password_resets/1/edit
-  #----------------------------------------------------------------------------
-  def edit
-    @user = User.find_by_password_reset_token!(params[:id])
   end
 
   # PUT /password_resets/1

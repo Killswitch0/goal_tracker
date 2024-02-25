@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     notifications = Notification.where(recipient: current_user)
     unread = notifications.unread
     unread.update_all(read_at: Time.zone.now)
-    redirect_to request.referrer
+    redirect_to request.referer
   end
 
   private

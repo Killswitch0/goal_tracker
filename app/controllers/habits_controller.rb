@@ -17,15 +17,15 @@ class HabitsController < ApplicationController
       @habits.not_completed_today(current_user)
   end
 
+  # GET /goals/1/habits/1
+  #----------------------------------------------------------------------------
+  def show; end
+
   # GET /goals/1/habits/new
   #----------------------------------------------------------------------------
   def new
     @habit = Habit.new
   end
-
-  # GET /goals/1/habits/1
-  #----------------------------------------------------------------------------
-  def show; end
 
   # GET goals/1/habits/1/edit
   #----------------------------------------------------------------------------

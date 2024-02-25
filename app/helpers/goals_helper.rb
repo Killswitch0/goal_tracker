@@ -86,7 +86,7 @@ module GoalsHelper
   end
 
   def goals_completed(goals = nil, user: nil)
-    goals = goals.nil? ? user.goals : goals
+    goals = user.goals if goals.nil?
 
     completed = goals.where(complete: true).count
     all = goals.count

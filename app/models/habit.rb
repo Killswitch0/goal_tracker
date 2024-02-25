@@ -98,7 +98,7 @@ class Habit < ApplicationRecord
       .where(
         habits: { user_id: user },
         completion_dates: {
-          date: Date.current.beginning_of_month..Date.current.end_of_month
+          date: Date.current.all_month
         }
       )
       .group('habits.id, completion_dates.id')

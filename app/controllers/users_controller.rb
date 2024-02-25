@@ -4,16 +4,16 @@ class UsersController < ApplicationController
 
   helper_method :user
 
-  # GET /users/new
-  #----------------------------------------------------------------------------
-  def new
-    @user = User.new
-  end
-
   # GET /users/1
   #----------------------------------------------------------------------------
   def show
     @top_three_habits = Habit.top_this_month(current_user).first(3)
+  end
+
+  # GET /users/new
+  #----------------------------------------------------------------------------
+  def new
+    @user = User.new
   end
 
   # GET /users/1/edit

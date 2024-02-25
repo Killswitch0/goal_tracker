@@ -10,7 +10,7 @@ class DashboardHabitsController < ApplicationController
   def create
     @habit = current_user.habits.build(task_params)
 
-    respond_to do |format|        
+    respond_to do |format|
       if @habit.save
         flash[:noticed] = t('habits.create.success')
         format.html { redirect_to dashboard_path }

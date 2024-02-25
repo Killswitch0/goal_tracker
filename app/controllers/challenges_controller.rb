@@ -24,13 +24,6 @@ class ChallengesController < ApplicationController
       end
   end
 
-  # GET /challenges/new
-  #----------------------------------------------------------------------------
-  def new
-    @challenge = Challenge.new
-    @challenge_goal = ChallengeGoal.new
-  end
-
   # GET /challenges/1
   #----------------------------------------------------------------------------
   def show
@@ -48,6 +41,13 @@ class ChallengesController < ApplicationController
       end
 
     mark_notifications_as_read
+  end
+
+  # GET /challenges/new
+  #----------------------------------------------------------------------------
+  def new
+    @challenge = Challenge.new
+    @challenge_goal = ChallengeGoal.new
   end
 
   # POST /challenges
@@ -169,9 +169,9 @@ class ChallengesController < ApplicationController
   #----------------------------------------------------------------------------
   def leave
     flash[:noticed] = if @invitation.destroy
-                        t('challenges.leave.success')
+                        t('.success')
                       else
-                        t('challenges.leave.fail')
+                        t('.fail')
                       end
 
     redirect_to challenges_path

@@ -14,7 +14,7 @@ gem 'sqlite3', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
 
-gem "puma", "~> 5.6"
+gem 'puma', '~> 5.6'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -61,7 +61,6 @@ gem 'letter_opener', '~> 1.8'
 gem 'noticed', '~> 1.6'
 gem 'pg', '~> 1.5'
 gem 'rails-i18n'
-gem 'rubocop'
 gem 'sass-rails'
 gem 'sidekiq'
 gem 'simple_calendar', '~> 2.4'
@@ -81,6 +80,16 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'selenium-webdriver'
+
+  # Security tools
+  gem 'brakeman'
+  gem 'bundler-audit'
+  gem 'ruby_audit'
+
+  # Linting
+  gem 'rubocop-rails'
+  gem "erb_lint", require: false
+  gem 'reek', '~> 6.2'
 end
 
 group :development do
@@ -99,21 +108,11 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'launchy'
-  gem 'selenium-webdriver'
   gem 'shoulda-matchers' # gem с макросами для короткой записи тестов на ассоциации, валидации
   gem 'webdrivers'
-
-  # Security tools
-  gem 'brakeman'
-  gem 'bundler-audit'
-  gem 'ruby_audit'
-
-  # Linting
-  gem 'rubocop-rails'
 
   gem 'database_cleaner', '~> 2.0'
 end
 
 gem 'gravatar_image_tag', '~> 1.2'
 gem 'sidekiq-cron', '~> 1.10'
-gem 'reek', '~> 6.2'

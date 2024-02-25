@@ -42,7 +42,7 @@ class ChartsController < ApplicationController
   #----------------------------------------------------------------------------
   def habits_current_month_completions_json
     @top_three_habits = Habit.top_this_month(current_user).take(3)
-    range = Date.current.beginning_of_month..Date.current.end_of_month
+    range = Date.current.all_month
     habits = Habit.habits_with_completion_period_data(@top_three_habits, :month, range:).chart_json
 
     render json: habits

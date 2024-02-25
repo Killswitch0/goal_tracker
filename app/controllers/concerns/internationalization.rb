@@ -6,13 +6,13 @@ module Internationalization
 
     private
 
-    def switch_locale(&action)
+    def switch_locale(&)
       locale = locale_from_url || locale_from_headers || I18n.default_locale
       response.set_header 'Content-Language', locale
       # &action - controller action need to do
       # specific controller action will be performed
       # within the scope of the locale
-      I18n.with_locale locale, &action
+      I18n.with_locale(locale, &)
     end
 
     def locale_from_url

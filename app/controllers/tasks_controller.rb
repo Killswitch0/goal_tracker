@@ -13,6 +13,12 @@ class TasksController < ApplicationController
     @uncompleted_tasks = @tasks.where(complete: false, goal_id: @goal.id)
   end
 
+  # GET /goals/1/tasks/1
+  #----------------------------------------------------------------------------
+  def show
+    # @tasks = Task.find(params[:id])
+  end
+
   # GET /goals/1/tasks/new
   #----------------------------------------------------------------------------
   def new
@@ -21,9 +27,7 @@ class TasksController < ApplicationController
 
   # GET /goals/1/tasks/1
   #----------------------------------------------------------------------------
-  def show
-    # @tasks = Task.find(params[:id])
-  end
+  def edit; end
 
   # POST /goals/1/tasks
   #----------------------------------------------------------------------------
@@ -41,10 +45,6 @@ class TasksController < ApplicationController
       end
     end
   end
-
-  # GET /goals/1/tasks/1
-  #----------------------------------------------------------------------------
-  def edit; end
 
   # PUT /goals/1/tasks/1
   #----------------------------------------------------------------------------
