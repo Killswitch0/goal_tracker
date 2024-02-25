@@ -65,8 +65,6 @@ class ChartsController < ApplicationController
     )
   end
 
-  def redirect_if_no_data; end
-
   def default_params
     @chart_type = chart_params[:chart_type] ||= 'line'
   end

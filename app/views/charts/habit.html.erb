@@ -31,10 +31,10 @@
         <% end %>
 
         <div class="dropdown">
-          <a class="nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= t("chart.type.#{@chart_type}") %> 
-            <%= icon 'chevron-down left' %>
-          </a>
+          <%= link_with_icon 'chevron-down left', '#', "chart.type.#{@chart_type}", 
+                                                        data: { bs_toggle: 'dropdown' },
+                                                        class: 'nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle flex-row-reverse',
+                                                        id: 'navbarDropdown' %>
 
           <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
             <% %w(column line).each do |type| %>
@@ -42,7 +42,7 @@
                 <% if params[:chart_type] == type %>
                   <%= tag.span t("chart.type.#{type}"), class: 'dropdown-item' %>
                 <% else %>
-                  <%= link_to t("chart.type.#{type}"), { chart_type: t("chart.type.#{type}"), period: 'day' }, class: 'dropdown-item' %>
+                  <%= link_to t("chart.type.#{type}"), { chart_type: type, period: 'day' }, class: 'dropdown-item' %>
                 <% end %>
               </li>
             <% end %>
