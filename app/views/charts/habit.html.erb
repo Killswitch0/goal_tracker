@@ -8,7 +8,7 @@
       <div>
         <div class="vr"></div>
           <span class="goal-name"><%= @goal.try(:name)&.truncate(30) %></span>
-          <%= inline_svg_tag("icons/bootstrap/bullseye", options = {size: '25px', class: 'ms-1'}) %>
+          <%= inline_svg_tag('icons/bootstrap/bullseye', options = { size: '25px', class: 'ms-1' }) %>
       </div>
     <% end %>
   </div>
@@ -32,12 +32,12 @@
 
         <div class="dropdown">
           <%= link_with_icon 'chevron-down left', '#', "chart.type.#{@chart_type}", 
-                                                        data: { bs_toggle: 'dropdown' },
-                                                        class: 'nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle flex-row-reverse',
-                                                        id: 'navbarDropdown' %>
+                             data: { bs_toggle: 'dropdown' },
+                             class: 'nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle flex-row-reverse',
+                             id: 'navbarDropdown' %>
 
           <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-            <% %w(column line).each do |type| %>
+            <% %w[column line].each do |type| %>
               <li>
                 <% if params[:chart_type] == type %>
                   <%= tag.span t("chart.type.#{type}"), class: 'dropdown-item' %>

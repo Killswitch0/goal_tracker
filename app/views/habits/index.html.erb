@@ -26,8 +26,8 @@
                   <td class="text-center">
                     <%= link_with_icon 'pencil', edit_goal_habit_path(@goal, habit), class: 'btn btn-primary btn-sm' %>
                     <%= link_with_icon 'trash', goal_habit_path(@goal, habit),
-                                data: { turbo_method: :delete },
-                                class: "btn btn-danger btn-sm" %></td>
+                                       data: { turbo_method: :delete },
+                                       class: 'btn btn-danger btn-sm' %></td>
                 </tr>
               <% end %>
             <% end %>
@@ -62,7 +62,7 @@
                   <td class="text-center">
                     <%= link_with_icon 'pencil', edit_goal_habit_path(@goal, habit), class: 'btn btn-primary btn-sm' %>
                     <%= link_with_icon 'trash', goal_habit_path(@goal, habit),
-                                                 data: { turbo_method: :delete }, class: "btn btn-danger btn-sm" %>
+                                       data: { turbo_method: :delete }, class: 'btn btn-danger btn-sm' %>
                   </td>
                 </tr>
               <% end %>
@@ -74,6 +74,6 @@
   </div>
 
   <div class="buttons-list my-3">
-    <%= link_to t('back_to_goal'), goal_path(@goal), class: "btn btn-secondary" %>
+    <%= link_to t('back_to_goal'), goal_path(@goal), class: 'btn btn-secondary' %>
   </div>
 </div>

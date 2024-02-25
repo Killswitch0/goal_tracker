@@ -1,17 +1,17 @@
 <%= form_with(model: [goal, habit]) do |f| %>
-  <%= render "shared/error_messages", resource: habit %>
+  <%= render 'shared/error_messages', resource: habit %>
     <div class="mb-3">
       <%= f.label :name %>
-      <%= f.text_field :name, class: "mb-1 form-control" %>
+      <%= f.text_field :name, class: 'mb-1 form-control' %>
     </div>
 
     <div class="mb-3">
       <%= f.label :description %>
-      <%= f.text_area :description, class: "mb-1 form-control" %>
+      <%= f.text_area :description, class: 'mb-1 form-control' %>
     </div>
 
     <div class="form-buttons">
       <%= link_to t('back_to_goal'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary' %>
-      <%= f.submit "#{habit.new_record? ? t('create') : t('update')}", class: "btn btn-primary action" %>
+      <%= f.submit (habit.new_record? ? t('create') : t('update')).to_s, class: 'btn btn-primary action' %>
     </div>
 <% end %>

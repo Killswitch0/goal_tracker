@@ -29,7 +29,7 @@ RSpec.feature 'FilterGoalsInChallenges' do
 
       expect(page).to have_content(user.name)
 
-      expect(page).not_to have_css('[@id="challenges-show"]/div[2]/ul/li', text: "#{user2.name}")
+      expect(page).not_to have_css('li.goal-items__item', text: user2.name.to_s)
     end
 
     scenario 'Authenticated user try to show all goals' do

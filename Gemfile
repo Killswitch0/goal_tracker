@@ -88,7 +88,7 @@ group :development, :test do
 
   # Linting
   gem 'rubocop-rails'
-  gem "erb_lint", require: false
+  gem 'erb_lint', require: false
   gem 'reek', '~> 6.2'
 end
 

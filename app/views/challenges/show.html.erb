@@ -19,24 +19,26 @@
 
     <div class="buttons-list mt-2">
       <div class="buttons-list__left">
-        <%= link_with_icon 'person-plus-fill', create_invitation_challenge_path(@challenge),
-                                               'invite_user',
-                                               data: { turbo_frame: 'remote_modal' },
-                                               class: 'mt-2 btn btn-sm mx-3 btn-primary link-icon' if @challenge.check_creator(current_user)  %>
+        <%= if @challenge.check_creator(current_user)
+              link_with_icon 'person-plus-fill', create_invitation_challenge_path(@challenge),
+                             'invite_user',
+                             data: { turbo_frame: 'remote_modal' },
+                             class: 'mt-2 btn btn-sm mx-3 btn-primary link-icon'
+            end  %>
 
         <%= link_with_icon 'plus-lg', add_goal_challenge_path(@challenge), 
-                                      'add_goal',
-                                      data: { turbo_frame: 'remote_modal' },
-                                      class: 'mt-2 btn btn-sm btn-primary mx-3 link-icon' %>
+                           'add_goal',
+                           data: { turbo_frame: 'remote_modal' },
+                           class: 'mt-2 btn btn-sm btn-primary mx-3 link-icon' %>
       </div>
 
       <div class= "buttons-list__right">
         <%= delete_link_to 'leave', leave_challenge_path(@challenge),
-                                   'box-arrow-right',
-                                    title: 'leave_challenge_name',
-                                    name: @challenge.name,
-                                    confirm: 'leave',
-                                    class: 'mt-2 btn btn-sm btn-warning link-icon' %>
+                           'box-arrow-right',
+                           title: 'leave_challenge_name',
+                           name: @challenge.name,
+                           confirm: 'leave',
+                           class: 'mt-2 btn btn-sm btn-warning link-icon' %>
       </div>
     </div>
 
@@ -57,7 +59,7 @@
                 </div>
               <% end %>
             <% else %>
-              <%= inline_svg_tag("icons/basic/question", options = { height: 60, width: 60, class: 'question mt-2' }) %>
+              <%= inline_svg_tag('icons/basic/question', options = { height: 60, width: 60, class: 'question mt-2' }) %>
             <% end %>
           </div>
         </div>
@@ -66,7 +68,7 @@
 
     <div class="buttons-list center">
       <div class="btn-group">
-        <%= active_link_to challenge_path(@challenge, filter: "#{current_user.id}"), class: 'btn btn-primary btn-sm' do %>
+        <%= active_link_to challenge_path(@challenge, filter: current_user.id.to_s), class: 'btn btn-primary btn-sm' do %>
           <%= icon('person-circle') %>
           <%= t('my_goals') %>
         <% end %>
@@ -88,14 +90,16 @@
         <% @challenge_goals.each_with_index do |goal| %>
 
           <li class="goal-items__item" style="border-top: 7px solid <%= load_level_color(goal.tasks.count) %>">
-            <% percentage = calculate_tasks(goal: goal, user: goal.user) %>
+            <% percentage = calculate_tasks(goal:, user: goal.user) %>
                           
-            <%= delete_link_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
-                                   title: 'delete_goal_name',
-                                   name: goal.name,
-                                   class: 'btn-close position-absolute' if goal.user == current_user %>
+            <%= if goal.user == current_user
+                  delete_link_to '', destroy_goal_challenge_path(@challenge, goal_id: goal.id),
+                                 title: 'delete_goal_name',
+                                 name: goal.name,
+                                 class: 'btn-close position-absolute'
+                end %>
 
-            <%= tag.div data: { controller: 'challenges', percentage: percentage },
+            <%= tag.div data: { controller: 'challenges', percentage: },
                         class: 'goal-items__progress fw-bold fs-4' do %>
               <span><%= percentage %>%</span>
             <% end %>

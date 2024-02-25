@@ -1,4 +1,4 @@
-<% goal = goal || nil %>
+<% goal ||= nil %>
 
 <div class="dropdown mx-2">
   <a class="nav-link dropdown-toggle nav-link-dropdown link-icon icon-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -9,11 +9,11 @@
   <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
     <li>
       <%= link_to t('show_tasks'), 
-        goal ? goal_task_chart_path(goal, period: 'day') : task_chart_path(period: 'day'), class: 'dropdown-item' %>
+                  goal ? goal_task_chart_path(goal, period: 'day') : task_chart_path(period: 'day'), class: 'dropdown-item' %>
     </li>
     <li>
       <%= link_to t('show_habits'), 
-        goal ? goal_habit_chart_path(goal, period: 'day', chart_type: 'line') : habit_chart_path(period: 'day', chart_type: 'line'), class: 'dropdown-item' %>
+                  goal ? goal_habit_chart_path(goal, period: 'day', chart_type: 'line') : habit_chart_path(period: 'day', chart_type: 'line'), class: 'dropdown-item' %>
     </li>
   </ul>
 </div>

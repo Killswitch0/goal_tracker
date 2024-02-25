@@ -1,13 +1,13 @@
 <%= form_with url: calendar_path, method: :get, class: 'input-group__form' do |f| %>
   <div class="m-2">
     <%= f.text_field :search,
-            placeholder: t('search').concat('...'),
-            class: 'input-group-text' %>
+                     placeholder: t('search').concat('...'),
+                     class: 'input-group-text' %>
   </div>
 
   <div class="m-2">
-    <%= f.date_field :start_date, value: "#{params[:start_date].present? ? params[:start_date] : Date.today}",
-                    class: 'form-control' %>
+    <%= f.date_field :start_date, value: (params[:start_date].presence || Time.zone.today).to_s,
+                                  class: 'form-control' %>
   </div>
 
   <div class="btn-group d-flex m-2">

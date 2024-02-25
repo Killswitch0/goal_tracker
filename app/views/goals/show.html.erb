@@ -19,8 +19,8 @@
       <dd class="col-sm-8 px-5">
         <div class="completed-info">
           <% percentage = calculate_tasks(goal: @goal, user: @goal.user) %>
-          <%= tag.div tag.span("#{percentage}%"), data: { controller: 'goals', percentage: percentage },
-                        class: 'completed-info__progress' %>
+          <%= tag.div tag.span("#{percentage}%"), data: { controller: 'goals', percentage: },
+                                                  class: 'completed-info__progress' %>
         </div>
       </dd>
       <dt class="col-sm-4"><%= t('status') %>:</dt>
@@ -30,14 +30,14 @@
       <% challenge = @goal.goal_in_challenge&.name.present? %>
       <% if challenge %>
         <dt class="col-sm-4"><%= t('in_challenge') %>:</dt>
-        <dd class="col-sm-8 px-5"><%= link_to "#{@goal.goal_in_challenge&.name}", @goal.goal_in_challenge, class: 'hover-link underline' %></dd>
+        <dd class="col-sm-8 px-5"><%= link_to @goal.goal_in_challenge&.name.to_s, @goal.goal_in_challenge, class: 'hover-link underline' %></dd>
       <% end %>
     </dl>
 
 
     <div class="buttons-list evenly">
       <div class="buttons-list__left">
-        <%= link_to t('back_to_goals'), goals_path, class: "btn btn-sm btn-secondary" %>
+        <%= link_to t('back_to_goals'), goals_path, class: 'btn btn-sm btn-secondary' %>
       </div>
       
       <div class="buttons-list__right">
@@ -79,9 +79,9 @@
                   <% unless habit.name.nil? %>
                     <th scope="row"><%= index + 1 %></th>
                     <td><%= link_to habit.name, edit_goal_habit_path(@goal, habit),
-                                                style: "text-decoration: none",
-                                                data: { turbo_frame: 'remote_modal' },
-                                                class: 'hover-link' %></td>
+                                    style: 'text-decoration: none',
+                                    data: { turbo_frame: 'remote_modal' },
+                                    class: 'hover-link' %></td>
                     <td><%= habit.description.truncate(15) %></td>
                     <td>
                       <%= habit_complete_link(habit, complete_goal_habit_path(@goal, habit)) %>
@@ -94,8 +94,8 @@
           </section>
 
           <div class="buttons-list">
-            <%= link_with_icon 'plus-lg', new_goal_habit_path(@goal), 'new_habit', data: { turbo_frame: 'remote_modal' }, class: "btn btn-primary" %>
-            <%= link_with_icon 'list', goal_habits_path(@goal), 'all_habits', class: "btn btn-primary" %>
+            <%= link_with_icon 'plus-lg', new_goal_habit_path(@goal), 'new_habit', data: { turbo_frame: 'remote_modal' }, class: 'btn btn-primary' %>
+            <%= link_with_icon 'list', goal_habits_path(@goal), 'all_habits', class: 'btn btn-primary' %>
             <%= link_to_chart @goal, icon_class: 'graph-up', class: 'btn btn-primary' %>
           </div>
         </div>
@@ -134,9 +134,9 @@
                     <th scope="row"><%= index + 1 %></th>
                     <td>
                       <%= link_to task.name.truncate(15), edit_goal_task_path(@goal, task),
-                                                          style: "#{task.complete? ? 'text-decoration: line-through' : 'text-decoration: none'}",
-                                                          data: { turbo_frame: 'remote_modal' },
-                                                          class: 'hover-link' %>
+                                  style: (task.complete? ? 'text-decoration: line-through' : 'text-decoration: none').to_s,
+                                  data: { turbo_frame: 'remote_modal' },
+                                  class: 'hover-link' %>
                     </td>
                   <% end %>
                   <td><%= task_complete_link(task, complete_goal_task_path(@goal, task)) %></td>

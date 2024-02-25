@@ -9,7 +9,7 @@
         <div>
           <div class="vr"></div>
             <span class="goal-name"><%= @goal.try(:name)&.truncate(30) %></span>
-            <%= inline_svg_tag("icons/bootstrap/bullseye", options = {size: '25px', class: 'ms-1'}) %>
+            <%= inline_svg_tag('icons/bootstrap/bullseye', options = { size: '25px', class: 'ms-1' }) %>
         </div>
       <% end %>
     </div>
@@ -32,7 +32,7 @@
                                  icon_class: 'graph-up display-1' %>
     <% else %>
       <div class="chart__body">
-        <div class="mt-5"><%= line_chart(tasks_chart_path(period: params[:period]), dataset: {borderWidth: 5}, empty: t('chart.tasks.empty')) %></div>
+        <div class="mt-5"><%= line_chart(tasks_chart_path(period: params[:period]), dataset: { borderWidth: 5 }, empty: t('chart.tasks.empty')) %></div>
         
         <div class="buttons-list start">
           <% if @goal %>

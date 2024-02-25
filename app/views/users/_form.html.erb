@@ -1,5 +1,5 @@
 <%= form_with(model: user, url: path, local: true) do |f| %>
-  <%= render "shared/error_messages", resource: user %>
+  <%= render 'shared/error_messages', resource: user %>
   
   <div class="row">
     <div class="col-sm-12 text-center">
@@ -7,8 +7,8 @@
         <% if user.avatar.attached? %>
           <%= image_tag user.avatar.variant(resize_to_fill: [100, nil]), class: 'rounded-circle' %>
           <%= link_to t('delete'), delete_image_attachment_user_url(user),
-                          data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                          class: 'btn btn-sm btn-danger d-block mt-3 col-sm-4 m-auto' %>
+                      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                      class: 'btn btn-sm btn-danger d-block mt-3 col-sm-4 m-auto' %>
         <% else %>
           <%= user.decorate.gravatar(size: 100, css_class: 'rounded-circle') %>
         <% end %>
@@ -23,22 +23,22 @@
   
   <div class="mb-3">
     <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
   
   <div class="mb-3">
     <%= f.label :email %>
-    <%= f.text_field :email, class: "form-control" %>
+    <%= f.text_field :email, class: 'form-control' %>
   </div>
   
   <div class="mb-3">
     <%= f.label :password %>
-    <%= f.password_field :password, class: "form-control" %>
+    <%= f.password_field :password, class: 'form-control' %>
   </div>
   
   <div class="mb-3">
     <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, class: "mb-1 form-control" %>
+    <%= f.password_field :password_confirmation, class: 'mb-1 form-control' %>
   </div>
   
   <% unless user.new_record? %>
@@ -49,7 +49,7 @@
   <% end %>
   
   <div class="form-buttons">
-    <%= link_to t('back'), :back, class: "btn btn-secondary mt-3" %>
-    <%= f.submit "#{user.new_record? ? t('authenticate.sign_up') : t('update')}", class: "btn btn-primary action mt-3" %>
+    <%= link_to t('back'), :back, class: 'btn btn-secondary mt-3' %>
+    <%= f.submit (user.new_record? ? t('authenticate.sign_up') : t('update')).to_s, class: 'btn btn-primary action mt-3' %>
   </div>
 <% end %>

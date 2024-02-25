@@ -47,7 +47,7 @@
           <div class="tasks-statistics">
             <div class="tasks-statistics__info">
               <div><%= tasks_completed_for(current_user) %></div>
-              <span><%= calculate_tasks(user: current_user).to_s + '%' %></span>
+              <span><%= "#{calculate_tasks(user: current_user)}%" %></span>
             </div>
 
             <div class="progress-bar">
@@ -59,7 +59,7 @@
         <div class="habits-info">
           <div class="habits-info__title">
             <%= t('all_habits') %> <!--  TODO - change title to top 3 habits and ability to change amount of habits to show -->
-            <span><%= I18n.localize(Date.today, format: :long) %></span>
+            <span><%= I18n.l(Time.zone.today, format: :long) %></span>
           </div>
           <div class="habits-statistics">
             <div class="habits-statistics__title">

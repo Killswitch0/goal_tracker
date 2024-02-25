@@ -16,12 +16,12 @@ RSpec.feature 'DeleteGoalFromChallenges' do
       log_in(user)
 
       visit challenge_path(challenge)
-      expect(page).to have_css('[@id="challenges-show"]/div[2]/ul/li', text: user.name)
+      expect(page).to have_css('li.goal-items__item', text: user.name)
 
-      find('[@id="challenges-show"]/div[2]/ul/li/a').click
-      find("[@id='confirmButton']").click
+      find('a.btn-close').click
+      find('#confirmButton').click
 
-      expect(page).not_to have_css('[@id="challenges-show"]/div[2]/ul/li/div[2]', text: user.name)
+      expect(page).not_to have_css('li.goal-items__item', text: user.name)
     end
   end
 end

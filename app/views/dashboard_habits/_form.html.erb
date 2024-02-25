@@ -1,14 +1,14 @@
 <%= form_with(model: habit, url: path) do |f| %>
-  <%= render "shared/error_messages", resource: habit %>
+  <%= render 'shared/error_messages', resource: habit %>
 
   <div class="mb-3">
     <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="mb-3">
     <%= f.label :description %>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= f.text_area :description, class: 'form-control' %>
   </div>
 
   <div class="mb-3">
@@ -18,6 +18,6 @@
 
   <div class="form-buttons">
     <%= link_to t('back_to_dashboard'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary' %>
-    <%= f.submit t('create'), class: "btn btn-primary action" %>
+    <%= f.submit t('create'), class: 'btn btn-primary action' %>
   </div>
 <% end %>

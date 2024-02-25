@@ -1,20 +1,20 @@
 <%= render 'shared/remote_modal', title: t('add_goal') do %>
   <%= form_with(url: add_goal_challenge_path(@challenge), method: :post) do |f| %>
-    <%= render "shared/error_messages", resource: @challenge_goal %>
+    <%= render 'shared/error_messages', resource: @challenge_goal %>
   
     <div class="mb-3">
       <%= f.label :goal_id, t('activerecord.attributes.category.goal_id') %>
       <%= f.select :goal_id, options_for_select(
-                              current_user.goals.pluck(:name, :id),
-                              params[:goal_id]
-                            ), 
-                            {},
-                            class: 'form-select', include_blank: false %>
+            current_user.goals.pluck(:name, :id),
+            params[:goal_id]
+          ), 
+                   {},
+                   class: 'form-select', include_blank: false %>
     </div>
 
     <div class="form-buttons">
       <%= link_to t('back'), '#', data: { bs_dismiss: 'modal' }, class: 'btn btn-secondary mt-3' %>
-      <%= f.submit t('create'), class: "btn btn-primary action mt-3" %>
+      <%= f.submit t('create'), class: 'btn btn-primary action mt-3' %>
     </div>
   <% end %>
 <% end %>

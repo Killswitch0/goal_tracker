@@ -1,9 +1,9 @@
 <% if @all_goals.empty? %>
   <div class="large-table-board mt-3">
     <%= render 'shared/empty', title: t('partials.empty.dashboard.title'),
-                              message: t('partials.empty.dashboard.message'),
-                              svg: true,
-                              svg_path: 'icons/material/space_dashboard' %>
+                               message: t('partials.empty.dashboard.message'),
+                               svg: true,
+                               svg_path: 'icons/material/space_dashboard' %>
   </div>
 <% else %>
   <section id="dashboard-show">
@@ -29,12 +29,12 @@
                         <%= tasks_completed_for(goal) %>
                       </div>
                       <div>
-                        <span><%= calculate_tasks(goal: goal, user: current_user).to_s + '%' %></span>
+                        <span><%= "#{calculate_tasks(goal:, user: current_user)}%" %></span>
                       </div>
                     </div>
 
                     <div class="progress-bar goal-bar">
-                      <div class="progress-bar__progress" style="width: <%= calculate_tasks(goal: goal, user: current_user) %>%;"></div>
+                      <div class="progress-bar__progress" style="width: <%= calculate_tasks(goal:, user: current_user) %>%;"></div>
                     </div>
                   </div>
                 </li>

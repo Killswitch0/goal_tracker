@@ -37,6 +37,7 @@ RSpec.configure do |config|
   # чтобы вызывать методы гема FactoryBot без написания класса .create_list
   config.include FactoryBot::Syntax::Methods
   config.include FeatureHelper, type: :feature # указываем, что нужны нам только для acceptance тестов
+  config.include ControllerHelper, type: :controller
   config.include SessionsHelper, type: %i[controller feature]
 
   # Модуль для возможности тестов с аутентифицированным юзером
