@@ -20,10 +20,10 @@
 
 class Task < ApplicationRecord
   include Streakable
-  include Notifiable::Base
-  include Notifiable::Create
-  include Notifiable::Deadline
-  include Notifiable::AlmostStreak
+  include Notifyable::Base
+  include Notifyable::Create
+  include Notifyable::Deadline
+  include Notifyable::AlmostStreak
   include Searchable
   include ValidationConstants
 
@@ -64,8 +64,8 @@ class Task < ApplicationRecord
   end
 
   # for Streakable concern
-  def completed_count
-    goal.tasks.where(complete: true).count
+  def completion_count
+    goal.tasks_completed_count
   end
 
   def completion_condition

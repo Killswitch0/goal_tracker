@@ -15,8 +15,8 @@
 #  index_challenge_users_on_user_id      (user_id)
 
 class ChallengeUser < ApplicationRecord
-  include Notifiable::Base
-  include Notifiable::Create
+  include Notifyable::Base
+  include Notifyable::Create
 
   belongs_to :user
   belongs_to :challenge
@@ -33,7 +33,7 @@ class ChallengeUser < ApplicationRecord
   has_noticed_notifications model_name: 'Notification'
 
   # ignore invite notify if creator
-  def check_creator
+  def check_creator # TODO - is it need?
     user_id != challenge.user_id
   end
 
@@ -43,6 +43,7 @@ class ChallengeUser < ApplicationRecord
 
   private
 
+  # params for Notifyable::Base send_notification
   def notification_params
     { challenge_user: self, challenge: }
   end

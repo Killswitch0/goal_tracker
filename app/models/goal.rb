@@ -21,8 +21,8 @@
 #
 
 class Goal < ApplicationRecord
-  include Notifiable::Base
-  include Notifiable::Create
+  include Notifyable::Base
+  include Notifyable::Create
   include Searchable
   include ValidationConstants
 

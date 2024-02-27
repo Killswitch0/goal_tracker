@@ -1,4 +1,4 @@
-module Notifiable
+module Notifyable
   extend ActiveSupport::Concern
 
   module Base

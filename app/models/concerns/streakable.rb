@@ -12,7 +12,7 @@ module Streakable
 
     return false if all_items.nil?
 
-    calc_condition = (all_items - completed_count).between?(2, 4)
+    calc_condition = (all_items - completion_count).between?(2, 5)
 
     calc_condition &&
       completion_condition

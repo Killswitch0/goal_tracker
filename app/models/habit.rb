@@ -19,9 +19,9 @@
 class Habit < ApplicationRecord
   include Searchable
   include Streakable
-  include Notifiable::Base
-  include Notifiable::Create
-  include Notifiable::AlmostStreak
+  include Notifyable::Base
+  include Notifyable::Create
+  include Notifyable::AlmostStreak
   include ValidationConstants
 
   belongs_to :user
@@ -123,7 +123,7 @@ class Habit < ApplicationRecord
   end
 
   # For Streakable concern
-  def completed_count
+  def completion_count
     goal.habits.completed_today.count
   end
 
