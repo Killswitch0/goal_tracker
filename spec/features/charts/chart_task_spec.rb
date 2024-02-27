@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'ChartTasks', type: :feature do
+RSpec.feature 'ChartTasks', type: :feature do # TODO - add chart_goal_task spec
   let(:user) { create(:user) }
 
   before do

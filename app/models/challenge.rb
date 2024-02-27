@@ -31,19 +31,19 @@ class Challenge < ApplicationRecord
   validates :deadline, presence: true
   validate :min_deadline_period
 
-  def determine_category_winners
-    user_tasks_count = {}
+  def determine_category_winners # TODO - add test for it
+    users_tasks = {}
 
     goals.each do |goal|
       user = goal.user
       user_tasks_count = user.tasks_count
 
-      completed = tasks.completed.count == user_tasks_count
+      completed = user.tasks.completed.count == user_tasks_count
 
-      user_tasks_count[user] = goal.tasks_count if completed || deadline < Date.today
+      users_tasks[user] = goal.tasks_count if completed || deadline < Time.zone.today
     end
 
-    user_tasks_count
+    users_tasks
   end
 
   def check_creator(user)
