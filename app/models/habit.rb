@@ -50,7 +50,7 @@ class Habit < ApplicationRecord
   has_noticed_notifications model_name: 'Notification'
 
   scope :completed_today, lambda {
-    today = Date.today
+    today = Time.zone.today
 
     includes(:completion_dates)
       .where('completion_dates.date >= ?', today)
@@ -58,10 +58,10 @@ class Habit < ApplicationRecord
   }
 
   scope :not_completed_today, lambda { |user|
-    today = Date.today
+    today = Time.zone.today
 
     left_joins(:completion_dates)
-      .where('habits.user_id = ?', user.id)
+      .where(habits: { user_id: user.id })
       .where.not(
         'EXISTS (
           SELECT 1
@@ -73,7 +73,7 @@ class Habit < ApplicationRecord
   }
 
   scope :sorted_by_completion, lambda { |user|
-    today = Date.today
+    today = Time.zone.today
 
     joins(:completion_dates)
       .where(
@@ -152,7 +152,7 @@ class Habit < ApplicationRecord
   end
 
   def create_completion_date
-    completion_date = CompletionDate.new(date: Time.now.to_date)
+    completion_date = CompletionDate.new(date: Time.zone.now.to_date)
     completion_dates << completion_date # Habit.new.completion_dates.build
   end
 

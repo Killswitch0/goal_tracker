@@ -10,7 +10,6 @@ module DashboardHelper
   def calculate_goals
     goals = current_user.goals
     completed = goals.where(complete: true).count
-    all = goals.count
 
     calculate_percentage(completed, 'goals', user: current_user)
   end
@@ -25,7 +24,7 @@ module DashboardHelper
     user_items = user_items.where(goal:) if goal
     total_items = user_items.count
 
-    return 0 if total_items.zero?
+    return total_items if total_items.zero?
 
     (completed_items.to_f / total_items * 100).round
   end

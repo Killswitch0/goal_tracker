@@ -31,7 +31,7 @@ class Challenge < ApplicationRecord
   validates :deadline, presence: true
   validate :min_deadline_period
 
-  def determine_category_winners # TODO - add test for it
+  def determine_category_winners # TODO: - add test for it
     users_tasks = {}
 
     goals.each do |goal|

@@ -116,3 +116,5 @@ end
 
 gem 'gravatar_image_tag', '~> 1.2'
 gem 'sidekiq-cron', '~> 1.10'
+
+gem 'counter_culture', '~> 3.5'

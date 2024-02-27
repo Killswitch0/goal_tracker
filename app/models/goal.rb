@@ -84,15 +84,24 @@ class Goal < ApplicationRecord
   end
 
   def tasks_streak?
-    return if tasks.completed.count.zero?
+    return false if tasks.completed.count.zero?
 
     tasks.completed.count == tasks.count
   end
 
   def habits_streak?
-    return if habits.completed_today.count.zero?
+    return false if habits.completed_today.count.zero?
 
     habits.completed_today.count == habits.count
+  end
+
+  def completed_tasks_cached_count # TODO: - is it really need?
+    last_modified = tasks.maximum(:updated_at).utc
+    cache_key = "#{self.cache_key}-#{last_modified.to_i}"
+
+    Rails.cache.fetch(cache_key) do
+      tasks.where(complete: true).count
+    end
   end
 
   private

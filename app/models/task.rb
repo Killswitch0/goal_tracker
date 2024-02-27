@@ -30,6 +30,9 @@ class Task < ApplicationRecord
   belongs_to :goal, counter_cache: true
   belongs_to :user, counter_cache: true
 
+  # TODO: - !!! REALIZE -> https://github.com/magnusvk/counter_culture
+  counter_culture :goal, column_name: proc { |model| model.complete? ? 'tasks_completed_count' : nil }
+
   after_update_commit :check_goal_completion
 
   validates :name, presence: true,
@@ -38,7 +41,7 @@ class Task < ApplicationRecord
                      message: :text_input
                    }
 
-  validates :deadline, presence: true, comparison: { greater_than: Date.today }
+  validates :deadline, presence: true, comparison: { greater_than: Time.zone.today }
 
   after_create_commit :notify_create
   after_update_commit :notify_almost_streak, if: :almost_streak?
@@ -51,10 +54,6 @@ class Task < ApplicationRecord
   scope :uncompleted, -> { where(complete: false) }
 
   private
-
-  def broadcast_notifications
-    TaskNotification.with(notification_params).deliver(user)
-  end
 
   def check_goal_completion
     if goal.tasks.all?(&:complete?)
