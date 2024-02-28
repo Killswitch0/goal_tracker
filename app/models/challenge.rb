@@ -1,8 +1,8 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: challenges
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  name        :string
 #  description :text
 #  deadline    :datetime
@@ -10,10 +10,6 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-# Indexes
-#
-#  index_challenges_on_user_id  (user_id)
-
 class Challenge < ApplicationRecord
   include Searchable
   include ValidationConstants
@@ -31,7 +27,9 @@ class Challenge < ApplicationRecord
   validates :deadline, presence: true
   validate :min_deadline_period
 
-  def determine_category_winners # TODO: - add test for it
+  # Returns a hash with data about users and the sum of completed tasks for each
+  #----------------------------------------------------------------------------
+  def determine_category_winners 
     users_tasks = {}
 
     goals.each do |goal|
@@ -46,12 +44,14 @@ class Challenge < ApplicationRecord
     users_tasks
   end
 
+  #----------------------------------------------------------------------------
   def check_creator(user)
     self.user == user
   end
 
   private
 
+  #----------------------------------------------------------------------------
   def min_deadline_period
     return unless deadline
     return unless deadline < Date.today + 1.day

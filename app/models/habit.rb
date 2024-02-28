@@ -1,9 +1,9 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: habits
 #
-#  id             :integer          not null, primary key
-#  name           :string(255)
+#  id             :bigint           not null, primary key
+#  name           :string
 #  description    :text
 #  days_completed :integer          default(0)
 #  user_id        :bigint           not null
@@ -11,11 +11,6 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
-# Indexes
-#
-#  index_habits_on_goal_id  (goal_id)
-#  index_habits_on_user_id  (user_id)
-
 class Habit < ApplicationRecord
   include Searchable
   include Streakable
@@ -106,7 +101,10 @@ class Habit < ApplicationRecord
       .uniq
   }
 
-  # => [{"name":"Morning exercise 0","data":{"2024-02-01":1}}]
+  # Returns an array with habit name and completion dates data
+  #
+  # [{"name":"Morning exercise","data":{"2024-02-01":1}}]
+  #----------------------------------------------------------------------------
   def self.habits_with_completion_period_data(habits, period, range: nil)
     habits.map do |habit|
       completion_data = habit.completion_dates
@@ -123,6 +121,7 @@ class Habit < ApplicationRecord
   end
 
   # For Streakable concern
+  #----------------------------------------------------------------------------
   def completion_count
     goal.habits.completed_today.count
   end
@@ -135,6 +134,8 @@ class Habit < ApplicationRecord
     completion_dates.created_today.exists?
   end
 
+  # Creates or deletes a habit completion date record within the current day
+  #----------------------------------------------------------------------------
   def complete_habit_today
     if completion_dates.created_today.exists?
       update_attribute(:days_completed, self.days_completed -= 1)
@@ -147,15 +148,21 @@ class Habit < ApplicationRecord
 
   private
 
+  # For Notifyable::Base send_notification
+  #----------------------------------------------------------------------------
   def notification_params
     { habit: self, goal: }
   end
 
+  # Creates completion date record for habit
+  #----------------------------------------------------------------------------
   def create_completion_date
     completion_date = CompletionDate.new(date: Time.zone.now.to_date)
     completion_dates << completion_date # Habit.new.completion_dates.build
   end
 
+  # Deletes habit completion date record for current day
+  #----------------------------------------------------------------------------
   def delete_completion_date
     completion_dates.created_today.delete_all
   end

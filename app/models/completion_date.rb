@@ -1,18 +1,13 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: completion_dates
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  date       :date
 #  habit_id   :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# Indexes
-#
-#  index_completion_dates_on_habit_id  (habit_id)
-#
-
 class CompletionDate < ApplicationRecord
   include Streakable
 

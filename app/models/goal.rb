@@ -1,25 +1,21 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: goals
 #
-#  id             :integer          not null, primary key
-#  name           :string(255)
-#  description    :string(255)
-#  days_completed :integer          default(0)
-#  user_id        :bigint           not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  deadline       :datetime
-#  complete       :boolean          default(FALSE)
-#  category_id    :bigint           not null
-#  color          :string(255)
+#  id                    :bigint           not null, primary key
+#  name                  :string
+#  description           :string
+#  days_completed        :integer          default(0)
+#  user_id               :bigint           not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  deadline              :datetime
+#  complete              :boolean          default(FALSE)
+#  category_id           :bigint           not null
+#  color                 :string
+#  tasks_count           :integer          default(0)
+#  tasks_completed_count :integer          default(0), not null
 #
-# Indexes
-#
-#  index_goals_on_category_id  (category_id)
-#  index_goals_on_user_id      (user_id)
-#
-
 class Goal < ApplicationRecord
   include Notifyable::Base
   include Notifyable::Create
@@ -79,22 +75,13 @@ class Goal < ApplicationRecord
       .order('completed_tasks_count DESC')
   }
 
-  def goal_in_challenge
+  # Returns challenge that have current goal or nil
+  #----------------------------------------------------------------------------
+  def challenge_with_goal
     challenge_goals.where(goal: self).first&.challenge
   end
 
-  def tasks_streak?
-    return false if tasks.completed.count.zero?
-
-    tasks.completed.count == tasks.count
-  end
-
-  def habits_streak?
-    return false if habits.completed_today.count.zero?
-
-    habits.completed_today.count == habits.count
-  end
-
+  #----------------------------------------------------------------------------
   def completed_tasks_cached_count # TODO: - is it really need?
     last_modified = tasks.maximum(:updated_at).utc
     cache_key = "#{self.cache_key}-#{last_modified.to_i}"
@@ -106,6 +93,8 @@ class Goal < ApplicationRecord
 
   private
 
+  # For Notifyable::Base send_notification method
+  #----------------------------------------------------------------------------
   def notification_params
     { goal: self }
   end

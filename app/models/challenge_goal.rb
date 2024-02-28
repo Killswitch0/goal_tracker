@@ -1,23 +1,15 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: challenge_goals
 #
-#  id                  :integer          not null, primary key
-#  user_id             :bigint           not null
-#  goal_id             :bigint           not null
-#  challenge_id        :bigint           not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  challenge_user_id   :bigint           not null
+#  id                :bigint           not null, primary key
+#  user_id           :bigint           not null
+#  goal_id           :bigint           not null
+#  challenge_id      :bigint           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  challenge_user_id :bigint           not null
 #
-# Indexes
-#
-#  index_challenge_goals_on_challenge_id     (challenge_id)
-#  index_challenge_goals_on_challenge_user_id (challenge_user_id)
-#  index_challenge_goals_on_goal_id          (goal_id)
-#  index_challenge_goals_on_user_id          (user_id)
-#
-
 class ChallengeGoal < ApplicationRecord
   belongs_to :user
   belongs_to :goal
@@ -33,8 +25,9 @@ class ChallengeGoal < ApplicationRecord
 
   private
 
+  #----------------------------------------------------------------------------
   def check_deadline
-    return unless Date.today >= challenge.deadline
+    return unless Time.zone.today >= challenge.deadline
 
     errors.add(:goal_id,
                I18n.t('activerecord.errors.models.challenge_goal.challenge_ended'))

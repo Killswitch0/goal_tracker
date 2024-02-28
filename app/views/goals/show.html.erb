@@ -27,10 +27,10 @@
       <dd class="col-sm-8 px-5 <%= 'completed' if @goal.complete? %>">
         <%= @goal.complete? ? t('complete') : t('in_process') %>
       </dd>
-      <% challenge = @goal.goal_in_challenge&.name.present? %>
+      <% challenge = @goal.challenge_with_goal %>
       <% if challenge %>
         <dt class="col-sm-4"><%= t('in_challenge') %>:</dt>
-        <dd class="col-sm-8 px-5"><%= link_to @goal.goal_in_challenge&.name.to_s, @goal.goal_in_challenge, class: 'hover-link underline' %></dd>
+        <dd class="col-sm-8 px-5"><%= link_to challenge.name, challenge, class: 'hover-link underline' %></dd>
       <% end %>
     </dl>
 

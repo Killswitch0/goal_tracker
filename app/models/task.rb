@@ -1,23 +1,17 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: tasks
 #
-#  id           :integer          not null, primary key
-#  name         :string(255)
-#  complete     :boolean          default(FALSE)
-#  goal_id      :bigint           not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  user_id      :bigint           not null
-#  deadline     :datetime
+#  id            :bigint           not null, primary key
+#  name          :string
+#  complete      :boolean          default(FALSE)
+#  goal_id       :bigint           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  user_id       :bigint           not null
+#  deadline      :datetime
 #  complete_date :date
 #
-# Indexes
-#
-#  index_tasks_on_goal_id  (goal_id)
-#  index_tasks_on_user_id  (user_id)
-#
-
 class Task < ApplicationRecord
   include Streakable
   include Notifyable::Base
@@ -55,6 +49,8 @@ class Task < ApplicationRecord
 
   private
 
+  # Checks the number of completed tasks within a goal and updates it
+  #----------------------------------------------------------------------------
   def check_goal_completion
     if goal.tasks.all?(&:complete?)
       goal.update(complete: true)
@@ -63,7 +59,8 @@ class Task < ApplicationRecord
     end
   end
 
-  # for Streakable concern
+  # Streakable concern methods
+  #----------------------------------------------------------------------------
   def completion_count
     goal.tasks_completed_count
   end
@@ -72,6 +69,8 @@ class Task < ApplicationRecord
     complete?
   end
 
+  # For Notifyable::Base send_notification
+  #----------------------------------------------------------------------------
   def notification_params
     { task: self, goal: }
   end

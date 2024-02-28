@@ -2,25 +2,21 @@
 #
 # Table name: users
 #
-#  id                      :integer          not null, primary key
-#  name                    :string(255)
-#  email                   :string(255)
-#  password_digest         :string(255)
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  email_confirmed         :boolean          default(FALSE)
-#  confirm_token           :string(255)
-#  auth_token              :string(255)
-#  password_reset_token    :string(255)
-#  password_reset_sent_at  :datetime
-#  role                    :integer          default(0), not null
-#  gravatar_hash           :string(255)
+#  id                     :bigint           not null, primary key
+#  name                   :string
+#  email                  :string
+#  password_digest        :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  email_confirmed        :boolean          default(FALSE)
+#  confirm_token          :string
+#  auth_token             :string
+#  password_reset_token   :string
+#  password_reset_sent_at :datetime
+#  role                   :integer          default(0), not null
+#  gravatar_hash          :string
+#  tasks_count            :integer          default(0)
 #
-# Indexes
-#
-#  index_users_on_role  (role)
-#
-
 class User < ApplicationRecord
   include Rememberable
   include Recoverable
@@ -95,9 +91,9 @@ class User < ApplicationRecord
     role == 1
   end
 
-  # returns user goal in challenge or nil
+  # Returns goal tasks in challenge or nil
   def tasks_in_challenge(challenge)
-    goal_in_challenge = challenge_goals.where(challenge:).first&.goal
+    goal_in_challenge = challenge_goals.find_by(challenge:)&.goal
     goal_in_challenge&.tasks
   end
 

@@ -1,19 +1,14 @@
-# == Schema information
+# == Schema Information
 #
 # Table name: challenge_users
 #
-#  id           :integer          not null, primary key
+#  id           :bigint           not null, primary key
 #  confirm      :boolean          default(FALSE)
 #  user_id      :bigint           not null
 #  challenge_id :bigint           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
-# Indexes
-#
-#  index_challenge_users_on_challenge_id  (challenge_id)
-#  index_challenge_users_on_user_id      (user_id)
-
 class ChallengeUser < ApplicationRecord
   include Notifyable::Base
   include Notifyable::Create
@@ -26,24 +21,26 @@ class ChallengeUser < ApplicationRecord
   validates :challenge_id, presence: true, uniqueness: { scope: :user_id }
   validates :user_id, presence: true
 
-  after_create_commit :notify_create, if: :check_creator
+  after_create_commit :notify_create, if: :not_creator?
 
   before_destroy :cleanup_notifications
 
   has_noticed_notifications model_name: 'Notification'
 
-  # ignore invite notify if creator
-  def check_creator # TODO - is it need?
+  #----------------------------------------------------------------------------
+  def not_creator? 
     user_id != challenge.user_id
   end
 
+  #----------------------------------------------------------------------------
   def creator?
     user_id == challenge.user_id
   end
 
   private
 
-  # params for Notifyable::Base send_notification
+  # Params for Notifyable::Base send_notification
+  #----------------------------------------------------------------------------
   def notification_params
     { challenge_user: self, challenge: }
   end
