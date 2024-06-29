@@ -28,7 +28,7 @@ RSpec.feature 'SignUps' do
       fill_in 'Confirmation', with: "#{user.password}"
       click_on 'Sign up'
 
-      expect(page).to have_content I18n.t('activerecord.errors.models.user.taken'), count: 1
+      expect(page).to have_content I18n.t('.name'), count: 1
       expect(current_path).to eq signup_path
     end
   end

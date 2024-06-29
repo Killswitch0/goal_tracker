@@ -30,7 +30,7 @@
 !/tmp/storage/.keep
 
 # Ignore Redis server files
-dump.rdb
+.dump.rdb
 
 /public/assets
 
@@ -66,3 +66,4 @@ docs
 
 # Other files
 h
+.DS_Store

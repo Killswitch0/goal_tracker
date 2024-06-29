@@ -47,40 +47,35 @@ en:
           one_goal: 'can add only one goal.'
           challenge_ended: "can't add to completed challenge"
         user:
-          blank: "can't be blank"
-          taken: 'has already been taken'
-        goal:
-          blank: "can't be blank"
-          taken: 'has already been taken'
-        habit:
-          blank: "can't be blank"
-          taken: 'has already been taken'
-        task:
-          blank: "can't be blank"
-          taken: 'has already been taken'
-      attributes:
-        user:
-          email:
-            blank: "can't be blank"
-            invalid: 'is invalid'
-          password:
-            password_format: 'must be in English and contain only letters.'
-            password_length: 'must be between 6 and 10 characters.'
-            password_complexity: >
-              complexity requirement not met. Length should be 8-70 characters and include:
-              1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character."
+          attributes:
+            name:
+              blank: "can't be blank"
+              taken: 'has already been taken'
               name_format: "must be in English and contain only letters."
-          name:
-            blank: "can't be blank"
+            email:
+              blank: "can't be blank"
+              invalid: 'is invalid'
+            password:
+              password_format: 'must be in English and contain only letters.'
+              password_length: 'must be between 6 and 10 characters.'
+              password_complexity: 
+                "complexity requirement not met. Length should be 8-70 characters and include:
+                1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special character."
         goal:
-          name:
-            blank: "can't be blank"
+          attributes:
+            name:
+              blank: "can't be blank"
+              taken: 'has already been taken'
         habit:
-          name:
-            blank: "can't be blank"
+          attributes:
+            name:
+              blank: "can't be blank"
+              taken: 'has already been taken'
         task:
-          name:
-            blank: "can't be blank"
+          attributes:
+            name:
+              blank: "can't be blank"
+              taken: 'has already been taken'
     models:
       user: 'User'
       goal: 'Goal'
