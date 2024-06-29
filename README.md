@@ -104,10 +104,10 @@ To precompile assets, run:
 rails assets:precompile
 ```
 
-To run Sidekiq:
+To run redis-server and Sidekiq:
 
 ```
-bundle exec sidekiq
+redis-server & bundle exec sidekiq
 ```
 
 And run server in another terminal window:
