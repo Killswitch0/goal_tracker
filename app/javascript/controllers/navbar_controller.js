@@ -16,8 +16,10 @@ export default class extends Controller {
       notifications.classList.toggle('show-block');
     });
 
-    dropdownLink.addEventListener('blur', (e) => {
-      notifications.classList.remove('show-block')
+    document.addEventListener('click', (e) => {
+      if (!dropdownLink.contains(e.target) && !notifications.contains(e.target)) {
+        notifications.classList.remove('show-block')
+      }
     });
   }
 }
