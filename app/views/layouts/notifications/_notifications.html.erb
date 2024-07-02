@@ -13,7 +13,6 @@
           <div class="notif-box">
             <h2 class="title"><%= t('notifications.common.notifications') %></h2>
             <span id="notifes">
-              <%#= notif_limit(@unread.count) %>
               <%= render 'layouts/notifications/notifications_count_header', unread: @unread, current_user: current_user %>
             </span>
           </div>

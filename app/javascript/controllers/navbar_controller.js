@@ -3,10 +3,10 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="navbar"
 export default class extends Controller {
   connect() {
-    this.showNotifications();
+    this.showAndHideNotifications();
   }
 
-  showNotifications() {
+  showAndHideNotifications() {
     let dropdownLink = document.querySelector('.notifications-dropdown');
     let notifications = document.querySelector('#notifications');
 
@@ -14,6 +14,10 @@ export default class extends Controller {
       e.preventDefault();
 
       notifications.classList.toggle('show-block');
+    });
+
+    dropdownLink.addEventListener('blur', (e) => {
+      notifications.classList.remove('show-block')
     });
   }
 }
