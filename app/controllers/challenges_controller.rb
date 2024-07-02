@@ -145,6 +145,7 @@ class ChallengesController < ApplicationController
     if @invitation
       @invitation.update(confirm: true)
       flash[:noticed] = t('.success', challenge_name: @invitation.challenge.name)
+      mark_notifications_as_read
     else
       flash[:danger] = t('.fail')
     end

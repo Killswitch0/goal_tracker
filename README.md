@@ -134,5 +134,5 @@ walt@mail.com
 
 To run tests, please run this command:
 ```
-bundle exec rspec
+redis-server & bundle exec rspec
 ```

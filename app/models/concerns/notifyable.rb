@@ -6,11 +6,6 @@ module Notifyable
 
     def send_notification(params:, subtype: '')
       "#{self.class.name}#{subtype.capitalize}Notification".constantize.with(params).deliver(user)
-
-      broadcast_prepend_to "notifications_#{user.id}",
-                           target: "notifications_#{user.id}",
-                           partial: 'layouts/notifications-list',
-                           locals: { user:, notifications: Notification.where(recipient: user).newest_first.limit(20) } # TODO: mb need refactor?
     end
 
     # { habit: self, goal: goal }

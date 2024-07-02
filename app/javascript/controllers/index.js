@@ -21,3 +21,6 @@ application.register("navbar", NavbarController)
 
 import RemoteModalController from "./remote_modal_controller"
 application.register("remote-modal", RemoteModalController)
+
+import UniqueController from "./unique_controller"
+application.register("unique", UniqueController)

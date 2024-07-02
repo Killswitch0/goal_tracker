@@ -1,0 +1,7 @@
+<%= turbo_stream_from "notifications-count" %>
+<%= tag.span id: 'notifications-count' do %>
+  <%= notif_limit(unread.count) %> 
+<% end %>
+
+
+

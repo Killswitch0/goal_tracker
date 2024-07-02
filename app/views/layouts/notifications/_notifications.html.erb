@@ -2,7 +2,8 @@
   <li class="nav-item dropdown">
     <a class="nav-link nav-link-dropdown notifications-dropdown" href="#">
       <span class="badge rounded-pill" id="notif-bell">
-        <%= notif_limit(@unread.count) %> <%= icon('bell') %> <!-- Add turbo live update -->
+        <%= render 'layouts/notifications/notifications_count', unread: @unread, current_user: current_user %>
+        <%= icon('bell') %>
       </span>
     </a>
 
@@ -11,14 +12,17 @@
         <div class="buttons-list between">
           <div class="notif-box">
             <h2 class="title"><%= t('notifications.common.notifications') %></h2>
-            <span id="notifes"><%= notif_limit(@unread.count) %></span>
+            <span id="notifes">
+              <%#= notif_limit(@unread.count) %>
+              <%= render 'layouts/notifications/notifications_count_header', unread: @unread, current_user: current_user %>
+            </span>
           </div>
 
           <p id="mark_all"><%= link_to t('notifications.common.mark_as_read'), mark_notifications_as_read_path %></p>
         </div>
       </header>
 
-      <%= render 'layouts/notifications-list', notifications: @notifications, user: current_user %>
+      <%= render 'layouts/notifications/notifications_list', notifications: @notifications, user: current_user %>
     
       <footer>
         <%= link_with_icon 'chevron-right', notifications_path(filter: 'all'), 'show_all', id: 'mark_all', class: 'text-decoration-none' %>
