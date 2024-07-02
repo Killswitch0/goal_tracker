@@ -107,7 +107,7 @@ rails assets:precompile
 To run redis-server and Sidekiq:
 
 ```
-redis-server & bundle exec sidekiq
+redis-server && bundle exec sidekiq
 ```
 
 And run server in another terminal window:
@@ -134,5 +134,5 @@ walt@mail.com
 
 To run tests, please run this command:
 ```
-redis-server & bundle exec rspec
+redis-server && bundle exec rspec
 ```
